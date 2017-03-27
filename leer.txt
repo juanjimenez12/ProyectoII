@@ -1,0 +1,5 @@
+Para configurar la base de datos a la hora de crear las entidades
+JNDI Name: doctorado
+
+Para configurar la opción de mapeo de la entidades
+En collection type agregar: java.util.list
