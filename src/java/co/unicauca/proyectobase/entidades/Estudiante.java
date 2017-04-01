@@ -11,12 +11,13 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -38,17 +39,18 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Estudiante.findByEstCohorte", query = "SELECT e FROM Estudiante e WHERE e.estCohorte = :estCohorte"),
     @NamedQuery(name = "Estudiante.findByEstTutor", query = "SELECT e FROM Estudiante e WHERE e.estTutor = :estTutor"),
     @NamedQuery(name = "Estudiante.findByEstSemestre", query = "SELECT e FROM Estudiante e WHERE e.estSemestre = :estSemestre"),
+    @NamedQuery(name = "Estudiante.findByEstEstado", query = "SELECT e FROM Estudiante e WHERE e.estEstado = :estEstado"),
     @NamedQuery(name = "Estudiante.findByEstUsuario", query = "SELECT e FROM Estudiante e WHERE e.estUsuario = :estUsuario"),
     @NamedQuery(name = "Estudiante.findByEstContrasena", query = "SELECT e FROM Estudiante e WHERE e.estContrasena = :estContrasena")})
 public class Estudiante implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "est_identificador")
     private Integer estIdentificador;
-    @Size(max = 12)
+    @Size(max = 20)
     @Column(name = "est_codigo")
     private String estCodigo;
     @Size(max = 20)
@@ -67,6 +69,9 @@ public class Estudiante implements Serializable {
     private String estTutor;
     @Column(name = "est_semestre")
     private Integer estSemestre;
+    @Size(max = 12)
+    @Column(name = "est_estado")
+    private String estEstado;
     @Size(max = 20)
     @Column(name = "est_usuario")
     private String estUsuario;
@@ -147,6 +152,14 @@ public class Estudiante implements Serializable {
 
     public void setEstSemestre(Integer estSemestre) {
         this.estSemestre = estSemestre;
+    }
+
+    public String getEstEstado() {
+        return estEstado;
+    }
+
+    public void setEstEstado(String estEstado) {
+        this.estEstado = estEstado;
     }
 
     public String getEstUsuario() {

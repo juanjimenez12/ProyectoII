@@ -19,7 +19,6 @@ import javax.validation.constraints.NotNull;
 public class DoctoradoPK implements Serializable {
 
     @Basic(optional = false)
-    @NotNull
     @Column(name = "doc_identificador")
     private int docIdentificador;
     @Basic(optional = false)
