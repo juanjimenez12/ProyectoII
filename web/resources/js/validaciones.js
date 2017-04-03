@@ -1,4 +1,6 @@
 $(function(){
+    
+   
 	//agregar expresion 
 $.validator.addMethod('valCodigo',function(value,element)
 {
@@ -6,11 +8,11 @@ $.validator.addMethod('valCodigo',function(value,element)
 });
 $.validator.addMethod('valNombre',function(value,element)
 {
-    return this.optional(element) || /^[\p{L}\s']+$/.test(value);
+    return this.optional(element) || /^[A-Za-z\s]{1,}[\.]{0,1}[A-Za-z\s]{0,}$/.test(value);
 });
 $.validator.addMethod('valApellido',function(value,element)
 {
-    return this.optional(element) || /^[\p{L}\s']+$/.test(value);
+    return this.optional(element) || /^[A-Za-z\s]{1,}[\.]{0,1}[A-Za-z\s]{0,}$/.test(value);
 });
 $.validator.addMethod('valCorreo',function(value,element)
 {
@@ -24,7 +26,17 @@ $.validator.addMethod('valCohorte',function(value,element)
 });
 $.validator.addMethod('valNombreTutor',function(value,element)
 {
-    return this.optional(element) || /^[\p{L}\s']+$/.test(value);
+    return this.optional(element) || /^[A-Za-z\s]{1,}[\.]{0,1}[A-Za-z\s]{0,}$/.test(value);
+});
+
+$.validator.addMethod('valSemestre',function(value,element)
+{
+var seleccion = document.getElementById("valSemestre");
+if(seleccion.value == "Seleccionar") {
+return false;
+}else{
+return true;
+}
 });
 
 
@@ -35,7 +47,7 @@ $.validator.setDefaults( {
         }
 } );
 
-$( "#signupForm1" ).validate( {
+$( "#FormRegistrar" ).validate( {
         rules: {
                 //se agrega la funcion nueva 
                 valCodigo: {
@@ -72,7 +84,11 @@ $( "#signupForm1" ).validate( {
                         maxlength: 45,
                         valNombreTutor:true
                 },
-                agree1: "required"
+                              
+                valSemestre: {
+                valSemestre:true
+                },
+               
         },
         messages: {
                 valCodigo: {
@@ -111,6 +127,9 @@ $( "#signupForm1" ).validate( {
                         maxlength: "El nombre del tutor solo puede contener letras y su longitud debe ser de 3 a 45 caracteres",
                         required: "El nombre del tutor es obligatorio"
                 },
+                valSemestre: {
+                        valSemestre :"El usuario es obligatorio"
+                        },
                 agree1: "Please accept our policy"
         },
         errorElement: "em",

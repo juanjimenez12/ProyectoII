@@ -4,8 +4,10 @@
       xmlns:cc="http://xmlns.jcp.org/jsf/composite"
       xmlns:p="http://primefaces.org/ui">
     
+    
+    
     <body>
-        
+       
     </body>
 
     <!-- INTERFACE -->
@@ -26,54 +28,54 @@
                         <div class="panel-body">
                             <form id="FormRegistrar" method="post" class="form-horizontal" action="">
                                 <div class="form-group">
-                                    <label class="col-sm-4 control-label" for="nombreEst">Nombres</label>
+                                    <label class="col-sm-4 control-label" for="valNombre">Nombres</label>
                                     <div class="col-sm-5">
-                                        <input type="text" class="form-control" id="nombreEst" name="nombreEst" placeholder="Nombres" value="#{estudianteController.actual.estNombre}"/>
+                                        <input type="text" class="form-control" id="valNombre" name="valNombre" placeholder="valNombre" value="#{estudianteController.actual.estNombre}"/>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="col-sm-4 control-label" for="ApellidoEst">Apellidos</label>
+                                    <label class="col-sm-4 control-label" for="valApellido">Apellidos</label>
                                     <div class="col-sm-5">
-                                        <input type="text" class="form-control" id="ApellidoEst" name="ApellidoEst" placeholder="Apellidos" value="#{estudianteController.actual.estApellido}"/>
+                                        <input type="text" class="form-control" id="valApellido" name="valApellido" placeholder="Apellidos" value="#{estudianteController.actual.estApellido}"/>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="col-sm-4 control-label" for="CodigoEst">Código Estudiantil</label>
+                                    <label class="col-sm-4 control-label" for="valCodigo">Código Estudiantil</label>
                                     <div class="col-sm-5">
-                                        <input type="text" class="form-control" id="CodigoEst" name="CodigoEst" placeholder="Código Estudiantil" value="#{estudianteController.actual.estCodigo}"/>
+                                        <input type="text" class="form-control" id="valCodigo" name="valCodigo" placeholder="Código Estudiantil" value="#{estudianteController.actual.estCodigo}"/>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="col-sm-4 control-label" for="correoEst">Correo</label>
+                                    <label class="col-sm-4 control-label" for="valCorreo">Correo</label>
                                     <div class="col-sm-5">
-                                        <input type="text" class="form-control" id="correoEst" name="correoEst" placeholder="Correo" value="#{estudianteController.actual.estCorreo}"/>
+                                        <input type="text" class="form-control" id="valCorreo" name="valCorreo" placeholder="Correo" value="#{estudianteController.actual.estCorreo}"/>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="col-sm-4 control-label" for="cohorteEst">Cohorte</label>
+                                    <label class="col-sm-4 control-label" for="valCohorte">Cohorte</label>
                                     <div class="col-sm-5">
-                                        <input type="text" class="form-control" id="cohorteEst" name="cohorteEst" placeholder="Cohorte" value="#{estudianteController.actual.estCohorte}"/>
+                                        <input type="text" class="form-control" id="valCohorte" name="valCohorte" placeholder="Cohorte" value="#{estudianteController.actual.estCohorte}"/>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="col-sm-4 control-label" for="tutorEst">Nombre del Tutor</label>
+                                    <label class="col-sm-4 control-label" for="valNombreTutor">Nombre del Tutor</label>
                                     <div class="col-sm-5">
-                                        <p:inputText  class="form-control" id="tutorEst"  placeholder="Nombre del Tutor" value="#{estudianteController.actual.estTutor}"/>
+                                        <input type="text" class="form-control" id="valNombreTutor"  placeholder="Nombre del Tutor" value="#{estudianteController.actual.estTutor}"/>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="col-sm-4 control-label" for="semestreEst">Semestre</label>
+                                    <label class="col-sm-4 control-label" for="valSemestre">Semestre</label>
                                     <div class="col-sm-5">
-                                        <select class="form-control" value="#{estudianteController.actual.estSemestre}">
-                                            <option class="active"></option>
-                                            <option>1</option>
-                                            <option>2</option>
+                                        <select class="form-control" value="#{estudianteController.actual.estSemestre}" name="valSemestre" id="valSemestre">
+                                            <option class="active">Seleccionar</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
                                         </select>
                                     </div>
                                 </div>

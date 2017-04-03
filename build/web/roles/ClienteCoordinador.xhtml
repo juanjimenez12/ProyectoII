@@ -9,7 +9,7 @@
     
     
     <h:body>
-         
+          <script type="javascript" src="../js/validaciones.js"/>
     </h:body>
     
     <body>
@@ -34,8 +34,16 @@
                               <ul class="nav navbar-nav">
                                 <li class="active"><a href="#">Menu Coordinador<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-home"></span></a></li>
                                 
+                                 <li class="dropdown">
+                                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Gestión de Estudiantes <span class="caret"></span><span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-user"></span></a>
+                                  <ul class="dropdown-menu forAnimate" role="menu" id="">
+                                      <li><a href="#"  onclick="routing('GU-Ver')" > <span class ="glyphicon glyphicon-chevron-right"></span> Ver Estudiantes </a></li>
+                                      <li><a href="#" onclick="routing('GU-Modificar')" > <span class ="glyphicon glyphicon-chevron-right"></span> Agregar Estudiantes</a></li>
+                                    <li><a href="#"> <span class ="glyphicon glyphicon-chevron-right"></span> Editar Estudiantes</a></li>                                    
+                                  </ul>
+                                </li> 
                                      
-                                <li><a href="#" id="colorLetraMenu" onclick="routing('GU-Ver')">  Agregar Estudiantes A Posgrado <span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-edit"></span> </a> </li>
+                               
                                 <li><a href="#" onclick="routing('GU-Modificar')"> Buscar Publicaciones <span style="font-size: 16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-search"></span></a></li>
                                 <li><a href="#">   Ver Publicaciones Sin Visado<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-list-alt"></span></a></li>                                    
                                 <li><a href="#">  Ver Todos los Estudiantes <span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-eye-open"></span></a></li>
