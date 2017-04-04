@@ -35,12 +35,11 @@
     padding: 5px;
 }
 
-.left_content { /*aqui cuadra el contenido */
-    width: 80%;
-   
+.left_content { /*aqui cuadra el contenido lateral  */
+    width: 77%;
     background-color: white;
     padding: 5px;
-    margin-left: 290px;
+    margin-left: 22%;
 }
 
 .right_content {
@@ -89,7 +88,7 @@ body,html{
     }
 
     nav.sidebar:hover + .main{
-      margin-left: 200px;
+      margin-left: 280px;
     }
 
     nav.sidebar.navbar.sidebar>.container .navbar-brand, .navbar>.container-fluid .navbar-brand {
@@ -133,9 +132,10 @@ body,html{
       color: #777;
     }
 
+    /*menu lateral medidas*/
     nav.sidebar{
       position: fixed;
-      width: 280px;
+      width: 20%;
       height: 100%;
       margin-left: -160px;
       float: left;

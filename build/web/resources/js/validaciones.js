@@ -154,34 +154,29 @@
 
                     // Add the span element, if doesn't exists, and apply the icon classes to it.
                     if ( !element.next( "span" )[ 0 ] ) {
-                            //alert("2");
+                            
                            $( "<span class='glyphicon glyphicon-remove form-control-feedback'></span>" ).insertAfter( element );
                             
                     }
             },
             success: function ( label, element ) {
                     // Add the span element, if doesn't exists, and apply the icon classes to it.
-                    //alert("4");
                     if ( !$( element ).next( "span" )[ 0 ] ) {
                             $( "<span class='glyphicon glyphicon-ok form-control-feedback'></span>" ).insertAfter( $( element) );
                     }
             },
             highlight: function ( element, errorClass, validClass ) {
-                //alert("3");
                 
                     $( element).parents( ".col-md-6" ).addClass( "has-error" ).removeClass( "has-success" );
                     $( element ).next( "span" ).addClass( "glyphicon-remove" ).removeClass( "glyphicon-ok" );
                     
             },
-            unhighlight: function ( element, errorClass, validClass ) {
-                   // alert("1");
-                    
+            unhighlight: function ( element, errorClass, validClass ) {                    
                      
                      //alert(element.name);
                     $( element ).parents( ".col-md-6" ).addClass( "has-success" ).removeClass( "has-error" );
                     $( element ).next( "span" ).addClass( "glyphicon-ok" ).removeClass( "glyphicon-remove" );
                     //$(element).attr('name',obtenername);
-
             }
     } );
 
