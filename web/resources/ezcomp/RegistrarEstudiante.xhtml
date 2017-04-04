@@ -18,9 +18,9 @@
 
     <!-- IMPLEMENTATION -->
     <cc:implementation>
-        <div class="container-fluid">
+        <div class="container">
             <div class="row">
-                <div class="col-sm-12 col-sm-offset-2">
+                <div class="col-md-12">
                     <div class="panel panel-default">
                         
                         <div class="panel-heading">
@@ -30,50 +30,50 @@
                         <div class="panel-body">
                             <form id="FormRegistrar" method="post" class="form-horizontal" action="">
                                 <div class="form-group">
-                                    <label class="col-sm-4 control-label" for="valNombre">Nombres</label>
-                                    <div class="col-sm-5">
+                                    <label class="col-md-4 control-label" for="valNombre">Nombres</label>
+                                    <div class="col-md-6">
                                         <h:inputText class="form-control" id="valNombre" value="#{estudianteController.actual.estNombre}"> </h:inputText>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="col-sm-4 control-label" for="valApellido">Apellidos</label>
-                                    <div class="col-sm-5">
+                                    <label class="col-md-4 control-label" for="valApellido">Apellidos</label>
+                                    <div class="col-md-6">
                                         <h:inputText class="form-control" id="valApellido"  value="#{estudianteController.actual.estApellido}"/>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="col-sm-4 control-label" for="valCodigo">Código Estudiantil</label>
-                                    <div class="col-sm-5">
+                                    <label class="col-md-4 control-label" for="valCodigo">Código Estudiantil</label>
+                                    <div class="col-md-6">
                                         <h:inputText class="form-control" id="valCodigo" value="#{estudianteController.actual.estCodigo}"/>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="col-sm-4 control-label" for="valCorreo">Correo</label>
-                                    <div class="col-sm-5">
+                                    <label class="col-md-4 control-label" for="valCorreo">Correo</label>
+                                    <div class="col-md-6">
                                         <h:inputText class="form-control" id="valCorreo" value="#{estudianteController.actual.estCorreo}"/>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="col-sm-4 control-label" for="valCohorte">Cohorte</label>
-                                    <div class="col-sm-5">
+                                    <label class="col-md-4 control-label" for="valCohorte">Cohorte</label>
+                                    <div class="col-md-6">
                                         <h:inputText class="form-control" id="valCohorte" value="#{estudianteController.actual.estCohorte}"/>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="col-sm-4 control-label" for="valNombreTutor">Nombre del Tutor</label>
-                                    <div class="col-sm-5">
+                                    <label class="col-md-4 control-label" for="valNombreTutor">Nombre del Tutor</label>
+                                    <div class="col-md-6">
                                         <h:inputText class="form-control" id="valNombreTutor" value="#{estudianteController.actual.estTutor}"/>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="col-sm-4 control-label" for="valSemestre">Semestre</label>
-                                    <div class="col-sm-5">
+                                    <label class="col-md-4 control-label" for="valSemestre">Semestre</label>
+                                    <div class="col-md-6">
                                         <h:selectOneMenu class="form-control" value="#{estudianteController.actual.estSemestre}" id="valSemestre">
                                             <f:selectItem itemLabel="Seleccionar" itemValue="0"></f:selectItem>
                                             <f:selectItem itemLabel="1" itemValue="1"></f:selectItem>

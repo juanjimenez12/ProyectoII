@@ -1,10 +1,5 @@
     $(function(){
-        
-        
-
-   
-    
-            //agregar expresion 
+     //agregar expresion 
     $.validator.addMethod('valCodigo',function(value,element )
     {
         return this.optional(element) || /^[a-zA-Z0-9_]/ .test(value);
@@ -174,7 +169,7 @@
             highlight: function ( element, errorClass, validClass ) {
                 //alert("3");
                 
-                    $( element).parents( ".col-sm-5" ).addClass( "has-error" ).removeClass( "has-success" );
+                    $( element).parents( ".col-lg-6" ).addClass( "has-error" ).removeClass( "has-success" );
                     $( element ).next( "span" ).addClass( "glyphicon-remove" ).removeClass( "glyphicon-ok" );
                     
             },
@@ -183,7 +178,7 @@
                     
                      
                      //alert(element.name);
-                    $( element ).parents( ".col-sm-5" ).addClass( "has-success" ).removeClass( "has-error" );
+                    $( element ).parents( ".col-lg-6" ).addClass( "has-success" ).removeClass( "has-error" );
                     $( element ).next( "span" ).addClass( "glyphicon-ok" ).removeClass( "glyphicon-remove" );
                     //$(element).attr('name',obtenername);
 
