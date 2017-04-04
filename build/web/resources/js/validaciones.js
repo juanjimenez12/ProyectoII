@@ -167,14 +167,14 @@
             },
             highlight: function ( element, errorClass, validClass ) {
                 
-                    $( element).parents( ".col-md-7" ).addClass( "has-error" ).removeClass( "has-success" );
+                    $( element).parents( ".col-md-6" ).addClass( "has-error" ).removeClass( "has-success" );
                     $( element ).next( "span" ).addClass( "glyphicon-remove" ).removeClass( "glyphicon-ok" );
                     
             },
             unhighlight: function ( element, errorClass, validClass ) {                    
                      
                      //alert(element.name);
-                    $( element ).parents( ".col-md-7" ).addClass( "has-success" ).removeClass( "has-error" );
+                    $( element ).parents( ".col-md-6" ).addClass( "has-success" ).removeClass( "has-error" );
                     $( element ).next( "span" ).addClass( "glyphicon-ok" ).removeClass( "glyphicon-remove" );
                     //$(element).attr('name',obtenername);
             }
