@@ -280,10 +280,13 @@ $.extend( $.validator, {
                         var obtenername = element.name;
                         
                         var nuevoName = obtenername.split(':');
-                        if(nuevoName.length >1)
+                        var identificador; 
+                        
+                        if(nuevoName.length >1)                        
                         {
-                            
-                            $(element).attr('name',nuevoName[1]);  
+                            identificador = nuevoName[0] + ":"; 
+                            $(element).attr('name',nuevoName[1]);
+                            $(element).attr('onfocus', identificador);
                         }                   
                         
                         /* ---------------------------------------- fin de la validacion para JSF --------------------------------------*/
@@ -291,10 +294,10 @@ $.extend( $.validator, {
 			// Hide error label and remove error class on focus if enabled
 			if ( this.settings.focusCleanup ) {
 				if ( this.settings.unhighlight ) {
-					this.settings.unhighlight.call( this, element, this.settings.errorClass, this.settings.validClass );
+					this.settings.unhighlight.call( this, element, this.settings.errorClass, this.settings.validClass);
 				}
 				this.hideThese( this.errorsFor( element ) );
-			}
+			}      
 		},
 		onfocusout: function( element ) {
                    

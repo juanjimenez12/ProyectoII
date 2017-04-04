@@ -47,7 +47,6 @@ public class EstudianteController implements Serializable {
     String EDITAR = "editar";
     
     public EstudianteController() {
-        
     }
     
     public Estudiante getActual(){

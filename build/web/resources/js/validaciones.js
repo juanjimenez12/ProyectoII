@@ -28,17 +28,13 @@
         return this.optional(element) || /^[A-Za-z\s]{1,}[\.]{0,1}[A-Za-z\s]{0,}$/.test(value);
     });
 
-    $.validator.addMethod('valSemestre',function(value,element)
+    $.validator.addMethod('valSemestre', function(value,element)
     {
-    var seleccion = document.getElementById("valSemestre");
-    if(seleccion.value == "Seleccionar") {
-    return false;
-    }else{
-    return true;
-    }
+        alert('s');
+        alert($(element).value);
+        /*var seleccion = document.getElementById("valSemestre");
+        return (seleccion.value === "Seleccionar");*/
     });
-
-
     //hasta aqui ...................
     $.validator.setDefaults( {
             submitHandler: function () {
@@ -47,8 +43,6 @@
     } );
 
     $( "#FormRegistrar" ).validate( {
-        
-       
             rules: {
                     //se agrega la funcion nueva 
                     valCodigo: {
@@ -87,8 +81,8 @@
                     },
 
                     valSemestre: {
-                    valSemestre:true
-                    },
+                        valSemestre: false
+                    }
 
             },
             messages: {
@@ -130,8 +124,8 @@
                             required: "El nombre del tutor es obligatorio"
                     },
                     valSemestre: {
-                            valSemestre :"El usuario es obligatorio"
-                            },
+                            valSemestre :"Seleccione un semestre"
+                    },
                     agree1: "Please accept our policy"
             },
             errorElement: "em",
@@ -171,12 +165,15 @@
                     $( element ).next( "span" ).addClass( "glyphicon-remove" ).removeClass( "glyphicon-ok" );
                     
             },
-            unhighlight: function ( element, errorClass, validClass ) {                    
-                     
+            unhighlight: function ( element, errorClass, validClass ) { 
                      //alert(element.name);
                     $( element ).parents( ".col-md-6" ).addClass( "has-success" ).removeClass( "has-error" );
                     $( element ).next( "span" ).addClass( "glyphicon-ok" ).removeClass( "glyphicon-remove" );
                     //$(element).attr('name',obtenername);
+                    var identificador = $(element).attr('onfocus');
+                    var name = $(element).attr('name');
+                    
+                    $(element).attr('name', (identificador + "" + name));
             }
     } );
 

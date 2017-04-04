@@ -84,6 +84,7 @@ public class Estudiante implements Serializable {
     private List<Publicacion> publicacionList;
 
     public Estudiante() {
+        
     }
 
     public Estudiante(Integer estIdentificador) {
@@ -112,7 +113,6 @@ public class Estudiante implements Serializable {
 
     public void setEstNombre(String estNombre) {
         this.estNombre = estNombre;
-        System.out.println("lleuge aqui");
     }
 
     public String getEstApellido() {

@@ -18,105 +18,77 @@
 
     <!-- IMPLEMENTATION -->
     <cc:implementation>
-        <div class="container" align="center">
-            <div class="">
-                <div class="col-md-8">
-                    <div class="panel panel-success">
-                        
-                        <div class="panel-heading">
-                            <h3 class="panel-title">Editar Estudiante</h3>
+        <div class="col-md-10" style="width: 1000px">
+            <div class="panel panel-success">
+
+                <div class="panel-heading">
+                    <h3 class="panel-title">Editar Estudiante</h3>
+                </div>
+
+                <div class="panel-body">
+                    <form id="FormRegistrar" method="post" class="form-horizontal" action="">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="valNombre">Nombres</label>
+                            <div class="col-md-6">
+                                <h:inputText class="form-control" id="valNombre" value="#{estudianteController.actual.estNombre}"> </h:inputText>
+                            </div>
                         </div>
-                        
-                        <div class="panel-body">
-                            <form id="FormRegistrar" method="post" class="form-horizontal" action="">
-                                <div class="form-group">
-                                    <label class="col-md-3 control-label" for="valNombre">Nombres</label>
-                                    <div class="col-md-5">
-                                        <h:inputText class="form-control" id="valNombre" value="#{estudianteController.actual.estNombre}"> </h:inputText>
-                                    </div>
-                                </div>
 
-                                <div class="form-group">
-                                    <label class="col-md-3 control-label" for="valApellido">Apellidos</label>
-                                    <div class="col-md-5">
-                                        <h:inputText class="form-control" id="valApellido"  value="#{estudianteController.actual.estApellido}"/>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="col-md-3 control-label" for="valCodigo">Código Estudiantil</label>
-                                    <div class="col-md-5">
-                                        <h:inputText class="form-control" id="valCodigo" value="#{estudianteController.actual.estCodigo}"/>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="col-md-3 control-label" for="valCorreo">Correo</label>
-                                    <div class="col-md-5">
-                                        <h:inputText class="form-control" id="valCorreo" value="#{estudianteController.actual.estCorreo}"/>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="col-md-3 control-label" for="valCohorte">Cohorte</label>
-                                    <div class="col-md-5">
-                                        <h:inputText class="form-control" id="valCohorte" value="#{estudianteController.actual.estCohorte}"/>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="col-md-3 control-label" for="valNombreTutor">Nombre del Tutor</label>
-                                    <div class="col-md-5">
-                                        <h:inputText class="form-control" id="valNombreTutor" value="#{estudianteController.actual.estTutor}"/>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="col-md-3 control-label" for="valSemestre">Semestre</label>
-                                    <div class="col-md-5">
-                                        <h:selectOneMenu class="form-control" value="#{estudianteController.actual.estSemestre}" id="valSemestre">
-                                            <f:selectItem itemLabel="Seleccionar" itemValue="0"></f:selectItem>
-                                            <f:selectItem itemLabel="1" itemValue="1"></f:selectItem>
-                                            <f:selectItem itemLabel="2" itemValue="2"></f:selectItem>
-                                        </h:selectOneMenu>
-                                    </div>
-                                </div>
-
-							<!--<div class="form-group">
-								<label class="col-sm-4 control-label" for="valContra">Password</label>
-								<div class="col-sm-5">
-									<input type="password" class="form-control" id="valContra" name="valContra" placeholder="Password" />
-								</div>
-							</div>
-
-							<div class="form-group">
-								<label class="col-sm-4 control-label" for="confirm_password1">Confirm password</label>
-								<div class="col-sm-5">
-									<input type="password" class="form-control" id="confirm_password1" name="confirm_password1" placeholder="Confirm password" />
-								</div>
-							</div>
-
-							<div class="form-group">
-								<div class="col-sm-5 col-sm-offset-4">
-									<div class="checkbox">
-										<label>
-											<input type="checkbox" id="agree1" name="agree1" value="agree" />Please agree to our policy
-										</label>
-									</div>
-								</div>
-							</div>-->
-
-                                <div class="form-group">
-                                    <div class="col-sm-9 col-sm-offset-4">
-                                        <p:commandButton value="Terminar edición" class="btn btn-primary" action="#{estudianteController.agregar()}" />
-                                        <p:commandButton value="Cancelar" class="btn btn-danger" />
-                                    </div>
-                                </div>
-                            </form>
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="valApellido">Apellidos</label>
+                            <div class="col-md-6">
+                                <h:inputText class="form-control" id="valApellido"  value="#{estudianteController.actual.estApellido}"/>
+                            </div>
                         </div>
-                    </div>
+
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="valCodigo">Código Estudiantil</label>
+                            <div class="col-md-6">
+                                <h:inputText class="form-control" id="valCodigo" value="#{estudianteController.actual.estCodigo}"/>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="valCorreo">Correo</label>
+                            <div class="col-md-6">
+                                <h:inputText class="form-control" id="valCorreo" value="#{estudianteController.actual.estCorreo}"/>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="valCohorte">Cohorte</label>
+                            <div class="col-md-6">
+                                <h:inputText class="form-control" id="valCohorte" value="#{estudianteController.actual.estCohorte}"/>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="valNombreTutor">Nombre del Tutor</label>
+                            <div class="col-md-6">
+                                <h:inputText class="form-control" id="valNombreTutor" value="#{estudianteController.actual.estTutor}"/>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="valSemestre">Semestre</label>
+                            <div class="col-md-6">
+                                <h:selectOneMenu class="form-control" value="#{estudianteController.actual.estSemestre}" id="valSemestre">
+                                    <f:selectItem itemLabel="Seleccionar" itemValue="0"></f:selectItem>
+                                    <f:selectItem itemLabel="1" itemValue="1"></f:selectItem>
+                                    <f:selectItem itemLabel="2" itemValue="2"></f:selectItem>
+                                </h:selectOneMenu>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-6 col-sm-offset-3">
+                                <p:commandButton value="Terminar edición" class="btn btn-primary" action="#{estudianteController.agregar()}" />
+                                <p:commandButton value="Cancelar" class="btn btn-danger" />
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
-	</div>
+        </div>
     </cc:implementation>
 </html>
