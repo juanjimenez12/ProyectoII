@@ -30,7 +30,7 @@
 }
 
 .center_content {
-    position: relative;
+    position: fixed;
     background-color: white;
     padding: 5px;
 }
