@@ -1,8 +1,8 @@
     $(function(){
-      // clic para todos los elementos del formulario apra despues validarlos 
+      // ----- lo que se hace es cambiar los nombres de los elementos del form para que puedan ser -----
       
-       var elementosFormulario = document.getElementById("FormRegistrar").elements
-      
+       var elementosFormulario = document.getElementById("FormRegistrar").elements // se coloca el id del formulario a validar 
+       //no tocar de aqui para abajo
             for (i = 0 ; i < elementosFormulario.length - 1 ; i++)
             {
                 var obtenername = elementosFormulario[i].name;
@@ -16,7 +16,9 @@
                             $(elementosFormulario[i]).attr('name',nuevoName[1]);
                             $(elementosFormulario[i]).attr('onfocus', identificador);
                         }
-            }      
+            }   
+            
+        //--------------------------FIN-----------------------------------
       
      //agregar expresion 
     $.validator.addMethod('valCodigo',function(value,element )
