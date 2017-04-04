@@ -51,6 +51,10 @@ public class EstudianteController implements Serializable {
     
     public Estudiante getActual(){
         if(actual==null){actual = new Estudiante();}
+        if(actual.getEstSemestre() != null)
+        {
+            System.out.println("");
+        }        
         return actual;
     }
     
