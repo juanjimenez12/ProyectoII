@@ -33,6 +33,14 @@ public class EstudianteController implements Serializable {
     private Estudiante actual;
     
     private List<Estudiante> listaEstudiantes;    
+
+    public List<Estudiante> getListaEstudiantes() {
+        return listaEstudiantes;
+    }
+
+    public void setListaEstudiantes(List<Estudiante> listaEstudiantes) {
+        this.listaEstudiantes = listaEstudiantes;
+    }
     
     String INICIO = "index";
     String CREAR = "new";

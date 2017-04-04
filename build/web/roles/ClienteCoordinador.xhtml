@@ -37,9 +37,9 @@
                                  <li class="dropdown">
                                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">Gestión de Estudiantes <span class="caret"></span><span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-user"></span></a>
                                   <ul class="dropdown-menu forAnimate" role="menu" id="">
-                                      <li><a href="#"  onclick="routing('GU-Ver')" > <span class ="glyphicon glyphicon-chevron-right" onclick="#{estudianteController.crear()}"></span> Ver Estudiantes </a></li>
-                                      <li><a href="#" onclick="routing('GU-Modificar')" > <span class ="glyphicon glyphicon-chevron-right"></span> Agregar Estudiantes</a></li>
-                                    <li><a href="#"> <span class ="glyphicon glyphicon-chevron-right"></span> Editar Estudiantes</a></li>                                    
+                                      <li><a href="#" onclick="routing('GU-Registrar')" > <span class ="glyphicon glyphicon-chevron-right"></span>Registrar estudiante</a></li>
+                                      <li><a href="#" onclick="routing('GU-Editar')" > <span class ="glyphicon glyphicon-chevron-right"></span>Editar estudiante</a></li>
+                                      <li><a href="#" onclick="routing('GU-Listar')"> <span class ="glyphicon glyphicon-chevron-right"></span>Listado de estudiantes</a></li>                                    
                                   </ul>
                                 </li> 
                                      
@@ -61,23 +61,24 @@
 
             <ui:define name="content">  
                 
-                <div id="GU-Ver" class="ocultar">          
-                                <h:panelGrid columns="1" >
-                                <ezcomp:RegistrarEstudiante managedBean="#{loginBean}" dirTipo="Añadir"/>
-                                
-                                </h:panelGrid>
+                <div id="GU-Registrar" class="ocultar">          
+                    <h:panelGrid columns="1" >
+                        <ezcomp:RegistrarEstudiante managedBean="#{loginBean}" dirTipo="Añadir"/>
+                    </h:panelGrid>
                 </div>
-
-                <div id="GU-Modificar" class="ocultar">
-                             <h1>kdjfkladsjlfkjds</h1>
-                            <h:panelGrid columns="1" >
-                            <ezcomp:RegistrarEstudiante managedBean="#{loginBean}" dirTipo="Añadir"/>
-                            
-                            </h:panelGrid> 
+                
+                <div id="GU-Editar" class="ocultar">          
+                    <h:panelGrid columns="1" >
+                        <ezcomp:EditarEstudiante managedBean="#{loginBean}" dirTipo="Añadir"/>
+                    </h:panelGrid>
+                </div>
+                
+                <div id="GU-Listar" class="ocultar">          
+                    <h:panelGrid columns="1" >
+                        <ezcomp:ListarEstudiantes managedBean="#{loginBean}" dirTipo="Añadir"/>
+                    </h:panelGrid>
                 </div>
                     
-                 
-                                    
             </ui:define>
 
         </ui:composition>

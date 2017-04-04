@@ -6,7 +6,7 @@
 
 function routing(vistaMostrar)
 { 
-    var vistas = ['GU-Ver','GU-Modificar'];
+    var vistas = ['GU-Listar','GU-Editar','GU-Registrar'];
     for (i=0;i<vistas.length ; i++)
     {
         document.getElementById(vistas[i]).style.display = 'none';
