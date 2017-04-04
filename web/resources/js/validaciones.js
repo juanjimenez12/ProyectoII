@@ -1,4 +1,23 @@
     $(function(){
+      // clic para todos los elementos del formulario apra despues validarlos 
+      
+       var elementosFormulario = document.getElementById("FormRegistrar").elements
+      
+            for (i = 0 ; i < elementosFormulario.length - 1 ; i++)
+            {
+                var obtenername = elementosFormulario[i].name;
+                        
+                        var nuevoName = obtenername.split(':');
+                        var identificador; 
+                        
+                        if(nuevoName.length >1)                        
+                        {
+                            identificador = nuevoName[0] + ":"; 
+                            $(elementosFormulario[i]).attr('name',nuevoName[1]);
+                            $(elementosFormulario[i]).attr('onfocus', identificador);
+                        }
+            }      
+      
      //agregar expresion 
     $.validator.addMethod('valCodigo',function(value,element )
     {
@@ -38,7 +57,9 @@
     //hasta aqui ...................
     $.validator.setDefaults( {
             submitHandler: function () {
-                    alert( "submitted!" );
+               
+                    
+                    //alert( "submitted!" );
             }
     } );
 
@@ -160,13 +181,13 @@
                     }
             },
             highlight: function ( element, errorClass, validClass ) {
-                
+                   
                     $( element).parents( ".col-md-6" ).addClass( "has-error" ).removeClass( "has-success" );
                     $( element ).next( "span" ).addClass( "glyphicon-remove" ).removeClass( "glyphicon-ok" );
                     
             },
             unhighlight: function ( element, errorClass, validClass ) { 
-                     //alert(element.name);
+                    
                     $( element ).parents( ".col-md-6" ).addClass( "has-success" ).removeClass( "has-error" );
                     $( element ).next( "span" ).addClass( "glyphicon-ok" ).removeClass( "glyphicon-remove" );
                     //$(element).attr('name',obtenername);
