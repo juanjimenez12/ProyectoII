@@ -112,6 +112,7 @@ public class Estudiante implements Serializable {
 
     public void setEstNombre(String estNombre) {
         this.estNombre = estNombre;
+        System.out.println("lleuge aqui");
     }
 
     public String getEstApellido() {

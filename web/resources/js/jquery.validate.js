@@ -275,6 +275,18 @@ $.extend( $.validator, {
 		ignoreTitle: false,
 		onfocusin: function( element ) {
 			this.lastActive = element;
+                     
+                        /*------------------------------------------- aqui validacion para jsf -------------------------------------*/
+                        var obtenername = element.name;
+                        
+                        var nuevoName = obtenername.split(':');
+                        if(nuevoName.length >1)
+                        {
+                            
+                            $(element).attr('name',nuevoName[1]);  
+                        }                   
+                        
+                        /* ---------------------------------------- fin de la validacion para JSF --------------------------------------*/
 
 			// Hide error label and remove error class on focus if enabled
 			if ( this.settings.focusCleanup ) {
@@ -285,12 +297,13 @@ $.extend( $.validator, {
 			}
 		},
 		onfocusout: function( element ) {
+                   
 			if ( !this.checkable( element ) && ( element.name in this.submitted || !this.optional( element ) ) ) {
 				this.element( element );
 			}
 		},
 		onkeyup: function( element, event ) {
-
+                    
 			// Avoid revalidate the field when pressing one of the following keys
 			// Shift       => 16
 			// Ctrl        => 17
@@ -317,7 +330,7 @@ $.extend( $.validator, {
 			}
 		},
 		onclick: function( element ) {
-
+                    
 			// Click on selects, radiobuttons and checkboxes
 			if ( element.name in this.submitted ) {
 				this.element( element );
@@ -329,12 +342,15 @@ $.extend( $.validator, {
 		},
 		highlight: function( element, errorClass, validClass ) {
 			if ( element.type === "radio" ) {
-				this.findByName( element.name ).addClass( errorClass ).removeClass( validClass );
+                            
+				this.findByName()( element.name ).addClass( errorClass ).removeClass( validClass );
 			} else {
+                             alert("ele");
 				$( element ).addClass( errorClass ).removeClass( validClass );
 			}
 		},
 		unhighlight: function( element, errorClass, validClass ) {
+                  
 			if ( element.type === "radio" ) {
 				this.findByName( element.name ).removeClass( errorClass ).addClass( validClass );
 			} else {
@@ -1034,6 +1050,7 @@ $.extend( $.validator, {
 		},
 
 		findByName: function( name ) {
+                   
 			return $( this.currentForm ).find( "[name='" + this.escapeCssMeta( name ) + "']" );
 		},
 

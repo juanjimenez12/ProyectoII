@@ -70,12 +70,12 @@ public class EstudianteController implements Serializable {
         return INICIO;
     }    
     
-    public String crear(){
-        actual = new Estudiante();        
-        return CREAR;
+    public void crear(){
+        actual = new Estudiante();
     }
-    
-    public String agregar(){        
+        
+    public String agregar(){    
+        
         String contraseña = cifrarBase64(actual.getEstCodigo());
         actual.setEstContrasena(contraseña);
 

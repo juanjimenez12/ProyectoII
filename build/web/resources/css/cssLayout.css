@@ -36,7 +36,8 @@
 }
 
 .left_content { /*aqui cuadra el contenido */
-    width: 100%;
+    width: 97%;
+   
     background-color: white;
     padding: 5px;
     margin-left: 290px;
