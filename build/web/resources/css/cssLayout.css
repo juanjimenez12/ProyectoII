@@ -36,8 +36,8 @@
 }
 
 .left_content { /*aqui cuadra el contenido lateral  */
-    width: 60%;
-    background-color: white;
+    width: 30%;
+    background-color: transparent;
     padding: 5px;
     margin-left: 22%;
 }
@@ -134,7 +134,7 @@ body,html{
 
     /*menu lateral medidas*/
     nav.sidebar{
-      position: fixed;
+      position: relative;
       width: 20%;
       height: 100%;
       margin-left: -160px;
