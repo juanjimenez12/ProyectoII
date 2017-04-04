@@ -3,7 +3,7 @@
         
 
    
-    alert("vu");
+    
             //agregar expresion 
     $.validator.addMethod('valCodigo',function(value,element )
     {
