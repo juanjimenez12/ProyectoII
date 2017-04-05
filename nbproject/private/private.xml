@@ -1,20 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
-    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-<<<<<<< HEAD
-            <file>file:/C:/Users/YS/Desktop/ProyectoII/web/resources/css/default.css</file>
-            <file>file:/C:/Users/YS/Desktop/ProyectoII/src/java/co/unicauca/proyectobase/login/UserLoginView.java</file>
-            <file>file:/C:/Users/YS/Desktop/ProyectoII/web/componentes/gestionUsuarios/EditarEstudiante.xhtml</file>
-            <file>file:/C:/Users/YS/Desktop/ProyectoII/web/plantillas/Coordinador.xhtml</file>
-            <file>file:/C:/Users/YS/Desktop/ProyectoII/web/WEB-INF/web.xml</file>
-            <file>file:/C:/Users/YS/Desktop/ProyectoII/web/index.xhtml</file>
-            <file>file:/C:/Users/YS/Desktop/ProyectoII/web/componentes/gestionUsuarios/RegistrarEstudiante.xhtml</file>
-=======
-            <file>file:/C:/Users/Davidstl5/Desktop/ProyectoII/web/plantillas/Coordinador.xhtml</file>
-            <file>file:/C:/Users/Davidstl5/Desktop/ProyectoII/web/resources/ezcomp/ListarEstudiantes.xhtml</file>
->>>>>>> df7aa1fc7ed94183c02c22595c78626761d16c37
-        </group>
-    </open-files>
 </project-private>

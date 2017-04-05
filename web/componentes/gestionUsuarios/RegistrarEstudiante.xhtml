@@ -18,7 +18,7 @@
                         <button type="button" class="close" data-dismiss="alert">&times;</button>
                         <strong >Importante : los campos con asterisco (*) son obligatorios.</strong>
                     </div>
-                    <h:panelGrid columns="3" cellpadding="10" styleClass="elementosCentrados bajarGrid" >
+                    <h:panelGrid columns="3" cellpadding="10" styleClass="elementosCentrados bajarGrid" id="panelRegistrar">
                         
                         <p:outputLabel value="Nombres *" for="valNombre" styleClass="addEspacio"/>
                         <h:inputText class="form-control" id="valNombre" value="#{estudianteController.actual.estNombre}" styleClass="addEspacio form-control " >
@@ -28,10 +28,6 @@
                         </h:inputText>
                         <p:message for="valNombre" id="msjValNombre"  styleClass="addEspacio"/>
                         
-                        
-                        
-                        
-                        
                         <h:outputLabel value="Apellidos *" for="valApellido" styleClass="addEspacio"/>
                         <h:inputText class="form-control" id="valApellido"  value="#{estudianteController.actual.estApellido}" styleClass="addEspacio form-control">
                             <f:validator validatorId="validadorApellidoEstudiante"/>
@@ -40,9 +36,6 @@
                         </h:inputText>
                         <p:message for="valApellido" id="msjValApellido" styleClass="addEspacio"/>
                         
-                     
-                         
-                        
                         <h:outputLabel value="Codigo *" for="valCodigo" styleClass="addEspacio"/>
                         <h:inputText class="form-control" id="valCodigo" value="#{estudianteController.actual.estCodigo}" styleClass="addEspacio form-control">
                             <f:validator validatorId="validadorCodigoEstudiante"/>
@@ -50,7 +43,6 @@
                             <p:ajax event="blur" update="msjValCodigo"/>
                         </h:inputText>
                         <p:message for="valCodigo" id="msjValCodigo" styleClass="addEspacio"/>
-                       
                         
                         <h:outputLabel value="Correo *" for="valCorreo" styleClass="addEspacio"/>
                         <h:inputText class="form-control" id="valCorreo" value="#{estudianteController.actual.estCorreo}" styleClass="addEspacio form-control" >
@@ -60,15 +52,13 @@
                         </h:inputText>
                         <p:message for="valCorreo" id="msjValCorreo" styleClass="addEspacio"/>
                         
-                        
                         <h:outputLabel value="Cohorte *" for="valCohorte" styleClass="addEspacio"/>
-                        <h:inputText class="form-control" id="valCohorte" value="#{estudianteController.actual.estCohorte}" styleClass="addEspacio form-control">
+                        <h:inputText class="form-control" id="valCohorte" value="#{estudianteController.actual.estCorreo}" styleClass="addEspacio form-control" >
                             <f:validator validatorId="validadorCohorteEstudiante"/>
                             <p:ajax event="keyup" update="msjValCohorte"/>
                             <p:ajax event="blur" update="msjValCohorte"/>
                         </h:inputText>
-                        <p:message for="valCohorte" id="msjValCohorte" styleClass="addEspacio"/>
-                        
+                        <p:message for="valCohorte" id="msjValCohorte" styleClass="addEspacio"/>                       
                         
                         <h:outputLabel value="Nombre del tutor *&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" for="valNombreTutor" styleClass="addEspacio "/>
                         <h:inputText class="form-control" id="valNombreTutor" value="#{estudianteController.actual.estTutor}" styleClass="addEspacio form-control">
@@ -84,11 +74,11 @@
                             <f:selectItem itemLabel="2" itemValue="2"></f:selectItem>
                         </h:selectOneMenu>
                         
-                        
-                        
                         <h:outputLabel styleClass="addEspacio"/>
                         <h:outputLabel styleClass="addEspacio"/>
-                        <h:commandButton value="Registrar" actionListener="#{estudianteController.agregar()}" class="btn btn-primary" type="submit"/>
+                        <h:commandButton value="Registrar" actionListener="#{estudianteController.agregar()}" class="btn btn-primary" >
+                            <f:ajax execute="@form" render="panelRegistrar"/>
+                        </h:commandButton>
                     </h:panelGrid>
                 </p:panel>
             </h:form>

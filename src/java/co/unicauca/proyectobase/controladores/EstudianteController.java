@@ -67,9 +67,8 @@ public class EstudianteController implements Serializable {
         return INICIO;
     }
     
-    public String listado(){
-        dao.findAll();        
-        return INICIO;
+    public List<Estudiante> listado(){
+        return dao.findAll();
     }    
     
     public void crear(){
@@ -87,7 +86,15 @@ public class EstudianteController implements Serializable {
         actual.setEstEstado("Activo");
 
         dao.create(actual);
+        
+        actual = new Estudiante();
+        
         return INICIO;        
+    }
+    
+    public void actualizarActual(Estudiante estudiante)
+    {
+        this.actual = estudiante;
     }
     
     public String editar(int id){

@@ -21,17 +21,33 @@ h3, h5 {
 	font-weight: normal !important;
 }
 
+#txt_nomusu
+{
+    margin-top: 1%;
+    margin-right: 50px;
+    font-weight: bold;
+}
+
 #btn_salir {
     margin-top: 1%;
-    margin-left: 50%;
+    margin-right: 0px;
     font-weight: bold;
 }
+
+#logo_salir
+{
+    margin-top: 12%;
+    font-weight: bold;
+    margin-right: 0px;   
+}
+
 #logo_usu{
-    margin-top: 3%;
+    margin-top: 12%;
     font-weight: bold;
-    margin-left: 50%;
-    
+    margin-right: 50px; 
 }
+
+
 
 #logo_unicaua
 {
@@ -42,7 +58,8 @@ h3, h5 {
     margin-top: 5%;
     margin-left: 10%;
     font-weight: bold;
-    font-size: 36px;
+    font-size: 30px;
+    width: 800px;
 }
 
 #antorcha {
