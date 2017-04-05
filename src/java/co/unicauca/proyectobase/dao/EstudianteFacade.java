@@ -9,6 +9,7 @@ import co.unicauca.proyectobase.entidades.Estudiante;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -27,6 +28,18 @@ public class EstudianteFacade extends AbstractFacade<Estudiante> {
 
     public EstudianteFacade() {
         super(Estudiante.class);
+    }
+    
+    public boolean findByEstCorreo(String estCorreo){
+        Query query = em.createNamedQuery("Estudiante.findByEstCorreo");
+        query.setParameter("estCorreo", estCorreo);
+        return !query.getResultList().isEmpty();
+    }
+    
+    public boolean findByEstCodigo(String estCodigo){
+            Query query = em.createNamedQuery("Estudiante.findByEstCodigo");
+            query.setParameter("estCodigo", estCodigo);
+            return !query.getResultList().isEmpty();
     }
     
 }

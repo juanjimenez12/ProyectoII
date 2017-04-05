@@ -1,6 +1,8 @@
 package co.unicauca.proyectobase.validadores;
 
+import co.unicauca.proyectobase.dao.EstudianteFacade;
 import java.util.regex.Pattern;
+import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -12,6 +14,9 @@ import javax.faces.validator.ValidatorException;
 @FacesValidator(value="validadorCodigoEstudiante")
 public class ValidadorCodigoEstudiante implements Validator
 {
+    @EJB
+    private EstudianteFacade dao;
+    
     @Override
     public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException 
     {
@@ -34,6 +39,13 @@ public class ValidadorCodigoEstudiante implements Validator
         {            
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "El código contiene caracteres no validos.");
             throw new ValidatorException(msg);  
-        }        
+        }    
+        
+        boolean existe = dao.findByEstCodigo(texto);
+        if(existe)
+        {
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "Ya existe un estudiante con este código.");
+            throw new ValidatorException(msg);  
+        }
     }
 }
