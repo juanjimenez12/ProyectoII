@@ -29,7 +29,7 @@ public class ValidadorApellidoEstudiante implements Validator
             throw new ValidatorException(msg);  
         }
         
-        boolean cumplePatron = Pattern.matches("[a-zA-ZñÑáÁéÉíÍóÓúÚ\\s]", texto);
+        boolean cumplePatron = Pattern.matches(".*[a-zA-ZñÑáÁéÉíÍóÓúÚ\\s]", texto);
         if(!cumplePatron)
         {            
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "El apellido del estudiante contiene caracteres no validos.");

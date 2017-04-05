@@ -14,37 +14,55 @@
         <ui:define name="content">            
             <h:form>
                 <p:panel header="Registrar Estudiante">
-                    <h:panelGrid columns="2" cellpadding="10" styleClass="elementosCentrados">
+                    <h:panelGrid columns="3" cellpadding="10" styleClass="elementosCentrados">
                         
                         <h:outputLabel value="Nombres" for="valNombre"/>
                         <h:inputText class="form-control" id="valNombre" value="#{estudianteController.actual.estNombre}">
                             <f:validator validatorId="validadorNombreEstudiante"/>
+                            <p:ajax event="keyup" update="msjValNombre"/>
+                            <p:ajax event="blur" update="msjValNombre"/>
                         </h:inputText>
+                        <h:message for="valNombre" id="msjValNombre"/>
                         
                         <h:outputLabel value="Apellidos" for="valApellido"/>
                         <h:inputText class="form-control" id="valApellido"  value="#{estudianteController.actual.estApellido}">
                             <f:validator validatorId="validadorApellidoEstudiante"/>
+                            <p:ajax event="keyup" update="msjValApellido"/>
+                            <p:ajax event="blur" update="msjValApellido"/>
                         </h:inputText>
+                        <h:message for="valApellido" id="msjValApellido"/>
                         
                         <h:outputLabel value="Codigo" for="valCodigo"/>
                         <h:inputText class="form-control" id="valCodigo" value="#{estudianteController.actual.estCodigo}">
                             <f:validator validatorId="validadorCodigoEstudiante"/>
+                            <p:ajax event="keyup" update="msjValCodigo"/>
+                            <p:ajax event="blur" update="msjValCodigo"/>
                         </h:inputText>
+                        <h:message for="valCodigo" id="msjValCodigo"/>
                         
                         <h:outputLabel value="Correo" for="valCorreo"/>
                         <h:inputText class="form-control" id="valCorreo" value="#{estudianteController.actual.estCorreo}">
                             <f:validator validatorId="validadorCorreo"/>
+                            <p:ajax event="keyup" update="msjValCorreo"/>
+                            <p:ajax event="blur" update="msjValCorreo"/>
                         </h:inputText>
+                        <h:message for="valCorreo" id="msjValCorreo"/>
                         
                         <h:outputLabel value="Cohorte" for="valCohorte"/>
                         <h:inputText class="form-control" id="valCohorte" value="#{estudianteController.actual.estCohorte}">
                             <f:validator validatorId="validadorCohorteEstudiante"/>
+                            <p:ajax event="keyup" update="msjValCohorte"/>
+                            <p:ajax event="blur" update="msjValCohorte"/>
                         </h:inputText>
+                        <h:message for="valCohorte" id="msjValCohorte"/>
                         
                         <h:outputLabel value="Nombre del tutor&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" for="valNombreTutor"/>
                         <h:inputText class="form-control" id="valNombreTutor" value="#{estudianteController.actual.estTutor}">
                             <f:validator validatorId="validadorNombreTutorEstudiante"/>
+                            <p:ajax event="keyup" update="msjValNombreTutor"/>
+                            <p:ajax event="blur" update="msjValNombreTutor"/>
                         </h:inputText>
+                        <h:message for="valNombreTutor" id="msjValNombreTutor"/>
                         
                         <h:outputLabel value="Semestre" for="valSemestre"/>
                         <h:selectOneMenu class="form-control"  id="valSemestre" value="#{estudianteController.actual.estSemestre}">                                    

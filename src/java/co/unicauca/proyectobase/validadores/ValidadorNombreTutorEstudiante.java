@@ -29,7 +29,7 @@ public class ValidadorNombreTutorEstudiante implements Validator
             throw new ValidatorException(msg);  
         }
         
-        boolean cumplePatron = Pattern.matches("[a-zA-ZñÑáÁéÉíÍóÓúÚ\\s]", texto);
+        boolean cumplePatron = Pattern.matches(".*[a-zA-ZñÑáÁéÉíÍóÓúÚ\\s]", texto);
         if(!cumplePatron)
         {            
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "El nombre del tutor contiene caracteres no válidos.");
