@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package co.unicauca.proyectobase.controladores;
 
 import co.unicauca.proyectobase.dao.EstudianteFacade;
@@ -10,18 +6,13 @@ import co.unicauca.proyectobase.entidades.Estudiante;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.ManagedBean;
 import javax.ejb.EJB;
-import javax.persistence.Query;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
-/**
- *
- * @author Sebastian
- */
+
 @Named(value = "estudianteController")
 @ManagedBean
 @SessionScoped
@@ -85,7 +76,7 @@ public class EstudianteController implements Serializable {
         actual = new Estudiante();
     }
         
-    public String agregar(){    
+    public String agregar(){ 
         
         String contraseña = cifrarBase64(actual.getEstCodigo());
         actual.setEstContrasena(contraseña);

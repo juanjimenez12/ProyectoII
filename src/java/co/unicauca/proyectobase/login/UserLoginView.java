@@ -46,7 +46,7 @@ public class UserLoginView {
         if(username != null && username.equals("admin") && password != null && password.equals("admin")) {
             loggedIn = true;
             message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Welcome santiago", username);
-            Utilidades.redireccionar("/ProyectoII/faces/roles/ClienteCoordinador.xhtml");
+            Utilidades.redireccionar("/ProyectoII/faces/plantillas/Coordinador.xhtml");
             //
         } else {
             loggedIn = false;

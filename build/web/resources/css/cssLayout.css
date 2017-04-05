@@ -35,11 +35,13 @@
     padding: 5px;
 }
 
-.left_content { /*aqui cuadra el contenido lateral  */
-    width: 30%;
+.left_content {
+    position: absolute;
+    width: 1000px;
     background-color: transparent;
     padding: 5px;
     margin-left: 22%;
+    text-align: center;
 }
 
 .right_content {

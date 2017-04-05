@@ -9,7 +9,7 @@
     
     
     <h:body>
-          <script type="javascript" src="../js/validaciones.js"/>
+          
     </h:body>
     
     <body>
@@ -19,64 +19,8 @@
             
             
             <ui:define name="left">
-                <nav class="navbar navbar-default sidebar" role="navigation">
-                            <div class="container-fluid">
-                            <div class="navbar-header">
-                              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-sidebar-navbar-collapse-1">
-                                <span class="sr-only">Toggle navigation</span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                              </button>      
-                            </div>
-                            <div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
-                               
-                              <ul class="nav navbar-nav">
-                                <li class="active"><a href="#">Menu Coordinador<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-home"></span></a></li>
-                                
-                                 <li class="dropdown">
-                                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Gestión de Estudiantes <span class="caret"></span><span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-user"></span></a>
-                                  <ul class="dropdown-menu forAnimate" role="menu" id="">
-                                      <li><a href="#" onclick="routing('GU-Registrar'); #{estudianteController.crear()}" > <span class ="glyphicon glyphicon-chevron-right"></span>Registrar estudiante</a></li>
-                                      <li><a href="#" onclick="routing('GU-Editar')" > <span class ="glyphicon glyphicon-chevron-right"></span>Editar estudiante</a></li>
-                                      <li><a href="#" onclick="routing('GU-Listar')"> <span class ="glyphicon glyphicon-chevron-right"></span>Listado de estudiantes</a></li>                                    
-                                  </ul>
-                                </li> 
-                                     
-                               
-                                <li><a href="#" onclick="routing('GU-Modificar')"> Buscar Publicaciones <span style="font-size: 16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-search"></span></a></li>
-                                <li><a href="#">   Ver Publicaciones Sin Visado<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-list-alt"></span></a></li>                                    
-                                <li><a href="#">  Ver Todos los Estudiantes <span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-eye-open"></span></a></li>
-                                
-                               
-                              </ul>
-                                 
-                            </div>
-                          </div>
-                    </nav>
-            </ui:define>           
-
-            <ui:define name="content">  
                 
-                <div id="GU-Registrar" class="ocultar">          
-                    <h:panelGrid columns="1" >
-                        <ezcomp:RegistrarEstudiante managedBean="#{loginBean}" dirTipo="Añadir"/>
-                    </h:panelGrid>
-                </div>
-                
-                <div id="GU-Editar" class="ocultar">          
-                    <h:panelGrid columns="1" >
-                        <ezcomp:EditarEstudiante managedBean="#{loginBean}" dirTipo="Añadir"/>
-                    </h:panelGrid>
-                </div>
-                
-                <div id="GU-Listar" class="ocultar">          
-                    <h:panelGrid columns="1" >
-                        <ezcomp:ListarEstudiantes managedBean="#{loginBean}" dirTipo="Añadir"/>
-                    </h:panelGrid>
-                </div>
-                    
-            </ui:define>
+            </ui:define>  
 
         </ui:composition>
         

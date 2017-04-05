@@ -1,92 +1,61 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:cc="http://xmlns.jcp.org/jsf/composite"
-      xmlns:p="http://primefaces.org/ui"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     
-    <body>
-       
-    </body>
-
-    <!-- INTERFACE -->
-    <cc:interface>
-    </cc:interface>
-
-    <!-- IMPLEMENTATION -->
-    <cc:implementation>
-        <div class="col-md-10" style="width: 1000px">
-            <div class="panel panel-success">
-
-                <div class="panel-heading">
-                    <h3 class="panel-title">Registrar Estudiante</h3>
-                </div>
-
-                <div class="panel-body">
-                    <form id="FormRegistrar" method="post" class="form-horizontal" action="">
-                        <div class="form-group">
-                            <label class="col-md-4 control-label" for="valNombre">Nombres</label>
-                            <div class="col-md-6">
-                                <h:inputText class="form-control" id="valNombre" value="#{estudianteController.actual.estNombre}"> </h:inputText>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-md-4 control-label" for="valApellido">Apellidos</label>
-                            <div class="col-md-6">
-                                <h:inputText class="form-control" id="valApellido"  value="#{estudianteController.actual.estApellido}"/>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-md-4 control-label" for="valCodigo">Código Estudiantil</label>
-                            <div class="col-md-6">
-                                <h:inputText class="form-control" id="valCodigo" value="#{estudianteController.actual.estCodigo}"/>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-md-4 control-label" for="valCorreo">Correo</label>
-                            <div class="col-md-6">
-                                <h:inputText class="form-control" id="valCorreo" value="#{estudianteController.actual.estCorreo}"/>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-md-4 control-label" for="valCohorte">Cohorte</label>
-                            <div class="col-md-6">
-                                <h:inputText class="form-control" id="valCohorte" value="#{estudianteController.actual.estCohorte}"/>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-md-4 control-label" for="valNombreTutor">Nombre del Tutor</label>
-                            <div class="col-md-6">
-                                <h:inputText class="form-control" id="valNombreTutor" value="#{estudianteController.actual.estTutor}"/>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-md-4 control-label" for="valSemestre">Semestre</label>
-                            <div class="col-md-6">
-                                <h:selectOneMenu class="form-control" value="#{estudianteController.actual.estSemestre}" id="valSemestre">                                    
-                                    <f:selectItem itemLabel="1" itemValue="1"></f:selectItem>
-                                    <f:selectItem itemLabel="2" itemValue="2"></f:selectItem>
-                                </h:selectOneMenu>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-sm-6 col-sm-offset-3">
-                              
-                                <h:commandButton value="Terminar edición" class="btn btn-primary" action="#{estudianteController.agregar()}" type="submit" />
-                               
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </cc:implementation>
+    <h:head>
+        <title>Registrar estudiante</title>
+    </h:head>
+    
+    <ui:composition template="../../plantillas/Coordinador.xhtml">
+        <ui:define name="content">            
+            <h:form>
+                <p:panel header="Registrar Estudiante">
+                    <h:panelGrid columns="2" cellpadding="10" styleClass="elementosCentrados">
+                        
+                        <h:outputLabel value="Nombres" for="valNombre"/>
+                        <h:inputText class="form-control" id="valNombre" value="#{estudianteController.actual.estNombre}">
+                            <f:validator validatorId="validadorNombreEstudiante"/>
+                        </h:inputText>
+                        
+                        <h:outputLabel value="Apellidos" for="valApellido"/>
+                        <h:inputText class="form-control" id="valApellido"  value="#{estudianteController.actual.estApellido}">
+                            <f:validator validatorId="validadorApellidoEstudiante"/>
+                        </h:inputText>
+                        
+                        <h:outputLabel value="Codigo" for="valCodigo"/>
+                        <h:inputText class="form-control" id="valCodigo" value="#{estudianteController.actual.estCodigo}">
+                            <f:validator validatorId="validadorCodigoEstudiante"/>
+                        </h:inputText>
+                        
+                        <h:outputLabel value="Correo" for="valCorreo"/>
+                        <h:inputText class="form-control" id="valCorreo" value="#{estudianteController.actual.estCorreo}">
+                            <f:validator validatorId="validadorCorreo"/>
+                        </h:inputText>
+                        
+                        <h:outputLabel value="Cohorte" for="valCohorte"/>
+                        <h:inputText class="form-control" id="valCohorte" value="#{estudianteController.actual.estCohorte}">
+                            <f:validator validatorId="validadorCohorteEstudiante"/>
+                        </h:inputText>
+                        
+                        <h:outputLabel value="Nombre del tutor&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" for="valNombreTutor"/>
+                        <h:inputText class="form-control" id="valNombreTutor" value="#{estudianteController.actual.estTutor}">
+                            <f:validator validatorId="validadorNombreTutorEstudiante"/>
+                        </h:inputText>
+                        
+                        <h:outputLabel value="Semestre" for="valSemestre"/>
+                        <h:selectOneMenu class="form-control"  id="valSemestre" value="#{estudianteController.actual.estSemestre}">                                    
+                            <f:selectItem itemLabel="1" itemValue="1"></f:selectItem>
+                            <f:selectItem itemLabel="2" itemValue="2"></f:selectItem>
+                        </h:selectOneMenu>
+                        
+                        <p:commandButton value="Registrar" actionListener="#{estudianteController.agregar()}" class="btn btn-primary" type="submit"/>
+                    </h:panelGrid>
+                </p:panel>
+            </h:form>
+        </ui:define>
+    </ui:composition>
 </html>
