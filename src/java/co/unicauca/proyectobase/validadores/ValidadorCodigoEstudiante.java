@@ -29,10 +29,10 @@ public class ValidadorCodigoEstudiante implements Validator
             throw new ValidatorException(msg);  
         }
         
-        boolean cumplePatron = Pattern.matches("[a-zA-ZñÑáÁéÉíÍóÓúÚ\\s]", texto);
+        boolean cumplePatron = Pattern.matches(".*[a-zA-Z0-9_]", texto);
         if(!cumplePatron)
         {            
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "El nombre del tutor contiene caracteres no validos.");
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "El código contiene caracteres no validos.");
             throw new ValidatorException(msg);  
         }        
     }
