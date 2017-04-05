@@ -11,6 +11,8 @@ import javax.annotation.ManagedBean;
 import javax.ejb.EJB;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 
 
 @Named(value = "estudianteController")
@@ -86,10 +88,13 @@ public class EstudianteController implements Serializable {
         actual.setEstEstado("Activo");
 
         dao.create(actual);
+        confirmarRegistro();
         
         actual = new Estudiante();
         
-        return INICIO;        
+        
+        
+        return INICIO;
     }
     
     public void actualizarActual(Estudiante estudiante)
@@ -135,4 +140,17 @@ public class EstudianteController implements Serializable {
        String b = new String(decodedByteArray);        
        return b;
    }
+   
+   /*mensajes de confirmacion */
+   
+   public void confirmarRegistro() {
+        addMessage("Estudiante Registrado con exito ","");
+    }
+     
+    public void addMessage(String summary, String detail) {
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, detail);
+        FacesContext.getCurrentInstance().addMessage(null, message);
+    }
+   
+   
 }
