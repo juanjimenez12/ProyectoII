@@ -3,6 +3,7 @@ package co.unicauca.proyectobase.controladores;
 
 import co.unicauca.proyectobase.dao.EstudianteFacade;
 import co.unicauca.proyectobase.entidades.Estudiante;
+import co.unicauca.proyectobase.utilidades.Utilidades;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
@@ -77,7 +78,7 @@ public class EstudianteController implements Serializable {
         actual = new Estudiante();
     }
         
-    public String agregar(){ 
+    public void agregar(){ 
         
         String contraseña = cifrarBase64(actual.getEstCodigo());
         actual.setEstContrasena(contraseña);
@@ -92,9 +93,7 @@ public class EstudianteController implements Serializable {
         
         actual = new Estudiante();
         
-        
-        
-        return INICIO;
+        redirigirAlistar();
     }
     
     public void actualizarActual(Estudiante estudiante)
@@ -141,7 +140,21 @@ public class EstudianteController implements Serializable {
        return b;
    }
    
+   
+   /*redireccionamiento para boton cancelar*/
+   
+   public void redirigirAlistar()
+   {
+       Utilidades.redireccionar("/ProyectoII/faces/componentes/gestionUsuarios/ListarEstudiantes.xhtml");
+       
+   }
+   
    /*mensajes de confirmacion */
+   
+    public void listadoEstudiantes()
+    {
+        addMessage("Listado de estudiantes ","");
+    }
    
    public void confirmarRegistro() {
         addMessage("Estudiante Registrado con exito ","");

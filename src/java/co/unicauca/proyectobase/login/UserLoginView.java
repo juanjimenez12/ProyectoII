@@ -10,7 +10,7 @@ import java.awt.event.ActionEvent;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
-import org.primefaces.context.RequestContext;
+import org.primefaces.context.RequestContext ;
 
 /**
  *
@@ -38,7 +38,7 @@ public class UserLoginView {
     }
    
     public void login() {
-        System.out.println("llegue a login");
+      
         RequestContext context = RequestContext.getCurrentInstance();
         FacesMessage message = null;
         boolean loggedIn = false;
