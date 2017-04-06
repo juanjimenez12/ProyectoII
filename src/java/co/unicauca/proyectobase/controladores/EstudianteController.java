@@ -52,20 +52,6 @@ public class EstudianteController implements Serializable {
         return actual;
     }
     
-    /*Obtener lista de estudiantes por estado
-    public List<Estudiante> getListado(){
-        if(listaEstudiantes==null){
-            listaEstudiantes = new ArrayList;
-        }
-        return listaEstudiantes;
-    }*/
-    
-    /*Listar estudiantes por estado
-    public String listado(String estado){
-        listaEstudiantes = dao.listarEstudiantesPorEstado(estado);        
-        return "index";
-    }*/
-    
     public String index(){
         return INICIO;
     }
@@ -90,10 +76,13 @@ public class EstudianteController implements Serializable {
 
         dao.create(actual);
         confirmarRegistro();
-        
-        actual = new Estudiante();
-        
+        limpiarCampos();
         redirigirAlistar();
+    }
+    
+    public void limpiarCampos()
+    {
+        actual = new Estudiante();
     }
     
     public void actualizarActual(Estudiante estudiante)
@@ -144,16 +133,22 @@ public class EstudianteController implements Serializable {
    /*redireccionamiento para boton cancelar*/
    
    public void redirigirAlistar()
+   {       
+           Utilidades.redireccionar("/ProyectoII/faces/componentes/gestionUsuarios/ListarEstudiantes.xhtml");   
+   }
+   
+   /*redireccion para volver a registrar */
+   
+   public void redirigirARegistrar()
    {
-       Utilidades.redireccionar("/ProyectoII/faces/componentes/gestionUsuarios/ListarEstudiantes.xhtml");
-       
+        Utilidades.redireccionar("/ProyectoII/faces/componentes/gestionUsuarios/RegistrarEstudiante.xhtml");
    }
    
    /*mensajes de confirmacion */
    
     public void listadoEstudiantes()
     {
-        addMessage("Listado de estudiantes ","");
+        addMessage("Usted abandono el registro y este es ellListado de estudiantes ","");
     }
    
    public void confirmarRegistro() {

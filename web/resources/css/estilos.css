@@ -3,6 +3,10 @@
     text-align: left;
 }
 
+.btn_listaEstudiantes{
+    margin-left: 3px;
+}
+
 
 /***** Generales *****/
 body {

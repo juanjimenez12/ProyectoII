@@ -67,9 +67,9 @@
 
                     <h:column>
                         <h:form>
-                            <h:commandButton action="#{estudianteController.verEstudiante(est)}" value="Ver"></h:commandButton>
-                            <h:commandButton action="#{estudianteController.editarEstudiante(est)}" value="Editar"></h:commandButton>
-                            <h:commandButton action="#{estudianteController.eliminarEstudiante(est)}" value="Eliminar"></h:commandButton>
+                            <h:commandButton action="#{estudianteController.verEstudiante(est)}" value="Ver" class="btn btn-success btn_listaEstudiantes"></h:commandButton>
+                            <h:commandButton action="#{estudianteController.editarEstudiante(est)}" value="Editar" class="btn btn-warning btn_listaEstudiantes"></h:commandButton>
+                            <h:commandButton action="#{estudianteController.eliminarEstudiante(est)}" value="Eliminar" class="btn btn-danger btn_listaEstudiantes"></h:commandButton>
                         </h:form>
                     </h:column>
                 </h:dataTable>

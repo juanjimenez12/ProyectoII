@@ -25,13 +25,13 @@
                     
                          <!-- ventana para redireccionar -->
                     
-                      <h:form>           
+                      <h:form>  
                         <p:commandButton value="cancelar Registro" icon="glyphicon glyphicon-arrow-left" >
                             <p:confirm header="Confirmation" message="Deseas Salir del Registro de Estudiantes" icon="ui-icon-alert" />
                         </p:commandButton>
                         <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
                             <p:commandButton value="Yes"  styleClass="ui-confirmdialog-yes" icon="ui-icon-check" actionListener="#{estudianteController.redirigirAlistar()}"/>
-                            <p:commandButton value="No"  styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                            <p:commandButton value="No"  styleClass="ui-confirmdialog-no" icon="ui-icon-close" actionListener="#{estudianteController.redirigirARegistrar()}" />
                         </p:confirmDialog>
                     </h:form>
                     
@@ -95,6 +95,7 @@
                                 <f:selectItem itemLabel="2" itemValue="2"></f:selectItem>
                             </h:selectOneMenu>
 
+                            <h:outputLabel styleClass="addEspacio"/>
                             <h:outputLabel styleClass="addEspacio"/>
 
                             <h:commandButton value="Registrar" actionListener="#{estudianteController.agregar()}" class="btn btn-primary" />                       
