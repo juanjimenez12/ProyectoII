@@ -123,9 +123,7 @@ public class EstudianteController implements Serializable {
     public void verEstudiante(Estudiante est)
     {
         actual = est;
-<<<<<<< HEAD
-        Utilidades.redireccionar("/ProyectoII/faces/componentes/gestionUsuarios/VerEstudiante.xhtml"); 
-=======
+
         Utilidades.redireccionar("/ProyectoII/faces/componentes/gestionUsuarios/VerEstudiante.xhtml");  
     }  
     
@@ -133,7 +131,7 @@ public class EstudianteController implements Serializable {
     {
         actual = est;
         Utilidades.redireccionar("/ProyectoII/faces/componentes/gestionUsuarios/EditarEstudiante.xhtml");  
->>>>>>> e5f083d8214ad3a93b378aa9212d0fef78fbc348
+
     }
    
    /*redireccionamiento para boton cancelar*/
