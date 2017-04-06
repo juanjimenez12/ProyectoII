@@ -13,10 +13,6 @@
     <ui:composition template="../../plantillas/Coordinador.xhtml">
         <ui:define name="content">    
             
-            
-            
-           
-                
                 <p:panel header="Registrar Estudiante" >
                     <div class="alert alert-success alert-dismissable">
                         <button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -39,7 +35,7 @@
                     
                     <!-- hasta aqui -->
                     
-                     <h:form>
+                    <h:form>
                         <h:panelGrid columns="3" cellpadding="10" styleClass="elementosCentrados bajarGrid" id="panelRegistrar">
 
                             <p:outputLabel value="Nombres *" for="valNombre" styleClass="addEspacio"/>
@@ -68,15 +64,15 @@
                                 <f:validator validatorId="validadorCorreo"/>
                                 <p:ajax event="blur" update="msjValCorreo"/>
                             </h:inputText>
-                            <p:message for="valCorreo" id="msjValCorreo" styleClass="addEspacio"/>
-
+                            <p:message for="valCorreo" id="msjValCorreo" styleClass="addEspacio"/> 
+                            
                             <h:outputLabel value="Cohorte *" for="valCohorte" styleClass="addEspacio"/>
                             <h:inputText class="form-control" id="valCohorte" value="#{estudianteController.actual.estCohorte}" styleClass="addEspacio form-control" >
                                 <f:validator validatorId="validadorCohorteEstudiante"/>
                                 <p:ajax event="blur" update="msjValCohorte"/>
                             </h:inputText>
-                            <p:message for="valCohorte" id="msjValCohorte" styleClass="addEspacio"/>                       
-
+                            <p:message for="valCohorte" id="msjValCohorte" styleClass="addEspacio"/>  
+                            
                             <h:outputLabel value="Nombre del tutor *&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" for="valNombreTutor" styleClass="addEspacio "/>
                             <h:inputText class="form-control" id="valNombreTutor" value="#{estudianteController.actual.estTutor}" styleClass="addEspacio form-control">
                                 <f:validator validatorId="validadorNombreTutorEstudiante"/>
@@ -97,11 +93,7 @@
 
                         </h:panelGrid>
                     </h:form>
-                    
-                    
                 </p:panel>
-                
-          
         </ui:define>
     </ui:composition>
 </html>
