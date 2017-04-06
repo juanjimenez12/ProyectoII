@@ -44,11 +44,10 @@ public class EstudianteController implements Serializable {
     }
     
     public Estudiante getActual(){
-        if(actual==null){actual = new Estudiante();}
-        if(actual.getEstSemestre() != null)
+        if(actual == null)
         {
-            System.out.println("");
-        }        
+            actual = new Estudiante();
+        }
         return actual;
     }
     
@@ -60,9 +59,6 @@ public class EstudianteController implements Serializable {
         return dao.findAll();
     }    
     
-    public void crear(){
-        actual = new Estudiante();
-    }
         
     public void agregar(){ 
         
@@ -129,12 +125,18 @@ public class EstudianteController implements Serializable {
        return b;
    }
    
+    public void verEstudiante(Estudiante est)
+    {
+        actual = est;
+        Utilidades.redireccionar("/ProyectoII/faces/componentes/gestionUsuarios/VerEstudiante.xhtml"); 
+    }
+   
    
    /*redireccionamiento para boton cancelar*/
    
    public void redirigirAlistar()
    {       
-           Utilidades.redireccionar("/ProyectoII/faces/componentes/gestionUsuarios/ListarEstudiantes.xhtml");   
+        Utilidades.redireccionar("/ProyectoII/faces/componentes/gestionUsuarios/ListarEstudiantes.xhtml");   
    }
    
    /*redireccion para volver a registrar */
