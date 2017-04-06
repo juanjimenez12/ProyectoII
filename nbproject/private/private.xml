@@ -3,10 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/YS/Desktop/ProyectoII/src/java/co/unicauca/proyectobase/login/UserLoginView.java</file>
+            <file>file:/C:/Users/YS/Desktop/ProyectoII/web/componentes/gestionUsuarios/ListarEstudiantes.xhtml</file>
+            <file>file:/C:/Users/YS/Desktop/ProyectoII/web/plantillas/Coordinador.xhtml</file>
             <file>file:/C:/Users/YS/Desktop/ProyectoII/src/java/co/unicauca/proyectobase/controladores/EstudianteController.java</file>
             <file>file:/C:/Users/YS/Desktop/ProyectoII/web/componentes/gestionUsuarios/RegistrarEstudiante.xhtml</file>
-            <file>file:/C:/Users/YS/Desktop/ProyectoII/web/WEB-INF/web.xml</file>
         </group>
     </open-files>
 </project-private>

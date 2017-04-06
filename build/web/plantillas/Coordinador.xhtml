@@ -14,7 +14,7 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"/>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
         <h:outputScript name="js/jquery-3.1.1.js"/>
-      
+        
     </h:head>
     
     <h:body>
@@ -58,18 +58,20 @@
                     <div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
 
                       <ul class="nav navbar-nav">
-                        <li class="active"><a href="#">Administrador principal<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-home"></span></a></li>
+                        <li class="active  mejorarMenu"><a href="#">Administrador principal<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-home"></span></a></li>
                         <li class="dropdown">
 
-                          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Gestion de Usuarios <span class="caret"></span><span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-user"></span></a>
+                          <a href="#" class="dropdown-toggle mejorarMenu" data-toggle="dropdown">Gestion de Usuarios <span class="caret"></span><span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-user"></span></a>
                           <ul class="dropdown-menu forAnimate" role="menu" id="">
-                              <li><a href="../gestionUsuarios/ListarEstudiantes.xhtml"> <span class ="glyphicon glyphicon-chevron-right"></span> Listar Estudiantes</a></li>
-                              <li><a href="../gestionUsuarios/RegistrarEstudiante.xhtml"> <span class ="glyphicon glyphicon-chevron-right"></span>Registrar Estudiante</a></li>                                  
+                              <h:form>
+                              <li><h:commandLink  actionListener="#{estudianteController.redirigirAlistar()}" >&nbsp; &nbsp; <span class ="glyphicon glyphicon-chevron-right"/>Listar Estudiantes</h:commandLink></li>
+                              <li> <h:commandLink  actionListener="#{estudianteController.redirigirARegistrar()}" >&nbsp; &nbsp; <span class ="glyphicon glyphicon-chevron-right"/>Registar Estudiantes</h:commandLink></li>                                 
+                              </h:form>
                           </ul>
                         </li> 
 
                         <li class="dropdown">
-                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Asistencia <span class="caret"></span><span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-list-alt"></span></a>
+                             <a href="#" class="dropdown-toggle  mejorarMenu" data-toggle="dropdown">Asistencia <span class="caret"></span><span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-list-alt"></span></a>
                           <ul class="dropdown-menu forAnimate" role="menu">
                             <li><a href="#"> <span class ="glyphicon glyphicon-chevron-right"></span> Imprimir Formato Asistencia Vacio</a></li>
                             <li><a href="#"> <span class ="glyphicon glyphicon-chevron-right"></span> Imprimir Reporte de asistencia</a></li>
@@ -78,7 +80,7 @@
                         </li>
 
                         <li class="dropdown">
-                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Gestion Servicios <span class="caret"></span><span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-edit"></span></a>
+                             <a href="#" class="dropdown-toggle  mejorarMenu" data-toggle="dropdown">Gestion Servicios <span class="caret"></span><span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-edit"></span></a>
                           <ul class="dropdown-menu forAnimate" role="menu">
                             <li><a href="#"> <span class ="glyphicon glyphicon-chevron-right"></span> Agregar Servicio</a></li>
                             <li><a href="#"> <span class ="glyphicon glyphicon-chevron-right"></span> Editar Servicio</a></li>

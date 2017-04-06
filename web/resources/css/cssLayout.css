@@ -50,7 +50,7 @@
     margin: 0px 170px 0px 170px;
 }
 
-#top a:link, #top a:visited {
+/*#top a:link, #top a:visited {
   color: white;
   font-weight : bold;
   text-decoration: none;
@@ -60,7 +60,7 @@
   color: black;
   font-weight : bold;
   text-decoration : underline;
-}
+}*/
 
 
 /*programacion css de menu lateral */
@@ -106,12 +106,13 @@ body,html{
     nav.sidebar a{
       padding-right: 13px;
     }
+    
 
-    nav.sidebar .navbar-nav > li:first-child{
+    nav.sidebar .navbar-nav > form>li:first-child{
       border-top: 1px #e5e5e5 solid;
     }
 
-    nav.sidebar .navbar-nav > li{
+    nav.sidebar .navbar-nav > form>li{
       border-bottom: 1px #e5e5e5 solid;
     }
 
@@ -130,9 +131,11 @@ body,html{
       padding: 0 0px 0 0px;
     }
 
-    .navbar-inverse .navbar-nav .open .dropdown-menu>li>a {
+    .navbar-inverse .navbar-nav .open .dropdown-menu>form>li>a {
       color: #777;
     }
+    
+    
 
     /*menu lateral medidas*/
     nav.sidebar{
@@ -174,8 +177,8 @@ body,html{
     }
   }
 
-  nav.sidebar .navbar-nav .open .dropdown-menu>li>a:hover, nav.sidebar .navbar-nav .open .dropdown-menu>li>a:focus {
-    color: #CCC;
+  nav.sidebar .navbar-nav .open .dropdown-menu>form>li>a:hover, nav.sidebar .navbar-nav .open .dropdown-menu>form>li>a:focus {
+    color: black;
     background-color: transparent;
   }
 
@@ -190,7 +193,30 @@ body,html{
       margin-right: 0%;
   }
   
-  /*color para las letras de los submenus*/
+  /*arreglo para menu lateral */
+  
+  .mejorarMenu
+  {
+      font-weight: bold;
+  }
+  
+  a:link, a:visited 
+  {
+    font-family: Helvetica;
+    color: #3B3D3F;
+  }
+  
+  
+  ul>form>li>a:link{
+      font-size: 15px;
+      text-decoration: none;
+  }
+  
+  ul>form>li:hover {
+      color: black;
+      background:#e5e5e5;
+      border-top: 2px #e5e5e5 solid;
+  }
   
   
 

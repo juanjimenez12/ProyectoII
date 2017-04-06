@@ -21,7 +21,7 @@ import javax.faces.context.FacesContext;
 @SessionScoped
 public class EstudianteController implements Serializable {
     
-    @EJB
+    @EJB    
     private EstudianteFacade dao;
     
     private Estudiante actual;
@@ -128,22 +128,25 @@ public class EstudianteController implements Serializable {
     public void verEstudiante(Estudiante est)
     {
         actual = est;
-        Utilidades.redireccionar("/ProyectoII/faces/componentes/gestionUsuarios/VerEstudiante.xhtml");  
+        Utilidades.redireccionar("/ProyectoII/faces/componentes/gestionUsuarios/VerEstudiante.xhtml"); 
     }
    
    
    /*redireccionamiento para boton cancelar*/
    
    public void redirigirAlistar()
-   {       
-        Utilidades.redireccionar("/ProyectoII/faces/componentes/gestionUsuarios/ListarEstudiantes.xhtml");   
+   {  
+       System.out.println("vine a listar");
+      limpiarCampos();
+      Utilidades.redireccionar("/ProyectoII/faces/componentes/gestionUsuarios/ListarEstudiantes.xhtml"); 
    }
    
    /*redireccion para volver a registrar */
    
    public void redirigirARegistrar()
    {
-        Utilidades.redireccionar("/ProyectoII/faces/componentes/gestionUsuarios/RegistrarEstudiante.xhtml");
+       limpiarCampos();
+       Utilidades.redireccionar("/ProyectoII/faces/componentes/gestionUsuarios/RegistrarEstudiante.xhtml");
    }
    
    /*mensajes de confirmacion */
