@@ -23,8 +23,9 @@
                         <strong >Importante : los campos con asterisco (*) son obligatorios.</strong>
                     </div>
                     
-                         <!-- ventana para redireccionar -->
+                      <!-- ventana para redireccionar -->
                     
+<<<<<<< HEAD
                       <h:form>  
                         <p:commandButton value="cancelar Registro" icon="glyphicon glyphicon-arrow-left" >
                             <p:confirm header="Confirmation" message="Deseas Salir del Registro de Estudiantes" icon="ui-icon-alert" />
@@ -33,6 +34,18 @@
                             <p:commandButton value="Yes"  styleClass="ui-confirmdialog-yes" icon="ui-icon-check" actionListener="#{estudianteController.redirigirAlistar()}"/>
                             <p:commandButton value="No"  styleClass="ui-confirmdialog-no" icon="ui-icon-close" actionListener="#{estudianteController.redirigirARegistrar()}" />
                         </p:confirmDialog>
+=======
+                    <h:form>
+                        <h:panelGrid columns="3" cellpadding="10" styleClass="izquierdaCancelar">
+                            <p:commandButton value="Cancelar registro" icon="glyphicon glyphicon-arrow-left">
+                                <p:confirm header="Confirmation" message="¿Deseas del registro del estudiante" icon="ui-icon-alert"/>
+                            </p:commandButton>
+                            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                <p:commandButton value="Aceptar"  styleClass="ui-confirmdialog-yes" icon="ui-icon-check" actionListener="#{estudianteController.redirigirAlistar()}"/>
+                                <p:commandButton value="Cancelar"  styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                            </p:confirmDialog>
+                        </h:panelGrid>
+>>>>>>> 256b4024808f6c5ef771679cd86faed38dc0fc7f
                     </h:form>
                     
                     <!-- hasta aqui -->
@@ -101,7 +114,7 @@
                             <h:commandButton value="Registrar" actionListener="#{estudianteController.agregar()}" class="btn btn-primary" />                       
 
                         </h:panelGrid>
-                     </h:form>
+                    </h:form>
                     
                     
                 </p:panel>
