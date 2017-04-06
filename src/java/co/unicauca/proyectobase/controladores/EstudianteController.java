@@ -128,7 +128,7 @@ public class EstudianteController implements Serializable {
     public void verEstudiante(Estudiante est)
     {
         actual = est;
-        Utilidades.redireccionar("/ProyectoII/faces/componentes/gestionUsuarios/VerEstudiante.xhtml"); 
+        Utilidades.redireccionar("/ProyectoII/faces/componentes/gestionUsuarios/VerEstudiante.xhtml");  
     }
    
    
