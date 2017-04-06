@@ -81,11 +81,6 @@ public class EstudianteController implements Serializable {
         actual = new Estudiante();
     }
     
-    public void actualizarActual(Estudiante estudiante)
-    {
-        this.actual = estudiante;
-    }
-    
     public String editar(int id){
         actual = dao.find(id);
         return EDITAR;
@@ -128,9 +123,18 @@ public class EstudianteController implements Serializable {
     public void verEstudiante(Estudiante est)
     {
         actual = est;
+<<<<<<< HEAD
         Utilidades.redireccionar("/ProyectoII/faces/componentes/gestionUsuarios/VerEstudiante.xhtml"); 
+=======
+        Utilidades.redireccionar("/ProyectoII/faces/componentes/gestionUsuarios/VerEstudiante.xhtml");  
+    }  
+    
+    public void editarEstudiante(Estudiante est)
+    {
+        actual = est;
+        Utilidades.redireccionar("/ProyectoII/faces/componentes/gestionUsuarios/EditarEstudiante.xhtml");  
+>>>>>>> e5f083d8214ad3a93b378aa9212d0fef78fbc348
     }
-   
    
    /*redireccionamiento para boton cancelar*/
    
@@ -149,11 +153,17 @@ public class EstudianteController implements Serializable {
        Utilidades.redireccionar("/ProyectoII/faces/componentes/gestionUsuarios/RegistrarEstudiante.xhtml");
    }
    
+   /*Redireccion para volver a editar*/
+   public void redirigirAEditar()
+   {
+       Utilidades.redireccionar("/ProyectoII/faces/componentes/gestionUsuarios/EditarEstudiante.xhtml");
+   }
+   
    /*mensajes de confirmacion */
    
     public void listadoEstudiantes()
     {
-        addMessage("Usted abandono el registro y este es ellListado de estudiantes ","");
+        addMessage("Usted abandono el registro y este es el lListado de estudiantes.","");
     }
    
    public void confirmarRegistro() {

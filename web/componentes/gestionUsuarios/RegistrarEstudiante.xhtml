@@ -11,97 +11,89 @@
     </h:head>
     
     <ui:composition template="../../plantillas/Coordinador.xhtml">
-        <ui:define name="content">    
-            
-            
-            
-           
+        <ui:define name="content">            
+            <p:panel header="Registrar Estudiante" >
                 
-                <p:panel header="Registrar Estudiante" >
-                    <div class="alert alert-success alert-dismissable">
-                        <button type="button" class="close" data-dismiss="alert">&times;</button>
-                        <strong >Importante : los campos con asterisco (*) son obligatorios.</strong>
-                    </div>
-                    
-                    <!-- ventana para redireccionar -->
-                    
-                    <h:form>
-                        <h:panelGrid columns="3" cellpadding="10" styleClass="izquierdaCancelar">
-                            <p:commandButton value="Cancelar registro" icon="glyphicon glyphicon-arrow-left">
-                                <p:confirm header="Confirmación" message="¿Deseas cancelar del registro del estudiante?" icon="ui-icon-alert"/>
-                            </p:commandButton>
-                            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
-                                <p:commandButton value="Aceptar"  styleClass="ui-confirmdialog-yes" icon="ui-icon-check" actionListener="#{estudianteController.redirigirAlistar()}"/>
-                                <p:commandButton value="Cancelar"  styleClass="ui-confirmdialog-no" icon="ui-icon-close" actionListener="#{estudianteController.redirigirARegistrar()}"/>
-                            </p:confirmDialog>
-                        </h:panelGrid>
-                    </h:form>
-                    
-                    <!-- hasta aqui -->
-                    
-                     <h:form>
-                        <h:panelGrid columns="3" cellpadding="10" styleClass="elementosCentrados bajarGrid" id="panelRegistrar">
+                <div class="alert alert-success alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <strong >Importante : los campos con asterisco (*) son obligatorios.</strong>
+                </div>
 
-                            <p:outputLabel value="Nombres *" for="valNombre" styleClass="addEspacio"/>
-                            <h:inputText class="form-control" id="valNombre" value="#{estudianteController.actual.estNombre}" styleClass="addEspacio form-control " >
-                                <f:validator validatorId="validadorNombreEstudiante"/>
-                                <p:ajax event="blur" update="msjValNombre"/>
-                            </h:inputText>
-                            <p:message for="valNombre" id="msjValNombre" styleClass="addEspacio"/>
+                <!-- ventana para redireccionar -->
 
-                            <h:outputLabel value="Apellidos *" for="valApellido" styleClass="addEspacio"/>
-                            <h:inputText class="form-control" id="valApellido"  value="#{estudianteController.actual.estApellido}" styleClass="addEspacio form-control">
-                                <f:validator validatorId="validadorApellidoEstudiante"/>
-                                <p:ajax event="blur" update="msjValApellido"/>
-                            </h:inputText>
-                            <p:message for="valApellido" id="msjValApellido" styleClass="addEspacio"/>
+                <h:form>
+                    <h:panelGrid columns="3" cellpadding="10" styleClass="izquierdaCancelar">
+                        <p:commandButton value="Cancelar registro" icon="glyphicon glyphicon-arrow-left">
+                            <p:confirm header="Confirmación" message="¿Deseas cancelar del registro del estudiante?" icon="ui-icon-alert"/>
+                        </p:commandButton>
+                        <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                            <p:commandButton value="Aceptar"  styleClass="ui-confirmdialog-yes" icon="ui-icon-check" actionListener="#{estudianteController.redirigirAlistar()}"/>
+                            <p:commandButton value="Cancelar"  styleClass="ui-confirmdialog-no" icon="ui-icon-close" actionListener="#{estudianteController.redirigirARegistrar()}"/>
+                        </p:confirmDialog>
+                    </h:panelGrid>
+                </h:form>
 
-                            <h:outputLabel value="Codigo *" for="valCodigo" styleClass="addEspacio"/>
-                            <h:inputText class="form-control" id="valCodigo" value="#{estudianteController.actual.estCodigo}" styleClass="addEspacio form-control">
-                                <f:validator validatorId="validadorCodigoEstudiante"/>
-                                <p:ajax event="blur" update="msjValCodigo"/>
-                            </h:inputText>
-                            <p:message for="valCodigo" id="msjValCodigo" styleClass="addEspacio"/>
+                <!-- hasta aqui -->
 
-                            <h:outputLabel value="Correo *" for="valCorreo" styleClass="addEspacio"/>
-                            <h:inputText class="form-control" id="valCorreo" value="#{estudianteController.actual.estCorreo}" styleClass="addEspacio form-control" >
-                                <f:validator validatorId="validadorCorreo"/>
-                                <p:ajax event="blur" update="msjValCorreo"/>
-                            </h:inputText>
-                            <p:message for="valCorreo" id="msjValCorreo" styleClass="addEspacio"/>
+                <h:form>
+                    <h:panelGrid columns="3" cellpadding="10" styleClass="elementosCentrados bajarGrid" id="panelRegistrar">
 
-                            <h:outputLabel value="Cohorte *" for="valCohorte" styleClass="addEspacio"/>
-                            <h:inputText class="form-control" id="valCohorte" value="#{estudianteController.actual.estCohorte}" styleClass="addEspacio form-control" >
-                                <f:validator validatorId="validadorCohorteEstudiante"/>
-                                <p:ajax event="blur" update="msjValCohorte"/>
-                            </h:inputText>
-                            <p:message for="valCohorte" id="msjValCohorte" styleClass="addEspacio"/>                       
+                        <p:outputLabel value="Nombres *" for="valNombre" styleClass="addEspacio"/>
+                        <h:inputText class="form-control" id="valNombre" value="#{estudianteController.actual.estNombre}" styleClass="addEspacio form-control " >
+                            <f:validator validatorId="validadorNombreEstudiante"/>
+                            <p:ajax event="blur" update="msjValNombre"/>
+                        </h:inputText>
+                        <p:message for="valNombre" id="msjValNombre" styleClass="addEspacio"/>
 
-                            <h:outputLabel value="Nombre del tutor *&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" for="valNombreTutor" styleClass="addEspacio "/>
-                            <h:inputText class="form-control" id="valNombreTutor" value="#{estudianteController.actual.estTutor}" styleClass="addEspacio form-control">
-                                <f:validator validatorId="validadorNombreTutorEstudiante"/>
-                                <p:ajax event="blur" update="msjValNombreTutor"/>
-                            </h:inputText>
-                            <p:message for="valNombreTutor" id="msjValNombreTutor" styleClass="addEspacio" />
+                        <h:outputLabel value="Apellidos *" for="valApellido" styleClass="addEspacio"/>
+                        <h:inputText class="form-control" id="valApellido"  value="#{estudianteController.actual.estApellido}" styleClass="addEspacio form-control">
+                            <f:validator validatorId="validadorApellidoEstudiante"/>
+                            <p:ajax event="blur" update="msjValApellido"/>
+                        </h:inputText>
+                        <p:message for="valApellido" id="msjValApellido" styleClass="addEspacio"/>
 
-                            <h:outputLabel value="Semestre* " for="valSemestre" styleClass="addEspacio"/>
-                            <h:selectOneMenu class="form-control"  id="valSemestre" value="#{estudianteController.actual.estSemestre}" styleClass="addEspacio form-control">                                    
-                                <f:selectItem itemLabel="1" itemValue="1"></f:selectItem>
-                                <f:selectItem itemLabel="2" itemValue="2"></f:selectItem>
-                            </h:selectOneMenu>
+                        <h:outputLabel value="Codigo *" for="valCodigo" styleClass="addEspacio"/>
+                        <h:inputText class="form-control" id="valCodigo" value="#{estudianteController.actual.estCodigo}" styleClass="addEspacio form-control">
+                            <f:validator validatorId="validadorCodigoEstudiante"/>
+                            <p:ajax event="blur" update="msjValCodigo"/>
+                        </h:inputText>
+                        <p:message for="valCodigo" id="msjValCodigo" styleClass="addEspacio"/>
 
-                            <h:outputLabel styleClass="addEspacio"/>
-                            <h:outputLabel styleClass="addEspacio"/>
+                        <h:outputLabel value="Correo *" for="valCorreo" styleClass="addEspacio"/>
+                        <h:inputText class="form-control" id="valCorreo" value="#{estudianteController.actual.estCorreo}" styleClass="addEspacio form-control" >
+                            <f:validator validatorId="validadorCorreo"/>
+                            <p:ajax event="blur" update="msjValCorreo"/>
+                        </h:inputText>
+                        <p:message for="valCorreo" id="msjValCorreo" styleClass="addEspacio"/> 
 
-                            <h:commandButton value="Registrar" actionListener="#{estudianteController.agregar()}" class="btn btn-primary" />                       
+                        <h:outputLabel value="Cohorte *" for="valCohorte" styleClass="addEspacio"/>
+                        <h:inputText class="form-control" id="valCohorte" value="#{estudianteController.actual.estCohorte}" styleClass="addEspacio form-control" >
+                            <f:validator validatorId="validadorCohorteEstudiante"/>
+                            <p:ajax event="blur" update="msjValCohorte"/>
+                        </h:inputText>
+                        <p:message for="valCohorte" id="msjValCohorte" styleClass="addEspacio"/>  
 
-                        </h:panelGrid>
-                    </h:form>
-                    
-                    
-                </p:panel>
-                
-          
+                        <h:outputLabel value="Nombre del tutor *&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" for="valNombreTutor" styleClass="addEspacio "/>
+                        <h:inputText class="form-control" id="valNombreTutor" value="#{estudianteController.actual.estTutor}" styleClass="addEspacio form-control">
+                            <f:validator validatorId="validadorNombreTutorEstudiante"/>
+                            <p:ajax event="blur" update="msjValNombreTutor"/>
+                        </h:inputText>
+                        <p:message for="valNombreTutor" id="msjValNombreTutor" styleClass="addEspacio" />
+
+                        <h:outputLabel value="Semestre* " for="valSemestre" styleClass="addEspacio"/>
+                        <h:selectOneMenu class="form-control"  id="valSemestre" value="#{estudianteController.actual.estSemestre}" styleClass="addEspacio form-control">                                    
+                            <f:selectItem itemLabel="1" itemValue="1"></f:selectItem>
+                            <f:selectItem itemLabel="2" itemValue="2"></f:selectItem>
+                        </h:selectOneMenu>
+
+                        <h:outputLabel styleClass="addEspacio"/>
+                        <h:outputLabel styleClass="addEspacio"/>
+
+                        <h:commandButton value="Registrar" actionListener="#{estudianteController.agregar()}" class="btn btn-primary" />                       
+
+                    </h:panelGrid>
+                </h:form>
+            </p:panel>
         </ui:define>
     </ui:composition>
 </html>
