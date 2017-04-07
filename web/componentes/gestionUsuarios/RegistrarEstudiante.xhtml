@@ -71,8 +71,12 @@
                         </h:selectOneMenu>
                         
                         <h:outputLabel styleClass="addEspacio"/>
-                        <h:commandButton value="Registrar estudiante" actionListener="#{estudianteController.agregar()}" class="btn btn-primary" />
+                        <h:outputLabel styleClass="addEspacio"/>
+                        <h:outputLabel styleClass="addEspacio"/>
+                        <h:outputLabel styleClass="addEspacio"/>
                         <h:commandButton value="Cancelar registro" onclick="if (!confirm('¿Desea cancelar el registro del estudiante?')) { return false;}; return true;" actionListener="#{estudianteController.redirigirAlistar()}" class="btn btn-primary" immediate="true"/>
+                        <h:commandButton value="Registrar estudiante" actionListener="#{estudianteController.agregar()}" class="btn btn-primary" />
+                        
                         <h:outputLabel styleClass="addEspacio"/>
                         <h:outputLabel styleClass="addEspacio"/>
                         <h:outputLabel styleClass="addEspacio"/>

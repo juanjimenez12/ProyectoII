@@ -38,15 +38,15 @@
 
                         <h:outputLabel value="Codigo *" for="valCodigo" styleClass="addEspacio"/>
                         <h:inputText class="form-control" id="valCodigo" value="#{estudianteController.actual.estCodigo}" styleClass="addEspacio form-control">
-                            <f:validator validatorId="validadorCodigoEstudiante"/>
-                            <p:ajax event="blur" update="msjValCodigo"/>
+                            <!--<f:validator validatorId="validadorCodigoEstudiante"/>
+                            <p:ajax event="blur" update="msjValCodigo"/>-->
                         </h:inputText>
                         <p:message for="valCodigo" id="msjValCodigo" styleClass="addEspacio"/>
 
                         <h:outputLabel value="Correo *" for="valCorreo" styleClass="addEspacio"/>
                         <h:inputText class="form-control" id="valCorreo" value="#{estudianteController.actual.estCorreo}" styleClass="addEspacio form-control" >
-                            <f:validator validatorId="validadorCorreo"/>
-                            <p:ajax event="blur" update="msjValCorreo"/>
+                            <!--<f:validator validatorId="validadorCorreo"/>
+                            <p:ajax event="blur" update="msjValCorreo"/>-->
                         </h:inputText>
                         <p:message for="valCorreo" id="msjValCorreo" styleClass="addEspacio"/>  
                             
@@ -72,7 +72,7 @@
 
                         
                         <h:outputLabel styleClass="addEspacio"/>
-                        <h:commandButton value="Terminar edición" actionListener="#{estudianteController.guardar()}" class="btn btn-primary" />
+                        <h:commandButton value="Terminar edición" actionListener="#{estudianteController.guardarEdicion()}" onclick="if (!confirm('Esta seguro que desea guardar los cambios?')) { return false;}; return true;" class="btn btn-primary" />
                         <h:commandButton value="Cancelar edición" onclick="if (!confirm('¿Desea cancelar la edición del estudiante?')) { return false;}; return true;" actionListener="#{estudianteController.redirigirAlistar()}" class="btn btn-primary" immediate="true"/>
                         <h:outputLabel styleClass="addEspacio"/>
                         <h:outputLabel styleClass="addEspacio"/>
