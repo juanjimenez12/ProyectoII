@@ -46,26 +46,11 @@
                         </f:facet>
                         <h:outputText value="#{est.estApellido}"></h:outputText>
                     </h:column>
+                    
                     <h:column>
                         <f:facet name="header">
-                            <h:outputText value="Correo"></h:outputText>
+                            <h:outputText value="Acciones"></h:outputText>
                         </f:facet>
-                        <h:outputText value="#{est.estCorreo}"></h:outputText>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Cohorte"></h:outputText>
-                        </f:facet>
-                        <h:outputText value="#{est.estCohorte}"></h:outputText>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Tutor"></h:outputText>
-                        </f:facet>
-                        <h:outputText value="#{est.estTutor}"></h:outputText>
-                    </h:column>            
-
-                    <h:column>
                         <h:form>
                             <h:commandButton actionListener="#{estudianteController.verEstudiante(est)}" value="Ver" class="btn btn-success btn_listaEstudiantes"/>
                             <h:commandButton actionListener="#{estudianteController.editarEstudiante(est)}" value="Editar" class="btn btn-warning btn_listaEstudiantes"/>

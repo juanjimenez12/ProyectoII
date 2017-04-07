@@ -119,29 +119,26 @@ public class EstudianteController implements Serializable {
        String b = new String(decodedByteArray);        
        return b;
    }
-   
+   //jquery-3.1.1//
     public void verEstudiante(Estudiante est)
     {
         actual = est;
-
         Utilidades.redireccionar("/ProyectoII/faces/componentes/gestionUsuarios/VerEstudiante.xhtml");  
     }  
     
     public void editarEstudiante(Estudiante est)
     {
         actual = est;
-        Utilidades.redireccionar("/ProyectoII/faces/componentes/gestionUsuarios/EditarEstudiante.xhtml");  
-
+        Utilidades.redireccionar("/ProyectoII/faces/componentes/gestionUsuarios/EditarEstudiante.xhtml");
     }
    
    /*redireccionamiento para boton cancelar*/
    
-   public void redirigirAlistar()
-   {  
-       System.out.println("vine a listar");
-      limpiarCampos();
-      Utilidades.redireccionar("/ProyectoII/faces/componentes/gestionUsuarios/ListarEstudiantes.xhtml"); 
-   }
+    public void redirigirAlistar()
+    {  
+       limpiarCampos();
+       Utilidades.redireccionar("/ProyectoII/faces/componentes/gestionUsuarios/ListarEstudiantes.xhtml"); 
+    }
    
    /*redireccion para volver a registrar */
    
@@ -161,7 +158,7 @@ public class EstudianteController implements Serializable {
    
     public void listadoEstudiantes()
     {
-        addMessage("Usted abandono el registro y este es el lListado de estudiantes.","");
+        addMessage("Usted abandono el registro y este es el istado de estudiantes.","");
     }
    
    public void confirmarRegistro() {
