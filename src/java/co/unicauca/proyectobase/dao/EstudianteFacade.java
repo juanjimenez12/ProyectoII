@@ -13,7 +13,7 @@ import javax.persistence.Query;
 
 /**
  *
- * @author Sebastian
+ * @author Sahydo
  */
 @Stateless
 public class EstudianteFacade extends AbstractFacade<Estudiante> {
@@ -29,7 +29,6 @@ public class EstudianteFacade extends AbstractFacade<Estudiante> {
     public EstudianteFacade() {
         super(Estudiante.class);
     }
-    
     public boolean findByEstCorreo(String estCorreo){
         Query query = em.createNamedQuery("Estudiante.findByEstCorreo");
         query.setParameter("estCorreo", estCorreo);
@@ -41,5 +40,4 @@ public class EstudianteFacade extends AbstractFacade<Estudiante> {
             query.setParameter("estCodigo", estCodigo);
             return !query.getResultList().isEmpty();
     }
-    
 }

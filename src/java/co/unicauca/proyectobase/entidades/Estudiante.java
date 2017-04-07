@@ -24,7 +24,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Sebastian
+ * @author Sahydo
  */
 @Entity
 @Table(name = "estudiante")
@@ -84,7 +84,6 @@ public class Estudiante implements Serializable {
     private List<Publicacion> publicacionList;
 
     public Estudiante() {
-        
     }
 
     public Estudiante(Integer estIdentificador) {

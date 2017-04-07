@@ -23,13 +23,14 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Sebastian
+ * @author Sahydo
  */
 @Entity
 @Table(name = "publicacion")
@@ -38,13 +39,16 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Publicacion.findAll", query = "SELECT p FROM Publicacion p"),
     @NamedQuery(name = "Publicacion.findByPubIdentificador", query = "SELECT p FROM Publicacion p WHERE p.pubIdentificador = :pubIdentificador"),
     @NamedQuery(name = "Publicacion.findByPubTitulo", query = "SELECT p FROM Publicacion p WHERE p.pubTitulo = :pubTitulo"),
-    @NamedQuery(name = "Publicacion.findByPubTituloRevista", query = "SELECT p FROM Publicacion p WHERE p.pubTituloRevista = :pubTituloRevista"),
-    @NamedQuery(name = "Publicacion.findByPubLinkRevista", query = "SELECT p FROM Publicacion p WHERE p.pubLinkRevista = :pubLinkRevista"),
     @NamedQuery(name = "Publicacion.findByPubCategoria", query = "SELECT p FROM Publicacion p WHERE p.pubCategoria = :pubCategoria"),
     @NamedQuery(name = "Publicacion.findByPubCreditos", query = "SELECT p FROM Publicacion p WHERE p.pubCreditos = :pubCreditos"),
     @NamedQuery(name = "Publicacion.findByPubFechaVisado", query = "SELECT p FROM Publicacion p WHERE p.pubFechaVisado = :pubFechaVisado"),
     @NamedQuery(name = "Publicacion.findByPubFechaRegistro", query = "SELECT p FROM Publicacion p WHERE p.pubFechaRegistro = :pubFechaRegistro"),
-    @NamedQuery(name = "Publicacion.findByPubEstado", query = "SELECT p FROM Publicacion p WHERE p.pubEstado = :pubEstado")})
+    @NamedQuery(name = "Publicacion.findByPubEstado", query = "SELECT p FROM Publicacion p WHERE p.pubEstado = :pubEstado"),
+    @NamedQuery(name = "Publicacion.findByPubNombreAutor", query = "SELECT p FROM Publicacion p WHERE p.pubNombreAutor = :pubNombreAutor"),
+    @NamedQuery(name = "Publicacion.findByPubAutoresSecundarios", query = "SELECT p FROM Publicacion p WHERE p.pubAutoresSecundarios = :pubAutoresSecundarios"),
+    @NamedQuery(name = "Publicacion.findByPubFechaPublicacion", query = "SELECT p FROM Publicacion p WHERE p.pubFechaPublicacion = :pubFechaPublicacion"),
+    @NamedQuery(name = "Publicacion.findByPubDoi", query = "SELECT p FROM Publicacion p WHERE p.pubDoi = :pubDoi"),
+    @NamedQuery(name = "Publicacion.findByPubIsbn", query = "SELECT p FROM Publicacion p WHERE p.pubIsbn = :pubIsbn")})
 public class Publicacion implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -56,12 +60,6 @@ public class Publicacion implements Serializable {
     @Size(max = 200)
     @Column(name = "pub_titulo")
     private String pubTitulo;
-    @Size(max = 60)
-    @Column(name = "pub_titulo_revista")
-    private String pubTituloRevista;
-    @Size(max = 100)
-    @Column(name = "pub_link_revista")
-    private String pubLinkRevista;
     @Size(max = 5)
     @Column(name = "pub_categoria")
     private String pubCategoria;
@@ -76,10 +74,27 @@ public class Publicacion implements Serializable {
     @Size(max = 15)
     @Column(name = "pub_estado")
     private String pubEstado;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 60)
+    @Column(name = "pub_nombre_autor")
+    private String pubNombreAutor;
+    @Size(max = 300)
+    @Column(name = "pub_autores_secundarios")
+    private String pubAutoresSecundarios;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "pub_fecha_publicacion")
+    @Temporal(TemporalType.DATE)
+    private Date pubFechaPublicacion;
+    @Size(max = 50)
+    @Column(name = "pub_doi")
+    private String pubDoi;
+    @Size(max = 50)
+    @Column(name = "pub_isbn")
+    private String pubIsbn;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "arcPubIdentificador")
     private List<Archivo> archivoList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pclaPubIdentificador")
-    private List<PalabraClave> palabraClaveList;
     @JoinColumn(name = "pub_est_identificador", referencedColumnName = "est_identificador")
     @ManyToOne(optional = false)
     private Estudiante pubEstIdentificador;
@@ -92,6 +107,12 @@ public class Publicacion implements Serializable {
 
     public Publicacion(Integer pubIdentificador) {
         this.pubIdentificador = pubIdentificador;
+    }
+
+    public Publicacion(Integer pubIdentificador, String pubNombreAutor, Date pubFechaPublicacion) {
+        this.pubIdentificador = pubIdentificador;
+        this.pubNombreAutor = pubNombreAutor;
+        this.pubFechaPublicacion = pubFechaPublicacion;
     }
 
     public Integer getPubIdentificador() {
@@ -108,22 +129,6 @@ public class Publicacion implements Serializable {
 
     public void setPubTitulo(String pubTitulo) {
         this.pubTitulo = pubTitulo;
-    }
-
-    public String getPubTituloRevista() {
-        return pubTituloRevista;
-    }
-
-    public void setPubTituloRevista(String pubTituloRevista) {
-        this.pubTituloRevista = pubTituloRevista;
-    }
-
-    public String getPubLinkRevista() {
-        return pubLinkRevista;
-    }
-
-    public void setPubLinkRevista(String pubLinkRevista) {
-        this.pubLinkRevista = pubLinkRevista;
     }
 
     public String getPubCategoria() {
@@ -166,6 +171,46 @@ public class Publicacion implements Serializable {
         this.pubEstado = pubEstado;
     }
 
+    public String getPubNombreAutor() {
+        return pubNombreAutor;
+    }
+
+    public void setPubNombreAutor(String pubNombreAutor) {
+        this.pubNombreAutor = pubNombreAutor;
+    }
+
+    public String getPubAutoresSecundarios() {
+        return pubAutoresSecundarios;
+    }
+
+    public void setPubAutoresSecundarios(String pubAutoresSecundarios) {
+        this.pubAutoresSecundarios = pubAutoresSecundarios;
+    }
+
+    public Date getPubFechaPublicacion() {
+        return pubFechaPublicacion;
+    }
+
+    public void setPubFechaPublicacion(Date pubFechaPublicacion) {
+        this.pubFechaPublicacion = pubFechaPublicacion;
+    }
+
+    public String getPubDoi() {
+        return pubDoi;
+    }
+
+    public void setPubDoi(String pubDoi) {
+        this.pubDoi = pubDoi;
+    }
+
+    public String getPubIsbn() {
+        return pubIsbn;
+    }
+
+    public void setPubIsbn(String pubIsbn) {
+        this.pubIsbn = pubIsbn;
+    }
+
     @XmlTransient
     public List<Archivo> getArchivoList() {
         return archivoList;
@@ -173,15 +218,6 @@ public class Publicacion implements Serializable {
 
     public void setArchivoList(List<Archivo> archivoList) {
         this.archivoList = archivoList;
-    }
-
-    @XmlTransient
-    public List<PalabraClave> getPalabraClaveList() {
-        return palabraClaveList;
-    }
-
-    public void setPalabraClaveList(List<PalabraClave> palabraClaveList) {
-        this.palabraClaveList = palabraClaveList;
     }
 
     public Estudiante getPubEstIdentificador() {
