@@ -23,7 +23,7 @@
                 <h:form>
                 <p:growl id="message" showDetail="true" />
                 <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
-                     <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                    <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
                 </p:confirmDialog>
                 </h:form>
                 
@@ -54,7 +54,7 @@
                         <h:form>
                             <h:commandButton actionListener="#{estudianteController.verEstudiante(est)}" value="Ver" class="btn btn-success btn_listaEstudiantes"/>
                             <h:commandButton actionListener="#{estudianteController.editarEstudiante(est)}" value="Editar" class="btn btn-warning btn_listaEstudiantes"/>
-                            <h:commandButton actionListener="#{estudianteController.eliminarEstudiante(est)}" value="Eliminar" class="btn btn-danger btn_listaEstudiantes"/>
+                            <h:commandButton actionListener="#{estudianteController.eliminarEstudiante(est)}" value="Deshabilitar" class="btn btn-danger btn_listaEstudiantes"/>
                         </h:form>
                     </h:column>
                 </h:dataTable>
