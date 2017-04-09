@@ -30,7 +30,7 @@ public class PublicacionController implements Serializable {
         return listaPublicaciones;
     }
 
-    public void setListaEstudiantes(List<Publicacion> listaPublicacion) {
+    public void setListaPublicaciones(List<Publicacion> listaPublicacion) {
         this.listaPublicaciones = listaPublicacion;
     }
 
@@ -122,20 +122,21 @@ public class PublicacionController implements Serializable {
     }
     //jquery-3.1.1//
 */
-    public void verPublicacion(Publicacion est) {
-        actual = est;
+    public void verPublicacion(Publicacion pub) {
+        actual = pub;
+        System.out.println("si esta pasando por aqui");
         Utilidades.redireccionar("/ProyectoII/faces/componentes/gestionPublicaciones/VerPublicacion.xhtml");
     }
 
-    public void editarPublicacion(Publicacion est) {
-        actual = est;
+    public void editarPublicacion(Publicacion pub) {
+        actual = pub;
         Utilidades.redireccionar("/ProyectoII/faces/componentes/gestionPublicaciones/EditarPublicacion.xhtml");
     }
 
     /*redireccionamiento para boton cancelar*/
     public void redirigirAlistar() {
         limpiarCampos();
-        System.out.println("si esta pasando por aqui");
+        //System.out.println("si esta pasando por aqui");
         Utilidades.redireccionar("/ProyectoII/faces/componentes/gestionPublicaciones/ListarPublicaciones.xhtml");
     }
 

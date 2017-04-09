@@ -5,7 +5,7 @@
  */
 package co.unicauca.proyectobase.dao;
 
-import co.unicauca.proyectobase.entidades.TipoPublicacion;
+import co.unicauca.proyectobase.entidades.Congreso;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -15,7 +15,7 @@ import javax.persistence.PersistenceContext;
  * @author Sahydo
  */
 @Stateless
-public class TipoPublicacionFacade extends AbstractFacade<TipoPublicacion> {
+public class CongresoFacade extends AbstractFacade<Congreso> {
 
     @PersistenceContext(unitName = "ProyectoDoctoradoPU")
     private EntityManager em;
@@ -25,8 +25,8 @@ public class TipoPublicacionFacade extends AbstractFacade<TipoPublicacion> {
         return em;
     }
 
-    public TipoPublicacionFacade() {
-        super(TipoPublicacion.class);
+    public CongresoFacade() {
+        super(Congreso.class);
     }
     
 }
