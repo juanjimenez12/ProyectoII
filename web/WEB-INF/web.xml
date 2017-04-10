@@ -26,4 +26,8 @@
     <welcome-file-list>
         <welcome-file>faces/index.xhtml</welcome-file>
     </welcome-file-list>
+    <error-page>
+        <exception-type>javax.ejb.EJBException</exception-type>
+        <location>/WEB-INF/expired.xhtml</location>
+    </error-page>
 </web-app>
