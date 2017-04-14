@@ -18,89 +18,12 @@
                     <button type="button" class="close" data-dismiss="alert">&times;</button>
                     <strong >Importante: los campos con asterisco (*) son obligatorios.</strong>
                 </div>
-                <div class="row">
-                    <div class="col-sm-3"></div>
-                    <div class="col-sm-6">
-                        <h:form styleClass="elementosCentrados bajarGrid" id="panelRegistrar">
-                        <h:outputLabel value="Nombre Autor " for="valNombreAutor" styleClass="addEspacio"/>
-                        <h:outputText class="form-control" id="valNombreAutor"  value="#{publicacionController.getnombreAut()}" styleClass="addEspacio form-control"></h:outputText>
-                        <h:outputLabel styleClass="addEspacio"/>
-                        
-                        <h:outputLabel value="Autores Secundarios  *" for="valASecundarios" styleClass="addEspacio"/>
-                        <h:inputTextarea class="form-control" id="valASecundarios"  value="#{publicacionController.actual.pubAutoresSecundarios}" styleClass="addEspacio form-control"></h:inputTextarea>
-                        <h:outputLabel styleClass="addEspacio"/>
-                        
-                        <h:outputLabel for="event" value="Fecha Publicacion *" styleClass="addEspacio"/><br/>
-                        <p:calendar id="event" value="#{publicacionController.actual.pubFechaPublicacion}">
-                            <p:ajax event="dateSelect" listener="#{publicacionController.onDateSelect}"  />
-                        </p:calendar>
-                        <h:outputLabel styleClass="addEspacio"/><br/>
-                        
-                        <h:outputLabel value="Tipo publicación* " for="valTipopublicacion" styleClass="addEspacio"/>
-                        <h:selectOneMenu class="form-control"  id="valTipopublicacion" value="#{publicacionController.actual.pubTipoPublicacion}" styleClass="tipopublicacion  addEspacio form-control">                                    
-                            <f:selectItem itemLabel="Seleccionar" itemValue=""></f:selectItem>
-                            <f:selectItem itemLabel="Revista" itemValue="revista"></f:selectItem>
-                            <f:selectItem itemLabel="Congreso" itemValue="congreso"></f:selectItem>
-                        </h:selectOneMenu>
-                        <h:outputLabel styleClass="addEspacio"/>
 
-                        <div id="revista_info">
-                            <h:outputLabel value="Nombre Articulo *" for="valNArticulo" styleClass="addEspacio"/>
-                            <h:inputText class="form-control" id="valNArticulo"  value="#{publicacionController.actual.revista.revNombreArticulo}" styleClass="addEspacio form-control"></h:inputText>
-                            <h:outputLabel styleClass="addEspacio"/>
+                <h:form>
+                    <h:panelGrid columns="3" cellpadding="10" styleClass="elementosCentrados bajarGrid" id="panelRegistrar">
 
-                            <h:outputLabel value="Nombre Revista *" for="valNRevista" styleClass="addEspacio"/>
-                            <h:inputText class="form-control" id="valNRevista"  value="#{publicacionController.actual.revista.revNombreRevista}" styleClass="addEspacio form-control"></h:inputText>
-                            <h:outputLabel styleClass="addEspacio"/>
-
-                            <h:outputLabel value="Categoria *" for="valCategoria" styleClass="addEspacio"/>
-                            <h:inputText class="form-control" id="valCategoria"  value="#{publicacionController.actual.revista.revCategoria}" styleClass="addEspacio form-control"></h:inputText>
-                            <h:outputLabel styleClass="addEspacio"/>
-                        </div>
-                        <div id="congreso_info">
-                            <h:outputLabel value="Nombre Ponencia *" for="valNPonencia" styleClass="addEspacio"/>
-                            <h:inputText class="form-control" id="valNPonencia"  value="#{publicacionController.actual.congreso.congNombrePonencia}" styleClass="addEspacio form-control"></h:inputText>
-                            <h:outputLabel styleClass="addEspacio"/>
-
-                            <h:outputLabel value="Nombre Evento *" for="valNEvento" styleClass="addEspacio"/>
-                            <h:inputText class="form-control" id="valNEvento"  value="#{publicacionController.actual.congreso.congNombreEvento}" styleClass="addEspacio form-control"></h:inputText>
-                            <h:outputLabel styleClass="addEspacio"/>
-
-                            <h:outputLabel value="Tipo congreso *" for="valTipoCongreso" styleClass="addEspacio"/>
-                            <h:inputText class="form-control" id="valTipoCongreso"  value="#{publicacionController.actual.congreso.congTipoCongreso}" styleClass="addEspacio form-control"></h:inputText>
-                            <h:outputLabel styleClass="addEspacio"/>
-                        </div>
-                        <h:outputLabel value="DOI *" for="valDOI" styleClass="addEspacio"/>
-                        <h:inputText class="form-control" id="valDOI"  value="#{publicacionController.actual.pubDoi}" styleClass="addEspacio form-control"></h:inputText>
-                        <h:outputLabel styleClass="addEspacio"/>
-                        
-                        <h:outputLabel value="ISBN *" for="valISBN" styleClass="addEspacio"/>
-                        <h:inputText class="form-control" id="valISBN"  value="#{publicacionController.actual.pubIsbn}" styleClass="addEspacio form-control"></h:inputText>
-                        <h:outputLabel styleClass="addEspacio"/>
-
-                        <h:outputLabel for="articuloPDF" value="Articulo PDF" styleClass="addEspacio"/>
-                        <p:fileUpload id="articuloPDF" value="#{publicacionController.articuloPDF}"  mode="simple" allowTypes="/(\.|\/)(pdf)$/"></p:fileUpload>
-                        <h:outputLabel styleClass="addEspacio"/>
-                        
-                        <h:outputLabel for="indiceRevistaPDF" value="Tabla de Contenido PDF" styleClass="addEspacio"/>
-                        <p:fileUpload id="indiceRevistaPDF" value="#{publicacionController.tablaContenidoPDF}"  mode="simple" allowTypes="/(\.|\/)(pdf)$/"></p:fileUpload>
-                        <h:outputLabel styleClass="addEspacio"/>
-                        
-                        <h:outputLabel styleClass="addEspacio"/>
-                        <h:outputLabel styleClass="addEspacio"/>
-                        <h:outputLabel styleClass="addEspacio"/><br/>
-                        <h:commandButton value="Cancelar registro" onclick="if (!confirm('¿Desea cancelar el registro de la publicación?')) { return false;}; return true;" actionListener="#{punlicacionController.redirigirAlistar()}" class="btn btn-primary" immediate="true"/>
-                        <h:commandButton value="Registrar publicación" actionListener="#{publicacionController.agregar()}" class="btn btn-primary" />
-                        
-                        <h:outputLabel styleClass="addEspacio"/>
-                        <h:outputLabel styleClass="addEspacio"/>
-                        <h:outputLabel styleClass="addEspacio"/>
-                        <h:outputLabel styleClass="addEspacio"/>
+                    </h:panelGrid>
                 </h:form>
-                    </div>
-                    <div class="col-sm-3"></div>
-                </div>
-                
             </p:panel>
         </ui:define>
     </ui:composition>
