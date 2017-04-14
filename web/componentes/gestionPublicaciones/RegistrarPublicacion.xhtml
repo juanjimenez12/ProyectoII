@@ -35,6 +35,14 @@
                             <p:ajax event="dateSelect" listener="#{publicacionController.onDateSelect}"  />
                         </p:calendar>
                         <h:outputLabel styleClass="addEspacio"/><br/>
+                        <h:outputLabel value="DOI *" for="valDOI" styleClass="addEspacio"/>
+                        <h:inputText class="form-control" id="valDOI"  value="#{publicacionController.actual.pubDoi}" styleClass="addEspacio form-control"></h:inputText>
+                        <h:outputLabel styleClass="addEspacio"/>
+                        
+                        <h:outputLabel value="ISBN *" for="valISBN" styleClass="addEspacio"/>
+                        <h:inputText class="form-control" id="valISBN"  value="#{publicacionController.actual.pubIsbn}" styleClass="addEspacio form-control"></h:inputText>
+                        <h:outputLabel styleClass="addEspacio"/>
+
                         
                         <h:outputLabel value="Tipo publicación* " for="valTipopublicacion" styleClass="addEspacio"/>
                         <h:selectOneMenu class="form-control"  id="valTipopublicacion" value="#{publicacionController.actual.pubTipoPublicacion}" styleClass="tipopublicacion  addEspacio form-control">                                    
@@ -54,7 +62,13 @@
                             <h:outputLabel styleClass="addEspacio"/>
 
                             <h:outputLabel value="Categoria *" for="valCategoria" styleClass="addEspacio"/>
-                            <h:inputText class="form-control" id="valCategoria"  value="#{publicacionController.actual.revista.revCategoria}" styleClass="addEspacio form-control"></h:inputText>
+                            <h:selectOneMenu class="form-control"  id="valCategoria" value="#{publicacionController.actual.revista.revCategoria}" styleClass="addEspacio form-control">                                    
+                                <f:selectItem itemLabel="Seleccionar" itemValue=""></f:selectItem>
+                                <f:selectItem itemLabel="A1" itemValue="A1"></f:selectItem>
+                                <f:selectItem itemLabel="A2" itemValue="A2"></f:selectItem>
+                                <f:selectItem itemLabel="B" itemValue="B"></f:selectItem>
+                                <f:selectItem itemLabel="C" itemValue="C"></f:selectItem>
+                            </h:selectOneMenu>
                             <h:outputLabel styleClass="addEspacio"/>
                         </div>
                         <div id="congreso_info">
@@ -67,17 +81,14 @@
                             <h:outputLabel styleClass="addEspacio"/>
 
                             <h:outputLabel value="Tipo congreso *" for="valTipoCongreso" styleClass="addEspacio"/>
-                            <h:inputText class="form-control" id="valTipoCongreso"  value="#{publicacionController.actual.congreso.congTipoCongreso}" styleClass="addEspacio form-control"></h:inputText>
+                            <h:selectOneMenu class="form-control"  id="valTipoCongreso" value="#{publicacionController.actual.congreso.congTipoCongreso}" styleClass="addEspacio form-control">                                    
+                                <f:selectItem itemLabel="Seleccionar" itemValue=""></f:selectItem>
+                                <f:selectItem itemLabel="Evento nacional" itemValue="nacional"></f:selectItem>
+                                <f:selectItem itemLabel="Evento internacional" itemValue="internacional"></f:selectItem>
+                            </h:selectOneMenu>
                             <h:outputLabel styleClass="addEspacio"/>
                         </div>
-                        <h:outputLabel value="DOI *" for="valDOI" styleClass="addEspacio"/>
-                        <h:inputText class="form-control" id="valDOI"  value="#{publicacionController.actual.pubDoi}" styleClass="addEspacio form-control"></h:inputText>
-                        <h:outputLabel styleClass="addEspacio"/>
                         
-                        <h:outputLabel value="ISBN *" for="valISBN" styleClass="addEspacio"/>
-                        <h:inputText class="form-control" id="valISBN"  value="#{publicacionController.actual.pubIsbn}" styleClass="addEspacio form-control"></h:inputText>
-                        <h:outputLabel styleClass="addEspacio"/>
-
                         <h:outputLabel for="articuloPDF" value="Articulo PDF" styleClass="addEspacio"/>
                         <p:fileUpload id="articuloPDF" value="#{publicacionController.articuloPDF}"  mode="simple" allowTypes="/(\.|\/)(pdf)$/"></p:fileUpload>
                         <h:outputLabel styleClass="addEspacio"/>
