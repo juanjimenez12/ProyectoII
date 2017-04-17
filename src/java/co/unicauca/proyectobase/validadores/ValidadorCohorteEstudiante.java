@@ -30,12 +30,12 @@ public class ValidadorCohorteEstudiante implements Validator
         boolean cumplePatron = Pattern.matches(".*[0-9]", texto);
         if(!cumplePatron)
         {            
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "El cohorte contiene caracteres no validos.");
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "El cohorte contiene caracteres no válidos.");
             throw new ValidatorException(msg);  
         }
         
         cohorte = Integer.parseInt(texto);       
-        if((cohorte > anio) || (cohorte < 2000))
+        if((cohorte > anio) || (cohorte <= 2000))
         {
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "El cohorte debe ser un año mayor al 2000 y menor o igual al año actual.");
             throw new ValidatorException(msg);  

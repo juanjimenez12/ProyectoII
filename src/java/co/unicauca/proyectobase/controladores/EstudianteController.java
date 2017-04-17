@@ -39,6 +39,7 @@ public class EstudianteController implements Serializable {
     String EDITAR = "editar";
 
     public EstudianteController() {
+        
     }
 
     public Estudiante getActual() {
@@ -92,6 +93,14 @@ public class EstudianteController implements Serializable {
         actual.setEstEstado("Inactivo");
         dao.edit(actual);
         mensajeDeshabilitar();
+        return INICIO;
+    }
+    
+    public String habilitarEstudiante(int id) {
+        actual = dao.find(id);
+        actual.setEstEstado("Activo");
+        dao.edit(actual);
+        mensajeConfirmacionHabilitacion();
         return INICIO;
     }
 
@@ -149,20 +158,24 @@ public class EstudianteController implements Serializable {
 
     /*mensajes de confirmacion */
     public void mensajeEditar() {
-        addMessage("ha editado satisfactoriamente al estudiante", "");
+        addMessage("Ha editado satisfactoriamente al estudiante.", "");
     }
 
     public void mensajeDeshabilitar() {
 
-        addMessage("ha deshabilitado satisfactoriamente al estudiante", "");
+        addMessage("Ha deshabilitado satisfactoriamente al estudiante.", "");
     }
 
     public void mensajelistadoEstudiantes() {
-        addMessage("Usted abandono el registro y este es el istado de estudiantes.", "");
+        addMessage("Usted abandonó el registro y este es el listado de estudiantes.", "");
     }
 
     public void mensajeconfirmarRegistro() {
-        addMessage("Estudiante Registrado con exito ", "");
+        addMessage("Estudiante registrado con éxito.", "");
+    }
+    
+    public void mensajeConfirmacionHabilitacion() {
+        addMessage("Ha habilitado satisfactoriamente al estudiante.", "");
     }
 
     public void addMessage(String summary, String detail) {

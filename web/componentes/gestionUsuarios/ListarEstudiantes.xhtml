@@ -12,7 +12,7 @@
     <!-- IMPLEMENTATION -->
     <ui:composition template="../../plantillas/Coordinador.xhtml">
          <ui:define name="content"> 
-              <div class="panel panel-primary">
+             <div class="panel panel-primary" >
             <div class="panel-heading">
                 <h3 class="panel-title">
                     Estudiantes registrados
@@ -27,37 +27,34 @@
                 </p:confirmDialog>
                 </h:form>
                 
-                <h:dataTable value="#{estudianteController.listado()}" var="est" style="width: 100%; text-align: left;" styleClass="table table-bordered">
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Código estudiantil"></h:outputText>
-                        </f:facet>
+                <h:outputLabel rendered="#{estudianteController.listado().size() == 0}" value="No tiene Estudiantes Registrados"></h:outputLabel>
+                
+                
+                
+                <p:dataTable  var="est"  value="#{estudianteController.listado()}" rows="10"
+                         paginator="true"
+                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         rowsPerPageTemplate="5,10,15" rendered="#{estudianteController.listado().size() > 0}">
+                    <p:column headerText="Código estudiantil" >
                         <h:outputText value="#{est.estCodigo}"></h:outputText>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Nombres"></h:outputText>
-                        </f:facet>
+                    </p:column>
+                    <p:column headerText="Nombres"  >
                         <h:outputText value="#{est.estNombre}"></h:outputText>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Apellidos"></h:outputText>
-                        </f:facet>
+                    </p:column>
+                    <p:column headerText="Apellidos"  >
                         <h:outputText value="#{est.estApellido}"></h:outputText>
-                    </h:column>
+                    </p:column>
                     
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Acciones"></h:outputText>
-                        </f:facet>
-                        <h:form>
+                    <p:column headerText="Acciones"   >
+                           
+                        <h:form style="font-size: 10px;">
                             <h:commandButton actionListener="#{estudianteController.verEstudiante(est)}" value="Ver" class="btn btn-success btn_listaEstudiantes"/>
                             <h:commandButton actionListener="#{estudianteController.editarEstudiante(est)}" value="Editar" class="btn btn-warning btn_listaEstudiantes"/>
-                            <h:commandButton onclick="if (!confirm('¿Desea deshabilitar al estudiante?')) { return false;}; return true;" actionListener="#{estudianteController.cambiarEstado(est.estIdentificador)}" value="Deshabilitar" class="btn btn-danger btn_listaEstudiantes"/>
+                            <h:commandButton rendered="#{est.estEstado eq 'Activo'}" onclick="if (!confirm('¿Desea deshabilitar al estudiante?')) { return false;}; return true;" actionListener="#{estudianteController.cambiarEstado(est.estIdentificador)}" value="Deshabilitar" class="btn btn-danger btn_listaEstudiantes"/>
+                            <h:commandButton rendered="#{est.estEstado eq 'Inactivo'}" onclick="if (!confirm('¿Desea habilitar al estudiante?')) { return false;}; return true;" actionListener="#{estudianteController.habilitarEstudiante(est.estIdentificador)}" value="Habilitar" class="btn btn-info btn_listaEstudiantes"/>
                         </h:form>
-                    </h:column>
-                </h:dataTable>
+                    </p:column>
+                </p:dataTable>
             </div>
         </div>
              
