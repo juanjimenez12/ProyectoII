@@ -11,6 +11,7 @@ import javax.annotation.ManagedBean;
 import javax.ejb.EJB;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
+import javax.ejb.EJBException;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
@@ -59,18 +60,27 @@ public class EstudianteController implements Serializable {
 
     public void agregar() {
 
-        String contraseña = cifrarBase64(actual.getEstCodigo());
-        actual.setEstContrasena(contraseña);
+        try
+        {
+            String contraseña = cifrarBase64(actual.getEstCodigo());
+        
+            actual.setEstContrasena(contraseña);
 
-        String[] nombreusuario = actual.getEstCorreo().split("@");
-        actual.setEstUsuario(nombreusuario[0]);
+            String[] nombreusuario = actual.getEstCorreo().split("@");
+            actual.setEstUsuario(nombreusuario[0]);
 
-        actual.setEstEstado("Activo");
+            actual.setEstEstado("Activo");
 
-        dao.create(actual);
-        mensajeconfirmarRegistro();
-        limpiarCampos();
-        redirigirAlistar();
+            dao.create(actual);
+            dao.flush();
+            mensajeconfirmarRegistro();
+            limpiarCampos();
+            redirigirAlistar();
+        }
+        catch(EJBException e)
+        {
+            
+        }
     }
 
     public void limpiarCampos() {
@@ -78,10 +88,19 @@ public class EstudianteController implements Serializable {
     }
 
     
-    public String guardarEdicion() {
-        dao.edit(actual);
-        mensajeEditar();
-        redirigirAlistar();
+    public String guardarEdicion()
+    {
+        try
+        {
+            dao.edit(actual);
+            dao.flush();
+            mensajeEditar();
+            redirigirAlistar();            
+        }
+        catch(EJBException e)
+        {
+            
+        }
         return INICIO;
     }
 
@@ -89,28 +108,51 @@ public class EstudianteController implements Serializable {
     
     
     public String cambiarEstado(int id) {
-        actual = dao.find(id);
-        actual.setEstEstado("Inactivo");
-        dao.edit(actual);
-        mensajeDeshabilitar();
+        try
+        {
+            actual = dao.find(id);
+            actual.setEstEstado("Inactivo");
+            dao.edit(actual);
+            dao.flush();
+            mensajeDeshabilitar();
+        }
+        catch(EJBException e)
+        {
+            
+        }
         return INICIO;
     }
     
     public String habilitarEstudiante(int id) {
-        actual = dao.find(id);
-        actual.setEstEstado("Activo");
-        dao.edit(actual);
-        mensajeConfirmacionHabilitacion();
+        try
+        {
+            actual = dao.find(id);
+            actual.setEstEstado("Activo");
+            dao.edit(actual);
+            dao.flush();
+            mensajeConfirmacionHabilitacion();
+        }
+        catch(EJBException e)
+        {
+            
+        }
         return INICIO;
     }
 
     public boolean estudianteRegistrado(String codigo) {
-        Estudiante estudiante = dao.find(codigo);
-
-        if (estudiante != null) {
-            return true;
+        try
+        {
+            Estudiante estudiante = dao.find(codigo);
+            dao.flush();
+            
+            if (estudiante != null) {
+                return true;
+            }
         }
-
+        catch(EJBException e)
+        {
+            
+        }
         return false;
     }
 
@@ -182,5 +224,4 @@ public class EstudianteController implements Serializable {
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, detail);
         FacesContext.getCurrentInstance().addMessage(null, message);
     }
-
 }
