@@ -24,6 +24,15 @@ public class EstudianteController implements Serializable {
     private EstudianteFacade dao;
 
     private Estudiante actual;
+    private String cohorte;
+
+    public String getCohorte() {
+        return cohorte;
+    }
+
+    public void setCohorte(String cohorte) {
+        this.cohorte = cohorte;
+    }
 
     private List<Estudiante> listaEstudiantes;
 
@@ -58,12 +67,12 @@ public class EstudianteController implements Serializable {
         return dao.findAll();
     }
 
-    public void agregar() {
+    public void agregar() {        
 
         try
         {
             String contraseña = cifrarBase64(actual.getEstCodigo());
-        
+            actual.setEstCohorte(Integer.parseInt(cohorte));
             actual.setEstContrasena(contraseña);
 
             String[] nombreusuario = actual.getEstCorreo().split("@");

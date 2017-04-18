@@ -1,6 +1,7 @@
 package co.unicauca.proyectobase.validadores;
 
 import java.util.Date;
+import java.util.regex.Pattern;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -20,9 +21,16 @@ public class ValidadorCohorteEstudiante implements Validator
         int anio = fecha.getYear() + 1900;
         int cohorte;
         
-        if((texto == null) || (texto.length() == 0) || (texto.equals("null")))
+        if(texto.length() == 0)
         {
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "El cohorte del estudiante es obligatorio.");
+            throw new ValidatorException(msg);  
+        }
+        
+        boolean cumplePatron = Pattern.matches("^[0-9]*$", texto);
+        if(!cumplePatron)
+        {            
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "El cohorte contiene caracteres no válidos.");
             throw new ValidatorException(msg);  
         }
         
