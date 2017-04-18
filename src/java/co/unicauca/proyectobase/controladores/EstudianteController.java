@@ -27,6 +27,7 @@ public class EstudianteController implements Serializable {
     private String cohorte;
 
     public String getCohorte() {
+        cohorte = String.valueOf(actual.getEstCohorte());
         return cohorte;
     }
 
@@ -34,22 +35,7 @@ public class EstudianteController implements Serializable {
         this.cohorte = cohorte;
     }
 
-    private List<Estudiante> listaEstudiantes;
-
-    public List<Estudiante> getListaEstudiantes() {
-        return listaEstudiantes;
-    }
-
-    public void setListaEstudiantes(List<Estudiante> listaEstudiantes) {
-        this.listaEstudiantes = listaEstudiantes;
-    }
-
-    String INICIO = "index";
-    String CREAR = "new";
-    String EDITAR = "editar";
-
     public EstudianteController() {
-        
     }
 
     public Estudiante getActual() {
@@ -57,10 +43,6 @@ public class EstudianteController implements Serializable {
             actual = new Estudiante();
         }
         return actual;
-    }
-
-    public String index() {
-        return INICIO;
     }
 
     public List<Estudiante> listado() {
@@ -97,10 +79,11 @@ public class EstudianteController implements Serializable {
     }
 
     
-    public String guardarEdicion()
+    public void guardarEdicion()
     {
         try
         {
+            actual.setEstCohorte(Integer.parseInt(cohorte));
             dao.edit(actual);
             dao.flush();
             mensajeEditar();
@@ -110,13 +93,9 @@ public class EstudianteController implements Serializable {
         {
             
         }
-        return INICIO;
-    }
-
-   
+    }    
     
-    
-    public String cambiarEstado(int id) {
+    public void cambiarEstado(int id) {
         try
         {
             actual = dao.find(id);
@@ -129,10 +108,9 @@ public class EstudianteController implements Serializable {
         {
             
         }
-        return INICIO;
     }
     
-    public String habilitarEstudiante(int id) {
+    public void habilitarEstudiante(int id) {
         try
         {
             actual = dao.find(id);
@@ -145,7 +123,6 @@ public class EstudianteController implements Serializable {
         {
             
         }
-        return INICIO;
     }
 
     public boolean estudianteRegistrado(String codigo) {
