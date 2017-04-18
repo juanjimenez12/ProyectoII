@@ -51,8 +51,9 @@
                         <p:message for="valCorreo" id="msjValCorreo" styleClass="addEspacio"/> 
 
                         <h:outputLabel value="Cohorte*" for="valCohorte" styleClass="addEspacio"/>
-                        <h:inputText class="form-control" id="valCohorte" value="#{estudianteController.actual.estCohorte}" styleClass="addEspacio form-control">
+                        <h:inputText class="form-control" id="valCohorte" value="#{estudianteController.actual.estCohorte}" styleClass="addEspacio form-control" converterMessage="El cohorte contiene caracteres no válidos.">
                             <f:validator validatorId="validadorCohorteEstudiante"/>
+                            <f:convertNumber integerOnly="true"/>
                             <p:ajax event="blur" update="msjValCohorte"/>
                         </h:inputText>
                         <p:message for="valCohorte" id="msjValCohorte" styleClass="addEspacio"/>  
