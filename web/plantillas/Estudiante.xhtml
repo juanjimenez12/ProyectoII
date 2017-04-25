@@ -29,7 +29,7 @@
                             <td>  <h1 id="titulo">Programa De Posgrados Universidad del Cauca&nbsp;</h1>   </td>
                             <td>
                                <img src="../../resources/images/usuario.png" id="logo_usu">
-                                   <h4 id="txt_nomusu">Administrador</h4>
+                                   <h4 id="txt_nomusu">Estudiante</h4>
                                 </img>
                             </td>
                             <td >                               
@@ -60,27 +60,25 @@
                     <div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
 
                       <ul class="nav navbar-nav">
-                        <li class="active  mejorarMenu"><a href="#">Administrador principal<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-home"></span></a></li>
+                        <li class="active  mejorarMenu"><a href="#">Estudiantes<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-home"></span></a></li>
                         <li class="dropdown">
 
-                          <a href="#" class="dropdown-toggle mejorarMenu" data-toggle="dropdown">Gestión de Estudiantes <span class="caret"></span><span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-user"></span></a>
+                          <a href="#" class="dropdown-toggle mejorarMenu" data-toggle="dropdown">Publicaciones <span class="caret"></span><span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-user"></span></a>
                           <ul class="dropdown-menu forAnimate" role="menu" id="">
                               <h:form>
-                              <li><h:commandLink  actionListener="#{estudianteController.redirigirAlistar()}" >&nbsp; &nbsp; <span class ="glyphicon glyphicon-chevron-right"/>Listar Estudiantes</h:commandLink></li>
-                              <li> <h:commandLink  actionListener="#{estudianteController.redirigirARegistrar()}" >&nbsp; &nbsp; <span class ="glyphicon glyphicon-chevron-right"/>Registrar Estudiantes</h:commandLink></li>                                 
+                               <li><h:commandLink actionListener="#{publicacionController.redirigirAlistar()}"  >&nbsp; &nbsp; <span class ="glyphicon glyphicon-chevron-right"/>Listar Publicaciones</h:commandLink></li>
+                               <li> <h:commandLink actionListener="#{publicacionController.redirigirARegistrar()}"  >&nbsp; &nbsp; <span class ="glyphicon glyphicon-chevron-right"/>Registrar Publicaciones</h:commandLink></li>                                 
                               </h:form>
                           </ul>
                         </li> 
 
                         <li class="dropdown">
-                             <a href="#" class="dropdown-toggle  mejorarMenu" data-toggle="dropdown">Publicaciones <span class="caret"></span><span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-list-alt"></span></a>
+                             <a href="#" class="dropdown-toggle  mejorarMenu" data-toggle="dropdown">Nueva Funcionalidad <span class="caret"></span><span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-list-alt"></span></a>
                           <ul class="dropdown-menu forAnimate" role="menu">
                               <h:form>
-                                  <li><h:commandLink   >&nbsp; &nbsp; <span class ="glyphicon glyphicon-chevron-right"/>Agregar nueva funcionaliad</h:commandLink></li>
-                                  <li> <h:commandLink  >&nbsp; &nbsp; <span class ="glyphicon glyphicon-chevron-right"/>Agregar nueva funcionalidad </h:commandLink></li>
-                                  
+                               <li><h:commandLink   >&nbsp; &nbsp; <span class ="glyphicon glyphicon-chevron-right"/>Agregar nueva funcionaliad</h:commandLink></li>
+                               <li> <h:commandLink  >&nbsp; &nbsp; <span class ="glyphicon glyphicon-chevron-right"/>Agregar nueva funcionalidad </h:commandLink></li>
                               </h:form>
-         
                           </ul>
                         </li>
 
