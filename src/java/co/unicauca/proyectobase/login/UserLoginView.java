@@ -45,10 +45,17 @@ public class UserLoginView {
         System.out.println(username);
         if(username != null && username.equals("admin") && password != null && password.equals("admin")) {
             loggedIn = true;
-            message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Welcome santiago", username);
+            message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Welcome user", username);
             Utilidades.redireccionar("/ProyectoII/faces/componentes/gestionUsuarios/ListarEstudiantes.xhtml");
             //
-        } else {
+        }
+         if(username != null && username.equals("est") && password != null && password.equals("est")) {
+            loggedIn = true;
+            message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Welcome user", username);
+            Utilidades.redireccionar("/ProyectoII/faces/componentes/gestionPublicaciones/ListarPublicaciones.xhtml");
+            //
+        }
+        else {
             loggedIn = false;
             message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Loggin Error", "Invalid credentials");
         }
