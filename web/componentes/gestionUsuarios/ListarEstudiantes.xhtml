@@ -34,19 +34,22 @@
                 <p:dataTable  var="est"  value="#{estudianteController.listado()}" rows="10"
                          paginator="true"
                          paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                         rowsPerPageTemplate="5,10,15" rendered="#{estudianteController.listado().size() > 0}">
-                    <p:column headerText="Código estudiantil" >
+                         rowsPerPageTemplate="5,10,15" rendered="#{estudianteController.listado().size() > 0}"
+                         style="text-align: left;">
+                    
+                    <p:column headerText="Código estudiantil">
                         <h:outputText value="#{est.estCodigo}"></h:outputText>
                     </p:column>
-                    <p:column headerText="Nombres"  >
+                    
+                    <p:column headerText="Nombres">
                         <h:outputText value="#{est.estNombre}"></h:outputText>
                     </p:column>
-                    <p:column headerText="Apellidos"  >
+                    
+                    <p:column headerText="Apellidos">
                         <h:outputText value="#{est.estApellido}"></h:outputText>
                     </p:column>
                     
-                    <p:column headerText="Acciones"   >
-                           
+                    <p:column headerText="Acciones">                           
                         <h:form style="font-size: 10px;">
                             <h:commandButton actionListener="#{estudianteController.verEstudiante(est)}" value="Ver" class="btn btn-success btn_listaEstudiantes"/>
                             <h:commandButton actionListener="#{estudianteController.editarEstudiante(est)}" value="Editar" class="btn btn-warning btn_listaEstudiantes"/>
@@ -54,6 +57,7 @@
                             <h:commandButton rendered="#{est.estEstado eq 'Inactivo'}" onclick="if (!confirm('¿Desea habilitar al estudiante?')) { return false;}; return true;" actionListener="#{estudianteController.habilitarEstudiante(est.estIdentificador)}" value="Habilitar" class="btn btn-info btn_listaEstudiantes"/>
                         </h:form>
                     </p:column>
+                    
                 </p:dataTable>
             </div>
         </div>
