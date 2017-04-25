@@ -24,23 +24,18 @@ public class EstudianteController implements Serializable {
     private EstudianteFacade dao;
 
     private Estudiante actual;
+    private String cohorte;
 
-    private List<Estudiante> listaEstudiantes;
-
-    public List<Estudiante> getListaEstudiantes() {
-        return listaEstudiantes;
+    public String getCohorte() {
+        cohorte = String.valueOf(actual.getEstCohorte());
+        return cohorte;
     }
 
-    public void setListaEstudiantes(List<Estudiante> listaEstudiantes) {
-        this.listaEstudiantes = listaEstudiantes;
+    public void setCohorte(String cohorte) {
+        this.cohorte = cohorte;
     }
-
-    String INICIO = "index";
-    String CREAR = "new";
-    String EDITAR = "editar";
 
     public EstudianteController() {
-        
     }
 
     public Estudiante getActual() {
@@ -50,20 +45,16 @@ public class EstudianteController implements Serializable {
         return actual;
     }
 
-    public String index() {
-        return INICIO;
-    }
-
     public List<Estudiante> listado() {
         return dao.findAll();
     }
 
-    public void agregar() {
+    public void agregar() {        
 
         try
         {
             String contraseña = cifrarBase64(actual.getEstCodigo());
-        
+            actual.setEstCohorte(Integer.parseInt(cohorte));
             actual.setEstContrasena(contraseña);
 
             String[] nombreusuario = actual.getEstCorreo().split("@");
@@ -88,10 +79,11 @@ public class EstudianteController implements Serializable {
     }
 
     
-    public String guardarEdicion()
+    public void guardarEdicion()
     {
         try
         {
+            actual.setEstCohorte(Integer.parseInt(cohorte));
             dao.edit(actual);
             dao.flush();
             mensajeEditar();
@@ -101,13 +93,9 @@ public class EstudianteController implements Serializable {
         {
             
         }
-        return INICIO;
-    }
-
-   
+    }    
     
-    
-    public String cambiarEstado(int id) {
+    public void cambiarEstado(int id) {
         try
         {
             actual = dao.find(id);
@@ -120,10 +108,9 @@ public class EstudianteController implements Serializable {
         {
             
         }
-        return INICIO;
     }
     
-    public String habilitarEstudiante(int id) {
+    public void habilitarEstudiante(int id) {
         try
         {
             actual = dao.find(id);
@@ -136,7 +123,6 @@ public class EstudianteController implements Serializable {
         {
             
         }
-        return INICIO;
     }
 
     public boolean estudianteRegistrado(String codigo) {

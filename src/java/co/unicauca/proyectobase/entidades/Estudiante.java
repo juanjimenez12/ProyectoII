@@ -7,6 +7,8 @@ package co.unicauca.proyectobase.entidades;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.faces.application.FacesMessage;
+import javax.faces.validator.ValidatorException;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
