@@ -35,7 +35,7 @@ h3, h5 {
 #txt_nomusu
 {
     margin-top: 1%;
-    margin-right: 50px;
+    margin-left: 70px;
     font-weight: bold;
 }
 
@@ -55,7 +55,7 @@ h3, h5 {
 #logo_usu{
     margin-top: 12%;
     font-weight: bold;
-    margin-right: 50px; 
+    margin-left: 30px; 
 }
 
 
@@ -66,11 +66,12 @@ h3, h5 {
 }
 
 #titulo {
+   
     margin-top: 5%;
     margin-left: 10%;
     font-weight: bold;
-    font-size: 30px;
-    width: 800px;
+    font-size: 28px;
+    
 }
 
 #antorcha {
