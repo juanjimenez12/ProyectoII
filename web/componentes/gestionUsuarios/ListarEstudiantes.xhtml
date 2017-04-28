@@ -27,11 +27,13 @@
                 </p:confirmDialog>
                 </h:form>
                 
-                <h:outputLabel rendered="#{estudianteController.listado().size() == 0}" value="No tiene Estudiantes Registrados"></h:outputLabel>
+                <h:outputLabel rendered="#{estudianteController.listado().size() == 0}" value="No tiene Estudiantes Registrados"></h:outputLabel>                
                 
+                <h:inputText value="#{listadoEstudiantes.variableFiltrado}">
+                    <p:ajax update="tablaEstudiantes" event="keyup"/>
+                </h:inputText>
                 
-                
-                <p:dataTable  var="est"  value="#{estudianteController.listado()}" rows="10"
+                <p:dataTable id="tablaEstudiantes" var="est" value="#{estudianteController.listado()}" rows="10"
                          paginator="true"
                          paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                          rowsPerPageTemplate="5,10,15" rendered="#{estudianteController.listado().size() > 0}"

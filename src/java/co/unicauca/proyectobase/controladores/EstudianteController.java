@@ -22,9 +22,9 @@ public class EstudianteController implements Serializable {
 
     @EJB
     private EstudianteFacade dao;
-
     private Estudiante actual;
     private String cohorte;
+    private String variableFiltrado;
 
     public String getCohorte() {
         cohorte = String.valueOf(actual.getEstCohorte());
@@ -45,7 +45,7 @@ public class EstudianteController implements Serializable {
         return actual;
     }
 
-    public List<Estudiante> listado() {
+    public List<Estudiante> listado() {        
         return dao.findAll();
     }
 
