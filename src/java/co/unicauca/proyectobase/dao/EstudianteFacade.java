@@ -10,6 +10,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import java.util.List;
 
 /**
  *
@@ -39,5 +40,13 @@ public class EstudianteFacade extends AbstractFacade<Estudiante> {
             Query query = em.createNamedQuery("Estudiante.findByEstCodigo");
             query.setParameter("estCodigo", estCodigo);
             return !query.getResultList().isEmpty();
+    }
+    
+    public List<Estudiante> findAllByString(String texto)
+    {
+        Query query = em.createNamedQuery("Estudiante.findAllByString");
+        query.setParameter("texto", "%" + texto + "%");
+        List<Estudiante> findEst = query.getResultList();
+        return findEst;
     }
 }

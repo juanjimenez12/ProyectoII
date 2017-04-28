@@ -25,8 +25,13 @@ public class EstudianteController implements Serializable {
     private Estudiante actual;
     private String cohorte;
     private String variableFiltrado;
+    private List<Estudiante> listadoEncontrado;
 
     public String getCohorte() {
+        if((cohorte == null) || (cohorte.equals("null")))
+        {
+            return "";
+        }
         cohorte = String.valueOf(actual.getEstCohorte());
         return cohorte;
     }
@@ -35,6 +40,14 @@ public class EstudianteController implements Serializable {
         this.cohorte = cohorte;
     }
 
+    public List<Estudiante> getListadoEncontrado() {
+        return listadoEncontrado;
+    }
+
+    public void setListadoEncontrado(List<Estudiante> listadoEncontrado) {
+        this.listadoEncontrado = listadoEncontrado;
+    }
+    
     public EstudianteController() {
     }
 
@@ -45,8 +58,26 @@ public class EstudianteController implements Serializable {
         return actual;
     }
 
-    public List<Estudiante> listado() {        
-        return dao.findAll();
+    public String getVariableFiltrado() {
+        return variableFiltrado;
+    }
+
+    public void setVariableFiltrado(String variableFiltrado) {        
+        this.variableFiltrado = variableFiltrado;
+    }    
+    
+    public List<Estudiante> listado() {
+        
+        if((variableFiltrado == null) || (variableFiltrado.equals("")))
+        {
+            listadoEncontrado = dao.findAll();
+            return listadoEncontrado;
+        }
+        else
+        {
+            listadoEncontrado = dao.findAllByString(variableFiltrado);
+            return listadoEncontrado;
+        }
     }
 
     public void agregar() {        
