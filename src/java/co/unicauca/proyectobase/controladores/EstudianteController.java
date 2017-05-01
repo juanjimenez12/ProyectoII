@@ -195,6 +195,7 @@ public class EstudianteController implements Serializable {
 
     public void editarEstudiante(Estudiante est) {
         actual = est;
+        cohorte = "" + est.getEstCohorte();
         Utilidades.redireccionar("/ProyectoII/faces/componentes/gestionUsuarios/EditarEstudiante.xhtml");
     }
 
