@@ -107,6 +107,7 @@ public class EstudianteController implements Serializable {
 
     public void limpiarCampos() {
         actual = new Estudiante();
+        cohorte = "";
     }
 
     
