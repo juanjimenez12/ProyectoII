@@ -30,7 +30,7 @@ public class EstudianteController implements Serializable {
     private List<String> Estado;
 
     public String getCohorte() {
-        if((cohorte == null) || (cohorte.equals("null")))
+        if((cohorte == null) || (cohorte.equals("null")) || (cohorte.equals("")))
         {
             return "";
         }
@@ -55,6 +55,7 @@ public class EstudianteController implements Serializable {
         this.Estado.add("Activo");
         this.Estado.add("Inactivo");
         this.Estado.add("Egresado");
+        cohorte = "";
     }
 
     public List<String> getEstado() {
@@ -64,12 +65,11 @@ public class EstudianteController implements Serializable {
     public void setEstado(List<String> Estado) {
         this.Estado = Estado;
     }
-    
-    
 
     public Estudiante getActual() {
         if (actual == null) {
             actual = new Estudiante();
+            cohorte = "";
         }
         return actual;
     }
