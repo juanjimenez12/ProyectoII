@@ -10,6 +10,7 @@ import java.util.List;
 import javax.annotation.ManagedBean;
 import javax.ejb.EJB;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.Base64;
 import javax.ejb.EJBException;
 import javax.faces.application.FacesMessage;
@@ -26,6 +27,7 @@ public class EstudianteController implements Serializable {
     private String cohorte;
     private String variableFiltrado;
     private List<Estudiante> listadoEncontrado;
+    private List<String> Estado;
 
     public String getCohorte() {
         if((cohorte == null) || (cohorte.equals("null")))
@@ -49,7 +51,21 @@ public class EstudianteController implements Serializable {
     }
     
     public EstudianteController() {
+        this.Estado = new ArrayList<String>();
+        this.Estado.add("Activo");
+        this.Estado.add("Inactivo");
+        this.Estado.add("Egresado");
     }
+
+    public List<String> getEstado() {
+        return Estado;
+    }
+
+    public void setEstado(List<String> Estado) {
+        this.Estado = Estado;
+    }
+    
+    
 
     public Estudiante getActual() {
         if (actual == null) {
