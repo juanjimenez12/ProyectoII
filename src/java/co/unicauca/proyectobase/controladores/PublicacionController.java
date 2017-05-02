@@ -29,7 +29,7 @@ import java.util.Base64;*/
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import org.primefaces.event.SelectEvent;
-import org.primefaces.model.UploadedFile;
+import org.primefaces.model.UploadedFile; 
 
 @Named(value = "publicacionController")
 @ManagedBean
@@ -120,7 +120,7 @@ public class PublicacionController implements Serializable {
             arcTablaC.setArcIdentificador(numArchivos);
             CollArchivo.add(arcTablaC);
             actual.setArchivoCollection(CollArchivo);
-            actual.agregarMetadatos(ArticuloPDF, TablaContenidoPDF);
+            actual.agregarMetadatos(ArticuloPDF, TablaContenidoPDF); 
 
         } catch (IOException | GeneralSecurityException | DocumentException | PathNotFoundException | AccessDeniedException ex) {
             Logger.getLogger(PublicacionController.class.getName()).log(Level.SEVERE, null, ex);

@@ -36,14 +36,14 @@
                         </h:inputText>
                         <p:message for="valApellido" id="msjValApellido" styleClass="addEspacio"/>
 
-                        <h:outputLabel value="Codigo*" for="valCodigo" styleClass="addEspacio"/>
+                        <h:outputLabel value="Código*" for="valCodigo" styleClass="addEspacio"/>
                         <h:inputText class="form-control" id="valCodigo" value="#{estudianteController.actual.estCodigo}" styleClass="addEspacio form-control">
                             <f:validator validatorId="validadorCodigoEstudiante"/>
                             <p:ajax event="blur" update="msjValCodigo"/>
                         </h:inputText>
                         <p:message for="valCodigo" id="msjValCodigo" styleClass="addEspacio"/>
 
-                        <h:outputLabel value="E-mail*" for="valCorreo" styleClass="addEspacio"/>
+                        <h:outputLabel value="Correo electrónico*" for="valCorreo" styleClass="addEspacio"/>
                         <h:inputText class="form-control" id="valCorreo" value="#{estudianteController.actual.estCorreo}" styleClass="addEspacio form-control" >
                             <f:validator validatorId="validadorCorreo"/>                            
                             <p:ajax event="blur" update="msjValCorreo"/>
@@ -75,7 +75,7 @@
                         <h:outputLabel styleClass="addEspacio"/>
                         <h:outputLabel styleClass="addEspacio"/>
                         <h:commandButton value="Cancelar registro" onclick="if (!confirm('¿Desea cancelar el registro del estudiante?')) { return false;}; return true;" actionListener="#{estudianteController.redirigirAlistar()}" class="btn btn-primary" immediate="true"/>
-                        <h:commandButton value="Guardar" onclick="if (!confirm('¿Desea registrar este estudiante?')) { return false;}; return true;" actionListener="#{estudianteController.agregar()}" class="btn btn-primary" />
+                        <h:commandButton value="Registrar estudiante" onclick="if (!confirm('¿Desea registrar este estudiante?')) { return false;}; return true;" actionListener="#{estudianteController.agregar()}" class="btn btn-primary" />
                         
                         <h:outputLabel styleClass="addEspacio"/>
                         <h:outputLabel styleClass="addEspacio"/>
