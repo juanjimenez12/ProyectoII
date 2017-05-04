@@ -24,15 +24,13 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author DELL7
  */
 @Entity
-@Table(name = "congreso")
+@Table(name = "libro")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Congreso.findAll", query = "SELECT c FROM Congreso c")
-    , @NamedQuery(name = "Congreso.findByPubIdentificador", query = "SELECT c FROM Congreso c WHERE c.pubIdentificador = :pubIdentificador")
-    , @NamedQuery(name = "Congreso.findByCongTituloPonencia", query = "SELECT c FROM Congreso c WHERE c.congTituloPonencia = :congTituloPonencia")
-    , @NamedQuery(name = "Congreso.findByCongNombreEvento", query = "SELECT c FROM Congreso c WHERE c.congNombreEvento = :congNombreEvento")
-    , @NamedQuery(name = "Congreso.findByCongTipoCongreso", query = "SELECT c FROM Congreso c WHERE c.congTipoCongreso = :congTipoCongreso")})
-public class Congreso implements Serializable {
+    @NamedQuery(name = "Libro.findAll", query = "SELECT l FROM Libro l")
+    , @NamedQuery(name = "Libro.findByPubIdentificador", query = "SELECT l FROM Libro l WHERE l.pubIdentificador = :pubIdentificador")
+    , @NamedQuery(name = "Libro.findByLibTituloLibro", query = "SELECT l FROM Libro l WHERE l.libTituloLibro = :libTituloLibro")})
+public class Libro implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -43,34 +41,22 @@ public class Congreso implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 200)
-    @Column(name = "cong_titulo_ponencia")
-    private String congTituloPonencia;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 100)
-    @Column(name = "cong_nombre_evento")
-    private String congNombreEvento;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 30)
-    @Column(name = "cong_tipo_congreso")
-    private String congTipoCongreso;
+    @Column(name = "lib_titulo_libro")
+    private String libTituloLibro;
     @JoinColumn(name = "pub_identificador", referencedColumnName = "pub_identificador", insertable = false, updatable = false)
     @OneToOne(optional = false)
     private Publicacion publicacion;
 
-    public Congreso() {
+    public Libro() {
     }
 
-    public Congreso(Integer pubIdentificador) {
+    public Libro(Integer pubIdentificador) {
         this.pubIdentificador = pubIdentificador;
     }
 
-    public Congreso(Integer pubIdentificador, String congTituloPonencia, String congNombreEvento, String congTipoCongreso) {
+    public Libro(Integer pubIdentificador, String libTituloLibro) {
         this.pubIdentificador = pubIdentificador;
-        this.congTituloPonencia = congTituloPonencia;
-        this.congNombreEvento = congNombreEvento;
-        this.congTipoCongreso = congTipoCongreso;
+        this.libTituloLibro = libTituloLibro;
     }
 
     public Integer getPubIdentificador() {
@@ -81,28 +67,12 @@ public class Congreso implements Serializable {
         this.pubIdentificador = pubIdentificador;
     }
 
-    public String getCongTituloPonencia() {
-        return congTituloPonencia;
+    public String getLibTituloLibro() {
+        return libTituloLibro;
     }
 
-    public void setCongTituloPonencia(String congTituloPonencia) {
-        this.congTituloPonencia = congTituloPonencia;
-    }
-
-    public String getCongNombreEvento() {
-        return congNombreEvento;
-    }
-
-    public void setCongNombreEvento(String congNombreEvento) {
-        this.congNombreEvento = congNombreEvento;
-    }
-
-    public String getCongTipoCongreso() {
-        return congTipoCongreso;
-    }
-
-    public void setCongTipoCongreso(String congTipoCongreso) {
-        this.congTipoCongreso = congTipoCongreso;
+    public void setLibTituloLibro(String libTituloLibro) {
+        this.libTituloLibro = libTituloLibro;
     }
 
     public Publicacion getPublicacion() {
@@ -123,10 +93,10 @@ public class Congreso implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Congreso)) {
+        if (!(object instanceof Libro)) {
             return false;
         }
-        Congreso other = (Congreso) object;
+        Libro other = (Libro) object;
         if ((this.pubIdentificador == null && other.pubIdentificador != null) || (this.pubIdentificador != null && !this.pubIdentificador.equals(other.pubIdentificador))) {
             return false;
         }
@@ -135,7 +105,7 @@ public class Congreso implements Serializable {
 
     @Override
     public String toString() {
-        return "co.unicauca.proyectobase.entidades.Congreso[ pubIdentificador=" + pubIdentificador + " ]";
+        return "co.unicauca.proyectobase.entidades.Libro[ pubIdentificador=" + pubIdentificador + " ]";
     }
     
 }

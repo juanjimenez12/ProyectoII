@@ -24,15 +24,14 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author DELL7
  */
 @Entity
-@Table(name = "congreso")
+@Table(name = "capitulo_libro")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Congreso.findAll", query = "SELECT c FROM Congreso c")
-    , @NamedQuery(name = "Congreso.findByPubIdentificador", query = "SELECT c FROM Congreso c WHERE c.pubIdentificador = :pubIdentificador")
-    , @NamedQuery(name = "Congreso.findByCongTituloPonencia", query = "SELECT c FROM Congreso c WHERE c.congTituloPonencia = :congTituloPonencia")
-    , @NamedQuery(name = "Congreso.findByCongNombreEvento", query = "SELECT c FROM Congreso c WHERE c.congNombreEvento = :congNombreEvento")
-    , @NamedQuery(name = "Congreso.findByCongTipoCongreso", query = "SELECT c FROM Congreso c WHERE c.congTipoCongreso = :congTipoCongreso")})
-public class Congreso implements Serializable {
+    @NamedQuery(name = "CapituloLibro.findAll", query = "SELECT c FROM CapituloLibro c")
+    , @NamedQuery(name = "CapituloLibro.findByPubIdentificador", query = "SELECT c FROM CapituloLibro c WHERE c.pubIdentificador = :pubIdentificador")
+    , @NamedQuery(name = "CapituloLibro.findByCaplibTituloLibro", query = "SELECT c FROM CapituloLibro c WHERE c.caplibTituloLibro = :caplibTituloLibro")
+    , @NamedQuery(name = "CapituloLibro.findByCaplibTituloCapitulo", query = "SELECT c FROM CapituloLibro c WHERE c.caplibTituloCapitulo = :caplibTituloCapitulo")})
+public class CapituloLibro implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -43,34 +42,28 @@ public class Congreso implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 200)
-    @Column(name = "cong_titulo_ponencia")
-    private String congTituloPonencia;
+    @Column(name = "caplib_titulo_libro")
+    private String caplibTituloLibro;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 100)
-    @Column(name = "cong_nombre_evento")
-    private String congNombreEvento;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 30)
-    @Column(name = "cong_tipo_congreso")
-    private String congTipoCongreso;
+    @Size(min = 1, max = 80)
+    @Column(name = "caplib_titulo_capitulo")
+    private String caplibTituloCapitulo;
     @JoinColumn(name = "pub_identificador", referencedColumnName = "pub_identificador", insertable = false, updatable = false)
     @OneToOne(optional = false)
     private Publicacion publicacion;
 
-    public Congreso() {
+    public CapituloLibro() {
     }
 
-    public Congreso(Integer pubIdentificador) {
+    public CapituloLibro(Integer pubIdentificador) {
         this.pubIdentificador = pubIdentificador;
     }
 
-    public Congreso(Integer pubIdentificador, String congTituloPonencia, String congNombreEvento, String congTipoCongreso) {
+    public CapituloLibro(Integer pubIdentificador, String caplibTituloLibro, String caplibTituloCapitulo) {
         this.pubIdentificador = pubIdentificador;
-        this.congTituloPonencia = congTituloPonencia;
-        this.congNombreEvento = congNombreEvento;
-        this.congTipoCongreso = congTipoCongreso;
+        this.caplibTituloLibro = caplibTituloLibro;
+        this.caplibTituloCapitulo = caplibTituloCapitulo;
     }
 
     public Integer getPubIdentificador() {
@@ -81,28 +74,20 @@ public class Congreso implements Serializable {
         this.pubIdentificador = pubIdentificador;
     }
 
-    public String getCongTituloPonencia() {
-        return congTituloPonencia;
+    public String getCaplibTituloLibro() {
+        return caplibTituloLibro;
     }
 
-    public void setCongTituloPonencia(String congTituloPonencia) {
-        this.congTituloPonencia = congTituloPonencia;
+    public void setCaplibTituloLibro(String caplibTituloLibro) {
+        this.caplibTituloLibro = caplibTituloLibro;
     }
 
-    public String getCongNombreEvento() {
-        return congNombreEvento;
+    public String getCaplibTituloCapitulo() {
+        return caplibTituloCapitulo;
     }
 
-    public void setCongNombreEvento(String congNombreEvento) {
-        this.congNombreEvento = congNombreEvento;
-    }
-
-    public String getCongTipoCongreso() {
-        return congTipoCongreso;
-    }
-
-    public void setCongTipoCongreso(String congTipoCongreso) {
-        this.congTipoCongreso = congTipoCongreso;
+    public void setCaplibTituloCapitulo(String caplibTituloCapitulo) {
+        this.caplibTituloCapitulo = caplibTituloCapitulo;
     }
 
     public Publicacion getPublicacion() {
@@ -123,10 +108,10 @@ public class Congreso implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Congreso)) {
+        if (!(object instanceof CapituloLibro)) {
             return false;
         }
-        Congreso other = (Congreso) object;
+        CapituloLibro other = (CapituloLibro) object;
         if ((this.pubIdentificador == null && other.pubIdentificador != null) || (this.pubIdentificador != null && !this.pubIdentificador.equals(other.pubIdentificador))) {
             return false;
         }
@@ -135,7 +120,7 @@ public class Congreso implements Serializable {
 
     @Override
     public String toString() {
-        return "co.unicauca.proyectobase.entidades.Congreso[ pubIdentificador=" + pubIdentificador + " ]";
+        return "co.unicauca.proyectobase.entidades.CapituloLibro[ pubIdentificador=" + pubIdentificador + " ]";
     }
     
 }

@@ -7,12 +7,12 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     
     <h:head>
-        <title>Listado de publicaciones</title>
+        <title>Listar Publicaciones</title>
     </h:head>
     <!-- IMPLEMENTATION -->
     <ui:composition template="../../plantillas/Estudiante.xhtml">
          <ui:define name="content"> 
-              <div class="panel panel-primary">
+             <div class="panel panel-primary" >
             <div class="panel-heading">
                 <h3 class="panel-title">
                     Publicaciones registradas
@@ -27,36 +27,31 @@
                 </p:confirmDialog>
                 </h:form>
                 
-                <h:dataTable value="#{publicacionController.listado()}" var="est" style="width: 100%; text-align: left;" styleClass="table table-bordered">
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Hash"></h:outputText>
-                        </f:facet>
-                        <h:outputText value="#{pub.pubHash}"></h:outputText>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Autor"></h:outputText>
-                        </f:facet>
-                        <h:outputText value="#{pub.pubEstIdentificador}"></h:outputText>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Fecha de registro"></h:outputText>
-                        </f:facet>
-                        <h:outputText value="#{pub.pubFechaRegistro}"></h:outputText>
-                    </h:column>
+                <h:outputLabel rendered="#{publicacionController.listado().size() == 0}" value="No tiene Publicaciones Registradas"></h:outputLabel>
+                
+                
+                
+                <p:dataTable  var="pub"  value="#{publicacionController.listado()}" rows="10"
+                         paginator="true"
+                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         rowsPerPageTemplate="5,10,15" rendered="#{publicacionController.listado().size() > 0}">
+                    <p:column headerText="Nombre Autor" >
+                        <h:outputText value="#{pub.pubNombreAutor}"></h:outputText>
+                    </p:column>
+                    <p:column headerText="Tipo Publicacion"  >
+                        <h:outputText value="#{pub.pubTipoPublicacion}"></h:outputText>
+                    </p:column>
+                    <p:column headerText="ISBN"  >
+                        <h:outputText value="#{pub.pubIsbn}"></h:outputText>
+                    </p:column>
                     
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Acciones"></h:outputText>
-                        </f:facet>
-                        <h:form>
+                    <p:column headerText="Acciones"   >
+                           
+                        <h:form style="font-size: 10px;">
                             <h:commandButton actionListener="#{publicacionController.verPublicacion(pub)}" value="Ver" class="btn btn-success btn_listaEstudiantes"/>
-                            <h:commandButton actionListener="#{publicacionController.editarPublicacion(pub)}" value="Editar" class="btn btn-warning btn_listaEstudiantes"/>
                         </h:form>
-                    </h:column>
-                </h:dataTable>
+                    </p:column>
+                </p:dataTable>
             </div>
         </div>
              
@@ -65,3 +60,6 @@
        
     
 </html>
+
+
+ 

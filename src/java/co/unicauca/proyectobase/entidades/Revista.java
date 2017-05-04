@@ -9,8 +9,6 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
@@ -23,23 +21,23 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Sahydo
+ * @author DELL7
  */
 @Entity
 @Table(name = "revista")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Revista.findAll", query = "SELECT r FROM Revista r"),
-    @NamedQuery(name = "Revista.findByPubIdentificador", query = "SELECT r FROM Revista r WHERE r.pubIdentificador = :pubIdentificador"),
-    @NamedQuery(name = "Revista.findByRevNombreRevista", query = "SELECT r FROM Revista r WHERE r.revNombreRevista = :revNombreRevista"),
-    @NamedQuery(name = "Revista.findByRevNombreArticulo", query = "SELECT r FROM Revista r WHERE r.revNombreArticulo = :revNombreArticulo"),
-    @NamedQuery(name = "Revista.findByRevCategoria", query = "SELECT r FROM Revista r WHERE r.revCategoria = :revCategoria")})
+    @NamedQuery(name = "Revista.findAll", query = "SELECT r FROM Revista r")
+    , @NamedQuery(name = "Revista.findByPubIdentificador", query = "SELECT r FROM Revista r WHERE r.pubIdentificador = :pubIdentificador")
+    , @NamedQuery(name = "Revista.findByRevNombreRevista", query = "SELECT r FROM Revista r WHERE r.revNombreRevista = :revNombreRevista")
+    , @NamedQuery(name = "Revista.findByRevTituloArticulo", query = "SELECT r FROM Revista r WHERE r.revTituloArticulo = :revTituloArticulo")
+    , @NamedQuery(name = "Revista.findByRevCategoria", query = "SELECT r FROM Revista r WHERE r.revCategoria = :revCategoria")})
 public class Revista implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
+    @NotNull
     @Column(name = "pub_identificador")
     private Integer pubIdentificador;
     @Basic(optional = false)
@@ -49,9 +47,9 @@ public class Revista implements Serializable {
     private String revNombreRevista;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 250)
-    @Column(name = "rev_nombre_articulo")
-    private String revNombreArticulo;
+    @Size(min = 1, max = 200)
+    @Column(name = "rev_titulo_articulo")
+    private String revTituloArticulo;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 2)
@@ -68,10 +66,10 @@ public class Revista implements Serializable {
         this.pubIdentificador = pubIdentificador;
     }
 
-    public Revista(Integer pubIdentificador, String revNombreRevista, String revNombreArticulo, String revCategoria) {
+    public Revista(Integer pubIdentificador, String revNombreRevista, String revTituloArticulo, String revCategoria) {
         this.pubIdentificador = pubIdentificador;
         this.revNombreRevista = revNombreRevista;
-        this.revNombreArticulo = revNombreArticulo;
+        this.revTituloArticulo = revTituloArticulo;
         this.revCategoria = revCategoria;
     }
 
@@ -91,12 +89,12 @@ public class Revista implements Serializable {
         this.revNombreRevista = revNombreRevista;
     }
 
-    public String getRevNombreArticulo() {
-        return revNombreArticulo;
+    public String getRevTituloArticulo() {
+        return revTituloArticulo;
     }
 
-    public void setRevNombreArticulo(String revNombreArticulo) {
-        this.revNombreArticulo = revNombreArticulo;
+    public void setRevTituloArticulo(String revTituloArticulo) {
+        this.revTituloArticulo = revTituloArticulo;
     }
 
     public String getRevCategoria() {
