@@ -146,6 +146,78 @@ CREATE TABLE IF NOT EXISTS `doctorado`.`palabra_clave` (
 ENGINE = InnoDB;
 
 
+-- -----------------------------------------------------
+-- Table `doctorado`.`tipo_usuario`
+-- Contiene los tipos de usuario. EJ: Profesores, Coordinadores, Estudiantes ...
+-- @autor: Santiago Hyun
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `doctorado`.`tipo_usuario` ( 
+  `id` INT(11) NOT NULL AUTO_INCREMENT, 
+  `nombre` VARCHAR(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL , 
+  PRIMARY KEY (`id`)
+) ENGINE = InnoDB;
+
+-- -----------------------------------------------------
+-- Table `doctorado`.`usuario`
+-- Contiene los datos del usuario
+-- @autor: Santiago Hyun
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `doctorado`.`usuario` ( 
+  `id` INT NOT NULL AUTO_INCREMENT, 
+  `nombres` VARCHAR(30) NULL , 
+  `apellidos` VARCHAR(30) NULL , 
+  `nombre_usuario` VARCHAR(30) NOT NULL , 
+  `contrasena` VARCHAR(60) NOT NULL , 
+  `estado` VARCHAR(20) NOT NULL DEFAULT 'activo' , 
+  PRIMARY KEY (`id`)
+) ENGINE = InnoDB;
+
+-- -----------------------------------------------------
+-- Table `doctorado`.`grupo_tipo_usuario`
+-- Contiene la relación entre un usuario y un tipo (muchos a muchos)
+-- @autor: Santiago Hyun
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `doctorado`.`grupo_tipo_usuario` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `id_tipo` INT NOT NULL,
+  `id_usuario` INT NOT NULL,
+  `nombre_usuario` VARCHAR(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL ,
+  INDEX `fk_tipo_usuario_idx` (`id_tipo` ASC),
+  INDEX `fk_usuario_idx` (`id_usuario` ASC),
+  PRIMARY KEY (`id`, `id_tipo`, `id_usuario`),
+  CONSTRAINT `fk_tipo_usuario_idx`
+    FOREIGN KEY (`id_tipo`)
+    REFERENCES `doctorado`.`tipo_usuario` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_usuario_idx`
+    FOREIGN KEY (`id_usuario`)
+    REFERENCES `doctorado`.`usuario` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Datos para la tabla tipo_usuario
+-- @autor: Santiago Hyun
+-- -----------------------------------------------------
+INSERT INTO `tipo_usuario` (`id`, `nombre`) VALUES ('1', 'PROFESOR'), ('2', 'ESTUDIANTE')
+INSERT INTO `tipo_usuario`(`id`, `nombre`) VALUES ('3','COORDINADOR')
+-- -----------------------------------------------------
+-- Datos para la tabla usuario
+-- @autor: Santiago Hyun
+-- -----------------------------------------------------
+INSERT INTO `usuario` (`id`, `nombres`, `apellidos`, `nombre_usuario`, `contrasena`, `estado`) VALUES ('1', 'Sant', NULL, 'user1', '123456', 'activo');
+INSERT INTO `usuario` (`id`, `nombres`, `apellidos`, `nombre_usuario`, `contrasena`, `estado`) VALUES ('2', 'Alvaro', 'Restrepo', 'alvaro', '123456', 'activo');
+-- -----------------------------------------------------
+-- Datos para la tabla grupo_tipo_usuario
+-- @autor: Santiago Hyun
+-- -----------------------------------------------------
+INSERT INTO `grupo_tipo_usuario` (`id`, `id_tipo`, `id_usuario`, `nombre_usuario`) VALUES ('1', '2', '1','user1');
+INSERT INTO `grupo_tipo_usuario` (`id`, `id_tipo`, `id_usuario`, `nombre_usuario`) VALUES ('2', '3', '2', 'alvaro');
+
+
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
