@@ -144,6 +144,14 @@ public class PublicacionController implements Serializable {
 
     public List<Publicacion> listado() {
         return dao.findAll();
+       
+    }
+    
+       public List<Publicacion> listadoPublicaciones() {
+         
+           int idEstudiante = getAuxEstudiante().getEstIdentificador();
+           return dao.ListadoPublicacionEst(idEstudiante);
+       
     }
 
     public void onDateSelect(SelectEvent event) {
@@ -251,9 +259,10 @@ public class PublicacionController implements Serializable {
 
     public void agregar() {
         System.out.println("agregar");
+        Estudiante est = getAuxEstudiante();
         try {
 
-            Estudiante est = getAuxEstudiante();
+            
             actual.setPubEstIdentificador(est);
             String nombreAut = "";
             nombreAut = "" + est.getEstNombre() + " " + est.getEstApellido();
@@ -319,11 +328,11 @@ public class PublicacionController implements Serializable {
             dao.flush();
             mensajeconfirmarRegistro();
             limpiarCampos();
-            redirigirAlistar();
+            redirigirAlistar(est.getEstUsuario());
         } catch (IOException | GeneralSecurityException | DocumentException | PathNotFoundException | AccessDeniedException | EJBException ex) {
             mensajeRegistroFallido();
             limpiarCampos();
-            redirigirAlistar();
+            redirigirAlistar(est.getEstUsuario());
             Logger.getLogger(PublicacionController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
@@ -357,6 +366,14 @@ public class PublicacionController implements Serializable {
         Estudiante est = dao.obtenerEstudiante(nombreUsuario);
         setAuxEstudiante(est);
     }
+    
+       public void fijarEstudiante(String nombreUsuario) {
+
+        Estudiante est = dao.obtenerEstudiante(nombreUsuario);
+        setAuxEstudiante(est);
+    }
+    
+    
 
     public String getnombreAut() {
         Estudiante est = getAuxEstudiante();
@@ -369,7 +386,7 @@ public class PublicacionController implements Serializable {
     public String guardarEdicion() {
         dao.edit(actual);
         mensajeEditar();
-        redirigirAlistar();
+        redirigirAlistar(getAuxEstudiante().getEstUsuario());
         return INICIO;
     }
 
@@ -419,7 +436,8 @@ public class PublicacionController implements Serializable {
     }
 
     /*redireccionamiento para boton cancelar*/
-    public void redirigirAlistar() {
+    public void redirigirAlistar(String nombreUsuario) {
+        fijarEstudiante(nombreUsuario);
         limpiarCampos();
         System.out.println("si esta pasando por aqui");
 

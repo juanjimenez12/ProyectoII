@@ -94,5 +94,21 @@ public class PublicacionFacade extends AbstractFacade<Publicacion> {
             return null;
         }
     }
+        
+      public List<Publicacion> ListadoPublicacionEst(int estIdentificador) {
+
+        String comSimple = "\'";
+        String queryStr;
+        queryStr = "SELECT * FROM doctorado.publicacion where pub_est_identificador = " + comSimple + estIdentificador + comSimple;
+        javax.persistence.Query query = getEntityManager().createNativeQuery(queryStr);
+        List results = query.getResultList();
+        try {
+            return results;
+        } catch (Exception e) {
+            System.out.println("Error " + e.getMessage());
+            System.out.println(e);
+            return null;
+        }
+    }
 
 }
