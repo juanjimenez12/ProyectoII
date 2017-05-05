@@ -48,11 +48,8 @@
                             <h:outputLabel styleClass="addEspacio"/><br/>
                             <h:outputLabel value="DOI " for="valDOI" styleClass="addEspacio"/>
                             <h:inputText class="form-control" id="valDOI"  value="#{publicacionController.actual.pubDoi}" styleClass="addEspacio form-control">
-                                <f:ajax />
-                                <f:validator validatorId="validadorDOI" />  -->
-                                <p:ajax event="blur" update="msjValDOI" />  -->
+                          
                             </h:inputText>
-                            <p:message for="valDOI" id="msjValDOI" /> 
                             <h:outputLink style="color: blue" value="https://goo.gl/AKGq9b">Conozca mas sobre el DOI</h:outputLink>
                             <h:outputLabel styleClass="addEspacio" />
                             <br/>
