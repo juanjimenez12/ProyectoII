@@ -66,6 +66,8 @@ public class PublicacionController implements Serializable {
 
     private StreamedContent streamedContent;
     private InputStream stream;
+    private Estudiante auxEstudiante;
+
 
     public void visPdfPub() throws IOException {
 
@@ -448,5 +450,12 @@ public class PublicacionController implements Serializable {
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, summary, detail);
         FacesContext.getCurrentInstance().addMessage(null, message);
     }
+    
+        public Estudiante getAuxEstudiante() {
+        return auxEstudiante;
+    }
 
+    public void setAuxEstudiante(Estudiante auxEstudiante) {
+        this.auxEstudiante = auxEstudiante;
+    }
 }
