@@ -5,16 +5,70 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+ 
     
     <h:head>
         <title>Ver estudiante</title>
     </h:head>
-    
+
     <ui:composition template="../../plantillas/Estudiante.xhtml">
         <ui:define name="content">                
-            <p:panel header="Ver estudiante" >                    
+            <p:panel header="Ver Publicacion" >                    
                 <h:form>
                     <h:panelGrid columns="2" cellpadding="10" styleClass="elementosCentrados bajarGrid" id="panelRegistrar">
+
+                        <p:outputLabel value="Identificador Publicacion" for="valIdentPub" styleClass="addEspacio"/>
+                        <h:outputText class="form-control" id="valIdentPub" value="#{publicacionController.actual.pubIdentificador}" styleClass="addEspacio form-control"/>
+
+                        <h:outputLabel value="Nombre Autor" for="valNombAut" styleClass="addEspacio"/>
+                        <h:outputText class="form-control" id="valNombAut"  value="#{publicacionController.actual.pubNombreAutor}" styleClass="addEspacio form-control"/>
+
+                        <h:outputLabel value="Autores Secundarios" for="valAutSec" styleClass="addEspacio"/>
+                        <h:outputText class="form-control" id="valAutSec"  value="#{publicacionController.actual.pubAutoresSecundarios}" styleClass="addEspacio form-control"/>
+
+                        <h:outputLabel value="Tipo Publicacion" for="valTipoPub" styleClass="addEspacio"/>
+                        <h:outputText class="form-control" id="valTipoPub"  value="#{publicacionController.actual.pubTipoPublicacion}" styleClass="addEspacio form-control"/>
+
+                        <h:outputLabel value="DOI" for="valDOI" styleClass="addEspacio"/>
+                        <h:outputText class="form-control" id="valDOI"  value="#{publicacionController.actual.pubDoi}" styleClass="addEspacio form-control"/>
+
+                        <h:outputLabel value="IBN" for="valIBN" styleClass="addEspacio"/>
+                        <h:outputText class="form-control" id="valIBN" value="#{publicacionController.actual.pubIsbn}" styleClass="addEspacio form-control"/>
+
+                        <h:outputLabel styleClass="addEspacio"/>
+                        <h:outputLabel styleClass="addEspacio"/>
+                        <h:outputLabel value="Descargar" styleClass="addEspacio"/>
+                        <h:outputLabel styleClass="addEspacio"/>
+                           <h:commandButton value="Descargar Publicacion"   action="#{publicacionController.descargarPublicacion()}" class="btn btn-primary" />
+                                               <h:commandButton value="Descargar Tabla de Contenido"   action="#{publicacionController.descargarPubTC()}" class="btn btn-primary" />
+                                               <h:outputLabel styleClass="addEspacio"/>
+                        
+                       <h:outputLabel styleClass="addEspacio"/>
+                     
+                   
+                        <h:outputLabel value="Vista Previa" styleClass="addEspacio" />
+                        <h:outputLabel styleClass="addEspacio"/>
+                        
+                        
+                         
+                       <h:form>
+                      <div style="text-align: center"> 
+                           <h:commandButton value="Ver Publicacion"    action="#{publicacionController.pdfPub()}" class="btn btn-primary"  onclick="this.form.target='_blank'"  onblur="this.form.target='_self'"/>
+                                 <div class="divider"/>
+                           <h:commandButton value="Ver Tabla Contenido" action="#{publicacionController.pdfPubTC()}" class="btn btn-primary" onclick="this.form.target='_blank'"  onblur="this.form.target='_self'"/>
+                       </div>
+                       </h:form>
+          
+                    
+
+                        <h:outputLabel styleClass="addEspacio"/>
+                        <h:outputLabel styleClass="addEspacio"/>
+                        <h:outputLabel styleClass="addEspacio"/>
+
+                        <h:commandButton  value="Volver" actionListener="#{publicacionController.redirigirAlistar()}" class="btn btn-primary"  style="float:center;" />                       
+                        <h:outputLabel styleClass="addEspacio"/>
+                        <h:outputLabel styleClass="addEspacio"/>
 
                     </h:panelGrid>
                 </h:form>

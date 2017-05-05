@@ -9,8 +9,6 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
@@ -23,30 +21,30 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Sahydo
+ * @author DELL7
  */
 @Entity
 @Table(name = "congreso")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Congreso.findAll", query = "SELECT c FROM Congreso c"),
-    @NamedQuery(name = "Congreso.findByPubIdentificador", query = "SELECT c FROM Congreso c WHERE c.pubIdentificador = :pubIdentificador"),
-    @NamedQuery(name = "Congreso.findByCongNombrePonencia", query = "SELECT c FROM Congreso c WHERE c.congNombrePonencia = :congNombrePonencia"),
-    @NamedQuery(name = "Congreso.findByCongNombreEvento", query = "SELECT c FROM Congreso c WHERE c.congNombreEvento = :congNombreEvento"),
-    @NamedQuery(name = "Congreso.findByCongTipoCongreso", query = "SELECT c FROM Congreso c WHERE c.congTipoCongreso = :congTipoCongreso")})
+    @NamedQuery(name = "Congreso.findAll", query = "SELECT c FROM Congreso c")
+    , @NamedQuery(name = "Congreso.findByPubIdentificador", query = "SELECT c FROM Congreso c WHERE c.pubIdentificador = :pubIdentificador")
+    , @NamedQuery(name = "Congreso.findByCongTituloPonencia", query = "SELECT c FROM Congreso c WHERE c.congTituloPonencia = :congTituloPonencia")
+    , @NamedQuery(name = "Congreso.findByCongNombreEvento", query = "SELECT c FROM Congreso c WHERE c.congNombreEvento = :congNombreEvento")
+    , @NamedQuery(name = "Congreso.findByCongTipoCongreso", query = "SELECT c FROM Congreso c WHERE c.congTipoCongreso = :congTipoCongreso")})
 public class Congreso implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
+    @NotNull
     @Column(name = "pub_identificador")
     private Integer pubIdentificador;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 250)
-    @Column(name = "cong_nombre_ponencia")
-    private String congNombrePonencia;
+    @Size(min = 1, max = 200)
+    @Column(name = "cong_titulo_ponencia")
+    private String congTituloPonencia;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 100)
@@ -68,9 +66,9 @@ public class Congreso implements Serializable {
         this.pubIdentificador = pubIdentificador;
     }
 
-    public Congreso(Integer pubIdentificador, String congNombrePonencia, String congNombreEvento, String congTipoCongreso) {
+    public Congreso(Integer pubIdentificador, String congTituloPonencia, String congNombreEvento, String congTipoCongreso) {
         this.pubIdentificador = pubIdentificador;
-        this.congNombrePonencia = congNombrePonencia;
+        this.congTituloPonencia = congTituloPonencia;
         this.congNombreEvento = congNombreEvento;
         this.congTipoCongreso = congTipoCongreso;
     }
@@ -83,12 +81,12 @@ public class Congreso implements Serializable {
         this.pubIdentificador = pubIdentificador;
     }
 
-    public String getCongNombrePonencia() {
-        return congNombrePonencia;
+    public String getCongTituloPonencia() {
+        return congTituloPonencia;
     }
 
-    public void setCongNombrePonencia(String congNombrePonencia) {
-        this.congNombrePonencia = congNombrePonencia;
+    public void setCongTituloPonencia(String congTituloPonencia) {
+        this.congTituloPonencia = congTituloPonencia;
     }
 
     public String getCongNombreEvento() {

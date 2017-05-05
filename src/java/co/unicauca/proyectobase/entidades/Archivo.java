@@ -21,14 +21,14 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Sahydo
+ * @author DELL7
  */
 @Entity
 @Table(name = "archivo")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Archivo.findAll", query = "SELECT a FROM Archivo a"),
-    @NamedQuery(name = "Archivo.findByArcIdentificador", query = "SELECT a FROM Archivo a WHERE a.arcIdentificador = :arcIdentificador")})
+    @NamedQuery(name = "Archivo.findAll", query = "SELECT a FROM Archivo a")
+    , @NamedQuery(name = "Archivo.findByArcIdentificador", query = "SELECT a FROM Archivo a WHERE a.arcIdentificador = :arcIdentificador")})
 public class Archivo implements Serializable {
 
     private static final long serialVersionUID = 1L;

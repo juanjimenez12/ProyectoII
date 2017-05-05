@@ -48,6 +48,21 @@ public class PublicacionFacade extends AbstractFacade<Publicacion> {
             return -1;
         }
     }
+    
+        public int getIdArchivo() {
+        try {
+            String queryStr;
+            queryStr = "SELECT AUTO_INCREMENT FROM  INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'doctorado' AND TABLE_NAME = 'archivo'";
+            javax.persistence.Query query = getEntityManager().createNativeQuery(queryStr);
+            List results = query.getResultList();
+            int autoIncrement = ((BigInteger) results.get(0)).intValue();
+            return autoIncrement;
+        } catch (Exception e) {
+            System.out.println("Error " + e.getMessage());
+            System.out.println(e);
+            return -1;
+        }
+    }
 
     public Estudiante getEst() {
         int estIden = 1;

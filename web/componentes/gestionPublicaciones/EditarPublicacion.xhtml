@@ -21,10 +21,11 @@
                 
                 <h:form>                
                     <h:panelGrid columns="3" cellpadding="10" styleClass="elementosCentrados bajarGrid" id="panelRegistrar">
-                       
+     
+                        
                         <h:outputLabel styleClass="addEspacio"/>
-                        <h:commandButton value="Terminar edición" actionListener="#{publicacionController.guardarEdicion()}" onclick="if (!confirm('Esta seguro que desea guardar los cambios?')) { return false;}; return true;" class="btn btn-primary" />
-                        <h:commandButton value="Cancelar edición" onclick="if (!confirm('¿Desea cancelar la edición del estudiante?')) { return false;}; return true;" actionListener="#{publicacionController.redirigirAlistar()}" class="btn btn-primary" immediate="true"/>
+                        <h:commandButton value="Terminar edición" actionListener="#{estudianteController.guardarEdicion()}" onclick="if (!confirm('Esta seguro que desea guardar los cambios?')) { return false;}; return true;" class="btn btn-primary" />
+                        <h:commandButton value="Cancelar edición" onclick="if (!confirm('¿Desea cancelar la edición del estudiante?')) { return false;}; return true;" actionListener="#{estudianteController.redirigirAlistar()}" class="btn btn-primary" immediate="true"/>
                         <h:outputLabel styleClass="addEspacio"/>
                         <h:outputLabel styleClass="addEspacio"/>
                         <h:outputLabel styleClass="addEspacio"/>
