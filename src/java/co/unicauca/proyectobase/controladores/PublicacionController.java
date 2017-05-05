@@ -8,6 +8,7 @@ import co.unicauca.proyectobase.entidades.Publicacion;
 import co.unicauca.proyectobase.entidades.Revista;
 import co.unicauca.proyectobase.entidades.Libro;
 import co.unicauca.proyectobase.entidades.CapituloLibro;
+import static co.unicauca.proyectobase.entidades.GrupoTipoUsuario_.nombreUsuario;
 import co.unicauca.proyectobase.entidades.archivoPDF;
 import co.unicauca.proyectobase.utilidades.Utilidades;
 import com.itextpdf.text.DocumentException;
@@ -68,17 +69,17 @@ public class PublicacionController implements Serializable {
     private InputStream stream;
     private Estudiante auxEstudiante;
 
-
     public void visPdfPub() throws IOException {
 
         archivoPDF archivoPublic = actual.descargaPublicacion();
         InputStream fis = archivoPublic.getArchivo();
-         ByteArrayOutputStream os = new ByteArrayOutputStream(); 
+        ByteArrayOutputStream os = new ByteArrayOutputStream();
         byte[] buffer = new byte[0xFFFF];
-        for (int len; (len = fis.read(buffer)) != -1;)
+        for (int len; (len = fis.read(buffer)) != -1;) {
             os.write(buffer, 0, len);
+        }
         os.flush();
-        byte[] b =     os.toByteArray();
+        byte[] b = os.toByteArray();
         stream = new ByteArrayInputStream(b);
         stream.mark(0); //remember to this position!
         streamedContent = new DefaultStreamedContent(stream, "application/pdf");
@@ -155,13 +156,13 @@ public class PublicacionController implements Serializable {
         archivoPDF archivoPublic = actual.descargaPublicacion();
 
         InputStream fis = archivoPublic.getArchivo();
- String [] nombreArchivo = archivoPublic.getNombreArchivo().split("\\.");
+        String[] nombreArchivo = archivoPublic.getNombreArchivo().split("\\.");
         HttpServletResponse response
                 = (HttpServletResponse) FacesContext.getCurrentInstance()
                         .getExternalContext().getResponse();
 
         response.setContentType("application/pdf");
-        response.setHeader("Content-Disposition", "attachment;filename=" + nombreArchivo[0]+ ".pdf");
+        response.setHeader("Content-Disposition", "attachment;filename=" + nombreArchivo[0] + ".pdf");
 
         byte[] buffer = new byte[8 * 1024];
         int bytesRead;
@@ -177,7 +178,7 @@ public class PublicacionController implements Serializable {
 
     public void pdfPub() throws FileNotFoundException, IOException, IOException, IOException {
         archivoPDF archivoPublic = actual.descargaPublicacion();
-        String [] nombreArchivo = archivoPublic.getNombreArchivo().split("\\.");
+        String[] nombreArchivo = archivoPublic.getNombreArchivo().split("\\.");
         InputStream fis = archivoPublic.getArchivo();
 
         HttpServletResponse response
@@ -185,8 +186,8 @@ public class PublicacionController implements Serializable {
                         .getExternalContext().getResponse();
 
         response.setContentType("application/pdf");
-       // response.setHeader("Content-Disposition", "inline;filename=" + archivoPublic.getNombreArchivo() + ".pdf");
- response.setHeader("Content-Disposition", "inline;filename=" + nombreArchivo[0] + ".pdf");
+        // response.setHeader("Content-Disposition", "inline;filename=" + archivoPublic.getNombreArchivo() + ".pdf");
+        response.setHeader("Content-Disposition", "inline;filename=" + nombreArchivo[0] + ".pdf");
         byte[] buffer = new byte[8 * 1024];
         int bytesRead;
         while ((bytesRead = fis.read(buffer)) != -1) {
@@ -198,10 +199,10 @@ public class PublicacionController implements Serializable {
         response.getOutputStream().close();
         FacesContext.getCurrentInstance().responseComplete();
     }
-    
-        public void pdfPubTC() throws FileNotFoundException, IOException, IOException, IOException {
+
+    public void pdfPubTC() throws FileNotFoundException, IOException, IOException, IOException {
         archivoPDF archivoPublic = actual.descargaPubTC();
-        String [] nombreArchivo = archivoPublic.getNombreArchivo().split("\\.");
+        String[] nombreArchivo = archivoPublic.getNombreArchivo().split("\\.");
         InputStream fis = archivoPublic.getArchivo();
 
         HttpServletResponse response
@@ -209,8 +210,8 @@ public class PublicacionController implements Serializable {
                         .getExternalContext().getResponse();
 
         response.setContentType("application/pdf");
-       // response.setHeader("Content-Disposition", "inline;filename=" + archivoPublic.getNombreArchivo() + ".pdf");
- response.setHeader("Content-Disposition", "inline;filename=" + nombreArchivo[0] + ".pdf");
+        // response.setHeader("Content-Disposition", "inline;filename=" + archivoPublic.getNombreArchivo() + ".pdf");
+        response.setHeader("Content-Disposition", "inline;filename=" + nombreArchivo[0] + ".pdf");
         byte[] buffer = new byte[8 * 1024];
         int bytesRead;
         while ((bytesRead = fis.read(buffer)) != -1) {
@@ -222,12 +223,12 @@ public class PublicacionController implements Serializable {
         response.getOutputStream().close();
         FacesContext.getCurrentInstance().responseComplete();
     }
-        
+
     public void descargarPubTC() throws FileNotFoundException, IOException {
         archivoPDF archivoPubTC = actual.descargaPubTC();
         byte[] buf;
         InputStream fis = archivoPubTC.getArchivo();
-         String [] nombreArchivo = archivoPubTC.getNombreArchivo().split("\\.");
+        String[] nombreArchivo = archivoPubTC.getNombreArchivo().split("\\.");
 
         HttpServletResponse response
                 = (HttpServletResponse) FacesContext.getCurrentInstance()
@@ -252,9 +253,11 @@ public class PublicacionController implements Serializable {
         System.out.println("agregar");
         try {
 
-            Estudiante est = dao.getEst();
+            Estudiante est = getAuxEstudiante();
             actual.setPubEstIdentificador(est);
-            String nombreAut = getnombreAut();
+            String nombreAut = "";
+            nombreAut = "" + est.getEstNombre() + " " + est.getEstApellido();
+
             actual.setPubNombreAutor(nombreAut);
             int numPubRevis = dao.getnumFilasPubRev();
             actual.setPubIdentificador(numPubRevis);
@@ -339,11 +342,27 @@ public class PublicacionController implements Serializable {
 
     }
 
+    public void limpiarCampos(String nombreUsuario) {
+
+        actual = new Publicacion();
+        Revista rev = new Revista();
+        Congreso cong = new Congreso();
+        Libro lib = new Libro();
+        CapituloLibro caplib = new CapituloLibro();
+        actual.setRevista(rev);
+        actual.setCongreso(cong);
+        actual.setLibro(lib);
+        actual.setCapituloLibro(caplib);
+
+        Estudiante est = dao.obtenerEstudiante(nombreUsuario);
+        setAuxEstudiante(est);
+    }
+
     public String getnombreAut() {
-        Estudiante est = dao.getEst();
-        actual.setPubEstIdentificador(est);
+        Estudiante est = getAuxEstudiante();
         String nombreAut = "";
-        nombreAut = "" + actual.getPubEstIdentificador().getEstNombre() + " " + actual.getPubEstIdentificador().getEstApellido();
+        nombreAut = "" + est.getEstNombre() + " " + est.getEstApellido();
+
         return nombreAut;
     }
 
@@ -408,8 +427,8 @@ public class PublicacionController implements Serializable {
     }
 
     /*redireccion para volver a registrar */
-    public void redirigirARegistrar() {
-        limpiarCampos();
+    public void redirigirARegistrar(String nombreUsuario) {
+        limpiarCampos(nombreUsuario);
         Utilidades.redireccionar("/ProyectoII/faces/componentes/gestionPublicaciones/RegistrarPublicacion.xhtml");
     }
 
@@ -450,8 +469,8 @@ public class PublicacionController implements Serializable {
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, summary, detail);
         FacesContext.getCurrentInstance().addMessage(null, message);
     }
-    
-        public Estudiante getAuxEstudiante() {
+
+    public Estudiante getAuxEstudiante() {
         return auxEstudiante;
     }
 
