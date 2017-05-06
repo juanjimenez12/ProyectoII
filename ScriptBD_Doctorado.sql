@@ -256,9 +256,6 @@ INSERT INTO `usuario` (`id`, `nombres`, `apellidos`, `nombre_usuario`, `contrase
  -- -----------------------------------------------------
 INSERT INTO `grupo_tipo_usuario` (`id`, `id_tipo`, `id_usuario`, `nombre_usuario`) VALUES ('1', '2', '1','user1');
 INSERT INTO `grupo_tipo_usuario` (`id`, `id_tipo`, `id_usuario`, `nombre_usuario`) VALUES ('2', '3', '2', 'alvaro');
-
-
-
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
