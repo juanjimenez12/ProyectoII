@@ -370,7 +370,7 @@ public class Publicacion implements Serializable {
         return "co.unicauca.proyectobase.entidades.Publicacion[ pubIdentificador=" + pubIdentificador + " ]";
     }
 
-    public void agregarMetadatos(UploadedFile ArticuloPDF, UploadedFile TablaContenidoPDF) throws IOException, GeneralSecurityException, DocumentException, PathNotFoundException, AccessDeniedException {
+    public void agregarMetadatos(UploadedFile ArticuloPDF, UploadedFile TablaContenidoPDF,UploadedFile cartaAprobacionPDF) throws IOException, GeneralSecurityException, DocumentException, PathNotFoundException, AccessDeniedException {
 
         /*Nombre de los archivos que se almacenaran en el repositorio*/
         MetodosPDF mpdf = new MetodosPDF();
@@ -425,6 +425,7 @@ public class Publicacion implements Serializable {
         ArrayList<InputStream> archivosIS = new ArrayList<>();
         archivosIS.add(ArticuloPDF.getInputstream());
         archivosIS.add(TablaContenidoPDF.getInputstream());
+        
         CrearPDFA_Metadata(rutasArchivos, archivosIS, estampaTiempo);
 
         String hash = mpdf.obtenerHash(destArticulo);

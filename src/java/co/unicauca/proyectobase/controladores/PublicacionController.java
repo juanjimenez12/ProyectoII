@@ -62,6 +62,7 @@ public class PublicacionController implements Serializable {
     private List<Publicacion> listaPublicaciones;
     private UploadedFile publicacionPDF;
     private UploadedFile TablaContenidoPDF;
+    private UploadedFile cartaAprobacionPDF;
     private byte[] exportContent;
     private String pdfUrl;
 
@@ -115,6 +116,16 @@ public class PublicacionController implements Serializable {
     public void setTablaContenidoPDF(UploadedFile TablaContenidoPDF) {
         this.TablaContenidoPDF = TablaContenidoPDF;
     }
+
+    public UploadedFile getCartaAprobacionPDF() {
+        return cartaAprobacionPDF;
+    }
+
+    public void setCartaAprobacionPDF(UploadedFile cartaAprobacionPDF) {
+        this.cartaAprobacionPDF = cartaAprobacionPDF;
+    }
+    
+    
 
     public List<Publicacion> getListaPublicaciones() {
         return listaPublicaciones;
@@ -261,6 +272,12 @@ public class PublicacionController implements Serializable {
     }
 
     public void agregar() {
+        if(cartaAprobacionPDF.getFileName().equalsIgnoreCase("")){
+       
+         FacesContext.getCurrentInstance().addMessage("mensaje",new FacesMessage(FacesMessage.SEVERITY_ERROR, "Debe subir una evidencia de la publicacion", ""));
+        }
+        else
+        { 
         System.out.println("agregar");
         Estudiante est = getAuxEstudiante();
         try {
@@ -324,7 +341,7 @@ public class PublicacionController implements Serializable {
             arcTablaC.setArcIdentificador(numArchivos);
             CollArchivo.add(arcTablaC);
             actual.setArchivoCollection(CollArchivo);
-            actual.agregarMetadatos(publicacionPDF, TablaContenidoPDF);
+            actual.agregarMetadatos(publicacionPDF, TablaContenidoPDF,cartaAprobacionPDF);
 
             actual.setPubEstado("Activo");
             dao.create(actual);
@@ -338,6 +355,8 @@ public class PublicacionController implements Serializable {
             redirigirAlistar(est.getEstUsuario());
             Logger.getLogger(PublicacionController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+       }
 
     }
 
