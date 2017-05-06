@@ -8,6 +8,7 @@ import co.unicauca.proyectobase.entidades.Publicacion;
 import co.unicauca.proyectobase.entidades.Revista;
 import co.unicauca.proyectobase.entidades.Libro;
 import co.unicauca.proyectobase.entidades.CapituloLibro;
+import static co.unicauca.proyectobase.entidades.GrupoTipoUsuario_.nombreUsuario;
 import co.unicauca.proyectobase.entidades.archivoPDF;
 import co.unicauca.proyectobase.utilidades.Utilidades;
 import com.itextpdf.text.DocumentException;
@@ -61,22 +62,25 @@ public class PublicacionController implements Serializable {
     private List<Publicacion> listaPublicaciones;
     private UploadedFile publicacionPDF;
     private UploadedFile TablaContenidoPDF;
+    private UploadedFile cartaAprobacionPDF;
     private byte[] exportContent;
     private String pdfUrl;
 
     private StreamedContent streamedContent;
     private InputStream stream;
+    private Estudiante auxEstudiante;
 
     public void visPdfPub() throws IOException {
 
         archivoPDF archivoPublic = actual.descargaPublicacion();
         InputStream fis = archivoPublic.getArchivo();
-         ByteArrayOutputStream os = new ByteArrayOutputStream(); 
+        ByteArrayOutputStream os = new ByteArrayOutputStream();
         byte[] buffer = new byte[0xFFFF];
-        for (int len; (len = fis.read(buffer)) != -1;)
+        for (int len; (len = fis.read(buffer)) != -1;) {
             os.write(buffer, 0, len);
+        }
         os.flush();
-        byte[] b =     os.toByteArray();
+        byte[] b = os.toByteArray();
         stream = new ByteArrayInputStream(b);
         stream.mark(0); //remember to this position!
         streamedContent = new DefaultStreamedContent(stream, "application/pdf");
@@ -113,6 +117,16 @@ public class PublicacionController implements Serializable {
         this.TablaContenidoPDF = TablaContenidoPDF;
     }
 
+    public UploadedFile getCartaAprobacionPDF() {
+        return cartaAprobacionPDF;
+    }
+
+    public void setCartaAprobacionPDF(UploadedFile cartaAprobacionPDF) {
+        this.cartaAprobacionPDF = cartaAprobacionPDF;
+    }
+    
+    
+
     public List<Publicacion> getListaPublicaciones() {
         return listaPublicaciones;
     }
@@ -141,6 +155,17 @@ public class PublicacionController implements Serializable {
 
     public List<Publicacion> listado() {
         return dao.findAll();
+       
+    }
+    
+       public List<Publicacion> listadoPublicaciones(String nombreUsuario) {
+         
+                   Estudiante est = dao.obtenerEstudiante(nombreUsuario);
+        setAuxEstudiante(est);
+        
+           int idEstudiante = est.getEstIdentificador();
+           return dao.ListadoPublicacionEst(idEstudiante);
+       
     }
 
     public void onDateSelect(SelectEvent event) {
@@ -153,13 +178,13 @@ public class PublicacionController implements Serializable {
         archivoPDF archivoPublic = actual.descargaPublicacion();
 
         InputStream fis = archivoPublic.getArchivo();
- String [] nombreArchivo = archivoPublic.getNombreArchivo().split("\\.");
+        String[] nombreArchivo = archivoPublic.getNombreArchivo().split("\\.");
         HttpServletResponse response
                 = (HttpServletResponse) FacesContext.getCurrentInstance()
                         .getExternalContext().getResponse();
 
         response.setContentType("application/pdf");
-        response.setHeader("Content-Disposition", "attachment;filename=" + nombreArchivo[0]+ ".pdf");
+        response.setHeader("Content-Disposition", "attachment;filename=" + nombreArchivo[0] + ".pdf");
 
         byte[] buffer = new byte[8 * 1024];
         int bytesRead;
@@ -175,7 +200,7 @@ public class PublicacionController implements Serializable {
 
     public void pdfPub() throws FileNotFoundException, IOException, IOException, IOException {
         archivoPDF archivoPublic = actual.descargaPublicacion();
-        String [] nombreArchivo = archivoPublic.getNombreArchivo().split("\\.");
+        String[] nombreArchivo = archivoPublic.getNombreArchivo().split("\\.");
         InputStream fis = archivoPublic.getArchivo();
 
         HttpServletResponse response
@@ -183,8 +208,8 @@ public class PublicacionController implements Serializable {
                         .getExternalContext().getResponse();
 
         response.setContentType("application/pdf");
-       // response.setHeader("Content-Disposition", "inline;filename=" + archivoPublic.getNombreArchivo() + ".pdf");
- response.setHeader("Content-Disposition", "inline;filename=" + nombreArchivo[0] + ".pdf");
+        // response.setHeader("Content-Disposition", "inline;filename=" + archivoPublic.getNombreArchivo() + ".pdf");
+        response.setHeader("Content-Disposition", "inline;filename=" + nombreArchivo[0] + ".pdf");
         byte[] buffer = new byte[8 * 1024];
         int bytesRead;
         while ((bytesRead = fis.read(buffer)) != -1) {
@@ -196,10 +221,10 @@ public class PublicacionController implements Serializable {
         response.getOutputStream().close();
         FacesContext.getCurrentInstance().responseComplete();
     }
-    
-        public void pdfPubTC() throws FileNotFoundException, IOException, IOException, IOException {
+
+    public void pdfPubTC() throws FileNotFoundException, IOException, IOException, IOException {
         archivoPDF archivoPublic = actual.descargaPubTC();
-        String [] nombreArchivo = archivoPublic.getNombreArchivo().split("\\.");
+        String[] nombreArchivo = archivoPublic.getNombreArchivo().split("\\.");
         InputStream fis = archivoPublic.getArchivo();
 
         HttpServletResponse response
@@ -207,8 +232,8 @@ public class PublicacionController implements Serializable {
                         .getExternalContext().getResponse();
 
         response.setContentType("application/pdf");
-       // response.setHeader("Content-Disposition", "inline;filename=" + archivoPublic.getNombreArchivo() + ".pdf");
- response.setHeader("Content-Disposition", "inline;filename=" + nombreArchivo[0] + ".pdf");
+        // response.setHeader("Content-Disposition", "inline;filename=" + archivoPublic.getNombreArchivo() + ".pdf");
+        response.setHeader("Content-Disposition", "inline;filename=" + nombreArchivo[0] + ".pdf");
         byte[] buffer = new byte[8 * 1024];
         int bytesRead;
         while ((bytesRead = fis.read(buffer)) != -1) {
@@ -220,12 +245,12 @@ public class PublicacionController implements Serializable {
         response.getOutputStream().close();
         FacesContext.getCurrentInstance().responseComplete();
     }
-        
+
     public void descargarPubTC() throws FileNotFoundException, IOException {
         archivoPDF archivoPubTC = actual.descargaPubTC();
         byte[] buf;
         InputStream fis = archivoPubTC.getArchivo();
-         String [] nombreArchivo = archivoPubTC.getNombreArchivo().split("\\.");
+        String[] nombreArchivo = archivoPubTC.getNombreArchivo().split("\\.");
 
         HttpServletResponse response
                 = (HttpServletResponse) FacesContext.getCurrentInstance()
@@ -247,12 +272,21 @@ public class PublicacionController implements Serializable {
     }
 
     public void agregar() {
+        if(cartaAprobacionPDF.getFileName().equalsIgnoreCase("")){
+       
+         FacesContext.getCurrentInstance().addMessage("mensaje",new FacesMessage(FacesMessage.SEVERITY_ERROR, "Debe subir una evidencia de la publicacion", ""));
+        }
+        else
+        { 
         System.out.println("agregar");
+        Estudiante est = getAuxEstudiante();
         try {
 
-            Estudiante est = dao.getEst();
+            
             actual.setPubEstIdentificador(est);
-            String nombreAut = getnombreAut();
+            String nombreAut = "";
+            nombreAut = "" + est.getEstNombre() + " " + est.getEstApellido();
+
             actual.setPubNombreAutor(nombreAut);
             int numPubRevis = dao.getnumFilasPubRev();
             actual.setPubIdentificador(numPubRevis);
@@ -307,20 +341,22 @@ public class PublicacionController implements Serializable {
             arcTablaC.setArcIdentificador(numArchivos);
             CollArchivo.add(arcTablaC);
             actual.setArchivoCollection(CollArchivo);
-            actual.agregarMetadatos(publicacionPDF, TablaContenidoPDF);
+            actual.agregarMetadatos(publicacionPDF, TablaContenidoPDF,cartaAprobacionPDF);
 
             actual.setPubEstado("Activo");
             dao.create(actual);
             dao.flush();
             mensajeconfirmarRegistro();
             limpiarCampos();
-            redirigirAlistar();
+            redirigirAlistar(est.getEstUsuario());
         } catch (IOException | GeneralSecurityException | DocumentException | PathNotFoundException | AccessDeniedException | EJBException ex) {
             mensajeRegistroFallido();
             limpiarCampos();
-            redirigirAlistar();
+            redirigirAlistar(est.getEstUsuario());
             Logger.getLogger(PublicacionController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+       }
 
     }
 
@@ -337,18 +373,42 @@ public class PublicacionController implements Serializable {
 
     }
 
+    public void limpiarCampos(String nombreUsuario) {
+
+        actual = new Publicacion();
+        Revista rev = new Revista();
+        Congreso cong = new Congreso();
+        Libro lib = new Libro();
+        CapituloLibro caplib = new CapituloLibro();
+        actual.setRevista(rev);
+        actual.setCongreso(cong);
+        actual.setLibro(lib);
+        actual.setCapituloLibro(caplib);
+
+        Estudiante est = dao.obtenerEstudiante(nombreUsuario);
+        setAuxEstudiante(est);
+    }
+    
+       public void fijarEstudiante(String nombreUsuario) {
+
+        Estudiante est = dao.obtenerEstudiante(nombreUsuario);
+        setAuxEstudiante(est);
+    }
+    
+    
+
     public String getnombreAut() {
-        Estudiante est = dao.getEst();
-        actual.setPubEstIdentificador(est);
+        Estudiante est = getAuxEstudiante();
         String nombreAut = "";
-        nombreAut = "" + actual.getPubEstIdentificador().getEstNombre() + " " + actual.getPubEstIdentificador().getEstApellido();
+        nombreAut = "" + est.getEstNombre() + " " + est.getEstApellido();
+
         return nombreAut;
     }
 
     public String guardarEdicion() {
         dao.edit(actual);
         mensajeEditar();
-        redirigirAlistar();
+        redirigirAlistar(getAuxEstudiante().getEstUsuario());
         return INICIO;
     }
 
@@ -398,7 +458,8 @@ public class PublicacionController implements Serializable {
     }
 
     /*redireccionamiento para boton cancelar*/
-    public void redirigirAlistar() {
+    public void redirigirAlistar(String nombreUsuario) {
+        fijarEstudiante(nombreUsuario);
         limpiarCampos();
         System.out.println("si esta pasando por aqui");
 
@@ -406,8 +467,8 @@ public class PublicacionController implements Serializable {
     }
 
     /*redireccion para volver a registrar */
-    public void redirigirARegistrar() {
-        limpiarCampos();
+    public void redirigirARegistrar(String nombreUsuario) {
+        limpiarCampos(nombreUsuario);
         Utilidades.redireccionar("/ProyectoII/faces/componentes/gestionPublicaciones/RegistrarPublicacion.xhtml");
     }
 
@@ -449,4 +510,11 @@ public class PublicacionController implements Serializable {
         FacesContext.getCurrentInstance().addMessage(null, message);
     }
 
+    public Estudiante getAuxEstudiante() {
+        return auxEstudiante;
+    }
+
+    public void setAuxEstudiante(Estudiante auxEstudiante) {
+        this.auxEstudiante = auxEstudiante;
+    }
 }

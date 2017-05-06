@@ -22,7 +22,7 @@
                     <div class="col-sm-3"></div>
                     <div class="col-sm-6">
                         <h:form styleClass="elementosCentrados bajarGrid" id="panelRegistrar" enctype="multipart/form-data">           
-                             
+
                             <h:outputLabel value="Nombre Autor " for="valNombreAutor" styleClass="addEspacio"/>
                             <h:outputText class="form-control" id="valNombreAutor"  value="#{publicacionController.getnombreAut()}" styleClass="addEspacio form-control"></h:outputText>
                             <h:outputLabel styleClass="addEspacio"/>
@@ -48,11 +48,8 @@
                             <h:outputLabel styleClass="addEspacio"/><br/>
                             <h:outputLabel value="DOI " for="valDOI" styleClass="addEspacio"/>
                             <h:inputText class="form-control" id="valDOI"  value="#{publicacionController.actual.pubDoi}" styleClass="addEspacio form-control">
-                                <f:ajax />
-                                <f:validator validatorId="validadorDOI" />  -->
-                                <p:ajax event="blur" update="msjValDOI" />  -->
+
                             </h:inputText>
-                            <p:message for="valDOI" id="msjValDOI" /> 
                             <h:outputLink style="color: blue" value="https://goo.gl/AKGq9b">Conozca mas sobre el DOI</h:outputLink>
                             <h:outputLabel styleClass="addEspacio" />
                             <br/>
@@ -124,6 +121,15 @@
                                         <h:outputLink style="color: blue" value="https://goo.gl/2Ul5BG">Homologación de catogoria de la revista</h:outputLink>
                                         <h:outputLabel styleClass="addEspacio"/>
                                         <br/>
+
+                                        <h:outputLabel styleClass="addEspacio"/>
+                                        <h:outputLabel styleClass="addEspacio"/>
+                                        <h:outputLabel styleClass="addEspacio"/>
+
+                                        <h:outputLabel for="revistaPDF" value="Revista PDF" styleClass="addEspacio"/>
+                                        <p:fileUpload id="revistaPDF" value="#{publicacionController.publicacionPDF}"    required="true" mode="simple" allowTypes="/(\.|\/)(pdf)$/"></p:fileUpload>
+                                        <h:outputLabel styleClass="addEspacio"/>
+
                                     </div>
                                 </h:panelGroup>
 
@@ -155,6 +161,15 @@
                                             <f:selectItem itemLabel="Evento internacional" itemValue="internacional"></f:selectItem>
                                         </h:selectOneMenu>
                                         <h:outputLabel styleClass="addEspacio"/>
+
+
+                                        <h:outputLabel styleClass="addEspacio"/>
+
+
+                                        <h:outputLabel for="congresoPDF" value="Congreso PDF" styleClass="addEspacio"/>
+                                        <p:fileUpload id="congresoPDF" value="#{publicacionController.publicacionPDF}"    required="true" mode="simple" allowTypes="/(\.|\/)(pdf)$/"></p:fileUpload>
+                                        <h:outputLabel styleClass="addEspacio"/>
+
                                     </div>
                                 </h:panelGroup>
 
@@ -170,6 +185,13 @@
                                         <p:message for="valTLibro" id="msjvalTLibro" />
                                         <h:outputLabel styleClass="addEspacio"/>
                                         <h:outputLabel styleClass="addEspacio"/>
+
+
+                                        <h:outputLabel for="libroPDF" value="Libro PDF" styleClass="addEspacio"/>
+                                        <p:fileUpload id="libroPDF" value="#{publicacionController.publicacionPDF}"    required="true" mode="simple" allowTypes="/(\.|\/)(pdf)$/"></p:fileUpload>
+                                        <h:outputLabel styleClass="addEspacio"/>
+
+
                                     </div>
                                 </h:panelGroup>
 
@@ -192,6 +214,14 @@
                                         <p:message for="valTCapLibro" id="msjvalTCapLibro" />
                                         <h:outputLabel styleClass="addEspacio"/>
                                         <h:outputLabel styleClass="addEspacio"/>
+
+
+                                        <h:outputLabel for="capLibroPDF" value="Capitulo Libro PDF" styleClass="addEspacio"/>
+                                        <p:fileUpload id="capLibroPDF" value="#{publicacionController.publicacionPDF}"    required="true" mode="simple" allowTypes="/(\.|\/)(pdf)$/"></p:fileUpload>
+                                        <h:outputLabel styleClass="addEspacio"/>
+
+
+
                                     </div>
                                 </h:panelGroup>
 
@@ -199,14 +229,28 @@
 
                             </h:panelGroup>
 
-
-                            <h:outputLabel for="publicacionPDF" value="Publicacion PDF" styleClass="addEspacio"/>
-                            <p:fileUpload id="publicacionPDF" value="#{publicacionController.publicacionPDF}"    required="true" mode="simple" allowTypes="/(\.|\/)(pdf)$/"></p:fileUpload>
+                            <h:outputLabel for="tablaContenidoPDF" value="Tabla de Contenido PDF" styleClass="addEspacio"/>
+                            <p:fileUpload id="tablaContenidoPDF" value="#{publicacionController.tablaContenidoPDF}"    required="true" mode="simple" allowTypes="/(\.|\/)(pdf)$/" styleClass="addEspacio"></p:fileUpload>
                             <h:outputLabel styleClass="addEspacio"/>
 
-                            <h:outputLabel for="indiceRevistaPDF" value="Tabla de Contenido PDF" styleClass="addEspacio"/>
-                            <p:fileUpload id="indiceRevistaPDF" value="#{publicacionController.tablaContenidoPDF}"    required="true" mode="simple" allowTypes="/(\.|\/)(pdf)$/"></p:fileUpload>
                             <h:outputLabel styleClass="addEspacio"/>
+
+                            <h:outputLabel for="cartaAprobacionPDF" value="Evidencia de Publicacion * &nbsp;&nbsp;" />
+                
+    <h:outputLink id="grow" value="#">
+        <h:outputText value="¿Que significa?" />
+    </h:outputLink>
+    <p:tooltip id="toolTipGrow" for="grow" value="En este campo se debe seleccionar la carta de aprobacion de la publicacion"
+               showEffect="clip" hideEffect="explode" />
+                            
+                            <p:fileUpload id="cartaAprobacionPDF"  value="#{publicacionController.cartaAprobacionPDF}" required="true" mode="simple" allowTypes="/(\.|\/)(pdf)$/" >
+                      
+                            </p:fileUpload>  
+                             <p:messages id="mensaje" autoUpdate="true" closable="true" />
+                            <h:outputLabel styleClass="addEspacio"/>
+
+
+
 
                             <h:outputLabel styleClass="addEspacio"/>
                             <h:outputLabel styleClass="addEspacio"/>
@@ -226,7 +270,7 @@
                             <h:outputLabel styleClass="addEspacio"/>
                             <h:outputLabel styleClass="addEspacio"/>
                             <h:outputLabel styleClass="addEspacio"/>
-                        
+
                         </h:form>
                     </div>
                     <div class="col-sm-3"></div>

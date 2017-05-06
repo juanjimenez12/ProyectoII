@@ -74,5 +74,43 @@ public class PublicacionFacade extends AbstractFacade<Publicacion> {
             return null;
         }
     }
+    
+        public Estudiante obtenerEstudiante(String nombreUsuario) {
+
+        String comSimple = "\'";
+        String queryStr;
+        queryStr = " SELECT est_identificador FROM doctorado.estudiante WHERE est_usuario = " + comSimple + nombreUsuario + comSimple;
+        javax.persistence.Query query = getEntityManager().createNativeQuery(queryStr);
+        List results = query.getResultList();
+        int estIden = (int) results.get(0);
+
+        Estudiante est;
+        try {
+            est = em.find(Estudiante.class, estIden);
+            return est;
+        } catch (Exception e) {
+            System.out.println("Error " + e.getMessage());
+            System.out.println(e);
+            return null;
+        }
+    }
+        
+      public List<Publicacion> ListadoPublicacionEst(int estIdentificador) {
+
+        String comSimple = "\'";
+        String queryStr;
+        queryStr = "SELECT * FROM doctorado.publicacion where pub_est_identificador = " + comSimple + estIdentificador + comSimple;
+        javax.persistence.Query query = getEntityManager().createNativeQuery(queryStr);
+//        List results = 
+      
+        try {
+            System.out.println("co.unicauca.proyectobase.dao.PublicacionFacade.ListadoPublicacionEst()");
+            return query.getResultList();
+        } catch (Exception e) {
+            System.out.println("Error " + e.getMessage());
+            System.out.println(e);
+            return null;
+        }
+    }
 
 }

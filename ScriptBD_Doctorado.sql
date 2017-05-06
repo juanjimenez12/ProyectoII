@@ -183,7 +183,7 @@ CREATE TABLE IF NOT EXISTS `doctorado`.`capitulo_libro` (
     REFERENCES `doctorado`.`publicacion` (`pub_identificador`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB
+ENGINE = InnoDB;
 
 -- -----------------------------------------------------
 -- Fin Creacion Tablas Tipo de Publicacion
@@ -245,7 +245,7 @@ ENGINE = InnoDB;
 -- Datos para la tabla tipo_usuario
  -- -----------------------------------------------------
 INSERT INTO `tipo_usuario` (`id`, `nombre`) VALUES ('1', 'PROFESOR'), ('2', 'ESTUDIANTE');
-INSERT INTO `tipo_usuario`(`id`, `nombre`) VALUES ('3','COORDINADOR;
+INSERT INTO `tipo_usuario`(`id`, `nombre`) VALUES ('3','COORDINADOR');
 -- -----------------------------------------------------
 -- Datos para la tabla usuario
  -- -----------------------------------------------------

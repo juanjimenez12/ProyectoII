@@ -1,3 +1,5 @@
-/dist/
-/build/
-/test/
+dist/
+build/
+build/web
+test/
+nbproject/private/

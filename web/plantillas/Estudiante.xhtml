@@ -71,8 +71,8 @@
                           <a href="#" class="dropdown-toggle mejorarMenu" data-toggle="dropdown">Publicaciones <span class="caret"></span><span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-user"></span></a>
                           <ul class="dropdown-menu forAnimate" role="menu" id="">
                               <h:form>
-                               <li><h:commandLink actionListener="#{publicacionController.redirigirAlistar()}"  >&nbsp; &nbsp; <span class ="glyphicon glyphicon-chevron-right"/>Listar Publicaciones</h:commandLink></li>
-                               <li> <h:commandLink actionListener="#{publicacionController.redirigirARegistrar()}"  >&nbsp; &nbsp; <span class ="glyphicon glyphicon-chevron-right"/>Registrar Publicaciones</h:commandLink></li>                                 
+                               <li><h:commandLink actionListener="#{publicacionController.redirigirAlistar(usuariosSessionController.nombreUsuario)}"  >&nbsp; &nbsp; <span class ="glyphicon glyphicon-chevron-right"/>Listar Publicaciones</h:commandLink></li>
+                               <li> <h:commandLink actionListener="#{publicacionController.redirigirARegistrar(usuariosSessionController.nombreUsuario)}"  >&nbsp; &nbsp; <span class ="glyphicon glyphicon-chevron-right"/>Registrar Publicaciones</h:commandLink></li>                                 
                               </h:form>
                           </ul>
                         </li> 
