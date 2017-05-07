@@ -8,7 +8,6 @@ import co.unicauca.proyectobase.entidades.Publicacion;
 import co.unicauca.proyectobase.entidades.Revista;
 import co.unicauca.proyectobase.entidades.Libro;
 import co.unicauca.proyectobase.entidades.CapituloLibro;
-import static co.unicauca.proyectobase.entidades.GrupoTipoUsuario_.nombreUsuario;
 import co.unicauca.proyectobase.entidades.archivoPDF;
 import co.unicauca.proyectobase.utilidades.Utilidades;
 import com.itextpdf.text.DocumentException;
@@ -16,21 +15,15 @@ import com.openkm.sdk4j.exception.AccessDeniedException;
 import com.openkm.sdk4j.exception.PathNotFoundException;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.security.GeneralSecurityException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -40,11 +33,8 @@ import javax.ejb.EJBException;
 /*import java.nio.charset.StandardCharsets;
 import java.util.Base64;*/
 import javax.faces.application.FacesMessage;
-import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-import javax.faces.event.ValueChangeEvent;
 import javax.servlet.http.HttpServletResponse;
-import org.apache.commons.io.IOUtils;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
@@ -329,6 +319,7 @@ public class PublicacionController implements Serializable {
                 Archivo archCartaAprob = new Archivo();
                 archCartaAprob.setArcPubIdentificador(actual);
                 archCartaAprob.setArcIdentificador(numArchivos);
+                archCartaAprob.setArctipoPDFcargar("cartaAprobacion");
                 CollArchivo.add(archCartaAprob);
 
                 //int numArchivos = numPubRevis;
@@ -337,6 +328,7 @@ public class PublicacionController implements Serializable {
                     numArchivos = numArchivos + 1;
                     archArt.setArcPubIdentificador(actual);
                     archArt.setArcIdentificador(numArchivos);
+                    archArt.setArctipoPDFcargar("tipoPublicacion");
                     CollArchivo.add(archArt);
                 }
                 if (!TablaContenidoPDF.getFileName().equalsIgnoreCase("")) {
@@ -344,6 +336,7 @@ public class PublicacionController implements Serializable {
                     numArchivos = numArchivos + 1;
                     arcTablaC.setArcPubIdentificador(actual);
                     arcTablaC.setArcIdentificador(numArchivos);
+                    arcTablaC.setArctipoPDFcargar("tablaContenido");
                     CollArchivo.add(arcTablaC);
                 }
                 actual.setArchivoCollection(CollArchivo);
