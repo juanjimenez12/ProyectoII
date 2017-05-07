@@ -696,28 +696,35 @@ public class Publicacion implements Serializable {
     
     public archivoPDF descargaCartaAprobac() {
         archivoPDF archivo = new archivoPDF();
+        String tipoPDF = "cartaAprobacion";
+        
         String host = "http://localhost:8083/OpenKM";
         String username = "okmAdmin";
         String password = "admin";
         OKMWebservices ws = OKMWebservicesFactory.newInstance(host, username, password);
 
         try {
+            
             Map<String, String> properties = new HashMap();
             /* Se comprueba el tipo de publicacion: revista congreso , un libro 
                 o un capitulo de un libro que se devolvera como resultado*/
             if (this.pubTipoPublicacion.equalsIgnoreCase("revista")) {
                 properties.put("okp:revista.identPublicacion", "" + this.pubIdentificador);
-
+                properties.put("okp:revista.tipoPDFCargar", "" + tipoPDF);
+   
             }
             if (this.pubTipoPublicacion.equalsIgnoreCase("congreso")) {
                 properties.put("okp:congreso.identPublicacion", "" + this.pubIdentificador);
+                 properties.put("okp:congreso.tipoPDFCargar", "" + tipoPDF);
 
             }
             if (this.pubTipoPublicacion.equalsIgnoreCase("libro")) {
-                properties.put("okp:libro.identPublicacion", "" + this.pubIdentificador);;
+                properties.put("okp:libro.identPublicacion", "" + this.pubIdentificador);
+                    properties.put("okp:libro.tipoPDFCargar", "" + tipoPDF);
             }
             if (this.pubTipoPublicacion.equalsIgnoreCase("capitulo_libro")) {
                 properties.put("okp:capLibro.identPublicacion", "" + this.pubIdentificador);
+                properties.put("okp:capLibro.tipoPDFCargar", "" + tipoPDF);
             }
             // properties.put("okp:revista.identPublicacion", "" + this.pubIdentificador);
             QueryParams qParams = new QueryParams();
@@ -745,28 +752,35 @@ public class Publicacion implements Serializable {
     
     public archivoPDF descargaPublicacion() {
         archivoPDF archivo = new archivoPDF();
+        String tipoPDF = "tipoPublicacion";
+         
         String host = "http://localhost:8083/OpenKM";
         String username = "okmAdmin";
         String password = "admin";
         OKMWebservices ws = OKMWebservicesFactory.newInstance(host, username, password);
 
-        try {
+           try {
+            
             Map<String, String> properties = new HashMap();
             /* Se comprueba el tipo de publicacion: revista congreso , un libro 
                 o un capitulo de un libro que se devolvera como resultado*/
             if (this.pubTipoPublicacion.equalsIgnoreCase("revista")) {
                 properties.put("okp:revista.identPublicacion", "" + this.pubIdentificador);
-
+                properties.put("okp:revista.tipoPDFCargar", "" + tipoPDF);
+   
             }
             if (this.pubTipoPublicacion.equalsIgnoreCase("congreso")) {
                 properties.put("okp:congreso.identPublicacion", "" + this.pubIdentificador);
+                 properties.put("okp:congreso.tipoPDFCargar", "" + tipoPDF);
 
             }
             if (this.pubTipoPublicacion.equalsIgnoreCase("libro")) {
-                properties.put("okp:libro.identPublicacion", "" + this.pubIdentificador);;
+                properties.put("okp:libro.identPublicacion", "" + this.pubIdentificador);
+                    properties.put("okp:libro.tipoPDFCargar", "" + tipoPDF);
             }
             if (this.pubTipoPublicacion.equalsIgnoreCase("capitulo_libro")) {
                 properties.put("okp:capLibro.identPublicacion", "" + this.pubIdentificador);
+                properties.put("okp:capLibro.tipoPDFCargar", "" + tipoPDF);
             }
             // properties.put("okp:revista.identPublicacion", "" + this.pubIdentificador);
             QueryParams qParams = new QueryParams();
@@ -794,31 +808,35 @@ public class Publicacion implements Serializable {
 
     public archivoPDF descargaPubTC() {
         archivoPDF archivo = new archivoPDF();
+           String tipoPDF = "tablaContenido";
         String host = "http://localhost:8083/OpenKM";
         String username = "okmAdmin";
         String password = "admin";
         OKMWebservices ws = OKMWebservicesFactory.newInstance(host, username, password);
 
         try {
+            
             Map<String, String> properties = new HashMap();
-
             /* Se comprueba el tipo de publicacion: revista congreso , un libro 
                 o un capitulo de un libro que se devolvera como resultado*/
             if (this.pubTipoPublicacion.equalsIgnoreCase("revista")) {
                 properties.put("okp:revista.identPublicacion", "" + this.pubIdentificador);
-
+                properties.put("okp:revista.tipoPDFCargar", "" + tipoPDF);
+   
             }
             if (this.pubTipoPublicacion.equalsIgnoreCase("congreso")) {
                 properties.put("okp:congreso.identPublicacion", "" + this.pubIdentificador);
+                 properties.put("okp:congreso.tipoPDFCargar", "" + tipoPDF);
 
             }
             if (this.pubTipoPublicacion.equalsIgnoreCase("libro")) {
-                properties.put("okp:libro.identPublicacion", "" + this.pubIdentificador);;
+                properties.put("okp:libro.identPublicacion", "" + this.pubIdentificador);
+                    properties.put("okp:libro.tipoPDFCargar", "" + tipoPDF);
             }
             if (this.pubTipoPublicacion.equalsIgnoreCase("capitulo_libro")) {
                 properties.put("okp:capLibro.identPublicacion", "" + this.pubIdentificador);
+                properties.put("okp:capLibro.tipoPDFCargar", "" + tipoPDF);
             }
-
             // properties.put("okp:revista.identPublicacion", "" + this.pubIdentificador);
             QueryParams qParams = new QueryParams();
             qParams.setProperties(properties);

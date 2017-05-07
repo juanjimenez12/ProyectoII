@@ -162,30 +162,6 @@ public class PublicacionController implements Serializable {
         // facesContext.addMessage("event", new FacesMessage(FacesMessage.SEVERITY_INFO, "Date Selected", format.format(event.getObject())));
     }
 
-    public void descargarPublicacion() throws FileNotFoundException, IOException {
-        archivoPDF archivoPublic = actual.descargaPublicacion();
-
-        InputStream fis = archivoPublic.getArchivo();
-        String[] nombreArchivo = archivoPublic.getNombreArchivo().split("\\.");
-        HttpServletResponse response
-                = (HttpServletResponse) FacesContext.getCurrentInstance()
-                        .getExternalContext().getResponse();
-
-        response.setContentType("application/pdf");
-        response.setHeader("Content-Disposition", "attachment;filename=" + nombreArchivo[0] + ".pdf");
-
-        byte[] buffer = new byte[8 * 1024];
-        int bytesRead;
-        while ((bytesRead = fis.read(buffer)) != -1) {
-            response.getOutputStream().write(buffer, 0, bytesRead);
-        }
-
-        // response.getOutputStream().write(buf);
-        response.getOutputStream().flush();
-        response.getOutputStream().close();
-        FacesContext.getCurrentInstance().responseComplete();
-    }
-
     public void pdfPub() throws FileNotFoundException, IOException, IOException, IOException {
         archivoPDF archivoPublic = actual.descargaPublicacion();
         String[] nombreArchivo = archivoPublic.getNombreArchivo().split("\\.");
@@ -222,6 +198,54 @@ public class PublicacionController implements Serializable {
         response.setContentType("application/pdf");
         // response.setHeader("Content-Disposition", "inline;filename=" + archivoPublic.getNombreArchivo() + ".pdf");
         response.setHeader("Content-Disposition", "inline;filename=" + nombreArchivo[0] + ".pdf");
+        byte[] buffer = new byte[8 * 1024];
+        int bytesRead;
+        while ((bytesRead = fis.read(buffer)) != -1) {
+            response.getOutputStream().write(buffer, 0, bytesRead);
+        }
+
+        // response.getOutputStream().write(buf);
+        response.getOutputStream().flush();
+        response.getOutputStream().close();
+        FacesContext.getCurrentInstance().responseComplete();
+    }
+
+    public void descargarCartaAprobac() throws FileNotFoundException, IOException {
+        archivoPDF archivoPublic = actual.descargaCartaAprobac();
+
+        InputStream fis = archivoPublic.getArchivo();
+        String[] nombreArchivo = archivoPublic.getNombreArchivo().split("\\.");
+        HttpServletResponse response
+                = (HttpServletResponse) FacesContext.getCurrentInstance()
+                        .getExternalContext().getResponse();
+
+        response.setContentType("application/pdf");
+        response.setHeader("Content-Disposition", "attachment;filename=" + nombreArchivo[0] + ".pdf");
+
+        byte[] buffer = new byte[8 * 1024];
+        int bytesRead;
+        while ((bytesRead = fis.read(buffer)) != -1) {
+            response.getOutputStream().write(buffer, 0, bytesRead);
+        }
+
+        // response.getOutputStream().write(buf);
+        response.getOutputStream().flush();
+        response.getOutputStream().close();
+        FacesContext.getCurrentInstance().responseComplete();
+    }
+
+    public void descargarPublicacion() throws FileNotFoundException, IOException {
+        archivoPDF archivoPublic = actual.descargaPublicacion();
+
+        InputStream fis = archivoPublic.getArchivo();
+        String[] nombreArchivo = archivoPublic.getNombreArchivo().split("\\.");
+        HttpServletResponse response
+                = (HttpServletResponse) FacesContext.getCurrentInstance()
+                        .getExternalContext().getResponse();
+
+        response.setContentType("application/pdf");
+        response.setHeader("Content-Disposition", "attachment;filename=" + nombreArchivo[0] + ".pdf");
+
         byte[] buffer = new byte[8 * 1024];
         int bytesRead;
         while ((bytesRead = fis.read(buffer)) != -1) {
@@ -315,7 +339,7 @@ public class PublicacionController implements Serializable {
 
                 ArrayList<Archivo> CollArchivo = new ArrayList<>();
                 int numArchivos = dao.getIdArchivo();
-                
+
                 Archivo archCartaAprob = new Archivo();
                 archCartaAprob.setArcPubIdentificador(actual);
                 archCartaAprob.setArcIdentificador(numArchivos);
