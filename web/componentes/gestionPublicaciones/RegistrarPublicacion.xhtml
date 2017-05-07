@@ -1,17 +1,25 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+ 
+
 
     <h:head>
         <title>Registrar Publicacion</title>
     </h:head>
+    
+    
 
+    
+    
     <ui:composition template="../../plantillas/Estudiante.xhtml">
-        <ui:define name="content">            
+        <ui:define name="content">     
+            
             <p:panel header="Registrar publicación" >
 
                 <div class="alert alert-success alert-dismissable">
@@ -74,9 +82,9 @@
                             <h:outputLabel styleClass="addEspacio" />
                             <br/>
 
-
-
-
+             
+                            <h:outputLabel styleClass="addEspacio"/>
+                            
                             <h:outputLabel styleClass="addEspacio"/>
                             <h:outputLabel value="Tipo publicación* " for="valTipopublicacion" styleClass="addEspacio"/>
 
@@ -245,7 +253,7 @@
                             <p:fileUpload id="cartaAprobacionPDF"  value="#{publicacionController.cartaAprobacionPDF}" required="true" mode="simple" allowTypes="/(\.|\/)(pdf)$/" >
                       
                             </p:fileUpload>  
-                             <p:messages id="cartaAprobacion" autoUpdate="true" closable="true" />
+                             <p:messages id="cartaAprobacion" autoUpdate="true" closable="false" />
                             <h:outputLabel styleClass="addEspacio"/>
 
 
@@ -271,6 +279,14 @@
                             <h:outputLabel styleClass="addEspacio"/>
 
                         </h:form>
+                        
+                        
+              
+                            
+ 
+                        
+                        
+                        
                     </div>
                     <div class="col-sm-3"></div>
                 </div>

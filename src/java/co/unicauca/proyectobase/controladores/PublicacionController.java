@@ -124,8 +124,6 @@ public class PublicacionController implements Serializable {
     public void setCartaAprobacionPDF(UploadedFile cartaAprobacionPDF) {
         this.cartaAprobacionPDF = cartaAprobacionPDF;
     }
-    
-    
 
     public List<Publicacion> getListaPublicaciones() {
         return listaPublicaciones;
@@ -155,23 +153,23 @@ public class PublicacionController implements Serializable {
 
     public List<Publicacion> listado() {
         return dao.findAll();
-       
+
     }
-    
-       public List<Publicacion> listadoPublicaciones(String nombreUsuario) {
-         
-                   Estudiante est = dao.obtenerEstudiante(nombreUsuario);
+
+    public List<Publicacion> listadoPublicaciones(String nombreUsuario) {
+
+        Estudiante est = dao.obtenerEstudiante(nombreUsuario);
         setAuxEstudiante(est);
-        
-           int idEstudiante = est.getEstIdentificador();
-           return dao.ListadoPublicacionEst(idEstudiante);
-       
+
+        int idEstudiante = est.getEstIdentificador();
+        return dao.ListadoPublicacionEst(idEstudiante);
+
     }
 
     public void onDateSelect(SelectEvent event) {
         FacesContext facesContext = FacesContext.getCurrentInstance();
         SimpleDateFormat format = new SimpleDateFormat("MM/yyyy");
-       // facesContext.addMessage("event", new FacesMessage(FacesMessage.SEVERITY_INFO, "Date Selected", format.format(event.getObject())));
+        // facesContext.addMessage("event", new FacesMessage(FacesMessage.SEVERITY_INFO, "Date Selected", format.format(event.getObject())));
     }
 
     public void descargarPublicacion() throws FileNotFoundException, IOException {
@@ -272,91 +270,99 @@ public class PublicacionController implements Serializable {
     }
 
     public void agregar() {
-        if(cartaAprobacionPDF.getFileName().equalsIgnoreCase("")){
-       
-         FacesContext.getCurrentInstance().addMessage("cartaAprobacion",new FacesMessage(FacesMessage.SEVERITY_ERROR, "Debe subir una evidencia de la publicacion", ""));
-        }
-        else
-        { 
-        System.out.println("agregar");
-        Estudiante est = getAuxEstudiante();
-        try {
+        if (cartaAprobacionPDF.getFileName().equalsIgnoreCase("")) {
 
-            
-            actual.setPubEstIdentificador(est);
-            String nombreAut = "";
-            nombreAut = "" + est.getEstNombre() + " " + est.getEstApellido();
+            FacesContext.getCurrentInstance().addMessage("cartaAprobacion", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Debe subir una evidencia de la publicacion", ""));
+        } else {
+            System.out.println("agregar");
+            Estudiante est = getAuxEstudiante();
+            try {
 
-            actual.setPubNombreAutor(nombreAut);
-            int numPubRevis = dao.getnumFilasPubRev();
-            actual.setPubIdentificador(numPubRevis);
+                actual.setPubEstIdentificador(est);
+                String nombreAut = "";
+                nombreAut = "" + est.getEstNombre() + " " + est.getEstApellido();
 
-            /* Dependiendo de si se adiciona una revista, un congreso,un libro o un  
+                actual.setPubNombreAutor(nombreAut);
+                int numPubRevis = dao.getnumFilasPubRev();
+                actual.setPubIdentificador(numPubRevis);
+
+                /* Dependiendo de si se adiciona una revista, un congreso,un libro o un  
                capitulo de un libro se crea el objeto respectivo*/
-            if (actual.getPubTipoPublicacion().equals("revista")) {
-                actual.getRevista().setPubIdentificador(numPubRevis);
-                actual.getRevista().setPublicacion(actual);
-                actual.setCongreso(null);
-                actual.setCapituloLibro(null);
-                actual.setLibro(null);
+                if (actual.getPubTipoPublicacion().equals("revista")) {
+                    actual.getRevista().setPubIdentificador(numPubRevis);
+                    actual.getRevista().setPublicacion(actual);
+                    actual.setCongreso(null);
+                    actual.setCapituloLibro(null);
+                    actual.setLibro(null);
 
+                }
+                if (actual.getPubTipoPublicacion().equals("congreso")) {
+
+                    actual.getCongreso().setPubIdentificador(numPubRevis);
+                    actual.getCongreso().setPublicacion(actual);
+                    actual.setRevista(null);
+                    actual.setCapituloLibro(null);
+                    actual.setLibro(null);
+                }
+
+                if (actual.getPubTipoPublicacion().equals("libro")) {
+                    /* SI no es una revista, el objeto a adicionar es un congreso*/
+                    actual.getLibro().setPubIdentificador(numPubRevis);
+                    actual.getLibro().setPublicacion(actual);
+                    actual.setRevista(null);
+                    actual.setCongreso(null);
+                    actual.setCapituloLibro(null);
+                }
+
+                if (actual.getPubTipoPublicacion().equals("capitulo_libro")) {
+                    /* SI no es una revista, el objeto a adicionar es un congreso*/
+                    actual.getCapituloLibro().setPubIdentificador(numPubRevis);
+                    actual.getCapituloLibro().setPublicacion(actual);
+                    actual.setRevista(null);
+                    actual.setCongreso(null);
+                    actual.setLibro(null);
+                }
+
+                ArrayList<Archivo> CollArchivo = new ArrayList<>();
+                int numArchivos = dao.getIdArchivo();
+                
+                Archivo archCartaAprob = new Archivo();
+                archCartaAprob.setArcPubIdentificador(actual);
+                archCartaAprob.setArcIdentificador(numArchivos);
+                CollArchivo.add(archCartaAprob);
+
+                //int numArchivos = numPubRevis;
+                if (!publicacionPDF.getFileName().equalsIgnoreCase("")) {
+                    Archivo archArt = new Archivo();
+                    numArchivos = numArchivos + 1;
+                    archArt.setArcPubIdentificador(actual);
+                    archArt.setArcIdentificador(numArchivos);
+                    CollArchivo.add(archArt);
+                }
+                if (!TablaContenidoPDF.getFileName().equalsIgnoreCase("")) {
+                    Archivo arcTablaC = new Archivo();
+                    numArchivos = numArchivos + 1;
+                    arcTablaC.setArcPubIdentificador(actual);
+                    arcTablaC.setArcIdentificador(numArchivos);
+                    CollArchivo.add(arcTablaC);
+                }
+                actual.setArchivoCollection(CollArchivo);
+                actual.agregarMetadatos(publicacionPDF, TablaContenidoPDF, cartaAprobacionPDF);
+
+                actual.setPubEstado("Activo");
+                dao.create(actual);
+                dao.flush();
+                mensajeconfirmarRegistro();
+                limpiarCampos();
+                redirigirAlistar(est.getEstUsuario());
+            } catch (IOException | GeneralSecurityException | DocumentException | PathNotFoundException | AccessDeniedException | EJBException ex) {
+                mensajeRegistroFallido();
+                limpiarCampos();
+                redirigirAlistar(est.getEstUsuario());
+                Logger.getLogger(PublicacionController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            if (actual.getPubTipoPublicacion().equals("congreso")) {
 
-                actual.getCongreso().setPubIdentificador(numPubRevis);
-                actual.getCongreso().setPublicacion(actual);
-                actual.setRevista(null);
-                actual.setCapituloLibro(null);
-                actual.setLibro(null);
-            }
-
-            if (actual.getPubTipoPublicacion().equals("libro")) {
-                /* SI no es una revista, el objeto a adicionar es un congreso*/
-                actual.getLibro().setPubIdentificador(numPubRevis);
-                actual.getLibro().setPublicacion(actual);
-                actual.setRevista(null);
-                actual.setCongreso(null);
-                actual.setCapituloLibro(null);
-            }
-
-            if (actual.getPubTipoPublicacion().equals("capitulo_libro")) {
-                /* SI no es una revista, el objeto a adicionar es un congreso*/
-                actual.getCapituloLibro().setPubIdentificador(numPubRevis);
-                actual.getCapituloLibro().setPublicacion(actual);
-                actual.setRevista(null);
-                actual.setCongreso(null);
-                actual.setLibro(null);
-            }
-
-            ArrayList<Archivo> CollArchivo = new ArrayList<>();
-            int numArchivos = dao.getIdArchivo();
-            //int numArchivos = numPubRevis;
-            Archivo archArt = new Archivo();
-            archArt.setArcPubIdentificador(actual);
-            archArt.setArcIdentificador(numArchivos);
-            CollArchivo.add(archArt);
-            Archivo arcTablaC = new Archivo();
-            numArchivos = numArchivos + 1;
-            arcTablaC.setArcPubIdentificador(actual);
-            arcTablaC.setArcIdentificador(numArchivos);
-            CollArchivo.add(arcTablaC);
-            actual.setArchivoCollection(CollArchivo);
-            actual.agregarMetadatos(publicacionPDF, TablaContenidoPDF,cartaAprobacionPDF);
-
-            actual.setPubEstado("Activo");
-            dao.create(actual);
-            dao.flush();
-            mensajeconfirmarRegistro();
-            limpiarCampos();
-            redirigirAlistar(est.getEstUsuario());
-        } catch (IOException | GeneralSecurityException | DocumentException | PathNotFoundException | AccessDeniedException | EJBException ex) {
-            mensajeRegistroFallido();
-            limpiarCampos();
-            redirigirAlistar(est.getEstUsuario());
-            Logger.getLogger(PublicacionController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-       }
 
     }
 
@@ -388,14 +394,12 @@ public class PublicacionController implements Serializable {
         Estudiante est = dao.obtenerEstudiante(nombreUsuario);
         setAuxEstudiante(est);
     }
-    
-       public void fijarEstudiante(String nombreUsuario) {
+
+    public void fijarEstudiante(String nombreUsuario) {
 
         Estudiante est = dao.obtenerEstudiante(nombreUsuario);
         setAuxEstudiante(est);
     }
-    
-    
 
     public String getnombreAut() {
         Estudiante est = getAuxEstudiante();
