@@ -694,6 +694,55 @@ public class Publicacion implements Serializable {
         }
     }
     
+    public archivoPDF descargaCartaAprobac() {
+        archivoPDF archivo = new archivoPDF();
+        String host = "http://localhost:8083/OpenKM";
+        String username = "okmAdmin";
+        String password = "admin";
+        OKMWebservices ws = OKMWebservicesFactory.newInstance(host, username, password);
+
+        try {
+            Map<String, String> properties = new HashMap();
+            /* Se comprueba el tipo de publicacion: revista congreso , un libro 
+                o un capitulo de un libro que se devolvera como resultado*/
+            if (this.pubTipoPublicacion.equalsIgnoreCase("revista")) {
+                properties.put("okp:revista.identPublicacion", "" + this.pubIdentificador);
+
+            }
+            if (this.pubTipoPublicacion.equalsIgnoreCase("congreso")) {
+                properties.put("okp:congreso.identPublicacion", "" + this.pubIdentificador);
+
+            }
+            if (this.pubTipoPublicacion.equalsIgnoreCase("libro")) {
+                properties.put("okp:libro.identPublicacion", "" + this.pubIdentificador);;
+            }
+            if (this.pubTipoPublicacion.equalsIgnoreCase("capitulo_libro")) {
+                properties.put("okp:capLibro.identPublicacion", "" + this.pubIdentificador);
+            }
+            // properties.put("okp:revista.identPublicacion", "" + this.pubIdentificador);
+            QueryParams qParams = new QueryParams();
+            qParams.setProperties(properties);
+            int posPub = 0;
+            for (QueryResult qr : ws.find(qParams)) {
+                if (posPub == 0) {
+                    String auxDoc = qr.getDocument().getPath();
+                    String[] arrayNombre = auxDoc.split("/");
+                    int pos = arrayNombre.length;
+                    String nombreDoc = arrayNombre[pos - 1];
+                    System.out.println("nombreDocPUB: " + nombreDoc);
+                    InputStream initialStream = ws.getContent(qr.getDocument().getPath());
+                    archivo.setArchivo(initialStream);
+                    archivo.setNombreArchivo(nombreDoc);
+                }
+                posPub = posPub + 1;
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return archivo;
+    }
+    
     public archivoPDF descargaPublicacion() {
         archivoPDF archivo = new archivoPDF();
         String host = "http://localhost:8083/OpenKM";
@@ -797,7 +846,6 @@ public class Publicacion implements Serializable {
         }
         return archivo;
     }
-
 
     public Integer getPubIdentificador() {
         return pubIdentificador;

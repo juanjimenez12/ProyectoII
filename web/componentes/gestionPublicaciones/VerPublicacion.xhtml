@@ -6,8 +6,8 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
- 
-    
+
+
     <h:head>
         <title>Ver estudiante</title>
     </h:head>
@@ -40,27 +40,34 @@
                         <h:outputLabel styleClass="addEspacio"/>
                         <h:outputLabel value="Descargar" styleClass="addEspacio"/>
                         <h:outputLabel styleClass="addEspacio"/>
-                           <h:commandButton value="Descargar Publicacion"   action="#{publicacionController.descargarPublicacion()}" class="btn btn-primary" />
-                                               <h:commandButton value="Descargar Tabla de Contenido"   action="#{publicacionController.descargarPubTC()}" class="btn btn-primary" />
-                                               <h:outputLabel styleClass="addEspacio"/>
-                        
-                       <h:outputLabel styleClass="addEspacio"/>
-                     
-                   
+                        <h:outputLabel styleClass="addEspacio"/>
+                        <h:commandButton value="Descargar Carta de Aprobacion"   action="#{publicacionController.descargarCartaAprobac()}" class="btn btn-primary" />
+                        <h:outputLabel styleClass="addEspacio"/>
+                        <h:outputLabel styleClass="addEspacio"/>
+                        <h:commandButton value="Descargar Publicacion"   action="#{publicacionController.descargarPublicacion()}" class="btn btn-primary" />
+                        <h:outputLabel styleClass="addEspacio"/>               
+                        <h:outputLabel styleClass="addEspacio"/>
+
+                        <h:commandButton value="Descargar Tabla de Contenido"   action="#{publicacionController.descargarPubTC()}" class="btn btn-primary" />
+                        <h:outputLabel styleClass="addEspacio"/>
+
+                        <h:outputLabel styleClass="addEspacio"/>
+
+
                         <h:outputLabel value="Vista Previa" styleClass="addEspacio" />
                         <h:outputLabel styleClass="addEspacio"/>
-                        
-                        
-                         
-                       <h:form>
-                      <div style="text-align: center"> 
-                           <h:commandButton value="Ver Publicacion"    action="#{publicacionController.pdfPub()}" class="btn btn-primary"  onclick="this.form.target='_blank'"  onblur="this.form.target='_self'"/>
-                                 <div class="divider"/>
-                           <h:commandButton value="Ver Tabla Contenido" action="#{publicacionController.pdfPubTC()}" class="btn btn-primary" onclick="this.form.target='_blank'"  onblur="this.form.target='_self'"/>
-                       </div>
-                       </h:form>
-          
-                    
+
+
+
+                        <h:form>
+                            <div style="text-align: center"> 
+                                <h:commandButton value="Ver Publicacion"    action="#{publicacionController.pdfPub()}" class="btn btn-primary"  onclick="this.form.target = '_blank'"  onblur="this.form.target = '_self'"/>
+                                <div class="divider"/>
+                                <h:commandButton value="Ver Tabla Contenido" action="#{publicacionController.pdfPubTC()}" class="btn btn-primary" onclick="this.form.target = '_blank'"  onblur="this.form.target = '_self'"/>
+                            </div>
+                        </h:form>
+
+
 
                         <h:outputLabel styleClass="addEspacio"/>
                         <h:outputLabel styleClass="addEspacio"/>
