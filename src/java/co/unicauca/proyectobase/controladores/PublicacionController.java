@@ -510,6 +510,13 @@ public class PublicacionController implements Serializable {
 
         Utilidades.redireccionar("/ProyectoII/faces/componentes/gestionPublicaciones/ListarPublicaciones.xhtml");
     }
+        public void redirigirAlistar() {
+   
+        limpiarCampos();
+        System.out.println("si esta pasando por aqui");
+
+        Utilidades.redireccionar("/ProyectoII/faces/componentes/gestionPublicaciones/ListarPublicaciones.xhtml");
+    }
 
     /*redireccion para volver a registrar */
     public void redirigirARegistrar(String nombreUsuario) {
