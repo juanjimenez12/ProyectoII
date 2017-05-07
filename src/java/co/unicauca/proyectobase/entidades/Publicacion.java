@@ -805,16 +805,17 @@ public class Publicacion implements Serializable {
         }
         return archivo;
     }
-
-    public archivoPDF descargaPubTC() {
+    
+        public archivoPDF descargaPubTC() {
         archivoPDF archivo = new archivoPDF();
-           String tipoPDF = "tablaContenido";
+        String tipoPDF = "tablaContenido";
+         
         String host = "http://localhost:8083/OpenKM";
         String username = "okmAdmin";
         String password = "admin";
         OKMWebservices ws = OKMWebservicesFactory.newInstance(host, username, password);
 
-        try {
+           try {
             
             Map<String, String> properties = new HashMap();
             /* Se comprueba el tipo de publicacion: revista congreso , un libro 
@@ -842,16 +843,12 @@ public class Publicacion implements Serializable {
             qParams.setProperties(properties);
             int posPub = 0;
             for (QueryResult qr : ws.find(qParams)) {
-                if (posPub == 1) {
+                if (posPub == 0) {
                     String auxDoc = qr.getDocument().getPath();
                     String[] arrayNombre = auxDoc.split("/");
-                    for (int i = 0; i < arrayNombre.length; i++) {
-                        System.out.println("arrayNombre[i]: " + arrayNombre[i] + " en la pos: " + i);
-
-                    }
                     int pos = arrayNombre.length;
                     String nombreDoc = arrayNombre[pos - 1];
-                    System.out.println("nombreDocPUBTC " + nombreDoc);
+                    System.out.println("nombreDocPUB: " + nombreDoc);
                     InputStream initialStream = ws.getContent(qr.getDocument().getPath());
                     archivo.setArchivo(initialStream);
                     archivo.setNombreArchivo(nombreDoc);
@@ -864,6 +861,9 @@ public class Publicacion implements Serializable {
         }
         return archivo;
     }
+        
+
+ 
 
     public Integer getPubIdentificador() {
         return pubIdentificador;
