@@ -161,6 +161,30 @@ public class PublicacionController implements Serializable {
         SimpleDateFormat format = new SimpleDateFormat("MM/yyyy");
         // facesContext.addMessage("event", new FacesMessage(FacesMessage.SEVERITY_INFO, "Date Selected", format.format(event.getObject())));
     }
+    
+    public void pdfCartaAprob() throws FileNotFoundException, IOException, IOException, IOException {
+        archivoPDF archivoPublic = actual.descargaCartaAprobac();
+        String[] nombreArchivo = archivoPublic.getNombreArchivo().split("\\.");
+        InputStream fis = archivoPublic.getArchivo();
+
+        HttpServletResponse response
+                = (HttpServletResponse) FacesContext.getCurrentInstance()
+                        .getExternalContext().getResponse();
+
+        response.setContentType("application/pdf");
+        // response.setHeader("Content-Disposition", "inline;filename=" + archivoPublic.getNombreArchivo() + ".pdf");
+        response.setHeader("Content-Disposition", "inline;filename=" + nombreArchivo[0] + ".pdf");
+        byte[] buffer = new byte[8 * 1024];
+        int bytesRead;
+        while ((bytesRead = fis.read(buffer)) != -1) {
+            response.getOutputStream().write(buffer, 0, bytesRead);
+        }
+
+        // response.getOutputStream().write(buf);
+        response.getOutputStream().flush();
+        response.getOutputStream().close();
+        FacesContext.getCurrentInstance().responseComplete();
+    }
 
     public void pdfPub() throws FileNotFoundException, IOException, IOException, IOException {
         archivoPDF archivoPublic = actual.descargaPublicacion();
