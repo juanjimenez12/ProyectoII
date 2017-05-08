@@ -6,20 +6,20 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
- 
+
 
 
     <h:head>
         <title>Registrar Publicacion</title>
     </h:head>
-    
-    
 
-    
-    
+
+
+
+
     <ui:composition template="../../plantillas/Estudiante.xhtml">
         <ui:define name="content">     
-            
+
             <p:panel header="Registrar publicación" >
 
                 <div class="alert alert-success alert-dismissable">
@@ -36,7 +36,7 @@
                             <h:outputText class="form-control" id="valNombreAutor"  value="#{publicacionController.getnombreAut()}" styleClass="addEspacio form-control"></h:outputText>
                             <h:outputLabel styleClass="addEspacio"/>
 
-                            
+
                             <!-- Autor o autores secundarios de la publicacion -->
                             <h:outputLabel value="Autores Secundarios  *" for="valASecundarios" styleClass="addEspacio"/>
                             <h:inputTextarea class="form-control" id="valASecundarios"  value="#{publicacionController.actual.pubAutoresSecundarios}" styleClass="addEspacio form-control">
@@ -48,7 +48,7 @@
                             <br/>
                             <p:message for="valASecundarios" id="msjValAutores" /> 
 
-                            
+
                             <!-- Fecha de la publicacion -->
                             <h:outputLabel for="event" value="Fecha Publicacion *" styleClass="addEspacio"/><br/>
                             <p:calendar id="event" value="#{publicacionController.actual.pubFechaPublicacion}">
@@ -58,7 +58,7 @@
                             </p:calendar>
                             <p:message for="event" id="msjValFechaPublicacion" />
 
-                            
+
                             <!-- DOI de la publicacion, solo para revista y congreso, es opcional -->
                             <h:outputLabel styleClass="addEspacio"/><br/>
                             <h:outputLabel value="DOI " for="valDOI" styleClass="addEspacio"/>
@@ -67,13 +67,14 @@
                                 <p:ajax event="blur" update="msjValDOI" />
                                 <f:ajax />
                             </h:inputText>
+                            <p:message for="valDOI" id="msjValDOI" /> 
                             <h:outputLink style="color: blue" value="https://goo.gl/AKGq9b">Conozca mas sobre el DOI</h:outputLink>
                             <h:outputLink style="color: blue; margin-left: 40px" value="https://goo.gl/jPGYcc">Verifique su DOI</h:outputLink>
                             <h:outputLabel styleClass="addEspacio" />
                             <br/>
                             <h:outputLabel styleClass="addEspacio"/>
 
-                            
+
                             <!-- ISBN de la publicacion, solo para congreso, libro y capitulo de libro, es obligatorio -->
                             <h:outputLabel value="ISBN *" for="valISBN" styleClass="addEspacio"/>
                             <h:inputText class="form-control" id="valISBN"  value="#{publicacionController.actual.pubIsbn}" styleClass="addEspacio form-control">     
@@ -90,8 +91,8 @@
                             <br/>
                             <h:outputLabel styleClass="addEspacio"/>
                             <h:outputLabel styleClass="addEspacio"/>
-                            
-                            
+
+
                             <!-- Tipo de publicacion -->
                             <h:outputLabel value="Tipo publicación* " for="valTipopublicacion" styleClass="addEspacio"/>
 
@@ -108,7 +109,7 @@
                             <h:panelGroup id="tipoPub">
                                 <h:panelGroup rendered="#{publicacionController.actual.pubTipoPublicacion == 'revista'}">
                                     <div id="revista_info">
-                                        
+
                                         <!-- Titulo de la revista donde se va a publicar, es obligatorio -->
                                         <h:outputLabel value="Titulo Articulo *" for="valNArticulo" styleClass="addEspacio"/>
                                         <h:inputText class="form-control" id="valNArticulo"  value="#{publicacionController.actual.revista.revTituloArticulo}" styleClass="addEspacio form-control">
@@ -235,13 +236,8 @@
                                         <h:outputLabel for="capLibroPDF" value="Capitulo Libro PDF" styleClass="addEspacio"/>
                                         <p:fileUpload id="capLibroPDF" value="#{publicacionController.publicacionPDF}"    required="true" mode="simple" allowTypes="/(\.|\/)(pdf)$/"></p:fileUpload>
                                         <h:outputLabel styleClass="addEspacio"/>
-
-
-
                                     </div>
                                 </h:panelGroup>
-
-
 
                             </h:panelGroup>
 
@@ -252,21 +248,17 @@
                             <h:outputLabel styleClass="addEspacio"/>
 
                             <h:outputLabel for="cartaAprobacionPDF" value="Evidencia de Publicacion * &nbsp;&nbsp;" />
-               
-                 <p:commandButton id="ayuda" onclick="return false;"  icon="ui-icon-help"/>
- 
-    <p:tooltip id="toolTipGrow" for="ayuda" value="En este campo se debe seleccionar la carta de aprobacion de la publicacion"
-               showEffect="clip" hideEffect="blind" />
-                            
+
+                            <p:commandButton id="ayuda" onclick="return false;"  icon="ui-icon-help"/>
+
+                            <p:tooltip id="toolTipGrow" for="ayuda" value="En este campo se debe seleccionar la carta de aprobacion de la publicacion"
+                                       showEffect="clip" hideEffect="blind" />
+
                             <p:fileUpload id="cartaAprobacionPDF"  value="#{publicacionController.cartaAprobacionPDF}" required="true" mode="simple" allowTypes="/(\.|\/)(pdf)$/" >
-                      
+
                             </p:fileUpload>  
-                             <p:messages id="cartaAprobacion" autoUpdate="false" closable="false" />
+                            <p:messages id="cartaAprobacion" autoUpdate="false" closable="false" />
                             <h:outputLabel styleClass="addEspacio"/>
-
-
-
-
                             <h:outputLabel styleClass="addEspacio"/>
                             <h:outputLabel styleClass="addEspacio"/>
                             <h:outputLabel styleClass="addEspacio"/><br/>
@@ -287,14 +279,7 @@
                             <h:outputLabel styleClass="addEspacio"/>
 
                         </h:form>
-                        
-                        
-              
-                            
- 
-                        
-                        
-                        
+
                     </div>
                     <div class="col-sm-3"></div>
                 </div>
