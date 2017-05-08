@@ -31,10 +31,13 @@
                     <div class="col-sm-6">
                         <h:form styleClass="elementosCentrados bajarGrid" id="panelRegistrar" enctype="multipart/form-data">           
 
+                            <!-- Autor principal de la publicacion -->
                             <h:outputLabel value="Nombre Autor " for="valNombreAutor" styleClass="addEspacio"/>
                             <h:outputText class="form-control" id="valNombreAutor"  value="#{publicacionController.getnombreAut()}" styleClass="addEspacio form-control"></h:outputText>
                             <h:outputLabel styleClass="addEspacio"/>
 
+                            
+                            <!-- Autor o autores secundarios de la publicacion -->
                             <h:outputLabel value="Autores Secundarios  *" for="valASecundarios" styleClass="addEspacio"/>
                             <h:inputTextarea class="form-control" id="valASecundarios"  value="#{publicacionController.actual.pubAutoresSecundarios}" styleClass="addEspacio form-control">
                                 <f:validator validatorId="validadorAutoresSecundarios" />
@@ -45,6 +48,8 @@
                             <br/>
                             <p:message for="valASecundarios" id="msjValAutores" /> 
 
+                            
+                            <!-- Fecha de la publicacion -->
                             <h:outputLabel for="event" value="Fecha Publicacion *" styleClass="addEspacio"/><br/>
                             <p:calendar id="event" value="#{publicacionController.actual.pubFechaPublicacion}">
                                 <p:ajax event="dateSelect" listener="#{publicacionController.onDateSelect}"  />
@@ -53,39 +58,41 @@
                             </p:calendar>
                             <p:message for="event" id="msjValFechaPublicacion" />
 
+                            
+                            <!-- DOI de la publicacion, solo para revista y congreso, es opcional -->
                             <h:outputLabel styleClass="addEspacio"/><br/>
                             <h:outputLabel value="DOI " for="valDOI" styleClass="addEspacio"/>
                             <h:inputText class="form-control" id="valDOI"  value="#{publicacionController.actual.pubDoi}" styleClass="addEspacio form-control">
-
+                                <f:validator validatorId="validadorDOI" />
+                                <p:ajax event="blur" update="msjValDOI" />
+                                <f:ajax />
                             </h:inputText>
                             <h:outputLink style="color: blue" value="https://goo.gl/AKGq9b">Conozca mas sobre el DOI</h:outputLink>
+                            <h:outputLink style="color: blue; margin-left: 40px" value="https://goo.gl/jPGYcc">Verifique su DOI</h:outputLink>
                             <h:outputLabel styleClass="addEspacio" />
                             <br/>
-
-
                             <h:outputLabel styleClass="addEspacio"/>
 
+                            
+                            <!-- ISBN de la publicacion, solo para congreso, libro y capitulo de libro, es obligatorio -->
                             <h:outputLabel value="ISBN *" for="valISBN" styleClass="addEspacio"/>
                             <h:inputText class="form-control" id="valISBN"  value="#{publicacionController.actual.pubIsbn}" styleClass="addEspacio form-control">     
-                                <f:ajax /> 
-
-                                <f:validator validatorId="validadorISSN" /> 
-                                <p:ajax event="blur" update="msjValISSN" />
-
+                                <f:validator validatorId="validadorISBN" /> 
+                                <p:ajax event="blur" update="msjValISBN" />
+                                <f:ajax />
                             </h:inputText>
-
-
-                            <p:message for="valISBN" id="msjValISSN" /> 
+                            <p:message for="valISBN" id="msjValISBN" /> 
 
                             <h:outputLink style="color: blue" value="https://goo.gl/jQFjlJ">Conozca mas sobre el ISBN</h:outputLink>
+                            <h:outputLink style="color: blue; margin-left: 40px" value="https://goo.gl/DQUANK">Verifique su ISBN</h:outputLink>
                             <h:outputLabel styleClass="addEspacio" />
                             <h:outputLabel styleClass="addEspacio" />
                             <br/>
-
-             
+                            <h:outputLabel styleClass="addEspacio"/>
                             <h:outputLabel styleClass="addEspacio"/>
                             
-                            <h:outputLabel styleClass="addEspacio"/>
+                            
+                            <!-- Tipo de publicacion -->
                             <h:outputLabel value="Tipo publicación* " for="valTipopublicacion" styleClass="addEspacio"/>
 
                             <h:selectOneMenu class="form-control"  id="valTipopublicacion" value="#{publicacionController.actual.pubTipoPublicacion}" styleClass="tipopublicacion  addEspacio form-control">                                    
@@ -95,13 +102,14 @@
                                 <f:selectItem itemLabel="Libro" itemValue="libro"></f:selectItem>
                                 <f:selectItem itemLabel="Capitulo Libro" itemValue="capitulo_libro"></f:selectItem>
                                 <f:ajax render="@form" />
-
                             </h:selectOneMenu>
 
                             <h:outputLabel styleClass="addEspacio"/>
                             <h:panelGroup id="tipoPub">
                                 <h:panelGroup rendered="#{publicacionController.actual.pubTipoPublicacion == 'revista'}">
                                     <div id="revista_info">
+                                        
+                                        <!-- Titulo de la revista donde se va a publicar, es obligatorio -->
                                         <h:outputLabel value="Titulo Articulo *" for="valNArticulo" styleClass="addEspacio"/>
                                         <h:inputText class="form-control" id="valNArticulo"  value="#{publicacionController.actual.revista.revTituloArticulo}" styleClass="addEspacio form-control">
                                             <f:validator validatorId="validadorNombreArticulo" />

@@ -18,32 +18,35 @@ import javax.faces.validator.ValidatorException;
  *
  * @author Juan
  */
-@FacesValidator(value="validadorISSN")
-public class ValidadorISSN implements Validator {
-    
+@FacesValidator(value="validadorISBN")
+public class ValidadorISBN implements Validator{
+
     @Override
     public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException {
-        String issn = value.toString();
-
-        if(issn.length() == 0) {
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "Se debe registrar el ISSN de la revista");
-            throw new ValidatorException(msg);
-        }
-
-        if(!validarFormato(issn)) {
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "El formato del ISSN es incorrecto");
+        String isbn = value.toString();
+        
+        if(isbn.length() == 0) {
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "Se debe registrar el ISBN de la publicación.");
             throw new ValidatorException(msg);
         }
         
+        if(!validarFormato(isbn)) {
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "El ISBN debe ser numérico.");
+            throw new ValidatorException(msg);
+        }
+        
+        if(isbn.length() != 13) {
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "El ISBN debe ser de trece dígitos.");
+            throw new ValidatorException(msg);
+        }
+
+
     }
     
-    //valida el formato del DOI
-    public boolean validarFormato(String doi) {
-        Pattern p = Pattern.compile("(^([0-9]{4})+[-]{1}+([0-9]{3})+([0-9X]{1}))$");
-        //http://www.issn.org/es/comprender-el-issn/que-es-el-numero-issn/
-        //https://goo.gl/jQFjlJ
-        //Pattern p = Pattern.compile("^([0-9])");
-        Matcher m = p.matcher(doi);
+    //valida que el ISBN contenga solo numeros
+    public boolean validarFormato(String isbn) {
+        Pattern p = Pattern.compile("^[0-9]*$");
+        Matcher m = p.matcher(isbn); 
         return m.find();
     }
     
