@@ -33,14 +33,14 @@
                             <p:outputLabel value="Iniciar Sesión" class="textIniciarSesion"/>
                             <h:inputText id="username" value="#{usuariosSessionController.nombreUsuario}" required="true" label="username" class="userNameClass"/>
                             <h:inputSecret id="password" value="#{usuariosSessionController.contrasena}" required="true" label="password" class="userPasswordClass"/>
-                            <p:commandButton class="botonInicioSesion" value="Ingresar" actionListener="#{usuariosSessionController.login()}" oncomplete="handleLoginRequest(xhr, status, args)" ></p:commandButton>
+                            <p:commandButton class="botonInicioSesion" value="Ingresar" action="#{usuariosSessionController.login()}" oncomplete="handleLoginRequest(xhr, status, args)" ></p:commandButton>
                         </h:panelGrid>
                     </h:form>
                 </div>
             </div>
         </div>
         <br />
-        <br />
+        <br />  
         <p:dialog visible="#{usuariosSessionController.errorSesion}" 
                   resizable="false" width="250"
                   widgetVar="errorInicioSesion" closable="false"

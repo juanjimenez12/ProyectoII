@@ -8,7 +8,7 @@ import co.unicauca.proyectobase.entidades.Publicacion;
 import co.unicauca.proyectobase.entidades.Revista;
 import co.unicauca.proyectobase.entidades.Libro;
 import co.unicauca.proyectobase.entidades.CapituloLibro;
-import static co.unicauca.proyectobase.entidades.GrupoTipoUsuario_.nombreUsuario;
+//import static co.unicauca.proyectobase.entidades.GrupoTipoUsuario_.nombreUsuario;
 import co.unicauca.proyectobase.entidades.archivoPDF;
 import co.unicauca.proyectobase.utilidades.Utilidades;
 import com.itextpdf.text.DocumentException;
@@ -16,21 +16,15 @@ import com.openkm.sdk4j.exception.AccessDeniedException;
 import com.openkm.sdk4j.exception.PathNotFoundException;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.security.GeneralSecurityException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -40,11 +34,8 @@ import javax.ejb.EJBException;
 /*import java.nio.charset.StandardCharsets;
 import java.util.Base64;*/
 import javax.faces.application.FacesMessage;
-import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-import javax.faces.event.ValueChangeEvent;
 import javax.servlet.http.HttpServletResponse;
-import org.apache.commons.io.IOUtils;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
@@ -124,8 +115,6 @@ public class PublicacionController implements Serializable {
     public void setCartaAprobacionPDF(UploadedFile cartaAprobacionPDF) {
         this.cartaAprobacionPDF = cartaAprobacionPDF;
     }
-    
-    
 
     public List<Publicacion> getListaPublicaciones() {
         return listaPublicaciones;
@@ -155,208 +144,305 @@ public class PublicacionController implements Serializable {
 
     public List<Publicacion> listado() {
         return dao.findAll();
-       
+
     }
-    
-       public List<Publicacion> listadoPublicaciones(String nombreUsuario) {
-         
-                   Estudiante est = dao.obtenerEstudiante(nombreUsuario);
+
+    public List<Publicacion> listadoPublicaciones(String nombreUsuario) {
+
+        Estudiante est = dao.obtenerEstudiante(nombreUsuario);
         setAuxEstudiante(est);
-        
-           int idEstudiante = est.getEstIdentificador();
-           return dao.ListadoPublicacionEst(idEstudiante);
-       
+
+        int idEstudiante = est.getEstIdentificador();
+        return dao.ListadoPublicacionEst(idEstudiante);
+
     }
 
     public void onDateSelect(SelectEvent event) {
         FacesContext facesContext = FacesContext.getCurrentInstance();
         SimpleDateFormat format = new SimpleDateFormat("MM/yyyy");
-        facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Date Selected", format.format(event.getObject())));
+        // facesContext.addMessage("event", new FacesMessage(FacesMessage.SEVERITY_INFO, "Date Selected", format.format(event.getObject())));
     }
 
-    public void descargarPublicacion() throws FileNotFoundException, IOException {
-        archivoPDF archivoPublic = actual.descargaPublicacion();
+    public void pdfCartaAprob() throws FileNotFoundException, IOException, IOException, IOException {
+        archivoPDF archivoPublic = actual.descargaCartaAprobac();
+        if (archivoPublic.getNombreArchivo().equals("")) {
+            FacesContext.getCurrentInstance().addMessage("error", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Para esta publicacion el Usuario no ha cargado un PDF de la carta de aprobacion  ", ""));
 
-        InputStream fis = archivoPublic.getArchivo();
-        String[] nombreArchivo = archivoPublic.getNombreArchivo().split("\\.");
-        HttpServletResponse response
-                = (HttpServletResponse) FacesContext.getCurrentInstance()
-                        .getExternalContext().getResponse();
+        } else {
+            String[] nombreArchivo = archivoPublic.getNombreArchivo().split("\\.");
+            InputStream fis = archivoPublic.getArchivo();
 
-        response.setContentType("application/pdf");
-        response.setHeader("Content-Disposition", "attachment;filename=" + nombreArchivo[0] + ".pdf");
+            HttpServletResponse response
+                    = (HttpServletResponse) FacesContext.getCurrentInstance()
+                            .getExternalContext().getResponse();
 
-        byte[] buffer = new byte[8 * 1024];
-        int bytesRead;
-        while ((bytesRead = fis.read(buffer)) != -1) {
-            response.getOutputStream().write(buffer, 0, bytesRead);
+            response.setContentType("application/pdf");
+            // response.setHeader("Content-Disposition", "inline;filename=" + archivoPublic.getNombreArchivo() + ".pdf");
+            response.setHeader("Content-Disposition", "inline;filename=" + nombreArchivo[0] + ".pdf");
+            byte[] buffer = new byte[8 * 1024];
+            int bytesRead;
+            while ((bytesRead = fis.read(buffer)) != -1) {
+                response.getOutputStream().write(buffer, 0, bytesRead);
+            }
+
+            // response.getOutputStream().write(buf);
+            response.getOutputStream().flush();
+            response.getOutputStream().close();
+            FacesContext.getCurrentInstance().responseComplete();
         }
-
-        // response.getOutputStream().write(buf);
-        response.getOutputStream().flush();
-        response.getOutputStream().close();
-        FacesContext.getCurrentInstance().responseComplete();
     }
 
     public void pdfPub() throws FileNotFoundException, IOException, IOException, IOException {
         archivoPDF archivoPublic = actual.descargaPublicacion();
-        String[] nombreArchivo = archivoPublic.getNombreArchivo().split("\\.");
-        InputStream fis = archivoPublic.getArchivo();
 
-        HttpServletResponse response
-                = (HttpServletResponse) FacesContext.getCurrentInstance()
-                        .getExternalContext().getResponse();
+        if (archivoPublic.getNombreArchivo().equals("")) {
+            FacesContext.getCurrentInstance().addMessage("error", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Usuario no ha cargado un PDF para esta publicacion", ""));
 
-        response.setContentType("application/pdf");
-        // response.setHeader("Content-Disposition", "inline;filename=" + archivoPublic.getNombreArchivo() + ".pdf");
-        response.setHeader("Content-Disposition", "inline;filename=" + nombreArchivo[0] + ".pdf");
-        byte[] buffer = new byte[8 * 1024];
-        int bytesRead;
-        while ((bytesRead = fis.read(buffer)) != -1) {
-            response.getOutputStream().write(buffer, 0, bytesRead);
+        } else {
+
+            String[] nombreArchivo = archivoPublic.getNombreArchivo().split("\\.");
+            InputStream fis = archivoPublic.getArchivo();
+
+            HttpServletResponse response
+                    = (HttpServletResponse) FacesContext.getCurrentInstance()
+                            .getExternalContext().getResponse();
+
+            response.setContentType("application/pdf");
+            // response.setHeader("Content-Disposition", "inline;filename=" + archivoPublic.getNombreArchivo() + ".pdf");
+            response.setHeader("Content-Disposition", "inline;filename=" + nombreArchivo[0] + ".pdf");
+            byte[] buffer = new byte[8 * 1024];
+            int bytesRead;
+            while ((bytesRead = fis.read(buffer)) != -1) {
+                response.getOutputStream().write(buffer, 0, bytesRead);
+            }
+
+            // response.getOutputStream().write(buf);
+            response.getOutputStream().flush();
+            response.getOutputStream().close();
+            FacesContext.getCurrentInstance().responseComplete();
+
         }
 
-        // response.getOutputStream().write(buf);
-        response.getOutputStream().flush();
-        response.getOutputStream().close();
-        FacesContext.getCurrentInstance().responseComplete();
     }
 
     public void pdfPubTC() throws FileNotFoundException, IOException, IOException, IOException {
         archivoPDF archivoPublic = actual.descargaPubTC();
-        String[] nombreArchivo = archivoPublic.getNombreArchivo().split("\\.");
-        InputStream fis = archivoPublic.getArchivo();
+        if (archivoPublic.getNombreArchivo().equals("")) {
+            FacesContext.getCurrentInstance().addMessage("error", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Usuario no ha cargado un PDF de la tabla de contenido", ""));
 
-        HttpServletResponse response
-                = (HttpServletResponse) FacesContext.getCurrentInstance()
-                        .getExternalContext().getResponse();
+        } else {
+            String[] nombreArchivo = archivoPublic.getNombreArchivo().split("\\.");
+            InputStream fis = archivoPublic.getArchivo();
 
-        response.setContentType("application/pdf");
-        // response.setHeader("Content-Disposition", "inline;filename=" + archivoPublic.getNombreArchivo() + ".pdf");
-        response.setHeader("Content-Disposition", "inline;filename=" + nombreArchivo[0] + ".pdf");
-        byte[] buffer = new byte[8 * 1024];
-        int bytesRead;
-        while ((bytesRead = fis.read(buffer)) != -1) {
-            response.getOutputStream().write(buffer, 0, bytesRead);
+            HttpServletResponse response
+                    = (HttpServletResponse) FacesContext.getCurrentInstance()
+                            .getExternalContext().getResponse();
+
+            response.setContentType("application/pdf");
+            // response.setHeader("Content-Disposition", "inline;filename=" + archivoPublic.getNombreArchivo() + ".pdf");
+            response.setHeader("Content-Disposition", "inline;filename=" + nombreArchivo[0] + ".pdf");
+            byte[] buffer = new byte[8 * 1024];
+            int bytesRead;
+            while ((bytesRead = fis.read(buffer)) != -1) {
+                response.getOutputStream().write(buffer, 0, bytesRead);
+            }
+
+            // response.getOutputStream().write(buf);
+            response.getOutputStream().flush();
+            response.getOutputStream().close();
+            FacesContext.getCurrentInstance().responseComplete();
+
+        }
+    }
+
+    public void descargarCartaAprobac() throws FileNotFoundException, IOException {
+        archivoPDF archivoPublic = actual.descargaCartaAprobac();
+        if (archivoPublic.getNombreArchivo().equals("")) {
+            FacesContext.getCurrentInstance().addMessage("error", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Para esta publicacion el Usuario no ha cargado un PDF de la carta de aprobacion  ", ""));
+
+        } else {
+
+            InputStream fis = archivoPublic.getArchivo();
+            String[] nombreArchivo = archivoPublic.getNombreArchivo().split("\\.");
+            HttpServletResponse response
+                    = (HttpServletResponse) FacesContext.getCurrentInstance()
+                            .getExternalContext().getResponse();
+
+            response.setContentType("application/pdf");
+            response.setHeader("Content-Disposition", "attachment;filename=" + nombreArchivo[0] + ".pdf");
+
+            byte[] buffer = new byte[8 * 1024];
+            int bytesRead;
+            while ((bytesRead = fis.read(buffer)) != -1) {
+                response.getOutputStream().write(buffer, 0, bytesRead);
+            }
+
+            // response.getOutputStream().write(buf);
+            response.getOutputStream().flush();
+            response.getOutputStream().close();
+            FacesContext.getCurrentInstance().responseComplete();
+        }
+    }
+
+    public void descargarPublicacion() throws FileNotFoundException, IOException {
+        archivoPDF archivoPublic = actual.descargaPublicacion();
+        if (archivoPublic.getNombreArchivo().equals("")) {
+            FacesContext.getCurrentInstance().addMessage("error", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Usuario no ha cargado un PDF para esta publicacion", ""));
+
+        } else {
+            InputStream fis = archivoPublic.getArchivo();
+            String[] nombreArchivo = archivoPublic.getNombreArchivo().split("\\.");
+            HttpServletResponse response
+                    = (HttpServletResponse) FacesContext.getCurrentInstance()
+                            .getExternalContext().getResponse();
+
+            response.setContentType("application/pdf");
+            response.setHeader("Content-Disposition", "attachment;filename=" + nombreArchivo[0] + ".pdf");
+
+            byte[] buffer = new byte[8 * 1024];
+            int bytesRead;
+            while ((bytesRead = fis.read(buffer)) != -1) {
+                response.getOutputStream().write(buffer, 0, bytesRead);
+            }
+
+            // response.getOutputStream().write(buf);
+            response.getOutputStream().flush();
+            response.getOutputStream().close();
+            FacesContext.getCurrentInstance().responseComplete();
         }
 
-        // response.getOutputStream().write(buf);
-        response.getOutputStream().flush();
-        response.getOutputStream().close();
-        FacesContext.getCurrentInstance().responseComplete();
     }
 
     public void descargarPubTC() throws FileNotFoundException, IOException {
         archivoPDF archivoPubTC = actual.descargaPubTC();
-        byte[] buf;
-        InputStream fis = archivoPubTC.getArchivo();
-        String[] nombreArchivo = archivoPubTC.getNombreArchivo().split("\\.");
+        if (archivoPubTC.getNombreArchivo().equals("")) {
+            FacesContext.getCurrentInstance().addMessage("error", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Usuario no ha cargado un PDF de la tabla de contenido", ""));
 
-        HttpServletResponse response
-                = (HttpServletResponse) FacesContext.getCurrentInstance()
-                        .getExternalContext().getResponse();
+        } else {
+            byte[] buf;
+            InputStream fis = archivoPubTC.getArchivo();
+            String[] nombreArchivo = archivoPubTC.getNombreArchivo().split("\\.");
 
-        response.setContentType("application/pdf");
-        response.setHeader("Content-Disposition", "attachment;filename=" + nombreArchivo[0] + ".pdf");
+            HttpServletResponse response
+                    = (HttpServletResponse) FacesContext.getCurrentInstance()
+                            .getExternalContext().getResponse();
 
-        byte[] buffer = new byte[8 * 1024];
-        int bytesRead;
-        while ((bytesRead = fis.read(buffer)) != -1) {
-            response.getOutputStream().write(buffer, 0, bytesRead);
+            response.setContentType("application/pdf");
+            response.setHeader("Content-Disposition", "attachment;filename=" + nombreArchivo[0] + ".pdf");
+
+            byte[] buffer = new byte[8 * 1024];
+            int bytesRead;
+            while ((bytesRead = fis.read(buffer)) != -1) {
+                response.getOutputStream().write(buffer, 0, bytesRead);
+            }
+
+            // response.getOutputStream().write(buf);
+            response.getOutputStream().flush();
+            response.getOutputStream().close();
+            FacesContext.getCurrentInstance().responseComplete();
         }
 
-        // response.getOutputStream().write(buf);
-        response.getOutputStream().flush();
-        response.getOutputStream().close();
-        FacesContext.getCurrentInstance().responseComplete();
     }
 
     public void agregar() {
-        if(cartaAprobacionPDF.getFileName().equalsIgnoreCase("")){
-       
-         FacesContext.getCurrentInstance().addMessage("mensaje",new FacesMessage(FacesMessage.SEVERITY_ERROR, "Debe subir una evidencia de la publicacion", ""));
-        }
-        else
-        { 
-        System.out.println("agregar");
-        Estudiante est = getAuxEstudiante();
-        try {
+        if (cartaAprobacionPDF.getFileName().equalsIgnoreCase("")) {
 
-            
-            actual.setPubEstIdentificador(est);
-            String nombreAut = "";
-            nombreAut = "" + est.getEstNombre() + " " + est.getEstApellido();
+            FacesContext.getCurrentInstance().addMessage("cartaAprobacion", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Debe subir una evidencia de la publicacion", ""));
+        } else {
+            System.out.println("agregar");
+            Estudiante est = getAuxEstudiante();
+            try {
 
-            actual.setPubNombreAutor(nombreAut);
-            int numPubRevis = dao.getnumFilasPubRev();
-            actual.setPubIdentificador(numPubRevis);
+                actual.setPubEstIdentificador(est);
+                String nombreAut = "";
+                nombreAut = "" + est.getEstNombre() + " " + est.getEstApellido();
 
-            /* Dependiendo de si se adiciona una revista, un congreso,un libro o un  
+                actual.setPubNombreAutor(nombreAut);
+                int numPubRevis = dao.getnumFilasPubRev();
+                actual.setPubIdentificador(numPubRevis);
+
+                /* Dependiendo de si se adiciona una revista, un congreso,un libro o un  
                capitulo de un libro se crea el objeto respectivo*/
-            if (actual.getPubTipoPublicacion().equals("revista")) {
-                actual.getRevista().setPubIdentificador(numPubRevis);
-                actual.getRevista().setPublicacion(actual);
-                actual.setCongreso(null);
-                actual.setCapituloLibro(null);
-                actual.setLibro(null);
+                if (actual.getPubTipoPublicacion().equals("revista")) {
+                    actual.getRevista().setPubIdentificador(numPubRevis);
+                    actual.getRevista().setPublicacion(actual);
+                    actual.setCongreso(null);
+                    actual.setCapituloLibro(null);
+                    actual.setLibro(null);
 
+                }
+                if (actual.getPubTipoPublicacion().equals("congreso")) {
+
+                    actual.getCongreso().setPubIdentificador(numPubRevis);
+                    actual.getCongreso().setPublicacion(actual);
+                    actual.setRevista(null);
+                    actual.setCapituloLibro(null);
+                    actual.setLibro(null);
+                }
+
+                if (actual.getPubTipoPublicacion().equals("libro")) {
+                    /* SI no es una revista, el objeto a adicionar es un congreso*/
+                    actual.getLibro().setPubIdentificador(numPubRevis);
+                    actual.getLibro().setPublicacion(actual);
+                    actual.setRevista(null);
+                    actual.setCongreso(null);
+                    actual.setCapituloLibro(null);
+                }
+
+                if (actual.getPubTipoPublicacion().equals("capitulo_libro")) {
+                    /* SI no es una revista, el objeto a adicionar es un congreso*/
+                    actual.getCapituloLibro().setPubIdentificador(numPubRevis);
+                    actual.getCapituloLibro().setPublicacion(actual);
+                    actual.setRevista(null);
+                    actual.setCongreso(null);
+                    actual.setLibro(null);
+                }
+
+                ArrayList<Archivo> CollArchivo = new ArrayList<>();
+                int numArchivos = dao.getIdArchivo();
+
+                Archivo archCartaAprob = new Archivo();
+                archCartaAprob.setArcPubIdentificador(actual);
+                archCartaAprob.setArcIdentificador(numArchivos);
+                archCartaAprob.setArctipoPDFcargar("cartaAprobacion");
+                CollArchivo.add(archCartaAprob);
+
+                //int numArchivos = numPubRevis;
+                if (!publicacionPDF.getFileName().equalsIgnoreCase("")) {
+                    Archivo archArt = new Archivo();
+                    numArchivos = numArchivos + 1;
+                    archArt.setArcPubIdentificador(actual);
+                    archArt.setArcIdentificador(numArchivos);
+                    archArt.setArctipoPDFcargar("tipoPublicacion");
+                    CollArchivo.add(archArt);
+                }
+                if (!TablaContenidoPDF.getFileName().equalsIgnoreCase("")) {
+                    Archivo arcTablaC = new Archivo();
+                    numArchivos = numArchivos + 1;
+                    arcTablaC.setArcPubIdentificador(actual);
+                    arcTablaC.setArcIdentificador(numArchivos);
+                    arcTablaC.setArctipoPDFcargar("tablaContenido");
+                    CollArchivo.add(arcTablaC);
+                }
+                actual.setArchivoCollection(CollArchivo);
+                actual.agregarMetadatos(publicacionPDF, TablaContenidoPDF, cartaAprobacionPDF);
+
+                actual.setPubEstado("Activo");
+                dao.create(actual);
+                dao.flush();
+                mensajeconfirmarRegistro();
+                limpiarCampos();
+                redirigirAlistar();
+                // redirigirAlistar(est.getEstUsuario());
+            } catch (IOException | GeneralSecurityException | DocumentException | PathNotFoundException | AccessDeniedException | EJBException ex) {
+                mensajeRegistroFallido();
+                limpiarCampos();
+                redirigirAlistar();
+                //    redirigirAlistar(est.getEstUsuario());
+                Logger.getLogger(PublicacionController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            if (actual.getPubTipoPublicacion().equals("congreso")) {
 
-                actual.getCongreso().setPubIdentificador(numPubRevis);
-                actual.getCongreso().setPublicacion(actual);
-                actual.setRevista(null);
-                actual.setCapituloLibro(null);
-                actual.setLibro(null);
-            }
-
-            if (actual.getPubTipoPublicacion().equals("libro")) {
-                /* SI no es una revista, el objeto a adicionar es un congreso*/
-                actual.getLibro().setPubIdentificador(numPubRevis);
-                actual.getLibro().setPublicacion(actual);
-                actual.setRevista(null);
-                actual.setCongreso(null);
-                actual.setCapituloLibro(null);
-            }
-
-            if (actual.getPubTipoPublicacion().equals("capitulo_libro")) {
-                /* SI no es una revista, el objeto a adicionar es un congreso*/
-                actual.getCapituloLibro().setPubIdentificador(numPubRevis);
-                actual.getCapituloLibro().setPublicacion(actual);
-                actual.setRevista(null);
-                actual.setCongreso(null);
-                actual.setLibro(null);
-            }
-
-            ArrayList<Archivo> CollArchivo = new ArrayList<>();
-            int numArchivos = dao.getIdArchivo();
-            //int numArchivos = numPubRevis;
-            Archivo archArt = new Archivo();
-            archArt.setArcPubIdentificador(actual);
-            archArt.setArcIdentificador(numArchivos);
-            CollArchivo.add(archArt);
-            Archivo arcTablaC = new Archivo();
-            numArchivos = numArchivos + 1;
-            arcTablaC.setArcPubIdentificador(actual);
-            arcTablaC.setArcIdentificador(numArchivos);
-            CollArchivo.add(arcTablaC);
-            actual.setArchivoCollection(CollArchivo);
-            actual.agregarMetadatos(publicacionPDF, TablaContenidoPDF,cartaAprobacionPDF);
-
-            actual.setPubEstado("Activo");
-            dao.create(actual);
-            dao.flush();
-            mensajeconfirmarRegistro();
-            limpiarCampos();
-            redirigirAlistar(est.getEstUsuario());
-        } catch (IOException | GeneralSecurityException | DocumentException | PathNotFoundException | AccessDeniedException | EJBException ex) {
-            mensajeRegistroFallido();
-            limpiarCampos();
-            redirigirAlistar(est.getEstUsuario());
-            Logger.getLogger(PublicacionController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-       }
 
     }
 
@@ -388,14 +474,12 @@ public class PublicacionController implements Serializable {
         Estudiante est = dao.obtenerEstudiante(nombreUsuario);
         setAuxEstudiante(est);
     }
-    
-       public void fijarEstudiante(String nombreUsuario) {
+
+    public void fijarEstudiante(String nombreUsuario) {
 
         Estudiante est = dao.obtenerEstudiante(nombreUsuario);
         setAuxEstudiante(est);
     }
-    
-    
 
     public String getnombreAut() {
         Estudiante est = getAuxEstudiante();
@@ -460,6 +544,14 @@ public class PublicacionController implements Serializable {
     /*redireccionamiento para boton cancelar*/
     public void redirigirAlistar(String nombreUsuario) {
         fijarEstudiante(nombreUsuario);
+        limpiarCampos();
+        System.out.println("si esta pasando por aqui");
+
+        Utilidades.redireccionar("/ProyectoII/faces/componentes/gestionPublicaciones/ListarPublicaciones.xhtml");
+    }
+
+    public void redirigirAlistar() {
+
         limpiarCampos();
         System.out.println("si esta pasando por aqui");
 

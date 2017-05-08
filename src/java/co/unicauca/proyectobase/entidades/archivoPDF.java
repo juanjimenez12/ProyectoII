@@ -33,6 +33,7 @@ public class archivoPDF {
     private InputStream archivo; 
 
     public archivoPDF() {
+       this.nombreArchivo = "";
     }
 
     public archivoPDF(String nombreArchivo, InputStream archivo) {

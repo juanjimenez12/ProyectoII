@@ -67,6 +67,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `doctorado`.`archivo` (
   `arc_identificador` INT NOT NULL AUTO_INCREMENT,
   `arc_pub_identificador` INT NOT NULL,
+  `arc_tipoPDF_cargar` VARCHAR(40) NULL,
   PRIMARY KEY (`arc_identificador`),
   INDEX `fk_archivo_publicacion1_idx` (`arc_pub_identificador` ASC),
   CONSTRAINT `fk_archivo_publicacion1`
