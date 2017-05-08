@@ -105,7 +105,8 @@ public class PublicacionFacade extends AbstractFacade<Publicacion> {
       
         try {
             System.out.println("co.unicauca.proyectobase.dao.PublicacionFacade.ListadoPublicacionEst()");
-            return query.getResultList();
+            List<Publicacion> aux = query.getResultList();
+            return aux;
         } catch (Exception e) {
             System.out.println("Error " + e.getMessage());
             System.out.println(e);

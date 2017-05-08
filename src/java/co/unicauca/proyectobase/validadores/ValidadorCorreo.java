@@ -74,12 +74,12 @@ public class ValidadorCorreo implements Validator {
                 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "El correo no tiene @");
                 throw new ValidatorException(msg);
             }
-            else {
-                if(!validarDominio(correo.split("@")[1])) {
-                    FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "El correo debe ser: gmail.com, unicuauca.edu.co o hotmail.com");
-                    throw new ValidatorException(msg);
-                }
-            }
+//            else {
+//                if(!validarDominio(correo.split("@")[1])) {
+//                    FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "El correo debe ser: gmail.com, unicuauca.edu.co o hotmail.com");
+//                    throw new ValidatorException(msg);
+//                }
+//            }
         }
         else {
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "El formato del correo es incorrecto");
