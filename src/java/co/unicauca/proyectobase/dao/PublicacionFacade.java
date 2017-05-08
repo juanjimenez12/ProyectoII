@@ -100,13 +100,16 @@ public class PublicacionFacade extends AbstractFacade<Publicacion> {
         String comSimple = "\'";
         String queryStr;
         queryStr = "SELECT * FROM doctorado.publicacion where pub_est_identificador = " + comSimple + estIdentificador + comSimple;
-        javax.persistence.Query query = getEntityManager().createNativeQuery(queryStr);
 //        List results = 
       
+javax.persistence.Query   query=getEntityManager().createNamedQuery("findAllPub_Est");
+query.setParameter("identificacion", estIdentificador);
+//query1.getResultList();
+
         try {
             System.out.println("co.unicauca.proyectobase.dao.PublicacionFacade.ListadoPublicacionEst()");
-            List<Publicacion> aux = query.getResultList();
-            return aux;
+             
+            return query.getResultList();
         } catch (Exception e) {
             System.out.println("Error " + e.getMessage());
             System.out.println(e);
