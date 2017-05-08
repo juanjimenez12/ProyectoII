@@ -7,7 +7,6 @@ package co.unicauca.proyectobase.entidades;
 
 import java.io.Serializable;
 import java.util.Collection;
-import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -69,14 +68,12 @@ import com.openkm.sdk4j.exception.UserQuotaExceededException;
 import com.openkm.sdk4j.exception.VirusDetectedException;
 import com.openkm.sdk4j.exception.WebserviceException;
 import java.io.File;
-import java.io.OutputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import org.primefaces.model.UploadedFile;
 
@@ -183,193 +180,6 @@ public class Publicacion implements Serializable {
         this.pubTipoPublicacion = pubTipoPublicacion;
         this.pubFechaPublicacion = pubFechaPublicacion;
     }
-
-    public Integer getPubIdentificador() {
-        return pubIdentificador;
-    }
-
-    public void setPubIdentificador(Integer pubIdentificador) {
-        this.pubIdentificador = pubIdentificador;
-    }
-
-    public String getPubHash() {
-        return pubHash;
-    }
-
-    public void setPubHash(String pubHash) {
-        this.pubHash = pubHash;
-    }
-
-    public String getPubDiropkm() {
-        return pubDiropkm;
-    }
-
-    public void setPubDiropkm(String pubDiropkm) {
-        this.pubDiropkm = pubDiropkm;
-    }
-
-    public Integer getPubCreditos() {
-        return pubCreditos;
-    }
-
-    public void setPubCreditos(Integer pubCreditos) {
-        this.pubCreditos = pubCreditos;
-    }
-
-    public Date getPubFechaVisado() {
-        return pubFechaVisado;
-    }
-
-    public void setPubFechaVisado(Date pubFechaVisado) {
-        this.pubFechaVisado = pubFechaVisado;
-    }
-
-    public Date getPubFechaRegistro() {
-        return pubFechaRegistro;
-    }
-
-    public void setPubFechaRegistro(Date pubFechaRegistro) {
-        this.pubFechaRegistro = pubFechaRegistro;
-    }
-
-    public String getPubEstado() {
-        return pubEstado;
-    }
-
-    public void setPubEstado(String pubEstado) {
-        this.pubEstado = pubEstado;
-    }
-
-    public String getPubNombreAutor() {
-        return pubNombreAutor;
-    }
-
-    public void setPubNombreAutor(String pubNombreAutor) {
-        this.pubNombreAutor = pubNombreAutor;
-    }
-
-    public String getPubAutoresSecundarios() {
-        return pubAutoresSecundarios;
-    }
-
-    public void setPubAutoresSecundarios(String pubAutoresSecundarios) {
-        this.pubAutoresSecundarios = pubAutoresSecundarios;
-    }
-
-    public String getPubTipoPublicacion() {
-        return pubTipoPublicacion;
-    }
-
-    public void setPubTipoPublicacion(String pubTipoPublicacion) {
-        this.pubTipoPublicacion = pubTipoPublicacion;
-    }
-
-    public Date getPubFechaPublicacion() {
-        return pubFechaPublicacion;
-    }
-
-    public void setPubFechaPublicacion(Date pubFechaPublicacion) {
-        this.pubFechaPublicacion = pubFechaPublicacion;
-    }
-
-    public String getPubDoi() {
-        return pubDoi;
-    }
-
-    public void setPubDoi(String pubDoi) {
-        this.pubDoi = pubDoi;
-    }
-
-    public String getPubIsbn() {
-        return pubIsbn;
-    }
-
-    public void setPubIsbn(String pubIsbn) {
-        this.pubIsbn = pubIsbn;
-    }
-
-    public String getPubIssn() {
-        return pubIssn;
-    }
-
-    public void setPubIssn(String pubIssn) {
-        this.pubIssn = pubIssn;
-    }
-
-    public Libro getLibro() {
-        return libro;
-    }
-
-    public void setLibro(Libro libro) {
-        this.libro = libro;
-    }
-
-    @XmlTransient
-    public Collection<Archivo> getArchivoCollection() {
-        return archivoCollection;
-    }
-
-    public void setArchivoCollection(Collection<Archivo> archivoCollection) {
-        this.archivoCollection = archivoCollection;
-    }
-
-    public Congreso getCongreso() {
-        return congreso;
-    }
-
-    public void setCongreso(Congreso congreso) {
-        this.congreso = congreso;
-    }
-
-    public Revista getRevista() {
-        return revista;
-    }
-
-    public void setRevista(Revista revista) {
-        this.revista = revista;
-    }
-
-    public CapituloLibro getCapituloLibro() {
-        return capituloLibro;
-    }
-
-    public void setCapituloLibro(CapituloLibro capituloLibro) {
-        this.capituloLibro = capituloLibro;
-    }
-
-    public Estudiante getPubEstIdentificador() {
-        return pubEstIdentificador;
-    }
-
-    public void setPubEstIdentificador(Estudiante pubEstIdentificador) {
-        this.pubEstIdentificador = pubEstIdentificador;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (pubIdentificador != null ? pubIdentificador.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Publicacion)) {
-            return false;
-        }
-        Publicacion other = (Publicacion) object;
-        if ((this.pubIdentificador == null && other.pubIdentificador != null) || (this.pubIdentificador != null && !this.pubIdentificador.equals(other.pubIdentificador))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "co.unicauca.proyectobase.entidades.Publicacion[ pubIdentificador=" + pubIdentificador + " ]";
-    }
-
     public void agregarMetadatos(UploadedFile ArticuloPDF, UploadedFile TablaContenidoPDF, UploadedFile cartaAprobacionPDF) throws IOException, GeneralSecurityException, DocumentException, PathNotFoundException, AccessDeniedException {
 
         /*Nombre de los archivos que se almacenaran en el repositorio*/
@@ -378,6 +188,7 @@ public class Publicacion implements Serializable {
         String codigoFirma = mpdf.codigoFirma(codigoEst);
         codigoFirma = codigoFirma.trim();
 
+        String nombreCartaAprob = "Carta de Aprobacion-" + codigoFirma;
         String nombrePublicacion = "";
         String nombreTablaC = "Tabla de Contenido-" + codigoFirma;
 
@@ -401,8 +212,12 @@ public class Publicacion implements Serializable {
         /*Obtiene la ruta de la ubicacion del servidor donde se almacenaran 
           temporalmente los archivos ,para luego subirlos al Gestor Documental OpenKm  */
         String realPath = FacesContext.getCurrentInstance().getExternalContext().getRealPath("/");
+        //   String destCartaAprob = realPath + "WEB-INF\\temp\\Tabla de Contenido.pdf";
+        String destCartaAprob = realPath + "WEB-INF\\temp\\" + nombreCartaAprob + ".pdf";
         String destArticulo = realPath + "WEB-INF\\temp\\" + nombrePublicacion + ".pdf";
-        String destTablaC = realPath + "WEB-INF\\temp\\Tabla de Contenido.pdf";
+        //  String destTablaC = realPath + "WEB-INF\\temp\\Tabla de Contenido.pdf";
+        String destTablaC = realPath + "WEB-INF\\temp\\" + nombreTablaC + ".pdf";
+
 
         /*  Estampa de Tiempo
             Obtiene el dia y hora actual del servidor para posteriormente adicionrarlo
@@ -416,19 +231,19 @@ public class Publicacion implements Serializable {
         /*  Metodo para almacenar los metadatos de la Carte de Aprobacion , Articulo y Tabla de Contenido 
             para almacenarlo en formato PDFA */
         ArrayList<tipoPDF_cargar> subidaArchivos = new ArrayList<>();
-        
-            tipoPDF_cargar cartaAprobacion = new tipoPDF_cargar();
-            cartaAprobacion.setNombreArchivo(nombreTablaC);
-            cartaAprobacion.setRutaArchivo(pubHash);
-            cartaAprobacion.setTipoPDF("cartaAprobacion");
-            cartaAprobacion.setArchivoIS(cartaAprobacionPDF.getInputstream());
-            subidaArchivos.add(cartaAprobacion);
-      
+
+        tipoPDF_cargar cartaAprobacion = new tipoPDF_cargar();
+        cartaAprobacion.setNombreArchivo(nombreCartaAprob);
+        cartaAprobacion.setRutaArchivo(destCartaAprob);
+        cartaAprobacion.setTipoPDF("cartaAprobacion");
+        cartaAprobacion.setArchivoIS(cartaAprobacionPDF.getInputstream());
+        subidaArchivos.add(cartaAprobacion);
+
         if (!ArticuloPDF.getFileName().equalsIgnoreCase("")) {
             tipoPDF_cargar articulo = new tipoPDF_cargar();
             articulo.setNombreArchivo(nombrePublicacion);
             articulo.setRutaArchivo(destArticulo);
-            articulo.setTipoPDF("articulo");
+            articulo.setTipoPDF("tipoPublicacion");
             articulo.setArchivoIS(ArticuloPDF.getInputstream());
             subidaArchivos.add(articulo);
         }
@@ -449,110 +264,6 @@ public class Publicacion implements Serializable {
             el articulo en formato PDFA y la Tabla de Contenido del Articulo (formato PDFA) */
         //   SubirOpenKM(rutasArchivos, nombreArchivos, estampaTiempo, codigoFirma, hash);
         SubirOpenKM(subidaArchivos, estampaTiempo, codigoFirma, hash);
-    }
-
-    public archivoPDF descargaPublicacion() {
-        archivoPDF archivo = new archivoPDF();
-        String host = "http://localhost:8083/OpenKM";
-        String username = "okmAdmin";
-        String password = "admin";
-        OKMWebservices ws = OKMWebservicesFactory.newInstance(host, username, password);
-
-        try {
-            Map<String, String> properties = new HashMap();
-            /* Se comprueba el tipo de publicacion: revista congreso , un libro 
-                o un capitulo de un libro que se devolvera como resultado*/
-            if (this.pubTipoPublicacion.equalsIgnoreCase("revista")) {
-                properties.put("okp:revista.identPublicacion", "" + this.pubIdentificador);
-
-            }
-            if (this.pubTipoPublicacion.equalsIgnoreCase("congreso")) {
-                properties.put("okp:congreso.identPublicacion", "" + this.pubIdentificador);
-
-            }
-            if (this.pubTipoPublicacion.equalsIgnoreCase("libro")) {
-                properties.put("okp:libro.identPublicacion", "" + this.pubIdentificador);;
-            }
-            if (this.pubTipoPublicacion.equalsIgnoreCase("capitulo_libro")) {
-                properties.put("okp:capLibro.identPublicacion", "" + this.pubIdentificador);
-            }
-            // properties.put("okp:revista.identPublicacion", "" + this.pubIdentificador);
-            QueryParams qParams = new QueryParams();
-            qParams.setProperties(properties);
-            int posPub = 0;
-            for (QueryResult qr : ws.find(qParams)) {
-                if (posPub == 0) {
-                    String auxDoc = qr.getDocument().getPath();
-                    String[] arrayNombre = auxDoc.split("/");
-                    int pos = arrayNombre.length;
-                    String nombreDoc = arrayNombre[pos - 1];
-                    System.out.println("nombreDocPUB: " + nombreDoc);
-                    InputStream initialStream = ws.getContent(qr.getDocument().getPath());
-                    archivo.setArchivo(initialStream);
-                    archivo.setNombreArchivo(nombreDoc);
-                }
-                posPub = posPub + 1;
-
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return archivo;
-    }
-
-    public archivoPDF descargaPubTC() {
-        archivoPDF archivo = new archivoPDF();
-        String host = "http://localhost:8083/OpenKM";
-        String username = "okmAdmin";
-        String password = "admin";
-        OKMWebservices ws = OKMWebservicesFactory.newInstance(host, username, password);
-
-        try {
-            Map<String, String> properties = new HashMap();
-
-            /* Se comprueba el tipo de publicacion: revista congreso , un libro 
-                o un capitulo de un libro que se devolvera como resultado*/
-            if (this.pubTipoPublicacion.equalsIgnoreCase("revista")) {
-                properties.put("okp:revista.identPublicacion", "" + this.pubIdentificador);
-
-            }
-            if (this.pubTipoPublicacion.equalsIgnoreCase("congreso")) {
-                properties.put("okp:congreso.identPublicacion", "" + this.pubIdentificador);
-
-            }
-            if (this.pubTipoPublicacion.equalsIgnoreCase("libro")) {
-                properties.put("okp:libro.identPublicacion", "" + this.pubIdentificador);;
-            }
-            if (this.pubTipoPublicacion.equalsIgnoreCase("capitulo_libro")) {
-                properties.put("okp:capLibro.identPublicacion", "" + this.pubIdentificador);
-            }
-
-            // properties.put("okp:revista.identPublicacion", "" + this.pubIdentificador);
-            QueryParams qParams = new QueryParams();
-            qParams.setProperties(properties);
-            int posPub = 0;
-            for (QueryResult qr : ws.find(qParams)) {
-                if (posPub == 1) {
-                    String auxDoc = qr.getDocument().getPath();
-                    String[] arrayNombre = auxDoc.split("/");
-                    for (int i = 0; i < arrayNombre.length; i++) {
-                        System.out.println("arrayNombre[i]: " + arrayNombre[i] + " en la pos: " + i);
-
-                    }
-                    int pos = arrayNombre.length;
-                    String nombreDoc = arrayNombre[pos - 1];
-                    System.out.println("nombreDocPUBTC " + nombreDoc);
-                    InputStream initialStream = ws.getContent(qr.getDocument().getPath());
-                    archivo.setArchivo(initialStream);
-                    archivo.setNombreArchivo(nombreDoc);
-                }
-                posPub = posPub + 1;
-
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return archivo;
     }
 
     public void SubirOpenKM(ArrayList<tipoPDF_cargar> subidaArchivos, String estampaTiempo, String codigoFirma, String hash) throws IOException {
@@ -981,6 +692,363 @@ public class Publicacion implements Serializable {
             document.close();
 
         }
+    }
+    
+    public archivoPDF descargaCartaAprobac() {
+        archivoPDF archivo = new archivoPDF();
+        String tipoPDF = "cartaAprobacion";
+        
+        String host = "http://localhost:8083/OpenKM";
+        String username = "okmAdmin";
+        String password = "admin";
+        OKMWebservices ws = OKMWebservicesFactory.newInstance(host, username, password);
+
+        try {
+            
+            Map<String, String> properties = new HashMap();
+            /* Se comprueba el tipo de publicacion: revista congreso , un libro 
+                o un capitulo de un libro que se devolvera como resultado*/
+            if (this.pubTipoPublicacion.equalsIgnoreCase("revista")) {
+                properties.put("okp:revista.identPublicacion", "" + this.pubIdentificador);
+                properties.put("okp:revista.tipoPDFCargar", "" + tipoPDF);
+   
+            }
+            if (this.pubTipoPublicacion.equalsIgnoreCase("congreso")) {
+                properties.put("okp:congreso.identPublicacion", "" + this.pubIdentificador);
+                 properties.put("okp:congreso.tipoPDFCargar", "" + tipoPDF);
+
+            }
+            if (this.pubTipoPublicacion.equalsIgnoreCase("libro")) {
+                properties.put("okp:libro.identPublicacion", "" + this.pubIdentificador);
+                    properties.put("okp:libro.tipoPDFCargar", "" + tipoPDF);
+            }
+            if (this.pubTipoPublicacion.equalsIgnoreCase("capitulo_libro")) {
+                properties.put("okp:capLibro.identPublicacion", "" + this.pubIdentificador);
+                properties.put("okp:capLibro.tipoPDFCargar", "" + tipoPDF);
+            }
+            // properties.put("okp:revista.identPublicacion", "" + this.pubIdentificador);
+            QueryParams qParams = new QueryParams();
+            qParams.setProperties(properties);
+            int posPub = 0;
+            for (QueryResult qr : ws.find(qParams)) {
+                if (posPub == 0) {
+                    String auxDoc = qr.getDocument().getPath();
+                    String[] arrayNombre = auxDoc.split("/");
+                    int pos = arrayNombre.length;
+                    String nombreDoc = arrayNombre[pos - 1];
+                    System.out.println("nombreDocPUB: " + nombreDoc);
+                    InputStream initialStream = ws.getContent(qr.getDocument().getPath());
+                    archivo.setArchivo(initialStream);
+                    archivo.setNombreArchivo(nombreDoc);
+                }
+                posPub = posPub + 1;
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return archivo;
+    }
+    
+    public archivoPDF descargaPublicacion() {
+        archivoPDF archivo = new archivoPDF();
+        String tipoPDF = "tipoPublicacion";
+         
+        String host = "http://localhost:8083/OpenKM";
+        String username = "okmAdmin";
+        String password = "admin";
+        OKMWebservices ws = OKMWebservicesFactory.newInstance(host, username, password);
+
+           try {
+            
+            Map<String, String> properties = new HashMap();
+            /* Se comprueba el tipo de publicacion: revista congreso , un libro 
+                o un capitulo de un libro que se devolvera como resultado*/
+            if (this.pubTipoPublicacion.equalsIgnoreCase("revista")) {
+                properties.put("okp:revista.identPublicacion", "" + this.pubIdentificador);
+                properties.put("okp:revista.tipoPDFCargar", "" + tipoPDF);
+   
+            }
+            if (this.pubTipoPublicacion.equalsIgnoreCase("congreso")) {
+                properties.put("okp:congreso.identPublicacion", "" + this.pubIdentificador);
+                 properties.put("okp:congreso.tipoPDFCargar", "" + tipoPDF);
+
+            }
+            if (this.pubTipoPublicacion.equalsIgnoreCase("libro")) {
+                properties.put("okp:libro.identPublicacion", "" + this.pubIdentificador);
+                    properties.put("okp:libro.tipoPDFCargar", "" + tipoPDF);
+            }
+            if (this.pubTipoPublicacion.equalsIgnoreCase("capitulo_libro")) {
+                properties.put("okp:capLibro.identPublicacion", "" + this.pubIdentificador);
+                properties.put("okp:capLibro.tipoPDFCargar", "" + tipoPDF);
+            }
+            // properties.put("okp:revista.identPublicacion", "" + this.pubIdentificador);
+            QueryParams qParams = new QueryParams();
+            qParams.setProperties(properties);
+            int posPub = 0;
+            for (QueryResult qr : ws.find(qParams)) {
+                if (posPub == 0) {
+                    String auxDoc = qr.getDocument().getPath();
+                    String[] arrayNombre = auxDoc.split("/");
+                    int pos = arrayNombre.length;
+                    String nombreDoc = arrayNombre[pos - 1];
+                    System.out.println("nombreDocPUB: " + nombreDoc);
+                    InputStream initialStream = ws.getContent(qr.getDocument().getPath());
+                    archivo.setArchivo(initialStream);
+                    archivo.setNombreArchivo(nombreDoc);
+                }
+                posPub = posPub + 1;
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return archivo;
+    }
+    
+        public archivoPDF descargaPubTC() {
+        archivoPDF archivo = new archivoPDF();
+        String tipoPDF = "tablaContenido";
+         
+        String host = "http://localhost:8083/OpenKM";
+        String username = "okmAdmin";
+        String password = "admin";
+        OKMWebservices ws = OKMWebservicesFactory.newInstance(host, username, password);
+
+           try {
+            
+            Map<String, String> properties = new HashMap();
+            /* Se comprueba el tipo de publicacion: revista congreso , un libro 
+                o un capitulo de un libro que se devolvera como resultado*/
+            if (this.pubTipoPublicacion.equalsIgnoreCase("revista")) {
+                properties.put("okp:revista.identPublicacion", "" + this.pubIdentificador);
+                properties.put("okp:revista.tipoPDFCargar", "" + tipoPDF);
+   
+            }
+            if (this.pubTipoPublicacion.equalsIgnoreCase("congreso")) {
+                properties.put("okp:congreso.identPublicacion", "" + this.pubIdentificador);
+                 properties.put("okp:congreso.tipoPDFCargar", "" + tipoPDF);
+
+            }
+            if (this.pubTipoPublicacion.equalsIgnoreCase("libro")) {
+                properties.put("okp:libro.identPublicacion", "" + this.pubIdentificador);
+                    properties.put("okp:libro.tipoPDFCargar", "" + tipoPDF);
+            }
+            if (this.pubTipoPublicacion.equalsIgnoreCase("capitulo_libro")) {
+                properties.put("okp:capLibro.identPublicacion", "" + this.pubIdentificador);
+                properties.put("okp:capLibro.tipoPDFCargar", "" + tipoPDF);
+            }
+            // properties.put("okp:revista.identPublicacion", "" + this.pubIdentificador);
+            QueryParams qParams = new QueryParams();
+            qParams.setProperties(properties);
+            int posPub = 0;
+            for (QueryResult qr : ws.find(qParams)) {
+                if (posPub == 0) {
+                    String auxDoc = qr.getDocument().getPath();
+                    String[] arrayNombre = auxDoc.split("/");
+                    int pos = arrayNombre.length;
+                    String nombreDoc = arrayNombre[pos - 1];
+                    System.out.println("nombreDocPUB: " + nombreDoc);
+                    InputStream initialStream = ws.getContent(qr.getDocument().getPath());
+                    archivo.setArchivo(initialStream);
+                    archivo.setNombreArchivo(nombreDoc);
+                }
+                posPub = posPub + 1;
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return archivo;
+    }
+        
+
+ 
+
+    public Integer getPubIdentificador() {
+        return pubIdentificador;
+    }
+
+    public void setPubIdentificador(Integer pubIdentificador) {
+        this.pubIdentificador = pubIdentificador;
+    }
+
+    public String getPubHash() {
+        return pubHash;
+    }
+
+    public void setPubHash(String pubHash) {
+        this.pubHash = pubHash;
+    }
+
+    public String getPubDiropkm() {
+        return pubDiropkm;
+    }
+
+    public void setPubDiropkm(String pubDiropkm) {
+        this.pubDiropkm = pubDiropkm;
+    }
+
+    public Integer getPubCreditos() {
+        return pubCreditos;
+    }
+
+    public void setPubCreditos(Integer pubCreditos) {
+        this.pubCreditos = pubCreditos;
+    }
+
+    public Date getPubFechaVisado() {
+        return pubFechaVisado;
+    }
+
+    public void setPubFechaVisado(Date pubFechaVisado) {
+        this.pubFechaVisado = pubFechaVisado;
+    }
+
+    public Date getPubFechaRegistro() {
+        return pubFechaRegistro;
+    }
+
+    public void setPubFechaRegistro(Date pubFechaRegistro) {
+        this.pubFechaRegistro = pubFechaRegistro;
+    }
+
+    public String getPubEstado() {
+        return pubEstado;
+    }
+
+    public void setPubEstado(String pubEstado) {
+        this.pubEstado = pubEstado;
+    }
+
+    public String getPubNombreAutor() {
+        return pubNombreAutor;
+    }
+
+    public void setPubNombreAutor(String pubNombreAutor) {
+        this.pubNombreAutor = pubNombreAutor;
+    }
+
+    public String getPubAutoresSecundarios() {
+        return pubAutoresSecundarios;
+    }
+
+    public void setPubAutoresSecundarios(String pubAutoresSecundarios) {
+        this.pubAutoresSecundarios = pubAutoresSecundarios;
+    }
+
+    public String getPubTipoPublicacion() {
+        return pubTipoPublicacion;
+    }
+
+    public void setPubTipoPublicacion(String pubTipoPublicacion) {
+        this.pubTipoPublicacion = pubTipoPublicacion;
+    }
+
+    public Date getPubFechaPublicacion() {
+        return pubFechaPublicacion;
+    }
+
+    public void setPubFechaPublicacion(Date pubFechaPublicacion) {
+        this.pubFechaPublicacion = pubFechaPublicacion;
+    }
+
+    public String getPubDoi() {
+        return pubDoi;
+    }
+
+    public void setPubDoi(String pubDoi) {
+        this.pubDoi = pubDoi;
+    }
+
+    public String getPubIsbn() {
+        return pubIsbn;
+    }
+
+    public void setPubIsbn(String pubIsbn) {
+        this.pubIsbn = pubIsbn;
+    }
+
+    public String getPubIssn() {
+        return pubIssn;
+    }
+
+    public void setPubIssn(String pubIssn) {
+        this.pubIssn = pubIssn;
+    }
+
+    public Libro getLibro() {
+        return libro;
+    }
+
+    public void setLibro(Libro libro) {
+        this.libro = libro;
+    }
+
+    @XmlTransient
+    public Collection<Archivo> getArchivoCollection() {
+        return archivoCollection;
+    }
+
+    public void setArchivoCollection(Collection<Archivo> archivoCollection) {
+        this.archivoCollection = archivoCollection;
+    }
+
+    public Congreso getCongreso() {
+        return congreso;
+    }
+
+    public void setCongreso(Congreso congreso) {
+        this.congreso = congreso;
+    }
+
+    public Revista getRevista() {
+        return revista;
+    }
+
+    public void setRevista(Revista revista) {
+        this.revista = revista;
+    }
+
+    public CapituloLibro getCapituloLibro() {
+        return capituloLibro;
+    }
+
+    public void setCapituloLibro(CapituloLibro capituloLibro) {
+        this.capituloLibro = capituloLibro;
+    }
+
+    public Estudiante getPubEstIdentificador() {
+        return pubEstIdentificador;
+    }
+
+    public void setPubEstIdentificador(Estudiante pubEstIdentificador) {
+        this.pubEstIdentificador = pubEstIdentificador;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (pubIdentificador != null ? pubIdentificador.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Publicacion)) {
+            return false;
+        }
+        Publicacion other = (Publicacion) object;
+        if ((this.pubIdentificador == null && other.pubIdentificador != null) || (this.pubIdentificador != null && !this.pubIdentificador.equals(other.pubIdentificador))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "co.unicauca.proyectobase.entidades.Publicacion[ pubIdentificador=" + pubIdentificador + " ]";
     }
 
 }

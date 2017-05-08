@@ -17,6 +17,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -28,7 +29,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Archivo.findAll", query = "SELECT a FROM Archivo a")
-    , @NamedQuery(name = "Archivo.findByArcIdentificador", query = "SELECT a FROM Archivo a WHERE a.arcIdentificador = :arcIdentificador")})
+    , @NamedQuery(name = "Archivo.findByArcIdentificador", query = "SELECT a FROM Archivo a WHERE a.arcIdentificador = :arcIdentificador")
+    , @NamedQuery(name = "Archivo.findByArctipoPDFcargar", query = "SELECT a FROM Archivo a WHERE a.arctipoPDFcargar = :arctipoPDFcargar")})
 public class Archivo implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -37,6 +39,9 @@ public class Archivo implements Serializable {
     @Basic(optional = false)
     @Column(name = "arc_identificador")
     private Integer arcIdentificador;
+    @Size(max = 40)
+    @Column(name = "arc_tipoPDF_cargar")
+    private String arctipoPDFcargar;
     @JoinColumn(name = "arc_pub_identificador", referencedColumnName = "pub_identificador")
     @ManyToOne(optional = false)
     private Publicacion arcPubIdentificador;
@@ -54,6 +59,14 @@ public class Archivo implements Serializable {
 
     public void setArcIdentificador(Integer arcIdentificador) {
         this.arcIdentificador = arcIdentificador;
+    }
+
+    public String getArctipoPDFcargar() {
+        return arctipoPDFcargar;
+    }
+
+    public void setArctipoPDFcargar(String arctipoPDFcargar) {
+        this.arctipoPDFcargar = arctipoPDFcargar;
     }
 
     public Publicacion getArcPubIdentificador() {
