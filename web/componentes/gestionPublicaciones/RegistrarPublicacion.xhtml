@@ -264,13 +264,13 @@
                             <h:outputLabel styleClass="addEspacio"/><br/>
                             <h:commandButton value="Registrar publicación" action="#{publicacionController.agregar()}" class="btn btn-primary"
 
-                                             >   <f:ajax disabled="true"  /> </h:commandButton>
+                                             >    </h:commandButton>
 
                             <h:commandButton value="Cancelar registro" onclick="if (!confirm('¿Desea cancelar el registro de la publicación?')) {
                                         return false;
                                     }
                                     ;
-                                    return true;" actionListener="#{publicacionController.redirigirAlistar(usuariosSessionController.nombreUsuario)}" class="btn btn-primary" immediate="true"/>
+                                    return true;" action="#{publicacionController.redirigirAlistar(usuariosSessionController.nombreUsuario)}" class="btn btn-primary" immediate="true"/>
 
 
                             <h:outputLabel styleClass="addEspacio"/>
