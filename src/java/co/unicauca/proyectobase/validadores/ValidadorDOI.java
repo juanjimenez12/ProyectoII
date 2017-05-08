@@ -24,35 +24,61 @@ public class ValidadorDOI implements Validator {
     @Override
     public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException {
         String doi = value.toString();
-//        String[] valores = fecha.split(" ");
-//        
-//        System.out.println("MIRALOOOOOOO: " + fecha);
 
-        if(doi.length() == 0) {
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "Se debe registrar el DOI del artículo");
-            throw new ValidatorException(msg);
-        }
+        if(doi.length() != 0) {
+            if(!validarFormato(doi)) {
+                FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "No cumple con el formato de un DOI: xxxx/xxxx");
+                throw new ValidatorException(msg);
+            }
+            else {
+                if(!validarSufijo(doi)) {
+                    FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "No se puede iniciar con un caracter especial despues del símbolo /");
+                    throw new ValidatorException(msg);
+                }
+                else {
+                    if(!validarCaracteresPrefijo(doi)) {
+                        FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "El prefijo solo puede ser numérico");
+                        throw new ValidatorException(msg);
+                    }
 
-        if(!validarFormato(doi)) {
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "El formato del DOI es incorrecto");
-            throw new ValidatorException(msg);
-        }
-        
+                    if(!validarPrefijo(doi)) {
+                        FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "El inicio del DOI no cumple con el formato: 10.xxxx");
+                        throw new ValidatorException(msg);
+                    }
+                }
+            }
+        }        
     }
     
-//    //valida que el año de publicacion este en un periodo de 5 años
-//    public boolean validarAnioPublicacion(int anio) {
-//        Calendar c = Calendar.getInstance();
-//        int anioLimite = c.get(Calendar.YEAR)-5;
-//        return anio < anioLimite;
-//    }
-    
-    //valida el formato del DOI
+    //validar que el DOI tenga el formato "prefijo"/"sufijo"
     public boolean validarFormato(String doi) {
-        //Pattern p = Pattern.compile("^([0-9]{2}+[.]{1})+[0-9]+[/]{1}+[0-9-.]");
-       Pattern p = Pattern.compile("^([0-9]{2}+[.]{1})+[0-9]+[/]{1}+[0-9-.a-zA-Z]"); 
-        //Pattern p = Pattern.compile("0-9/-.");
-        Matcher m = p.matcher(doi);
+        return doi.split("/").length == 2;
+    }
+    
+    //valida que el sufijo no inicie con algun caracter especial, solo debe iniciar con una letra o un numero
+    public boolean validarSufijo(String doi) {        
+        String[] valores = doi.split("/");
+        
+        Pattern p = Pattern.compile("^([0-9a-zA-Z])");
+        Matcher m = p.matcher(valores[1]);
+        return m.find();
+    }
+    
+    //valida que el prefijo cumpla con el formato 10.xxxx
+    public boolean validarPrefijo(String doi) {        
+        String[] valores = doi.split("/");
+        
+        Pattern p = Pattern.compile("(^(10.)+([0-9]{4}))$");
+        Matcher m = p.matcher(valores[0]);
+        return m.find();
+    }
+    
+    //valida que el prefijo solo tenga numeros y un punto
+    public boolean validarCaracteresPrefijo(String doi) {        
+        String[] valores = doi.split("/");
+
+        Pattern p = Pattern.compile("^[0-9.]*$");
+        Matcher m = p.matcher(valores[0]);
         return m.find();
     }
     

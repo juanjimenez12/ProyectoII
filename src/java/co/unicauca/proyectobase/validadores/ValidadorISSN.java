@@ -24,33 +24,25 @@ public class ValidadorISSN implements Validator {
     @Override
     public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException {
         String issn = value.toString();
-//        String[] valores = fecha.split(" ");
-//        
-//        System.out.println("MIRALOOOOOOO: " + fecha);
 
         if(issn.length() == 0) {
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "Se debe registrar el ISBN de la revista");
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "Se debe registrar el ISSN de la revista");
             throw new ValidatorException(msg);
         }
 
         if(!validarFormato(issn)) {
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "El formato del ISBN es incorrecto");
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "El formato del ISSN es incorrecto");
             throw new ValidatorException(msg);
         }
         
     }
     
-//    //valida que el año de publicacion este en un periodo de 5 años
-//    public boolean validarAnioPublicacion(int anio) {
-//        Calendar c = Calendar.getInstance();
-//        int anioLimite = c.get(Calendar.YEAR)-5;
-//        return anio < anioLimite;
-//    }
-    
     //valida el formato del DOI
     public boolean validarFormato(String doi) {
-        //Pattern p = Pattern.compile("^([0-9]{4})+[-]{1}+([0-9]{4})");
-        Pattern p = Pattern.compile("^([0-9])");
+        Pattern p = Pattern.compile("(^([0-9]{4})+[-]{1}+([0-9]{3})+([0-9X]{1}))$");
+        //http://www.issn.org/es/comprender-el-issn/que-es-el-numero-issn/
+        //https://goo.gl/jQFjlJ
+        //Pattern p = Pattern.compile("^([0-9])");
         Matcher m = p.matcher(doi);
         return m.find();
     }
