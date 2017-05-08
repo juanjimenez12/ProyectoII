@@ -191,7 +191,7 @@ public class PublicacionController implements Serializable {
     public void pdfPub() throws FileNotFoundException, IOException, IOException, IOException {
         archivoPDF archivoPublic = actual.descargaPublicacion();
 
-        if (archivoPublic.getNombreArchivo().equals("null")) {
+        if (archivoPublic.getNombreArchivo().equals("")) {
             FacesContext.getCurrentInstance().addMessage("error", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Usuario no ha cargado un PDF para esta publicacion", ""));
 
         } else {
@@ -223,7 +223,7 @@ public class PublicacionController implements Serializable {
 
     public void pdfPubTC() throws FileNotFoundException, IOException, IOException, IOException {
         archivoPDF archivoPublic = actual.descargaPubTC();
-        if (archivoPublic.getNombreArchivo().equals("null")) {
+        if (archivoPublic.getNombreArchivo().equals("")) {
             FacesContext.getCurrentInstance().addMessage("error", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Usuario no ha cargado un PDF de la tabla de contenido", ""));
 
         } else {
@@ -277,7 +277,7 @@ public class PublicacionController implements Serializable {
 
     public void descargarPublicacion() throws FileNotFoundException, IOException {
         archivoPDF archivoPublic = actual.descargaPublicacion();
-        if (archivoPublic.getNombreArchivo().equals("null")) {
+        if (archivoPublic.getNombreArchivo().equals("")) {
             FacesContext.getCurrentInstance().addMessage("error", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Usuario no ha cargado un PDF para esta publicacion", ""));
 
         } else {
@@ -306,7 +306,7 @@ public class PublicacionController implements Serializable {
 
     public void descargarPubTC() throws FileNotFoundException, IOException {
         archivoPDF archivoPubTC = actual.descargaPubTC();
-        if (archivoPubTC.getNombreArchivo().equals("null")) {
+        if (archivoPubTC.getNombreArchivo().equals("")) {
             FacesContext.getCurrentInstance().addMessage("error", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Usuario no ha cargado un PDF de la tabla de contenido", ""));
 
         } else {
