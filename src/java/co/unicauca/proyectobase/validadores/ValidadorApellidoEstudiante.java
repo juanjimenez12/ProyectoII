@@ -19,20 +19,20 @@ public class ValidadorApellidoEstudiante implements Validator
         
         if(texto.length() == 0)
         {
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "El apellido del estudiante es obligatorio.");
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "Los apellidos del estudiante son obligatorios.");
             throw new ValidatorException(msg);  
         }
         
         if((texto.length() < 3) || (texto.length() > 20))
         {
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "El apellido del estudiante debe contener de 3 a 20 caracteres.");
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "Los apellidos del estudiante deben contener de 3 a 20 caracteres.");
             throw new ValidatorException(msg);  
         }
         
         boolean cumplePatron = Pattern.matches("^[a-zA-ZñÑáÁéÉíÍóÓúÚ\\s]*$", texto);
         if(!cumplePatron)
         {            
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "El apellido del estudiante contiene caracteres no válidos.");
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "Los apellidos del estudiante contienen caracteres no válidos.");
             throw new ValidatorException(msg);  
         }        
     }

@@ -2,3 +2,6 @@
 .build/
 .test/
 .nbproject/
+/build/
+/nbproject/private/
+/dist/
