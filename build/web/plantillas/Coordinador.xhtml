@@ -40,8 +40,11 @@
                             <td >                               
                                   <ul class="menuDer">
                                       <li class="ajustarMenuDer"><a href="#"  style="color: white; focus: transparent;"><span class="glyphicon glyphicon-user"></span> #{usuariosSessionController.nombreUsuario}</a></li>
-                                    <li class="ajustarMenuDer"><a href="#" style="color: white;"><span class="glyphicon glyphicon-log-in"></span> Salir</a></li>
-                                </ul>                            
+                                   <!-- <li class="ajustarMenuDer"><a href="#" style="color: white;"><span class="glyphicon glyphicon-log-in"></span> Salir</a></li>-->
+                                         <h:form>
+                                    <h:commandLink value="Salir " action="#{userLoginView.salir()}" class="btn btn-link" style="margin-left: 80px;color: white;"><span class="glyphicon glyphicon-log-in"></span></h:commandLink>
+                                    </h:form>
+                                  </ul>                            
                             </td>
                            
                         </tr>
@@ -82,9 +85,7 @@
                              <a href="#" class="dropdown-toggle  mejorarMenu" data-toggle="dropdown">Publicaciones <span class="caret"></span><span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-list-alt"></span></a>
                           <ul class="dropdown-menu forAnimate" role="menu">
                               <h:form>
-                                  <li><h:commandLink   >&nbsp; &nbsp; <span class ="glyphicon glyphicon-chevron-right"/>Agregar nueva funcionaliad</h:commandLink></li>
-                                  <li> <h:commandLink  >&nbsp; &nbsp; <span class ="glyphicon glyphicon-chevron-right"/>Agregar nueva funcionalidad </h:commandLink></li>
-                                  
+                                   <li><h:commandLink actionListener="#{publicacionController.redirigirAlistar()}"  >&nbsp; &nbsp; <span class ="glyphicon glyphicon-chevron-right"/>Listar Publicaciones</h:commandLink></li>
                               </h:form>
          
                           </ul>
