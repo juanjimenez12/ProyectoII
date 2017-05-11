@@ -90,7 +90,11 @@ public class ValidadorCodigoEstudiante implements Validator {
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "El código debe ser numérico.");
             throw new ValidatorException(msg); 
         }
-  
+        
+        if(!validarInicioCodigo(codigo)) {
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "El código debe iniciar por 70_");
+            throw new ValidatorException(msg); 
+        }
         
 
     }
