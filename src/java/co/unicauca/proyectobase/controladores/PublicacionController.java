@@ -25,7 +25,6 @@ import java.io.Serializable;
 import java.security.GeneralSecurityException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -614,6 +613,4 @@ public class PublicacionController implements Serializable {
     public void setAuxEstudiante(Estudiante auxEstudiante) {
         this.auxEstudiante = auxEstudiante;
     }
-
-    
 }

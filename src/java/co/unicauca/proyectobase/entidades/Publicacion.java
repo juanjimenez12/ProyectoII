@@ -74,8 +74,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.faces.context.FacesContext;
 import org.primefaces.model.UploadedFile;
 
@@ -952,12 +950,8 @@ public class Publicacion implements Serializable {
     }
 
     public Date getPubFechaPublicacion() {
-         
-        FormatoFechas FechaForm = new FormatoFechas(pubFechaPublicacion);
-        return FechaForm;
+        return pubFechaPublicacion;
     }
-    
-
 
     public void setPubFechaPublicacion(Date pubFechaPublicacion) {
         this.pubFechaPublicacion = pubFechaPublicacion;
@@ -1060,5 +1054,5 @@ public class Publicacion implements Serializable {
     public String toString() {
         return "co.unicauca.proyectobase.entidades.Publicacion[ pubIdentificador=" + pubIdentificador + " ]";
     }
-  
+
 }

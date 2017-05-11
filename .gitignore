@@ -1,16 +1,5 @@
-<<<<<<< HEAD
 .dist/
 .build/
 .test/
 .nbproject/
-/build/
 /nbproject/private/
-=======
-.dist/
-.build/
-.test/
-.nbproject/
-/build/
-/nbproject/private/
->>>>>>> origin/master
-/dist/

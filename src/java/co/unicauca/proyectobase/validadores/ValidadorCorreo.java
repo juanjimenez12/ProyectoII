@@ -60,24 +60,18 @@ public class ValidadorCorreo implements Validator {
         String correo = String.valueOf(value);
 
         if(correo.length() == 0) {
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "El correo electrónico del estudiante es obligatorio.");
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "El correo del estudiante es obligatorio.");
             throw new ValidatorException(msg);  
         }
 
         if((correo.length()<10) ||(correo.length()>30)) {
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "El correo electrónico debe contener de 10 a 30 caracteres");
-            throw new ValidatorException(msg);  
-        }
-        
-        boolean existe = dao.findByEstCorreo(correo);
-        if(existe) {
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "Ya existe un estudiante con este correo electrónico.");
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "El correo debe contener de 10 a 30 caracteres");
             throw new ValidatorException(msg);  
         }
         
         if(validarFormato(correo)) {
             if(!siTieneArroba(correo)) {
-                FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "El correo electrónico no tiene @");
+                FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "El correo no tiene @");
                 throw new ValidatorException(msg);
             }
 //            else {
@@ -88,26 +82,24 @@ public class ValidadorCorreo implements Validator {
 //            }
         }
         else {
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "Formato de correo electrónico no valido.");
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "El formato del correo es incorrecto");
             throw new ValidatorException(msg);
         }
         
         if(!validarInicioCorreo(correo)) {
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "El inicio del correo electrónico es incorrecto.");
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "El inicio del correo es incorrecto");
             throw new ValidatorException(msg);
         }
         
         if(validarInicioCorreo2(correo)) {
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "El correo electrónico no debe iniciar por www.");
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "El correo no debe iniciar por www");
             throw new ValidatorException(msg);
         }
         
         if(validarCaracteresEspeciales(correo)) {
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "El correo electrónico tiene caracteres errados.");
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "El correo tiene caracteres errados");
             throw new ValidatorException(msg);
         }
-        
-
     }
     
     
