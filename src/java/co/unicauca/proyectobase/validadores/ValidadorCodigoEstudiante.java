@@ -76,16 +76,16 @@ public class ValidadorCodigoEstudiante implements Validator {
             throw new ValidatorException(msg);  
         }
         
-       /* if(!validarFormato(codigo)) {
+//        if(!validarInicioCodigo(codigo)) {
+//            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "El código debe iniciar por 70_");
+//            throw new ValidatorException(msg); 
+//        }
+        
+        if(!validarFormato(codigo)) {
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "El código no cumple con el formato xx_xxxxxxxxxx");
             throw new ValidatorException(msg); 
-        }*/
-        
-       /* if(!validarInicioCodigo(codigo)) {
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "El código debe iniciar por 70_");
-            throw new ValidatorException(msg); 
-        }*/
-        
+        }
+   
         if(!validarCedula(codigo)) {
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "El código debe ser numérico.");
             throw new ValidatorException(msg); 
@@ -97,7 +97,14 @@ public class ValidadorCodigoEstudiante implements Validator {
     
     //validar que el codigo tenga el formato xx_xxxxxx
     public boolean validarFormato(String codigo) {
-        return codigo.split("_").length == 2;
+        //return codigo.split("_").length == 2;
+        Pattern p = Pattern.compile("(^(70_)+([0-9]))$");
+     //   Matcher m = p.matcher(codigo.split("_")[1]);
+      //  return m.find();
+        
+        Matcher m = p.matcher(codigo);
+        return m.find();
+    
     }
     
     //valida que el codigo empiece por 70
@@ -108,10 +115,10 @@ public class ValidadorCodigoEstudiante implements Validator {
     //valida que la cedula, la segunda parte del codigo, sea numerica
     public boolean validarCedula(String codigo) {
         Pattern p = Pattern.compile("^[0-9]*$");
-     //   Matcher m = p.matcher(codigo.split("_")[1]);
+        Matcher m = p.matcher(codigo.split("_")[1]);
       //  return m.find();
         
-        Matcher m = p.matcher(codigo);
+        //Matcher m = p.matcher(codigo);
         return m.find();
     }
 }
