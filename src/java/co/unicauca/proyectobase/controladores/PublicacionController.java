@@ -432,12 +432,12 @@ public class PublicacionController implements Serializable {
                 dao.flush();
                 mensajeconfirmarRegistro();
                 limpiarCampos();
-                redirigirAlistar();
+                redirigirAlistar(est.getEstUsuario());
                 // redirigirAlistar(est.getEstUsuario());
             } catch (IOException | GeneralSecurityException | DocumentException | PathNotFoundException | AccessDeniedException | EJBException ex) {
                 mensajeRegistroFallido();
                 limpiarCampos();
-                redirigirAlistar();
+                redirigirAlistar(est.getEstUsuario());
                 //    redirigirAlistar(est.getEstUsuario());
                 Logger.getLogger(PublicacionController.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -535,6 +535,10 @@ public class PublicacionController implements Serializable {
         actual = pub;
         Utilidades.redireccionar("/ProyectoII/faces/componentes/gestionPublicaciones/VerPublicacion.xhtml");
     }
+       public void verPublicacionEst(Publicacion pub) {
+        actual = pub;
+        Utilidades.redireccionar("/ProyectoII/faces/componentes/gestionPublicaciones/VerPublicacion_Est.xhtml");
+    }
 
     public void editarPublicacion(Publicacion pub) {
         actual = pub;
@@ -547,7 +551,7 @@ public class PublicacionController implements Serializable {
         limpiarCampos();
         System.out.println("si esta pasando por aqui");
 
-        Utilidades.redireccionar("/ProyectoII/faces/componentes/gestionPublicaciones/ListarPublicaciones.xhtml");
+        Utilidades.redireccionar("/ProyectoII/faces/componentes/gestionPublicaciones/ListarPublicaciones_Est.xhtml");
     }
 
     public void redirigirAlistar() {
@@ -555,7 +559,7 @@ public class PublicacionController implements Serializable {
         limpiarCampos();
         System.out.println("si esta pasando por aqui");
 
-        Utilidades.redireccionar("/ProyectoII/faces/componentes/gestionPublicaciones/ListarPublicaciones.xhtml");
+        Utilidades.redireccionar("/ProyectoII/faces/componentes/gestionPublicaciones/ListarPublicaciones_Coord.xhtml");
     }
 
     /*redireccion para volver a registrar */

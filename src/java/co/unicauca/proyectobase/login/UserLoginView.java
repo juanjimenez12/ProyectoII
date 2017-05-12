@@ -62,5 +62,10 @@ public class UserLoginView {
          
         FacesContext.getCurrentInstance().addMessage(null, message);
         context.addCallbackParam("loggedIn", loggedIn);
-    }  
+    }
+    
+    public void salir()
+    {
+        Utilidades.redireccionar("/ProyectoII/faces/index.xhtml");
+    }
 }

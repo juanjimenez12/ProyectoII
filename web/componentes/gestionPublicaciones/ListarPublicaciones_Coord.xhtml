@@ -7,15 +7,15 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     
     <h:head>
-        <title>Listar Publicaciones</title>
+        <title>Listado de Publicaciones</title>
     </h:head>
     <!-- IMPLEMENTATION -->
-    <ui:composition template="../../plantillas/Estudiante.xhtml">
+    <ui:composition template="../../plantillas/Coordinador.xhtml">
          <ui:define name="content"> 
              <div class="panel panel-primary" >
             <div class="panel-heading">
                 <h3 class="panel-title">
-                    Publicaciones registradas
+                    Publicaciones registradas por los estudiantes
                 </h3>
             </div>
             <div class="panel-body">
@@ -27,28 +27,29 @@
                 </p:confirmDialog>
                 </h:form>
                 
-                <h:outputLabel rendered="#{publicacionController.listado().size() == 0}" value="No tiene publicaciones registradas"></h:outputLabel>
+                <h:outputLabel rendered="#{publicacionController.listado().size() == 0}" value="Los estudiantes aun NO han registrado Publicaciones"></h:outputLabel>
                 
                 
                 <p:dataTable  var="pub"  value="#{publicacionController.listado()}" rows="10"
              
                          paginator="true"
                          paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                         rowsPerPageTemplate="5,10,15" rendered="#{publicacionController.listado().size() > 0}">
+                         rowsPerPageTemplate="5,10,15" rendered="#{publicacionController.listado().size() > 0}"  style="text-align: left;">
                     <p:column headerText="Nombre Autor" >
                         <h:outputText value="#{pub.pubNombreAutor}"></h:outputText>
                     </p:column>
                     <p:column headerText="Tipo Publicacion"  >
                         <h:outputText value="#{pub.pubTipoPublicacion}"></h:outputText>
                     </p:column>
-                    <p:column headerText="ISBN"  >
-                        <h:outputText value="#{pub.pubIsbn}"></h:outputText>
+                   <p:column headerText="Fecha publicacion:"  >
+                       <h:outputText value="#{pub.pubFechaPublicacion.toString()}"></h:outputText>
                     </p:column>
                     
                     <p:column headerText="Acciones"   >
                            
                         <h:form style="font-size: 10px;">
                             <h:commandButton actionListener="#{publicacionController.verPublicacion(pub)}" value="Ver" class="btn btn-success btn_listaEstudiantes"/>
+                             <h:commandButton actionListener="#{publicacionController.verPublicacion(pub)}" value="Visar" class="btn btn-success btn_listaEstudiantes"/>
                         </h:form>
                     </p:column>
                 </p:dataTable>

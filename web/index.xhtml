@@ -47,20 +47,21 @@
                   modal="true" 
                   style="background: #C8CDD6"
                   >
-                <p:panelGrid styleClass="panelgrid" style="text-align:center" >
-                    <p:row >
-                        <p:column  style="background: #C8CDD6">
-                            <p:outputLabel value="El usuario o la contraseña no son correctos" />            
-                        </p:column>
-                    </p:row>
-                    <p:row>
-                        <p:column  style="background: #C8CDD6">
+            <p:panelGrid styleClass="panelgrid" style="text-align:center" >
+                <p:row >
+                    <p:column  style="background: #C8CDD6">
+                        <p:outputLabel value="El usuario o la contraseña no son correctos" />            
+                    </p:column>
+                </p:row>
+                <p:row>
+                    <p:column  style="background: #C8CDD6">
+                        <h:form>
                             <p:commandButton value="Aceptar" 
                                              onclick="PF('errorInicioSesion').hide()"
-                                             />
-                        </p:column>
-                    </p:row>
-                </p:panelGrid>
+                                             /></h:form>
+                    </p:column>
+                </p:row>
+            </p:panelGrid>
 
         </p:dialog>
     </h:body>

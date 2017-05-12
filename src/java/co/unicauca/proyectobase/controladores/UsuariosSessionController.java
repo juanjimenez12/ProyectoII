@@ -97,7 +97,7 @@ public class UsuariosSessionController implements Serializable{
                         Utilidades.redireccionar("/ProyectoII/faces/componentes/gestionUsuarios/ListarEstudiantes.xhtml");
                         break;
                     case "ESTUDIANTE":
-                        Utilidades.redireccionar("/ProyectoII/faces/componentes/gestionPublicaciones/ListarPublicaciones.xhtml");
+                        Utilidades.redireccionar("/ProyectoII/faces/componentes/gestionPublicaciones/ListarPublicaciones_Est.xhtml");
                         break;
                     case "PROFESOR":
                         break;
