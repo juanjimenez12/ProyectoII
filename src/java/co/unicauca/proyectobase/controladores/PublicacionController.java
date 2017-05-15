@@ -537,7 +537,8 @@ public class PublicacionController implements Serializable {
         actual = pub;
         Utilidades.redireccionar("/ProyectoII/faces/componentes/gestionPublicaciones/VerPublicacion.xhtml");
     }
-       public void verPublicacionEst(Publicacion pub) {
+
+    public void verPublicacionEst(Publicacion pub) {
         actual = pub;
         Utilidades.redireccionar("/ProyectoII/faces/componentes/gestionPublicaciones/VerPublicacion_Est.xhtml");
     }
@@ -615,17 +616,51 @@ public class PublicacionController implements Serializable {
     public void setAuxEstudiante(Estudiante auxEstudiante) {
         this.auxEstudiante = auxEstudiante;
     }
-    
-     public void seleccionarArchivo(FileUploadEvent  event)
-    {
+
+    public void seleccionarArchivo(FileUploadEvent event) {
         String nombreArchivo = event.getFile().getFileName();
         UploadedFile Archivo = event.getFile();
         FacesMessage message = new FacesMessage("El archivo", event.getFile().getFileName() + " se selecciono exitosamente");
         FacesContext.getCurrentInstance().addMessage(null, message);
         RequestContext requestContext = RequestContext.getCurrentInstance();
         requestContext.update("filemessage");
-    
+
     }
 
+    public boolean renderizarRevista() {
+        boolean ret = false;
+        if (actual.getPubTipoPublicacion().equalsIgnoreCase("revista")) {
+            ret = true;
+        }
+        return ret;
+
+    }
+
+    public boolean renderizarCongreso() {
+        boolean ret = false;
+        if (actual.getPubTipoPublicacion().equalsIgnoreCase("congreso")) {
+            ret = true;
+        }
+        return ret;
+
+    }
+
+    public boolean renderizarLibro() {
+        boolean ret = false;
+        if (actual.getPubTipoPublicacion().equalsIgnoreCase("libro")) {
+            ret = true;
+        }
+        return ret;
+
+    }
+
+    public boolean renderizarCapLibro() {
+        boolean ret = false;
+        if (actual.getPubTipoPublicacion().equalsIgnoreCase("capitulo_libro")) {
+            ret = true;
+        }
+        return ret;
+
+    }
 
 }

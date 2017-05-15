@@ -950,7 +950,10 @@ public class Publicacion implements Serializable {
     }
 
     public Date getPubFechaPublicacion() {
-        return pubFechaPublicacion;
+        
+         FormatoFechas fecha =  new FormatoFechas(pubFechaPublicacion) ;
+         return fecha;
+         //       return pubFechaPublicacion;
     }
 
     public void setPubFechaPublicacion(Date pubFechaPublicacion) {
