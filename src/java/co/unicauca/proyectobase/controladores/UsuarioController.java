@@ -7,6 +7,7 @@ import co.unicauca.proyectobase.dao.UsuarioFacade;
 
 import java.io.Serializable;
 import java.util.ResourceBundle;
+import javax.annotation.ManagedBean;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
@@ -19,6 +20,7 @@ import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 
 @Named("usuarioController")
+@ManagedBean
 @SessionScoped
 public class UsuarioController implements Serializable {
 
@@ -30,6 +32,14 @@ public class UsuarioController implements Serializable {
     private int selectedItemIndex;
 
     public UsuarioController() {
+    }
+
+    public Usuario getCurrent() {
+        return current;
+    }
+
+    public void setCurrent(Usuario current) {
+        this.current = current;
     }
 
     public Usuario getSelected() {

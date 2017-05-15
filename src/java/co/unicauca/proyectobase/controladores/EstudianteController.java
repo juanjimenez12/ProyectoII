@@ -2,6 +2,7 @@ package co.unicauca.proyectobase.controladores;
 
 import co.unicauca.proyectobase.dao.EstudianteFacade;
 import co.unicauca.proyectobase.entidades.Estudiante;
+import co.unicauca.proyectobase.entidades.Usuario;
 import co.unicauca.proyectobase.utilidades.Utilidades;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
@@ -13,6 +14,8 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Base64;
 import javax.ejb.EJBException;
+import javax.el.ELContext;
+import javax.faces.application.Application;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
@@ -103,11 +106,20 @@ public class EstudianteController implements Serializable {
             String contraseña = cifrarBase64(actual.getEstCodigo());
             actual.setEstCohorte(Integer.parseInt(cohorte));
             actual.setEstContrasena(contraseña);
-
             String[] nombreusuario = actual.getEstCorreo().split("@");
             actual.setEstUsuario(nombreusuario[0]);
-
-            actual.setEstEstado("Activo");
+            actual.setEstEstado("activo");
+            
+            Usuario user = new Usuario();
+            user.setApellidos(actual.getEstApellido());
+            user.setContrasena(actual.getEstContrasena());
+            user.setEstado("activo");
+            user.setNombreUsuario(actual.getEstUsuario());
+            user.setNombres(actual.getEstNombre());
+            
+            UsuarioController uc = getUsuarioController();
+            uc.setCurrent(user);
+            uc.create();
 
             dao.create(actual);
             dao.flush();
@@ -258,5 +270,13 @@ public class EstudianteController implements Serializable {
     public void addMessage(String summary, String detail) {
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, detail);
         FacesContext.getCurrentInstance().addMessage(null, message);
+    }
+    
+    public UsuarioController getUsuarioController(){
+        FacesContext context = FacesContext.getCurrentInstance();
+        ELContext contextoEL = context.getELContext( );
+        Application appli = context.getApplication( );
+        UsuarioController usuarioController = (UsuarioController) appli.evaluateExpressionGet(context, "#{usuarioController}",UsuarioController.class);
+        return usuarioController;
     }
 }
