@@ -865,8 +865,27 @@ public class Publicacion implements Serializable {
         }
         return archivo;
     }
+    public String obtenerNombrePub()
+    {
+        String nombrePub="";
         
-
+           if (this.pubTipoPublicacion.equalsIgnoreCase("revista")) {
+                nombrePub=this.getRevista().getRevTituloArticulo();
+            }
+            if (this.pubTipoPublicacion.equalsIgnoreCase("congreso")) {
+                  nombrePub=this.getCongreso().getCongTituloPonencia();
+            }
+            if (this.pubTipoPublicacion.equalsIgnoreCase("libro")) {
+                 nombrePub=this.getLibro().getLibTituloLibro();
+            }
+            if (this.pubTipoPublicacion.equalsIgnoreCase("capitulo_libro")) {
+                 nombrePub=this.getCapituloLibro().getCaplibTituloCapitulo();
+            }
+        
+        
+        return nombrePub;
+    }
+ 
  
 
     public Integer getPubIdentificador() {
