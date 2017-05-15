@@ -36,6 +36,8 @@ import java.util.Base64;*/
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletResponse;
+import org.primefaces.context.RequestContext;
+import org.primefaces.event.FileUploadEvent;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
@@ -613,4 +615,17 @@ public class PublicacionController implements Serializable {
     public void setAuxEstudiante(Estudiante auxEstudiante) {
         this.auxEstudiante = auxEstudiante;
     }
+    
+     public void seleccionarArchivo(FileUploadEvent  event)
+    {
+        String nombreArchivo = event.getFile().getFileName();
+        UploadedFile Archivo = event.getFile();
+        FacesMessage message = new FacesMessage("El archivo", event.getFile().getFileName() + " se selecciono exitosamente");
+        FacesContext.getCurrentInstance().addMessage(null, message);
+        RequestContext requestContext = RequestContext.getCurrentInstance();
+        requestContext.update("filemessage");
+    
+    }
+
+
 }

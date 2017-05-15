@@ -240,11 +240,20 @@
                                 </h:panelGroup>
 
                             </h:panelGroup>
-
+                            
+                            
+                            <p:fileUpload mode="advanced" 
+                                          label="Seleccionar Archivo" invalidFileMessage="Solo se permiten archivo PDF"
+                                          dragDropSupport="true" update="filemessage" uploadLabel="Aceptar" cancelLabel="Cancelar"
+                                          allowTypes="/(\.|\/)(pdf)$/" fileUploadListener="#{publicacionController.seleccionarArchivo}"
+                                          styleClass="addEspacio"></p:fileUpload>
+                            <p:messages id="filemessage" autoUpdate="false" closable="false" />
+                            
+                            
                             <h:outputLabel for="tablaContenidoPDF" value="Tabla de Contenido PDF" styleClass="addEspacio"/>
                             <p:fileUpload id="tablaContenidoPDF" value="#{publicacionController.tablaContenidoPDF}"    required="true" mode="simple" allowTypes="/(\.|\/)(pdf)$/" styleClass="addEspacio"></p:fileUpload>
                             <h:outputLabel styleClass="addEspacio"/>
-
+                            
                             <h:outputLabel styleClass="addEspacio"/>
 
                             <h:outputLabel for="cartaAprobacionPDF" value="Evidencia de Publicacion * &nbsp;&nbsp;" />
