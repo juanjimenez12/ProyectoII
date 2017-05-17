@@ -107,7 +107,6 @@ import org.primefaces.model.UploadedFile;
     , @NamedQuery(name = "Publicacion.findAllLib",   query = "SELECT p FROM Publicacion p WHERE  p.pubNombreAutor LIKE :variableFiltro OR p.pubTipoPublicacion LIKE :variableFiltro OR p.libro.libTituloLibro LIKE :variableFiltro")
     , @NamedQuery(name = "Publicacion.findAllCapLib",query = "SELECT p FROM Publicacion p WHERE  p.pubNombreAutor LIKE :variableFiltro OR p.pubTipoPublicacion LIKE :variableFiltro OR p.capituloLibro.caplibTituloCapitulo LIKE :variableFiltro")
 
-        
     , @NamedQuery(name = "Publicacion.findAllByRev",     query = "SELECT p FROM Publicacion p WHERE  (p.pubEstIdentificador.estIdentificador =:identificacion) AND (p.pubNombreAutor LIKE :variableFiltro OR p.pubTipoPublicacion LIKE :variableFiltro OR p.revista.revTituloArticulo LIKE :variableFiltro)")
     , @NamedQuery(name = "Publicacion.findAllByCong",    query = "SELECT p FROM Publicacion p WHERE  (p.pubEstIdentificador.estIdentificador =:identificacion) AND (p.pubNombreAutor LIKE :variableFiltro OR p.pubTipoPublicacion LIKE :variableFiltro OR p.congreso.congTituloPonencia LIKE :variableFiltro)")
     , @NamedQuery(name = "Publicacion.findAllByLib",     query = "SELECT p FROM Publicacion p WHERE  (p.pubEstIdentificador.estIdentificador =:identificacion) AND (p.pubNombreAutor LIKE :variableFiltro OR p.pubTipoPublicacion LIKE :variableFiltro OR p.libro.libTituloLibro LIKE :variableFiltro)")
