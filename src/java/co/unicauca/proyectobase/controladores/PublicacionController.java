@@ -63,6 +63,9 @@ public class PublicacionController implements Serializable {
     private InputStream stream;
     private Estudiante auxEstudiante;
 
+    private String creditos;
+    private String variableFiltrado;
+
     public void visPdfPub() throws IOException {
 
         archivoPDF archivoPublic = actual.descargaPublicacion();
@@ -84,6 +87,15 @@ public class PublicacionController implements Serializable {
             streamedContent.getStream().reset(); //reset stream to the start position!
         }
         return streamedContent;
+    }
+
+    public String getCreditos() {
+        creditos = "" + actual.getPubCreditos();
+        return creditos;
+    }
+
+    public void setCreditos(String creditos) {
+        this.creditos = creditos;
     }
 
     public String getPdfUrl() {
@@ -144,18 +156,40 @@ public class PublicacionController implements Serializable {
         return INICIO;
     }
 
+  
     public List<Publicacion> listado() {
-        return dao.findAll();
+
+        if ((variableFiltrado == null) || (variableFiltrado.equals(""))) {
+
+            return dao.findAll();
+
+        } else {
+
+            return dao.ListadoPublicacionFilt(variableFiltrado);
+
+        }
 
     }
 
     public List<Publicacion> listadoPublicaciones(String nombreUsuario) {
 
-        Estudiante est = dao.obtenerEstudiante(nombreUsuario);
-        setAuxEstudiante(est);
+        if ((variableFiltrado == null) || (variableFiltrado.equals(""))) {
 
-        int idEstudiante = est.getEstIdentificador();
-        return dao.ListadoPublicacionEst(idEstudiante);
+            Estudiante est = dao.obtenerEstudiante(nombreUsuario);
+            setAuxEstudiante(est);
+
+            int idEstudiante = est.getEstIdentificador();
+            return dao.ListadoPublicacionEst(idEstudiante);
+
+        } else {
+
+            Estudiante est = dao.obtenerEstudiante(nombreUsuario);
+            setAuxEstudiante(est);
+
+            int idEstudiante = est.getEstIdentificador();
+            return dao.ListadoPublicacionEstFilt(idEstudiante, variableFiltrado);
+
+        }
 
     }
 
@@ -617,6 +651,14 @@ public class PublicacionController implements Serializable {
         this.auxEstudiante = auxEstudiante;
     }
 
+    public String getVariableFiltrado() {
+        return variableFiltrado;
+    }
+
+    public void setVariableFiltrado(String variableFiltrado) {
+        this.variableFiltrado = variableFiltrado;
+    }
+
     public void seleccionarArchivo(FileUploadEvent event) {
         String nombreArchivo = event.getFile().getFileName();
         UploadedFile Archivo = event.getFile();
@@ -660,6 +702,16 @@ public class PublicacionController implements Serializable {
             ret = true;
         }
         return ret;
+
+    }
+
+    public void asignarCreditos() {
+
+        int auxCreditos = Integer.parseInt(creditos);
+        actual.setPubCreditos(auxCreditos);
+        dao.edit(actual);
+        dao.flush();
+        redirigirAlistar();
 
     }
 

@@ -100,11 +100,25 @@ import org.primefaces.model.UploadedFile;
     , @NamedQuery(name = "Publicacion.findByPubDoi", query = "SELECT p FROM Publicacion p WHERE p.pubDoi = :pubDoi")
     , @NamedQuery(name = "Publicacion.findByPubIsbn", query = "SELECT p FROM Publicacion p WHERE p.pubIsbn = :pubIsbn")
     , @NamedQuery(name = "Publicacion.estIdentificacion", query = "SELECT e FROM Estudiante e WHERE e.estIdentificador = :estIdentificador")
+        
+    , @NamedQuery(name = "Publicacion.findAllEst",   query = "SELECT p FROM Publicacion p WHERE  p.pubNombreAutor LIKE :variableFiltro OR p.pubTipoPublicacion LIKE :variableFiltro")    
+    , @NamedQuery(name = "Publicacion.findAllRev",   query = "SELECT p FROM Publicacion p WHERE  p.pubNombreAutor LIKE :variableFiltro OR p.pubTipoPublicacion LIKE :variableFiltro OR p.revista.revTituloArticulo LIKE :variableFiltro")
+    , @NamedQuery(name = "Publicacion.findAllCong",  query = "SELECT p FROM Publicacion p WHERE  p.pubNombreAutor LIKE :variableFiltro OR p.pubTipoPublicacion LIKE :variableFiltro OR p.congreso.congTituloPonencia LIKE :variableFiltro")
+    , @NamedQuery(name = "Publicacion.findAllLib",   query = "SELECT p FROM Publicacion p WHERE  p.pubNombreAutor LIKE :variableFiltro OR p.pubTipoPublicacion LIKE :variableFiltro OR p.libro.libTituloLibro LIKE :variableFiltro")
+    , @NamedQuery(name = "Publicacion.findAllCapLib",query = "SELECT p FROM Publicacion p WHERE  p.pubNombreAutor LIKE :variableFiltro OR p.pubTipoPublicacion LIKE :variableFiltro OR p.capituloLibro.caplibTituloCapitulo LIKE :variableFiltro")
+
+        
+    , @NamedQuery(name = "Publicacion.findAllByRev",     query = "SELECT p FROM Publicacion p WHERE  (p.pubEstIdentificador.estIdentificador =:identificacion) AND (p.pubNombreAutor LIKE :variableFiltro OR p.pubTipoPublicacion LIKE :variableFiltro OR p.revista.revTituloArticulo LIKE :variableFiltro)")
+    , @NamedQuery(name = "Publicacion.findAllByCong",    query = "SELECT p FROM Publicacion p WHERE  (p.pubEstIdentificador.estIdentificador =:identificacion) AND (p.pubNombreAutor LIKE :variableFiltro OR p.pubTipoPublicacion LIKE :variableFiltro OR p.congreso.congTituloPonencia LIKE :variableFiltro)")
+    , @NamedQuery(name = "Publicacion.findAllByLib",     query = "SELECT p FROM Publicacion p WHERE  (p.pubEstIdentificador.estIdentificador =:identificacion) AND (p.pubNombreAutor LIKE :variableFiltro OR p.pubTipoPublicacion LIKE :variableFiltro OR p.libro.libTituloLibro LIKE :variableFiltro)")
+    , @NamedQuery(name = "Publicacion.findAllByCapLib",  query = "SELECT p FROM Publicacion p WHERE  (p.pubEstIdentificador.estIdentificador =:identificacion) AND (p.pubNombreAutor LIKE :variableFiltro OR p.pubTipoPublicacion LIKE :variableFiltro OR p.capituloLibro.caplibTituloCapitulo LIKE :variableFiltro )")
+    
+        , @NamedQuery(name = "Publicacion.findAllFiltPubEst",query = "SELECT p FROM Publicacion p WHERE  (p.pubEstIdentificador.estIdentificador =:identificacion) AND (p.pubNombreAutor LIKE :variableFiltro OR p.pubTipoPublicacion LIKE :variableFiltro OR p.revista.revTituloArticulo LIKE :variableFiltro OR p.capituloLibro.caplibTituloCapitulo LIKE :variableFiltro)")
     ,@NamedQuery(
-    name="findAllPub_Est",
-    query="SELECT p FROM Publicacion p WHERE p.pubEstIdentificador.estIdentificador= :identificacion"
-)
-        , @NamedQuery(name = "Publicacion.findByPubIssn", query = "SELECT p FROM Publicacion p WHERE p.pubIssn = :pubIssn")})
+            name = "findAllPub_Est",
+            query = "SELECT p FROM Publicacion p WHERE p.pubEstIdentificador.estIdentificador= :identificacion"
+    )
+    , @NamedQuery(name = "Publicacion.findByPubIssn", query = "SELECT p FROM Publicacion p WHERE p.pubIssn = :pubIssn")})
 public class Publicacion implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -184,6 +198,7 @@ public class Publicacion implements Serializable {
         this.pubTipoPublicacion = pubTipoPublicacion;
         this.pubFechaPublicacion = pubFechaPublicacion;
     }
+
     public void agregarMetadatos(UploadedFile ArticuloPDF, UploadedFile TablaContenidoPDF, UploadedFile cartaAprobacionPDF) throws IOException, GeneralSecurityException, DocumentException, PathNotFoundException, AccessDeniedException {
 
         /*Nombre de los archivos que se almacenaran en el repositorio*/
@@ -697,34 +712,34 @@ public class Publicacion implements Serializable {
 
         }
     }
-    
+
     public archivoPDF descargaCartaAprobac() {
         archivoPDF archivo = new archivoPDF();
         String tipoPDF = "cartaAprobacion";
-        
+
         String host = "http://localhost:8083/OpenKM";
         String username = "okmAdmin";
         String password = "admin";
         OKMWebservices ws = OKMWebservicesFactory.newInstance(host, username, password);
 
         try {
-            
+
             Map<String, String> properties = new HashMap();
             /* Se comprueba el tipo de publicacion: revista congreso , un libro 
                 o un capitulo de un libro que se devolvera como resultado*/
             if (this.pubTipoPublicacion.equalsIgnoreCase("revista")) {
                 properties.put("okp:revista.identPublicacion", "" + this.pubIdentificador);
                 properties.put("okp:revista.tipoPDFCargar", "" + tipoPDF);
-   
+
             }
             if (this.pubTipoPublicacion.equalsIgnoreCase("congreso")) {
                 properties.put("okp:congreso.identPublicacion", "" + this.pubIdentificador);
-                 properties.put("okp:congreso.tipoPDFCargar", "" + tipoPDF);
+                properties.put("okp:congreso.tipoPDFCargar", "" + tipoPDF);
 
             }
             if (this.pubTipoPublicacion.equalsIgnoreCase("libro")) {
                 properties.put("okp:libro.identPublicacion", "" + this.pubIdentificador);
-                    properties.put("okp:libro.tipoPDFCargar", "" + tipoPDF);
+                properties.put("okp:libro.tipoPDFCargar", "" + tipoPDF);
             }
             if (this.pubTipoPublicacion.equalsIgnoreCase("capitulo_libro")) {
                 properties.put("okp:capLibro.identPublicacion", "" + this.pubIdentificador);
@@ -753,34 +768,34 @@ public class Publicacion implements Serializable {
         }
         return archivo;
     }
-    
+
     public archivoPDF descargaPublicacion() {
         archivoPDF archivo = new archivoPDF();
         String tipoPDF = "tipoPublicacion";
-         
+
         String host = "http://localhost:8083/OpenKM";
         String username = "okmAdmin";
         String password = "admin";
         OKMWebservices ws = OKMWebservicesFactory.newInstance(host, username, password);
 
-           try {
-            
+        try {
+
             Map<String, String> properties = new HashMap();
             /* Se comprueba el tipo de publicacion: revista congreso , un libro 
                 o un capitulo de un libro que se devolvera como resultado*/
             if (this.pubTipoPublicacion.equalsIgnoreCase("revista")) {
                 properties.put("okp:revista.identPublicacion", "" + this.pubIdentificador);
                 properties.put("okp:revista.tipoPDFCargar", "" + tipoPDF);
-   
+
             }
             if (this.pubTipoPublicacion.equalsIgnoreCase("congreso")) {
                 properties.put("okp:congreso.identPublicacion", "" + this.pubIdentificador);
-                 properties.put("okp:congreso.tipoPDFCargar", "" + tipoPDF);
+                properties.put("okp:congreso.tipoPDFCargar", "" + tipoPDF);
 
             }
             if (this.pubTipoPublicacion.equalsIgnoreCase("libro")) {
                 properties.put("okp:libro.identPublicacion", "" + this.pubIdentificador);
-                    properties.put("okp:libro.tipoPDFCargar", "" + tipoPDF);
+                properties.put("okp:libro.tipoPDFCargar", "" + tipoPDF);
             }
             if (this.pubTipoPublicacion.equalsIgnoreCase("capitulo_libro")) {
                 properties.put("okp:capLibro.identPublicacion", "" + this.pubIdentificador);
@@ -809,34 +824,34 @@ public class Publicacion implements Serializable {
         }
         return archivo;
     }
-    
-        public archivoPDF descargaPubTC() {
+
+    public archivoPDF descargaPubTC() {
         archivoPDF archivo = new archivoPDF();
         String tipoPDF = "tablaContenido";
-         
+
         String host = "http://localhost:8083/OpenKM";
         String username = "okmAdmin";
         String password = "admin";
         OKMWebservices ws = OKMWebservicesFactory.newInstance(host, username, password);
 
-           try {
-            
+        try {
+
             Map<String, String> properties = new HashMap();
             /* Se comprueba el tipo de publicacion: revista congreso , un libro 
                 o un capitulo de un libro que se devolvera como resultado*/
             if (this.pubTipoPublicacion.equalsIgnoreCase("revista")) {
                 properties.put("okp:revista.identPublicacion", "" + this.pubIdentificador);
                 properties.put("okp:revista.tipoPDFCargar", "" + tipoPDF);
-   
+
             }
             if (this.pubTipoPublicacion.equalsIgnoreCase("congreso")) {
                 properties.put("okp:congreso.identPublicacion", "" + this.pubIdentificador);
-                 properties.put("okp:congreso.tipoPDFCargar", "" + tipoPDF);
+                properties.put("okp:congreso.tipoPDFCargar", "" + tipoPDF);
 
             }
             if (this.pubTipoPublicacion.equalsIgnoreCase("libro")) {
                 properties.put("okp:libro.identPublicacion", "" + this.pubIdentificador);
-                    properties.put("okp:libro.tipoPDFCargar", "" + tipoPDF);
+                properties.put("okp:libro.tipoPDFCargar", "" + tipoPDF);
             }
             if (this.pubTipoPublicacion.equalsIgnoreCase("capitulo_libro")) {
                 properties.put("okp:capLibro.identPublicacion", "" + this.pubIdentificador);
@@ -865,28 +880,25 @@ public class Publicacion implements Serializable {
         }
         return archivo;
     }
-    public String obtenerNombrePub()
-    {
-        String nombrePub="";
-        
-           if (this.pubTipoPublicacion.equalsIgnoreCase("revista")) {
-                nombrePub=this.getRevista().getRevTituloArticulo();
-            }
-            if (this.pubTipoPublicacion.equalsIgnoreCase("congreso")) {
-                  nombrePub=this.getCongreso().getCongTituloPonencia();
-            }
-            if (this.pubTipoPublicacion.equalsIgnoreCase("libro")) {
-                 nombrePub=this.getLibro().getLibTituloLibro();
-            }
-            if (this.pubTipoPublicacion.equalsIgnoreCase("capitulo_libro")) {
-                 nombrePub=this.getCapituloLibro().getCaplibTituloCapitulo();
-            }
-        
-        
+
+    public String obtenerNombrePub() {
+        String nombrePub = "";
+
+        if (this.pubTipoPublicacion.equalsIgnoreCase("revista")) {
+            nombrePub = this.getRevista().getRevTituloArticulo();
+        }
+        if (this.pubTipoPublicacion.equalsIgnoreCase("congreso")) {
+            nombrePub = this.getCongreso().getCongTituloPonencia();
+        }
+        if (this.pubTipoPublicacion.equalsIgnoreCase("libro")) {
+            nombrePub = this.getLibro().getLibTituloLibro();
+        }
+        if (this.pubTipoPublicacion.equalsIgnoreCase("capitulo_libro")) {
+            nombrePub = this.getCapituloLibro().getCaplibTituloCapitulo();
+        }
+
         return nombrePub;
     }
- 
- 
 
     public Integer getPubIdentificador() {
         return pubIdentificador;
@@ -969,10 +981,10 @@ public class Publicacion implements Serializable {
     }
 
     public Date getPubFechaPublicacion() {
-        
-         FormatoFechas fecha =  new FormatoFechas(pubFechaPublicacion) ;
-         return fecha;
-         //       return pubFechaPublicacion;
+
+        FormatoFechas fecha = new FormatoFechas(pubFechaPublicacion);
+        return fecha;
+        //       return pubFechaPublicacion;
     }
 
     public void setPubFechaPublicacion(Date pubFechaPublicacion) {

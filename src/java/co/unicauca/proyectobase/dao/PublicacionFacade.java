@@ -18,7 +18,7 @@ import javax.persistence.Persistence;
 
 import java.util.Arrays;
 import java.util.List;
- 
+
 @Stateless
 public class PublicacionFacade extends AbstractFacade<Publicacion> {
 
@@ -48,8 +48,8 @@ public class PublicacionFacade extends AbstractFacade<Publicacion> {
             return -1;
         }
     }
-    
-        public int getIdArchivo() {
+
+    public int getIdArchivo() {
         try {
             String queryStr;
             queryStr = "SELECT AUTO_INCREMENT FROM  INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'doctorado' AND TABLE_NAME = 'archivo'";
@@ -74,8 +74,8 @@ public class PublicacionFacade extends AbstractFacade<Publicacion> {
             return null;
         }
     }
-    
-        public Estudiante obtenerEstudiante(String nombreUsuario) {
+
+    public Estudiante obtenerEstudiante(String nombreUsuario) {
 
         String comSimple = "\'";
         String queryStr;
@@ -94,27 +94,108 @@ public class PublicacionFacade extends AbstractFacade<Publicacion> {
             return null;
         }
     }
-        
-      public List<Publicacion> ListadoPublicacionEst(int estIdentificador) {
 
-        String comSimple = "\'";
+    public List<Publicacion> ListadoPublicacionEst(int estIdentificador) {
+
+        /*      String comSimple = "\'";
         String queryStr;
         queryStr = "SELECT * FROM doctorado.publicacion where pub_est_identificador = " + comSimple + estIdentificador + comSimple;
 //        List results = 
-      
-javax.persistence.Query   query=getEntityManager().createNamedQuery("findAllPub_Est");
-query.setParameter("identificacion", estIdentificador);
+         */
+        javax.persistence.Query query = getEntityManager().createNamedQuery("findAllPub_Est");
+        query.setParameter("identificacion", estIdentificador);
 //query1.getResultList();
 
         try {
             System.out.println("co.unicauca.proyectobase.dao.PublicacionFacade.ListadoPublicacionEst()");
-             
+
             return query.getResultList();
         } catch (Exception e) {
             System.out.println("Error " + e.getMessage());
             System.out.println(e);
             return null;
         }
+    }
+
+    /* public List<Publicacion> ListadoPublicacionEstFilt(int estIdentificador, String variableFiltrado) {
+       
+        javax.persistence.Query query = getEntityManager().createNamedQuery("Publicacion.findAllFiltPubEst");
+        query.setParameter("identificacion", estIdentificador);
+          query.setParameter("variableFiltro", "%" + variableFiltrado + "%");
+   
+           System.out.println("identificacion: "+estIdentificador);
+           System.out.println("variableFiltrado: "+variableFiltrado);
+
+        try {
+            System.out.println("co.unicauca.proyectobase.dao.PublicacionFacade.ListadoPublicacionEst()");
+
+            return query.getResultList();
+        } catch (Exception e) {
+            System.out.println("Error " + e.getMessage());
+            System.out.println(e);
+            return null;
+        }
+    }*/
+    
+    
+            
+ public List<Publicacion> ListadoPublicacionFilt(String variableFiltrado) {
+
+        javax.persistence.Query query = em.createNamedQuery("Publicacion.findAllEst");
+        query.setParameter("variableFiltro", "%" + variableFiltrado + "%");
+        List<Publicacion> findPub = query.getResultList();
+        
+       if (findPub.isEmpty()) {
+            query = em.createNamedQuery("Publicacion.findAllRev");
+            query.setParameter("variableFiltro", "%" + variableFiltrado + "%");
+            findPub = query.getResultList();
+        }
+        if (findPub.isEmpty()) {
+            query = em.createNamedQuery("Publicacion.findAllCong");
+            query.setParameter("variableFiltro", "%" + variableFiltrado + "%");
+            findPub = query.getResultList();
+        }
+        if (findPub.isEmpty()) {
+            query = em.createNamedQuery("Publicacion.findAllLib");
+            query.setParameter("variableFiltro", "%" + variableFiltrado + "%");
+            findPub = query.getResultList();
+        }
+        if (findPub.isEmpty()) {
+            query = em.createNamedQuery("Publicacion.findAllCapLib");
+            query.setParameter("variableFiltro", "%" + variableFiltrado + "%");
+            findPub = query.getResultList();
+        }
+        return findPub;
+
+    }
+              
+    public List<Publicacion> ListadoPublicacionEstFilt(int estIdentificador, String variableFiltrado) {
+
+        javax.persistence.Query query = em.createNamedQuery("Publicacion.findAllByRev");
+        query.setParameter("identificacion", estIdentificador);
+        query.setParameter("variableFiltro", "%" + variableFiltrado + "%");
+
+        List<Publicacion> findPub = query.getResultList();
+        if (findPub.isEmpty()) {
+            query = em.createNamedQuery("Publicacion.findAllByCong");
+            query.setParameter("identificacion", estIdentificador);
+            query.setParameter("variableFiltro", "%" + variableFiltrado + "%");
+            findPub = query.getResultList();
+        }
+        if (findPub.isEmpty()) {
+            query = em.createNamedQuery("Publicacion.findAllByLib");
+            query.setParameter("identificacion", estIdentificador);
+            query.setParameter("variableFiltro", "%" + variableFiltrado + "%");
+            findPub = query.getResultList();
+        }
+        if (findPub.isEmpty()) {
+            query = em.createNamedQuery("Publicacion.findAllByCapLib");
+            query.setParameter("identificacion", estIdentificador);
+            query.setParameter("variableFiltro", "%" + variableFiltrado + "%");
+            findPub = query.getResultList();
+        }
+        return findPub;
+
     }
 
 }
