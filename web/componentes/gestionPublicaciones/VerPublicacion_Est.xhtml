@@ -45,10 +45,10 @@
                             <h:outputLabel styleClass="addEspacio"/>
                     </h:panelGrid>            
                 </h:form>
-                
-               <h:outputLabel class="colorVer" value="Datos Publicacion" />
+       
             
-                
+                         
+               <h:outputLabel class="colorVer" value="Datos Publicacion" />
 
                 <h:form>
                     <h:panelGrid columns="2" cellpadding="10" styleClass="elementosCentrados bajarGrid"  rendered="#{publicacionController.renderizarRevista() == true}">
@@ -161,6 +161,7 @@
                 <h:outputLabel class="colorVer" value="Vista Previa" />
                 <h:outputLabel styleClass="addEspacio"/>
 
+            
 
                 <h:form styleClass="elementosCentrados bajarGrid">
                     <h:panelGrid columns="2" cellpadding="10" styleClass="elementosCentrados bajarGrid" id="panelRegistrar"  >
@@ -183,14 +184,17 @@
                 <h:outputLabel styleClass="addEspacio"/>
                 <h:outputLabel styleClass="addEspacio"/>
 
-                <p:messages id="error" autoUpdate="true" closable="false" />
+                <p:messages id="error" closable="false" />
                 <h:outputLabel styleClass="addEspacio"/>
                 <h:outputLabel styleClass="addEspacio"/>
                 <h:outputLabel styleClass="addEspacio"/>
                 <h:outputLabel styleClass="addEspacio"/>
                 <h:outputLabel styleClass="addEspacio"/>
+                
+                
+                
                 <h:form>
-                    <h:commandButton  value="Volver" actionListener="#{publicacionController.redirigirAlistar()}" class="btn btn-primary"  style="float:center;" />                       
+                    <h:commandButton  value="Volver" actionListener="#{publicacionController.redirigirAlistar(usuariosSessionController.nombreUsuario)}" class="btn btn-primary"  style="float:center;" />                       
                 </h:form>  
                 <h:outputLabel styleClass="addEspacio"/>
                 <h:outputLabel styleClass="addEspacio"/>

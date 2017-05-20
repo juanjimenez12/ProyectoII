@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package co.unicauca.proyectobase.entidades;
 
 import java.io.Serializable;
@@ -250,12 +245,22 @@ public class Publicacion implements Serializable {
             para almacenarlo en formato PDFA */
         ArrayList<tipoPDF_cargar> subidaArchivos = new ArrayList<>();
 
+       /* tipoPDF_cargar cartaAprobacion = new tipoPDF_cargar();
+        cartaAprobacion.setNombreArchivo(nombreCartaAprob);
+        cartaAprobacion.setRutaArchivo(destCartaAprob);
+        cartaAprobacion.setTipoPDF("cartaAprobacion");
+        cartaAprobacion.setArchivoIS(cartaAprobacionPDF.getInputstream());
+        subidaArchivos.add(cartaAprobacion); */
+       
+      if (!cartaAprobacionPDF.getFileName().equalsIgnoreCase("")) {
         tipoPDF_cargar cartaAprobacion = new tipoPDF_cargar();
         cartaAprobacion.setNombreArchivo(nombreCartaAprob);
         cartaAprobacion.setRutaArchivo(destCartaAprob);
         cartaAprobacion.setTipoPDF("cartaAprobacion");
         cartaAprobacion.setArchivoIS(cartaAprobacionPDF.getInputstream());
-        subidaArchivos.add(cartaAprobacion);
+        subidaArchivos.add(cartaAprobacion);;
+       }
+               
 
         if (!ArticuloPDF.getFileName().equalsIgnoreCase("")) {
             tipoPDF_cargar articulo = new tipoPDF_cargar();
@@ -298,7 +303,8 @@ public class Publicacion implements Serializable {
             /* codigoFirma - en este caso corresponde al nombre de la carpeta que contendra
                 el articulo y su tabla de contenido en formato PDFA
                 Ruta del folder a crear en el Gestor Openkm*/
-            rutaFolderCrear = "/okm:root/Doctorado_Electronica/" + codigoFirma;
+           // rutaFolderCrear = "/okm:root/Doctorado_Electronica/" + codigoFirma;
+            rutaFolderCrear = "/okm:root/Doctorado_Electronica/"+this.pubEstIdentificador.getEstUsuario();
             this.setPubDiropkm(codigoFirma);
             try {
                 /* Se valida si el forder a crear existe o no*/
@@ -313,6 +319,23 @@ public class Publicacion implements Serializable {
                 fld.setPath(rutaFolderCrear);
                 ws.createFolder(fld);
             }
+            
+            rutaFolderCrear = "/okm:root/Doctorado_Electronica/"+this.pubEstIdentificador.getEstUsuario()+ "/" + codigoFirma;
+            try {
+                /* Se valida si el forder a crear existe o no*/
+                ws.isValidFolder(rutaFolderCrear);
+                crearFolder = false;
+            } catch (Exception e) {
+                crearFolder = true;
+            }
+            if (crearFolder == true) {
+                /* Si no existe el folder, se crea con la ruta(rutaFolderCrear)*/
+                Folder fld = new Folder();
+                fld.setPath(rutaFolderCrear);
+                ws.createFolder(fld);
+            }
+            
+            
             for (int i = 0; i < subidaArchivos.size(); i++) {
 
                 Archivo arch = (Archivo) archivoCollection.toArray()[i];

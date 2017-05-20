@@ -111,10 +111,12 @@ public class PublicacionController implements Serializable {
     }
 
     public void setPublicacionPDF(UploadedFile publicacionPDF) {
+
         this.publicacionPDF = publicacionPDF;
     }
 
     public UploadedFile getTablaContenidoPDF() {
+
         return TablaContenidoPDF;
     }
 
@@ -156,7 +158,6 @@ public class PublicacionController implements Serializable {
         return INICIO;
     }
 
-  
     public List<Publicacion> listado() {
 
         if ((variableFiltrado == null) || (variableFiltrado.equals(""))) {
@@ -381,10 +382,21 @@ public class PublicacionController implements Serializable {
     }
 
     public void agregar() {
-        if (cartaAprobacionPDF.getFileName().equalsIgnoreCase("")) {
+        boolean puedeSubir = false;
+        if (publicacionPDF.getFileName().equalsIgnoreCase("")) {
+            if (cartaAprobacionPDF.getFileName().equalsIgnoreCase("")) {
 
-            FacesContext.getCurrentInstance().addMessage("cartaAprobacion", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Debe subir una evidencia de la publicacion", ""));
+                FacesContext.getCurrentInstance().addMessage("cartaAprobacion", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Debe subir la publicacion o la evidencia de la publicacion en formato PDF", ""));
+            } else {
+                puedeSubir = true;
+
+            }
         } else {
+            puedeSubir = true;
+        }
+
+        if (puedeSubir == true) {
+            //else {
             System.out.println("agregar");
             Estudiante est = getAuxEstudiante();
             try {

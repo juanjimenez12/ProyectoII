@@ -19,3 +19,8 @@ $(document).ready(function () {
     });
 });
  
+ 
+$("#panelRegistrar:cartaAprobacionPDF").change(function() {
+
+alert("Entre");
+}) ;
