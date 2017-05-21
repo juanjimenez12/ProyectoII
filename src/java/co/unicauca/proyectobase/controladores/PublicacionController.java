@@ -34,6 +34,7 @@ import javax.ejb.EJBException;
 /*import java.nio.charset.StandardCharsets;
 import java.util.Base64;*/
 import javax.faces.application.FacesMessage;
+import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletResponse;
 import org.primefaces.context.RequestContext;
@@ -382,114 +383,137 @@ public class PublicacionController implements Serializable {
     }
 
     public void agregar() {
-        boolean puedeSubir = false;
-        if (publicacionPDF.getFileName().equalsIgnoreCase("")) {
-            if (cartaAprobacionPDF.getFileName().equalsIgnoreCase("")) {
+        /* formatoValido -> se utiliza para verificar que el usario
+           suba unicamente archivos en formato pdf*/
+        boolean formatoValido = true;
+        if (!publicacionPDF.getFileName().equalsIgnoreCase("") &&  !"application/pdf".equals(publicacionPDF.getContentType())) {
 
-                FacesContext.getCurrentInstance().addMessage("cartaAprobacion", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Debe subir la publicacion o la evidencia de la publicacion en formato PDF", ""));
+            FacesContext.getCurrentInstance().addMessage("valPublicacion", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Debe subir la Publicacion en formato PDF", ""));
+            formatoValido = false;
+        }
+        if (!TablaContenidoPDF.getFileName().equalsIgnoreCase("") && !"application/pdf".equals(TablaContenidoPDF.getContentType())) {
+
+            FacesContext.getCurrentInstance().addMessage("valTContenido", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Debe subir la Tabla de Contenido en formato PDF", ""));
+            formatoValido = false;
+        }
+        if (!cartaAprobacionPDF.getFileName().equalsIgnoreCase("") && !"application/pdf".equals(cartaAprobacionPDF.getContentType())) {
+
+            FacesContext.getCurrentInstance().addMessage("cartaAprobacion", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Debe subir la Carta de Aprobacion en formato PDF", ""));
+            formatoValido = false;
+        }
+        
+        if(formatoValido == true)  {
+            /* puedeSubir  ->  se utiliza para comprobar que el usuario ha seleccionado 
+                el PDF de la publicacion o en su defecto la carta de aprobacion*/
+            boolean puedeSubir = false;
+            if (publicacionPDF.getFileName().equalsIgnoreCase("")) {
+                if (cartaAprobacionPDF.getFileName().equalsIgnoreCase("")) {
+
+                    FacesContext.getCurrentInstance().addMessage("cartaAprobacion", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Debe subir la publicacion o la evidencia de la publicacion en formato PDF", ""));
+                } else {
+                    puedeSubir = true;
+
+                }
             } else {
                 puedeSubir = true;
-
             }
-        } else {
-            puedeSubir = true;
-        }
+                
+            if (puedeSubir == true) {
+                //else {
+                System.out.println("agregar");
+                Estudiante est = getAuxEstudiante();
+                try {
 
-        if (puedeSubir == true) {
-            //else {
-            System.out.println("agregar");
-            Estudiante est = getAuxEstudiante();
-            try {
+                    actual.setPubEstIdentificador(est);
+                    String nombreAut = "";
+                    nombreAut = "" + est.getEstNombre() + " " + est.getEstApellido();
 
-                actual.setPubEstIdentificador(est);
-                String nombreAut = "";
-                nombreAut = "" + est.getEstNombre() + " " + est.getEstApellido();
+                    actual.setPubNombreAutor(nombreAut);
+                    int numPubRevis = dao.getnumFilasPubRev();
+                    actual.setPubIdentificador(numPubRevis);
 
-                actual.setPubNombreAutor(nombreAut);
-                int numPubRevis = dao.getnumFilasPubRev();
-                actual.setPubIdentificador(numPubRevis);
-
-                /* Dependiendo de si se adiciona una revista, un congreso,un libro o un  
+                    /* Dependiendo de si se adiciona una revista, un congreso,un libro o un  
                capitulo de un libro se crea el objeto respectivo*/
-                if (actual.getPubTipoPublicacion().equals("revista")) {
-                    actual.getRevista().setPubIdentificador(numPubRevis);
-                    actual.getRevista().setPublicacion(actual);
-                    actual.setCongreso(null);
-                    actual.setCapituloLibro(null);
-                    actual.setLibro(null);
+                    if (actual.getPubTipoPublicacion().equals("revista")) {
+                        actual.getRevista().setPubIdentificador(numPubRevis);
+                        actual.getRevista().setPublicacion(actual);
+                        actual.setCongreso(null);
+                        actual.setCapituloLibro(null);
+                        actual.setLibro(null);
 
+                    }
+                    if (actual.getPubTipoPublicacion().equals("congreso")) {
+
+                        actual.getCongreso().setPubIdentificador(numPubRevis);
+                        actual.getCongreso().setPublicacion(actual);
+                        actual.setRevista(null);
+                        actual.setCapituloLibro(null);
+                        actual.setLibro(null);
+                    }
+
+                    if (actual.getPubTipoPublicacion().equals("libro")) {
+                        /* SI no es una revista, el objeto a adicionar es un congreso*/
+                        actual.getLibro().setPubIdentificador(numPubRevis);
+                        actual.getLibro().setPublicacion(actual);
+                        actual.setRevista(null);
+                        actual.setCongreso(null);
+                        actual.setCapituloLibro(null);
+                    }
+
+                    if (actual.getPubTipoPublicacion().equals("capitulo_libro")) {
+                        /* SI no es una revista, el objeto a adicionar es un congreso*/
+                        actual.getCapituloLibro().setPubIdentificador(numPubRevis);
+                        actual.getCapituloLibro().setPublicacion(actual);
+                        actual.setRevista(null);
+                        actual.setCongreso(null);
+                        actual.setLibro(null);
+                    }
+
+                    ArrayList<Archivo> CollArchivo = new ArrayList<>();
+                    int numArchivos = dao.getIdArchivo();
+
+                    Archivo archCartaAprob = new Archivo();
+                    archCartaAprob.setArcPubIdentificador(actual);
+                    archCartaAprob.setArcIdentificador(numArchivos);
+                    archCartaAprob.setArctipoPDFcargar("cartaAprobacion");
+                    CollArchivo.add(archCartaAprob);
+
+                    //int numArchivos = numPubRevis;
+                    if (!publicacionPDF.getFileName().equalsIgnoreCase("")) {
+                        Archivo archArt = new Archivo();
+                        numArchivos = numArchivos + 1;
+                        archArt.setArcPubIdentificador(actual);
+                        archArt.setArcIdentificador(numArchivos);
+                        archArt.setArctipoPDFcargar("tipoPublicacion");
+                        CollArchivo.add(archArt);
+                    }
+                    if (!TablaContenidoPDF.getFileName().equalsIgnoreCase("")) {
+                        Archivo arcTablaC = new Archivo();
+                        numArchivos = numArchivos + 1;
+                        arcTablaC.setArcPubIdentificador(actual);
+                        arcTablaC.setArcIdentificador(numArchivos);
+                        arcTablaC.setArctipoPDFcargar("tablaContenido");
+                        CollArchivo.add(arcTablaC);
+                    }
+                    actual.setArchivoCollection(CollArchivo);
+                    actual.agregarMetadatos(publicacionPDF, TablaContenidoPDF, cartaAprobacionPDF);
+
+                    actual.setPubEstado("Activo");
+                    dao.create(actual);
+                    dao.flush();
+                    mensajeconfirmarRegistro();
+                    limpiarCampos();
+                    redirigirAlistar(est.getEstUsuario());
+                    // redirigirAlistar(est.getEstUsuario());
+                } catch (IOException | GeneralSecurityException | DocumentException | PathNotFoundException | AccessDeniedException | EJBException ex) {
+                    mensajeRegistroFallido();
+                    limpiarCampos();
+                    redirigirAlistar(est.getEstUsuario());
+                    //    redirigirAlistar(est.getEstUsuario());
+                    Logger.getLogger(PublicacionController.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                if (actual.getPubTipoPublicacion().equals("congreso")) {
 
-                    actual.getCongreso().setPubIdentificador(numPubRevis);
-                    actual.getCongreso().setPublicacion(actual);
-                    actual.setRevista(null);
-                    actual.setCapituloLibro(null);
-                    actual.setLibro(null);
-                }
-
-                if (actual.getPubTipoPublicacion().equals("libro")) {
-                    /* SI no es una revista, el objeto a adicionar es un congreso*/
-                    actual.getLibro().setPubIdentificador(numPubRevis);
-                    actual.getLibro().setPublicacion(actual);
-                    actual.setRevista(null);
-                    actual.setCongreso(null);
-                    actual.setCapituloLibro(null);
-                }
-
-                if (actual.getPubTipoPublicacion().equals("capitulo_libro")) {
-                    /* SI no es una revista, el objeto a adicionar es un congreso*/
-                    actual.getCapituloLibro().setPubIdentificador(numPubRevis);
-                    actual.getCapituloLibro().setPublicacion(actual);
-                    actual.setRevista(null);
-                    actual.setCongreso(null);
-                    actual.setLibro(null);
-                }
-
-                ArrayList<Archivo> CollArchivo = new ArrayList<>();
-                int numArchivos = dao.getIdArchivo();
-
-                Archivo archCartaAprob = new Archivo();
-                archCartaAprob.setArcPubIdentificador(actual);
-                archCartaAprob.setArcIdentificador(numArchivos);
-                archCartaAprob.setArctipoPDFcargar("cartaAprobacion");
-                CollArchivo.add(archCartaAprob);
-
-                //int numArchivos = numPubRevis;
-                if (!publicacionPDF.getFileName().equalsIgnoreCase("")) {
-                    Archivo archArt = new Archivo();
-                    numArchivos = numArchivos + 1;
-                    archArt.setArcPubIdentificador(actual);
-                    archArt.setArcIdentificador(numArchivos);
-                    archArt.setArctipoPDFcargar("tipoPublicacion");
-                    CollArchivo.add(archArt);
-                }
-                if (!TablaContenidoPDF.getFileName().equalsIgnoreCase("")) {
-                    Archivo arcTablaC = new Archivo();
-                    numArchivos = numArchivos + 1;
-                    arcTablaC.setArcPubIdentificador(actual);
-                    arcTablaC.setArcIdentificador(numArchivos);
-                    arcTablaC.setArctipoPDFcargar("tablaContenido");
-                    CollArchivo.add(arcTablaC);
-                }
-                actual.setArchivoCollection(CollArchivo);
-                actual.agregarMetadatos(publicacionPDF, TablaContenidoPDF, cartaAprobacionPDF);
-
-                actual.setPubEstado("Activo");
-                dao.create(actual);
-                dao.flush();
-                mensajeconfirmarRegistro();
-                limpiarCampos();
-                redirigirAlistar(est.getEstUsuario());
-                // redirigirAlistar(est.getEstUsuario());
-            } catch (IOException | GeneralSecurityException | DocumentException | PathNotFoundException | AccessDeniedException | EJBException ex) {
-                mensajeRegistroFallido();
-                limpiarCampos();
-                redirigirAlistar(est.getEstUsuario());
-                //    redirigirAlistar(est.getEstUsuario());
-                Logger.getLogger(PublicacionController.class.getName()).log(Level.SEVERE, null, ex);
             }
-
         }
 
     }
@@ -724,6 +748,37 @@ public class PublicacionController implements Serializable {
         dao.edit(actual);
         dao.flush();
         redirigirAlistar();
+
+    }
+
+    private String uploadedFileName;
+
+    public String getUploadedFileName() {
+        return uploadedFileName;
+    }
+
+    public void setUploadedFileName(String uploadedFileName) {
+        this.uploadedFileName = uploadedFileName;
+    }
+
+    public void handleFileUpload(FileUploadEvent event) {
+        System.out.println(" uploadedFileName=event.getFile().getFileName();");
+        uploadedFileName = event.getFile().getFileName();
+    }
+
+    public void validateFile(FacesContext ctx,
+            UIComponent comp,
+            Object value) {
+        List<FacesMessage> msgs = new ArrayList<>();
+
+        UploadedFile file = (UploadedFile) value;
+        if (file.getSize() > 1024) {
+            msgs.add(new FacesMessage("file too big"));
+        }
+        if (!"text/plain".equals(file.getContentType())) {
+            msgs.add(new FacesMessage("not a text file"));
+            FacesContext.getCurrentInstance().addMessage("valTContenido", new FacesMessage(FacesMessage.SEVERITY_ERROR, " not a text file", ""));
+        }
 
     }
 
