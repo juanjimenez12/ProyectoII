@@ -78,7 +78,7 @@ public class ValidadorCredito implements Validator {
     
    //valida que el valor ingresado para el numero de creditos  sea numerico
     public boolean validarCredito(String numCreditos) {
-        Pattern p = Pattern.compile("^[1-9]*$");
+        Pattern p = Pattern.compile("^[0-9]*$");
         Matcher m = p.matcher(numCreditos);
         return m.find();
     }

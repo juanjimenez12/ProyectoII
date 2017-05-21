@@ -23,8 +23,10 @@ import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.security.GeneralSecurityException;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -92,6 +94,10 @@ public class PublicacionController implements Serializable {
 
     public String getCreditos() {
         creditos = "" + actual.getPubCreditos();
+        if(creditos.equalsIgnoreCase("null"))
+        {
+         creditos = "0";
+        }
         return creditos;
     }
 
@@ -742,9 +748,14 @@ public class PublicacionController implements Serializable {
     }
 
     public void asignarCreditos() {
-
+      
+       /* Obtiene la fecha correspondiente al moemento en el que se 
+            realiza el visado de la publicacion */
+        Date date = new Date();
+ 
         int auxCreditos = Integer.parseInt(creditos);
         actual.setPubCreditos(auxCreditos);
+        actual.setPubFechaVisado(date);
         dao.edit(actual);
         dao.flush();
         redirigirAlistar();

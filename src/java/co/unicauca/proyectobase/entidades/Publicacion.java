@@ -233,7 +233,7 @@ public class Publicacion implements Serializable {
 
 
         /*  Estampa de Tiempo
-            Obtiene el dia y hora actual del servidor para posteriormente adicionrarlo
+            Obtiene el dia y hora actual del servidor para posteriormente adicionarlo
             como Metadato en el documento PDF/A y el Gestor Documental*/
         Date date = new Date();
         DateFormat datehourFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
