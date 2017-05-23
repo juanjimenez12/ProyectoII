@@ -165,6 +165,11 @@ public class Publicacion implements Serializable {
     @Size(max = 30)
     @Column(name = "pub_issn")
     private String pubIssn;
+    
+    @Size(max = 20)
+    @Column(name = "pub_visado")
+    private String pubVisado;
+        
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "publicacion")
     private Libro libro;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "arcPubIdentificador")
@@ -1033,10 +1038,19 @@ public class Publicacion implements Serializable {
         return pubIssn;
     }
 
+    public String getPubVisado() {
+        return pubVisado;
+    }
+
+    public void setPubVisado(String pubVisado) {
+        this.pubVisado = pubVisado;
+    }
+
     public void setPubIssn(String pubIssn) {
         this.pubIssn = pubIssn;
     }
 
+    
     public Libro getLibro() {
         return libro;
     }

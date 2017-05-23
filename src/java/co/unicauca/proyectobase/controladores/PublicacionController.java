@@ -1,5 +1,6 @@
 package co.unicauca.proyectobase.controladores;
 
+import co.unicauca.proyectobase.dao.EstudianteFacade;
 import co.unicauca.proyectobase.dao.PublicacionFacade;
 import co.unicauca.proyectobase.entidades.Archivo;
 import co.unicauca.proyectobase.entidades.Congreso;
@@ -52,7 +53,8 @@ import org.primefaces.model.UploadedFile;
 public class PublicacionController implements Serializable {
 
     @EJB
-
+    private EstudianteFacade daoEst ;
+    @EJB
     private PublicacionFacade dao;
     private Publicacion actual;
     private List<Publicacion> listaPublicaciones;
@@ -94,9 +96,8 @@ public class PublicacionController implements Serializable {
 
     public String getCreditos() {
         creditos = "" + actual.getPubCreditos();
-        if(creditos.equalsIgnoreCase("null"))
-        {
-         creditos = "0";
+        if (creditos.equalsIgnoreCase("null")) {
+            creditos = "0";
         }
         return creditos;
     }
@@ -199,6 +200,52 @@ public class PublicacionController implements Serializable {
 
         }
 
+    }
+
+    public List<Publicacion> listadoEspera() {
+
+        if ((variableFiltrado == null) || (variableFiltrado.equals(""))) {
+
+            return listaPublicacionVisadoEspera(dao.findAll());
+
+        } else {
+            return listaPublicacionVisadoEspera(dao.ListadoPublicacionFilt(variableFiltrado));
+        }
+    }
+
+    public List<Publicacion> listadoRevisadas() {
+
+        if ((variableFiltrado == null) || (variableFiltrado.equals(""))) {
+
+            return listaPublicacionVisadoRevisada(dao.findAll());
+
+        } else {
+            return listaPublicacionVisadoRevisada(dao.ListadoPublicacionFilt(variableFiltrado));
+        }
+    }
+
+    /* Lista las publicaciones que su estado de Visado sea: espera,
+     es decir publicaciones que aun no han sido visadas*/
+    public List<Publicacion> listaPublicacionVisadoEspera(List<Publicacion> lista) {
+        List<Publicacion> listado = new ArrayList<>();
+        for (int i = 0; i < lista.size(); i++) {
+            if (lista.get(i).getPubVisado().equals("espera")) {
+                listado.add(lista.get(i));
+            }
+        }
+        return listado;
+    }
+
+    /* Lista las publicaciones que esten revisadas
+     es decir que su estado de Visado sea: aceptada o rechazada */
+    public List<Publicacion> listaPublicacionVisadoRevisada(List<Publicacion> lista) {
+        List<Publicacion> listado = new ArrayList<>();
+        for (int i = 0; i < lista.size(); i++) {
+            if (lista.get(i).getPubVisado().equals("aceptada") || lista.get(i).getPubVisado().equals("rechazada")) {
+                listado.add(lista.get(i));
+            }
+        }
+        return listado;
     }
 
     public void onDateSelect(SelectEvent event) {
@@ -392,7 +439,7 @@ public class PublicacionController implements Serializable {
         /* formatoValido -> se utiliza para verificar que el usario
            suba unicamente archivos en formato pdf*/
         boolean formatoValido = true;
-        if (!publicacionPDF.getFileName().equalsIgnoreCase("") &&  !"application/pdf".equals(publicacionPDF.getContentType())) {
+        if (!publicacionPDF.getFileName().equalsIgnoreCase("") && !"application/pdf".equals(publicacionPDF.getContentType())) {
 
             FacesContext.getCurrentInstance().addMessage("valPublicacion", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Debe subir la Publicacion en formato PDF", ""));
             formatoValido = false;
@@ -407,8 +454,8 @@ public class PublicacionController implements Serializable {
             FacesContext.getCurrentInstance().addMessage("cartaAprobacion", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Debe subir la Carta de Aprobacion en formato PDF", ""));
             formatoValido = false;
         }
-        
-        if(formatoValido == true)  {
+
+        if (formatoValido == true) {
             /* puedeSubir  ->  se utiliza para comprobar que el usuario ha seleccionado 
                 el PDF de la publicacion o en su defecto la carta de aprobacion*/
             boolean puedeSubir = false;
@@ -423,7 +470,7 @@ public class PublicacionController implements Serializable {
             } else {
                 puedeSubir = true;
             }
-                
+
             if (puedeSubir == true) {
                 //else {
                 System.out.println("agregar");
@@ -505,6 +552,8 @@ public class PublicacionController implements Serializable {
                     actual.agregarMetadatos(publicacionPDF, TablaContenidoPDF, cartaAprobacionPDF);
 
                     actual.setPubEstado("Activo");
+                    /* Asigna espera como estado del visado la publicacion */
+                    actual.setPubVisado("espera");
                     dao.create(actual);
                     dao.flush();
                     mensajeconfirmarRegistro();
@@ -641,6 +690,21 @@ public class PublicacionController implements Serializable {
         Utilidades.redireccionar("/ProyectoII/faces/componentes/gestionPublicaciones/ListarPublicaciones_Coord.xhtml");
     }
 
+    public void redirigirAlistarEspera() {
+
+        limpiarCampos();
+        System.out.println("si esta pasando por aqui");
+
+        Utilidades.redireccionar("/ProyectoII/faces/componentes/gestionPublicaciones/ListarPublicaciones_Espera.xhtml");
+    }
+
+    public void redirigirAlistarRevisadas() {
+
+        limpiarCampos();
+        System.out.println("si esta pasando por aqui");
+        Utilidades.redireccionar("/ProyectoII/faces/componentes/gestionPublicaciones/ListarPublicaciones_Rev.xhtml");
+    }
+
     /*redireccion para volver a registrar */
     public void redirigirARegistrar(String nombreUsuario) {
         limpiarCampos(nombreUsuario);
@@ -748,11 +812,11 @@ public class PublicacionController implements Serializable {
     }
 
     public void asignarCreditos() {
-      
-       /* Obtiene la fecha correspondiente al moemento en el que se 
+
+        /* Obtiene la fecha correspondiente al moemento en el que se 
             realiza el visado de la publicacion */
         Date date = new Date();
- 
+
         int auxCreditos = Integer.parseInt(creditos);
         actual.setPubCreditos(auxCreditos);
         actual.setPubFechaVisado(date);
@@ -760,6 +824,64 @@ public class PublicacionController implements Serializable {
         dao.flush();
         redirigirAlistar();
 
+    }
+
+    public void visarPublicacion() {
+ 
+      
+         
+         
+        int auxCreditos = Integer.parseInt(creditos);
+        if (actual.getPubVisado().equalsIgnoreCase("aceptada")) {
+                
+                int creditos_actuales = actual.getPubEstIdentificador().getEstCreditos();
+                int creditos_nuevos = creditos_actuales - actual.getPubCreditos();
+                creditos_nuevos = creditos_nuevos + auxCreditos;
+                actual.getPubEstIdentificador().setEstCreditos(creditos_nuevos);
+                actual.setPubCreditos(auxCreditos);
+                daoEst.edit(actual.getPubEstIdentificador());
+
+                dao.edit(actual);
+                dao.flush();
+                redirigirAlistarRevisadas();
+          }
+         
+        /* Si no la publicacion no ha sido aceptada 
+             indica que esta en espera */
+        else {
+            if (actual.getPubEstIdentificador().getEstCreditos() == null) {
+                actual.getPubEstIdentificador().setEstCreditos(auxCreditos);                
+                actual.setPubCreditos(auxCreditos);
+                 daoEst.edit(actual.getPubEstIdentificador());
+                actual.setPubVisado("aceptada");
+                dao.edit(actual);
+                dao.flush();
+                redirigirAlistarRevisadas();
+            
+            }else{
+                int creditos_actuales = actual.getPubEstIdentificador().getEstCreditos();
+                int creditos_nuevos = creditos_actuales + auxCreditos;
+                actual.getPubEstIdentificador().setEstCreditos(creditos_nuevos);
+                actual.setPubCreditos(auxCreditos);
+                actual.setPubVisado("aceptada");
+                daoEst.edit(actual.getPubEstIdentificador());
+                dao.edit(actual);
+                dao.flush();
+                redirigirAlistarRevisadas();
+            
+            
+            }
+ 
+
+        }
+
+    }
+
+    public void RechazarPublicacion() {
+        actual.setPubVisado("rechazada");
+        dao.edit(actual);
+        dao.flush();
+        redirigirAlistarRevisadas();
     }
 
     private String uploadedFileName;
