@@ -81,6 +81,9 @@ public class Estudiante implements Serializable {
     @Size(max = 40)
     @Column(name = "est_contrasena")
     private String estContrasena;
+    @Column(name = "est_creditos")
+    private Integer estCreditos;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "estudiante")
     private List<Doctorado> doctoradoList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "pubEstIdentificador")
@@ -92,6 +95,15 @@ public class Estudiante implements Serializable {
     public Estudiante(Integer estIdentificador) {
         this.estIdentificador = estIdentificador;
     }
+
+    public Integer getEstCreditos() {
+        return estCreditos;
+    }
+
+    public void setEstCreditos(Integer estCreditos) {
+        this.estCreditos = estCreditos;
+    }
+    
 
     public Integer getEstIdentificador() {
         return estIdentificador;

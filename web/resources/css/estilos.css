@@ -1,3 +1,20 @@
+ /*Hide the advanced buttons and progress*/
+.ui-fileupload-upload, .ui-fileupload-cancel, .ui-fileupload-progress{
+    display: none;
+}
+
+/*Move the file name and size of file onto same line*/
+.ui-fileupload-buttonbar, .ui-fileupload-content{
+    float: left;
+}
+
+/*Remove some of the margin from the file name to align correctly*/
+.ui-fileupload-files{
+    margin: 0;
+}
+
+
+
 .elementosCentrados{
     margin: auto;
     text-align: left;

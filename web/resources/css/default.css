@@ -1,3 +1,25 @@
+/* Button */
+.ui-button-text-icon-left .ui-button-text {
+  font-size: 0.8em;
+  padding: 0.2em;
+}
+
+/* Icon */
+.ui-button-text-icon-left .ui-icon {
+  display: none;
+}
+
+.ui-fileupload-buttonbar {
+  background: none;
+  border: 0;
+  padding: 0;  
+}
+ 
+
+.ui-fileupload-choose.ui-button {
+  margin-right: 40px;
+}
+
 body {
     background-color: #ffffff;
     font-size: 12px;
@@ -133,6 +155,7 @@ h1 {
 
 .bajarGrid
 {
+    
     margin-top: 25px; 
 }
 
