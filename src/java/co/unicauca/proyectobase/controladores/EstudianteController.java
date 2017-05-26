@@ -146,8 +146,9 @@ public class EstudianteController implements Serializable {
             actual.setEstCohorte(Integer.parseInt(cohorte));
             dao.edit(actual);
             dao.flush();
+            Utilidades.enviarCorreo("davidstl4@gmail.com", "Mensaje sistema soctorados", "Se ha editado su perfil de manera exitosa");
             mensajeEditar();
-            redirigirAlistar();            
+            redirigirAlistar();          
         }
         catch(EJBException e)
         {

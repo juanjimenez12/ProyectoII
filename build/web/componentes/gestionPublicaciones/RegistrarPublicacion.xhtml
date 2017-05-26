@@ -5,17 +5,12 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
-
-
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets" >
+    
 
     <h:head>
         <title>Registrar Publicacion</title>
     </h:head>
-
-
-
-
 
     <ui:composition template="../../plantillas/Estudiante.xhtml">
         <ui:define name="content">     
@@ -236,28 +231,55 @@
                                         <h:outputLabel for="capLibroPDF" value="Capitulo Libro PDF" styleClass="addEspacio"/>
                                         <p:fileUpload id="capLibroPDF" value="#{publicacionController.publicacionPDF}"    required="true" mode="simple" allowTypes="/(\.|\/)(pdf)$/"></p:fileUpload>
                                         <h:outputLabel styleClass="addEspacio"/>
+                                     
                                     </div>
                                 </h:panelGroup>
 
                             </h:panelGroup>
+                            
+                            
+                                <p:messages for="valPublicacion"  id="msjPublicacionF"/>
 
-                            <h:outputLabel for="tablaContenidoPDF" value="Tabla de Contenido PDF" styleClass="addEspacio"/>
-                            <p:fileUpload id="tablaContenidoPDF" value="#{publicacionController.tablaContenidoPDF}"    required="true" mode="simple" allowTypes="/(\.|\/)(pdf)$/" styleClass="addEspacio"></p:fileUpload>
+                           <!--  <p:fileUpload mode="advanced" allowTypes="/(\.|\/)(gif|jpe?g|png|pdf|doc|docx|xls|xlsx|xlsm)$/i" label="Seleccionar Archivo" invalidFileMessage="Solo se permiten archivo PDF"
+                                          dragDropSupport="true" update="filemessage" uploadLabel="Aceptar" cancelLabel="Cancelar"
+                                          fileUploadListener="{publicacionController.seleccionarArchivo}"
+                                          ></p:fileUpload>
+                            <p:growl id="filemessage" showDetail="true" />  -->
+
+
+                            <!--  <p:fileUpload mode="advanced" 
+                                            label="Seleccionar Archivo" invalidFileMessage="Solo se permiten archivo PDF"
+                                            dragDropSupport="true" update="filemessage" uploadLabel="Aceptar" cancelLabel="Cancelar"
+                                            allowTypes="/(\.|\/)(pdf)$/" fileUploadListener="{publicacionController.seleccionarArchivo}"
+                                            styleClass="addEspacio"></p:fileUpload>
+                              <p:messages id="filemessage" autoUpdate="false" closable="false" /> -->
+                                
+                             <!--    <p:fileUpload allowTypes="/(\.|\/)(pdf)$/" fileUploadListener="{publicacionController.handleFileUpload}" mode="advanced"  
+     update="panelRegistrar:fileName" auto="true"  />
+                                <p:inputText id="fileName" value="{publicacionController.uploadedFileName}" />  -->
+
+   
+                            <h:outputLabel for="valTContenido" value="Tabla de Contenido PDF" styleClass="addEspacio"/>
+                            <p:fileUpload id="tablaContenidoPDF"   value="#{publicacionController.tablaContenidoPDF}"       required="true" mode="simple" allowTypes="/(\.|\/)(pdf)$/" styleClass="addEspacio"></p:fileUpload>
                             <h:outputLabel styleClass="addEspacio"/>
-
-                            <h:outputLabel styleClass="addEspacio"/>
-
+                          
+                            <p:messages for="valTContenido"  id="msjvalTContenido" />
+            
+                          
+                            
                             <h:outputLabel for="cartaAprobacionPDF" value="Evidencia de Publicacion * &nbsp;&nbsp;" />
 
-                            <p:commandButton id="ayuda" onclick="return false;"  icon="ui-icon-help"/>
+                            <p:commandButton id="ayuda" ajax="false" onclick="return false;"  icon="ui-icon-help"/>
 
                             <p:tooltip id="toolTipGrow" for="ayuda" value="En este campo se debe seleccionar la carta de aprobacion de la publicacion"
                                        showEffect="clip" hideEffect="blind" />
 
-                            <p:fileUpload id="cartaAprobacionPDF"  value="#{publicacionController.cartaAprobacionPDF}" required="true" mode="simple" allowTypes="/(\.|\/)(pdf)$/" >
+                            <p:fileUpload id="cartaAprobacionPDF" value="#{publicacionController.cartaAprobacionPDF}" required="true" mode="simple" allowTypes="/(\.|\/)(pdf)$/" > 
 
                             </p:fileUpload>  
-                            <p:messages id="cartaAprobacion" autoUpdate="false" closable="false" />
+
+                            <p:messages for="cartaAprobacion"  id="msjCartaAprobacion"/>
+
                             <h:outputLabel styleClass="addEspacio"/>
                             <h:outputLabel styleClass="addEspacio"/>
                             <h:outputLabel styleClass="addEspacio"/>
@@ -287,4 +309,8 @@
             </p:panel>
         </ui:define>
     </ui:composition>
-</html>
+</html>  
+
+
+
+

@@ -23,7 +23,7 @@
                 <h:form>
                     <h:panelGrid columns="2" cellspacing="10"  styleClass="elementosCentrados bajarGrid"  >
 
-                        
+
 
                         <h:outputLabel value="Nombre Autor &nbsp;&nbsp;&nbsp;" for="valNombAut" styleClass="addEspacio"/>
                         <h:outputText class="form-control" id="valNombAut"  value="#{publicacionController.actual.pubNombreAutor}" styleClass="addEspacio form-control"/>
@@ -40,21 +40,25 @@
                         <h:outputLabel value="IBN &nbsp;&nbsp;&nbsp;" for="valIBN" styleClass="addEspacio"/>
                         <h:outputText class="form-control" id="valIBN" value="#{publicacionController.actual.pubIsbn}" styleClass="addEspacio form-control"/>
 
-
-                        
-                            <h:outputLabel styleClass="addEspacio"/>
+                        <h:outputLabel value="Estado Visado &nbsp;&nbsp;&nbsp;" for="valEstadoVis" styleClass="addEspacio"/>
+                        <h:outputText class="form-control" id="valEstadoVis" value="#{publicacionController.actual.pubVisado}" styleClass="addEspacio form-control" />
+                        <p:tooltip id="toolTipGrow" for="ayuda" value="El campo de estado visado indica si la publicacion aun no ha sido revisada(espera), o si fue aceptada o rechazada."
+                                   showEffect="clip" hideEffect="blind" />
+                        <h:outputLink  id="ayuda"  style="color: blue" onclick="return false;" >¿Que es el estado Visado?</h:outputLink>
+                        <h:outputLabel styleClass="addEspacio"/>
+                        <h:outputLabel styleClass="addEspacio"/>
                     </h:panelGrid>            
                 </h:form>
-                
-               <h:outputLabel class="colorVer" value="Datos Publicacion" />
-            
-                
+
+
+
+                <h:outputLabel class="colorVer" value="Datos Publicacion" />
 
                 <h:form>
                     <h:panelGrid columns="2" cellpadding="10" styleClass="elementosCentrados bajarGrid"  rendered="#{publicacionController.renderizarRevista() == true}">
 
                         <h:outputLabel styleClass="addEspacio"/>
-                      
+
 
                         <!-- Titulo de la revista donde se va a publicar, es obligatorio -->
                         <h:outputLabel value="Titulo Articulo &nbsp;&nbsp;&nbsp;" for="valNArticulo"  styleClass="addEspacio" />
@@ -74,7 +78,7 @@
 
                         </h:outputText>
 
-                             <h:outputLabel styleClass="addEspacio"/>
+                        <h:outputLabel styleClass="addEspacio"/>
                     </h:panelGrid>
                 </h:form>
 
@@ -95,14 +99,14 @@
 
                         </h:outputText>
 
-                       
+
 
                         <h:outputLabel value="Nombre Evento &nbsp;&nbsp;&nbsp;" for="valNEvento" styleClass="addEspacio"/>
                         <h:outputText class="form-control" id="valNEvento"  value="#{publicacionController.actual.congreso.congNombreEvento}" styleClass="addEspacio form-control">
 
                         </h:outputText>
 
- 
+
 
                         <h:outputLabel value="Tipo congreso &nbsp;&nbsp;&nbsp;" for="valTipoCongreso" styleClass="addEspacio"/>
                         <h:outputText class="form-control"  id="valTipoCongreso" value="#{publicacionController.actual.congreso.congTipoCongreso}" styleClass="addEspacio form-control">                                    
@@ -112,7 +116,7 @@
 
                         <h:outputLabel styleClass="addEspacio"/>
 
-                             <h:outputLabel styleClass="addEspacio"/>
+                        <h:outputLabel styleClass="addEspacio"/>
                     </h:panelGrid>            
                 </h:form>
 
@@ -122,7 +126,7 @@
 
                         <h:outputLabel styleClass="addEspacio"/>
                         <h:outputLabel styleClass="addEspacio"/>
-                    
+
 
                         <h:outputLabel value="Titulo Libro &nbsp;" for="valTLibro" styleClass="addEspacio"/>
                         <h:outputText class="form-control" id="valTLibro"  value="#{publicacionController.actual.libro.libTituloLibro}" styleClass="addEspacio form-control">
@@ -132,20 +136,20 @@
                         <h:outputLabel styleClass="addEspacio"/>
                         <h:outputLabel styleClass="addEspacio"/>
 
-                             <h:outputLabel styleClass="addEspacio"/>
+                        <h:outputLabel styleClass="addEspacio"/>
                     </h:panelGrid>            
                 </h:form>
 
                 <h:form>
                     <h:panelGrid columns="2" cellpadding="10" styleClass="elementosCentrados bajarGrid"  rendered="#{publicacionController.renderizarCapLibro() == true}">
-                             <h:outputLabel styleClass="addEspacio"/>
                         <h:outputLabel styleClass="addEspacio"/>
-                        
+                        <h:outputLabel styleClass="addEspacio"/>
+
                         <h:outputLabel value="Titulo Libro &nbsp;" for="valTCLibro" styleClass="addEspacio"/>
                         <h:outputText class="form-control" id="valTCLibro"  value="#{publicacionController.actual.capituloLibro.caplibTituloLibro}" styleClass="addEspacio form-control">
                         </h:outputText>
 
-                       
+
 
                         <h:outputLabel value="Titulo Capitulo Libro &nbsp;" for="valTCapLibro" styleClass="addEspacio"/>
                         <h:outputText class="form-control" id="valTCapLibro"  value="#{publicacionController.actual.capituloLibro.caplibTituloCapitulo}" styleClass="addEspacio form-control">
@@ -154,12 +158,13 @@
 
                         <h:outputLabel styleClass="addEspacio"/>
                         <h:outputLabel styleClass="addEspacio"/>
-                             <h:outputLabel styleClass="addEspacio"/>
+                        <h:outputLabel styleClass="addEspacio"/>
                     </h:panelGrid>            
                 </h:form>
 
                 <h:outputLabel class="colorVer" value="Vista Previa" />
                 <h:outputLabel styleClass="addEspacio"/>
+
 
 
                 <h:form styleClass="elementosCentrados bajarGrid">
@@ -183,15 +188,65 @@
                 <h:outputLabel styleClass="addEspacio"/>
                 <h:outputLabel styleClass="addEspacio"/>
 
-                <p:messages id="error" autoUpdate="true" closable="false" />
+                <p:messages for="error" closable="false" />
                 <h:outputLabel styleClass="addEspacio"/>
                 <h:outputLabel styleClass="addEspacio"/>
                 <h:outputLabel styleClass="addEspacio"/>
                 <h:outputLabel styleClass="addEspacio"/>
                 <h:outputLabel styleClass="addEspacio"/>
+
+
+                <!-- <h:form>
+                     <p:commandButton  value="Visar" onclick="PF('dialogVisar').show();"  class="btn btn-primary"  style="float:center;" />                       
+                 </h:form>   -->
+
+
                 <h:form>
-                    <h:commandButton  value="Volver" actionListener="#{publicacionController.redirigirAlistar()}" class="btn btn-primary"  style="float:center;" />                       
-                </h:form>  
+                    <h:panelGroup rendered="#{publicacionController.actual.pubVisado == 'espera'}" >
+                        <p:commandButton value="Visar" onclick="PF('dialogVisar').show();"  class="btn btn-primary"  style="float:center; margin-right: 20px;" />                       
+                        <p:commandButton value="Rechazar" actionListener="#{publicacionController.RechazarPublicacion()}"  class="btn btn-primary"  style="float:center; margin-right: 20px;" />                       
+                        <p:commandButton value="Volver" actionListener="#{publicacionController.redirigirAlistar()}" class="btn btn-primary"  style="float:center;" />                       
+                    </h:panelGroup>
+
+                    <h:panelGroup rendered="#{publicacionController.actual.pubVisado == 'aceptada'}">
+                        <p:commandButton value="Editar creditos" onclick="PF('dialogVisar').show();"  class="btn btn-primary"  style="float:center; margin-right: 20px;" />                       
+                        <p:commandButton value="Volver" actionListener="#{publicacionController.redirigirAlistar()}" class="btn btn-primary"  style="float:center;" />                       
+                    </h:panelGroup>
+
+                    <h:panelGroup rendered="#{publicacionController.actual.pubVisado == 'rechazada'}">
+                        <p:commandButton value="Volver" actionListener="#{publicacionController.redirigirAlistar()}" class="btn btn-primary"  style="float:center;" />                       
+                    </h:panelGroup>
+                </h:form>     
+
+
+                <p:dialog header="Confirmacion de Visado de Publicacion" minHeight="40" widgetVar="dialogVisar" resizable="false" draggable="false">
+                    <h:form>
+                        <h:outputText value="Numero Actual de Creditos: " />
+                        <h:outputText value="#{publicacionController.creditos}" />   
+                        <br/>
+                        <h:outputText value="Asignacion de Creditos: "></h:outputText>
+                        <h:inputText id="txtCreditos" value = "#{publicacionController.creditos}" maxlength="2" size="2">
+                            <f:validator validatorId="validadorCredito"/>
+                            <p:ajax event="keyup" update="msjValCredito btnAceptar" />  
+                        </h:inputText>
+                        <p:message for="txtCreditos" id="msjValCredito" styleClass="addEspacio"/> 
+
+
+
+                        <h:commandButton id="btnAceptar"  value="Aceptar"  action="#{publicacionController.visarPublicacion()}" class="btn btn-success"  style="float:center;"  disabled="#{not facesContext.postback or facesContext.validationFailed}"/>                             
+                    </h:form>
+                    <h:form>
+                        <p:commandButton  value="Cancelar" onclick="PF('dialogVisar').hide();"  class="btn btn-danger"  style="float:center;" />                       
+                    </h:form>
+                </p:dialog>
+
+
+                <h:outputLabel styleClass="addEspacio"/>
+                <h:outputLabel styleClass="addEspacio"/>
+
+              <!--  <h:form>
+                    <h:commandButton  value="Volver" actionListener="{publicacionController.redirigirAlistar()}" class="btn btn-primary"  style="float:center;" />                       
+                </ h:form>   -->
                 <h:outputLabel styleClass="addEspacio"/>
                 <h:outputLabel styleClass="addEspacio"/>
 
