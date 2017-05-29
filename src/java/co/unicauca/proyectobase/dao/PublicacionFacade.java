@@ -94,6 +94,32 @@ public class PublicacionFacade extends AbstractFacade<Publicacion> {
             return null;
         }
     }
+    
+        public int CountByMonthYear(String anio, String mes) {
+
+        String comSimple = "\'";
+        String queryStr;
+        queryStr =  "SELECT COUNT(*) FROM doctorado.publicacion WHERE YEAR(doctorado.publicacion.pub_fecha_registro) =" + comSimple + anio + comSimple + "  AND Month(doctorado.publicacion.pub_fecha_registro) = "+ comSimple + mes + comSimple;
+        
+        javax.persistence.Query query = getEntityManager().createNativeQuery(queryStr);
+        List results = query.getResultList();
+        int numeroPub = ((Long) results.get(0)).intValue();
+        return numeroPub;
+   
+    }
+        
+     public int CountByMonthYearVis(String anio, String mes) {
+
+        String comSimple = "\'";
+        String queryStr;
+        queryStr =  "SELECT COUNT(*) FROM doctorado.publicacion WHERE YEAR(doctorado.publicacion.pub_fecha_visado) =" + comSimple + anio + comSimple + "  AND Month(doctorado.publicacion.pub_fecha_visado) = "+ comSimple + mes + comSimple;
+        
+        javax.persistence.Query query = getEntityManager().createNativeQuery(queryStr);
+        List results = query.getResultList();
+        int numeroPub = ((Long) results.get(0)).intValue();
+        return numeroPub;
+   
+    }
 
     public List<Publicacion> ListadoPublicacionEst(int estIdentificador) {
 

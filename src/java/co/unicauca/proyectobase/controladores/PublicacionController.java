@@ -53,7 +53,7 @@ import org.primefaces.model.UploadedFile;
 public class PublicacionController implements Serializable {
 
     @EJB
-    private EstudianteFacade daoEst ;
+    private EstudianteFacade daoEst;
     @EJB
     private PublicacionFacade dao;
     private Publicacion actual;
@@ -716,6 +716,16 @@ public class PublicacionController implements Serializable {
         Utilidades.redireccionar("/ProyectoII/faces/componentes/gestionPublicaciones/EditarPublicacion.xhtml");
     }
 
+    public void redirigirGraficaPubReg() {
+
+        Utilidades.redireccionar("/ProyectoII/faces/componentes/gestionPublicaciones/GraficaPubReg.xhtml");
+    }
+
+    public void redirigirGraficaPubVis() {
+
+        Utilidades.redireccionar("/ProyectoII/faces/componentes/gestionPublicaciones/GraficaPubVis.xhtml");
+    }
+
     /*mensajes de confirmacion */
     public void mensajeEditar() {
         addMessage("ha editado satisfactoriamente la publicacion", "");
@@ -827,38 +837,32 @@ public class PublicacionController implements Serializable {
     }
 
     public void visarPublicacion() {
- 
-      
-         
-         
+
         int auxCreditos = Integer.parseInt(creditos);
         if (actual.getPubVisado().equalsIgnoreCase("aceptada")) {
-                
-                int creditos_actuales = actual.getPubEstIdentificador().getEstCreditos();
-                int creditos_nuevos = creditos_actuales - actual.getPubCreditos();
-                creditos_nuevos = creditos_nuevos + auxCreditos;
-                actual.getPubEstIdentificador().setEstCreditos(creditos_nuevos);
+
+            int creditos_actuales = actual.getPubEstIdentificador().getEstCreditos();
+            int creditos_nuevos = creditos_actuales - actual.getPubCreditos();
+            creditos_nuevos = creditos_nuevos + auxCreditos;
+            actual.getPubEstIdentificador().setEstCreditos(creditos_nuevos);
+            actual.setPubCreditos(auxCreditos);
+            daoEst.edit(actual.getPubEstIdentificador());
+
+            dao.edit(actual);
+            dao.flush();
+            redirigirAlistarRevisadas();
+        } /* Si no la publicacion no ha sido aceptada 
+             indica que esta en espera */ else {
+            if (actual.getPubEstIdentificador().getEstCreditos() == null) {
+                actual.getPubEstIdentificador().setEstCreditos(auxCreditos);
                 actual.setPubCreditos(auxCreditos);
                 daoEst.edit(actual.getPubEstIdentificador());
-
-                dao.edit(actual);
-                dao.flush();
-                redirigirAlistarRevisadas();
-          }
-         
-        /* Si no la publicacion no ha sido aceptada 
-             indica que esta en espera */
-        else {
-            if (actual.getPubEstIdentificador().getEstCreditos() == null) {
-                actual.getPubEstIdentificador().setEstCreditos(auxCreditos);                
-                actual.setPubCreditos(auxCreditos);
-                 daoEst.edit(actual.getPubEstIdentificador());
                 actual.setPubVisado("aceptada");
                 dao.edit(actual);
                 dao.flush();
                 redirigirAlistarRevisadas();
-            
-            }else{
+
+            } else {
                 int creditos_actuales = actual.getPubEstIdentificador().getEstCreditos();
                 int creditos_nuevos = creditos_actuales + auxCreditos;
                 actual.getPubEstIdentificador().setEstCreditos(creditos_nuevos);
@@ -868,10 +872,8 @@ public class PublicacionController implements Serializable {
                 dao.edit(actual);
                 dao.flush();
                 redirigirAlistarRevisadas();
-            
-            
+
             }
- 
 
         }
 

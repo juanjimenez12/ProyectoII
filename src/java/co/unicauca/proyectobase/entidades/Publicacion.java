@@ -107,6 +107,10 @@ import org.primefaces.model.UploadedFile;
     , @NamedQuery(name = "Publicacion.findAllByLib",     query = "SELECT p FROM Publicacion p WHERE  (p.pubEstIdentificador.estIdentificador =:identificacion) AND (p.pubNombreAutor LIKE :variableFiltro OR p.pubTipoPublicacion LIKE :variableFiltro OR p.libro.libTituloLibro LIKE :variableFiltro)")
     , @NamedQuery(name = "Publicacion.findAllByCapLib",  query = "SELECT p FROM Publicacion p WHERE  (p.pubEstIdentificador.estIdentificador =:identificacion) AND (p.pubNombreAutor LIKE :variableFiltro OR p.pubTipoPublicacion LIKE :variableFiltro OR p.capituloLibro.caplibTituloCapitulo LIKE :variableFiltro )")
     
+   
+       
+      
+
         , @NamedQuery(name = "Publicacion.findAllFiltPubEst",query = "SELECT p FROM Publicacion p WHERE  (p.pubEstIdentificador.estIdentificador =:identificacion) AND (p.pubNombreAutor LIKE :variableFiltro OR p.pubTipoPublicacion LIKE :variableFiltro OR p.revista.revTituloArticulo LIKE :variableFiltro OR p.capituloLibro.caplibTituloCapitulo LIKE :variableFiltro)")
     ,@NamedQuery(
             name = "findAllPub_Est",
