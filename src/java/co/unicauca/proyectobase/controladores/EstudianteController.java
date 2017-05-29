@@ -31,7 +31,22 @@ public class EstudianteController implements Serializable {
     private String variableFiltrado;
     private List<Estudiante> listadoEncontrado;
     private List<String> Estado;
+    private String credi;
 
+    public String getCredi(){
+         credi = "" + actual.getEstCreditos();
+    
+        if (credi.equalsIgnoreCase("null")) {
+            credi = "0";
+        }
+        return credi;
+    }
+    public void setCredi(String credi) {
+        this.credi = credi;
+    }
+
+
+ 
     public String getCohorte() {
         if((cohorte == null) || (cohorte.equals("null")) || (cohorte.equals("")))
         {

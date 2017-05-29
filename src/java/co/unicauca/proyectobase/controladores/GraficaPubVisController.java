@@ -120,7 +120,7 @@ public class GraficaPubVisController implements Serializable {
 
         barModel.addSeries(meses);
 
-        barModel.setTitle("Grafica Publicaciones Registradas "+anio);
+        barModel.setTitle("Grafica Publicaciones Visadas "+anio);
         barModel.setLegendPosition("ne");
        
         
