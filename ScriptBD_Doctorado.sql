@@ -49,6 +49,7 @@ CREATE TABLE IF NOT EXISTS `doctorado`.`publicacion` (
   `pub_autores_secundarios` VARCHAR(300) NULL,
   `pub_tipo_publicacion` VARCHAR(22) NOT NULL,
   `pub_fecha_publicacion` DATE NOT NULL,
+  `pub_num_acta` VARCHAR(20) NULL,
   `pub_doi`  VARCHAR(30) NULL,
   `pub_isbn` VARCHAR(30) NULL,
   `pub_issn` VARCHAR(30) NULL,

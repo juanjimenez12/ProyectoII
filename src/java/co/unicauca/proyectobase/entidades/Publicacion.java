@@ -95,23 +95,19 @@ import org.primefaces.model.UploadedFile;
     , @NamedQuery(name = "Publicacion.findByPubDoi", query = "SELECT p FROM Publicacion p WHERE p.pubDoi = :pubDoi")
     , @NamedQuery(name = "Publicacion.findByPubIsbn", query = "SELECT p FROM Publicacion p WHERE p.pubIsbn = :pubIsbn")
     , @NamedQuery(name = "Publicacion.estIdentificacion", query = "SELECT e FROM Estudiante e WHERE e.estIdentificador = :estIdentificador")
-        
-    , @NamedQuery(name = "Publicacion.findAllEst",   query = "SELECT p FROM Publicacion p WHERE  p.pubNombreAutor LIKE :variableFiltro OR p.pubTipoPublicacion LIKE :variableFiltro")    
-    , @NamedQuery(name = "Publicacion.findAllRev",   query = "SELECT p FROM Publicacion p WHERE  p.pubNombreAutor LIKE :variableFiltro OR p.pubTipoPublicacion LIKE :variableFiltro OR p.revista.revTituloArticulo LIKE :variableFiltro")
-    , @NamedQuery(name = "Publicacion.findAllCong",  query = "SELECT p FROM Publicacion p WHERE  p.pubNombreAutor LIKE :variableFiltro OR p.pubTipoPublicacion LIKE :variableFiltro OR p.congreso.congTituloPonencia LIKE :variableFiltro")
-    , @NamedQuery(name = "Publicacion.findAllLib",   query = "SELECT p FROM Publicacion p WHERE  p.pubNombreAutor LIKE :variableFiltro OR p.pubTipoPublicacion LIKE :variableFiltro OR p.libro.libTituloLibro LIKE :variableFiltro")
-    , @NamedQuery(name = "Publicacion.findAllCapLib",query = "SELECT p FROM Publicacion p WHERE  p.pubNombreAutor LIKE :variableFiltro OR p.pubTipoPublicacion LIKE :variableFiltro OR p.capituloLibro.caplibTituloCapitulo LIKE :variableFiltro")
 
-    , @NamedQuery(name = "Publicacion.findAllByRev",     query = "SELECT p FROM Publicacion p WHERE  (p.pubEstIdentificador.estIdentificador =:identificacion) AND (p.pubNombreAutor LIKE :variableFiltro OR p.pubTipoPublicacion LIKE :variableFiltro OR p.revista.revTituloArticulo LIKE :variableFiltro)")
-    , @NamedQuery(name = "Publicacion.findAllByCong",    query = "SELECT p FROM Publicacion p WHERE  (p.pubEstIdentificador.estIdentificador =:identificacion) AND (p.pubNombreAutor LIKE :variableFiltro OR p.pubTipoPublicacion LIKE :variableFiltro OR p.congreso.congTituloPonencia LIKE :variableFiltro)")
-    , @NamedQuery(name = "Publicacion.findAllByLib",     query = "SELECT p FROM Publicacion p WHERE  (p.pubEstIdentificador.estIdentificador =:identificacion) AND (p.pubNombreAutor LIKE :variableFiltro OR p.pubTipoPublicacion LIKE :variableFiltro OR p.libro.libTituloLibro LIKE :variableFiltro)")
-    , @NamedQuery(name = "Publicacion.findAllByCapLib",  query = "SELECT p FROM Publicacion p WHERE  (p.pubEstIdentificador.estIdentificador =:identificacion) AND (p.pubNombreAutor LIKE :variableFiltro OR p.pubTipoPublicacion LIKE :variableFiltro OR p.capituloLibro.caplibTituloCapitulo LIKE :variableFiltro )")
-    
-   
-       
-      
+    , @NamedQuery(name = "Publicacion.findAllEst", query = "SELECT p FROM Publicacion p WHERE  p.pubNombreAutor LIKE :variableFiltro OR p.pubTipoPublicacion LIKE :variableFiltro")
+    , @NamedQuery(name = "Publicacion.findAllRev", query = "SELECT p FROM Publicacion p WHERE  p.pubNombreAutor LIKE :variableFiltro OR p.pubTipoPublicacion LIKE :variableFiltro OR p.revista.revTituloArticulo LIKE :variableFiltro")
+    , @NamedQuery(name = "Publicacion.findAllCong", query = "SELECT p FROM Publicacion p WHERE  p.pubNombreAutor LIKE :variableFiltro OR p.pubTipoPublicacion LIKE :variableFiltro OR p.congreso.congTituloPonencia LIKE :variableFiltro")
+    , @NamedQuery(name = "Publicacion.findAllLib", query = "SELECT p FROM Publicacion p WHERE  p.pubNombreAutor LIKE :variableFiltro OR p.pubTipoPublicacion LIKE :variableFiltro OR p.libro.libTituloLibro LIKE :variableFiltro")
+    , @NamedQuery(name = "Publicacion.findAllCapLib", query = "SELECT p FROM Publicacion p WHERE  p.pubNombreAutor LIKE :variableFiltro OR p.pubTipoPublicacion LIKE :variableFiltro OR p.capituloLibro.caplibTituloCapitulo LIKE :variableFiltro")
 
-        , @NamedQuery(name = "Publicacion.findAllFiltPubEst",query = "SELECT p FROM Publicacion p WHERE  (p.pubEstIdentificador.estIdentificador =:identificacion) AND (p.pubNombreAutor LIKE :variableFiltro OR p.pubTipoPublicacion LIKE :variableFiltro OR p.revista.revTituloArticulo LIKE :variableFiltro OR p.capituloLibro.caplibTituloCapitulo LIKE :variableFiltro)")
+    , @NamedQuery(name = "Publicacion.findAllByRev", query = "SELECT p FROM Publicacion p WHERE  (p.pubEstIdentificador.estIdentificador =:identificacion) AND (p.pubNombreAutor LIKE :variableFiltro OR p.pubTipoPublicacion LIKE :variableFiltro OR p.revista.revTituloArticulo LIKE :variableFiltro)")
+    , @NamedQuery(name = "Publicacion.findAllByCong", query = "SELECT p FROM Publicacion p WHERE  (p.pubEstIdentificador.estIdentificador =:identificacion) AND (p.pubNombreAutor LIKE :variableFiltro OR p.pubTipoPublicacion LIKE :variableFiltro OR p.congreso.congTituloPonencia LIKE :variableFiltro)")
+    , @NamedQuery(name = "Publicacion.findAllByLib", query = "SELECT p FROM Publicacion p WHERE  (p.pubEstIdentificador.estIdentificador =:identificacion) AND (p.pubNombreAutor LIKE :variableFiltro OR p.pubTipoPublicacion LIKE :variableFiltro OR p.libro.libTituloLibro LIKE :variableFiltro)")
+    , @NamedQuery(name = "Publicacion.findAllByCapLib", query = "SELECT p FROM Publicacion p WHERE  (p.pubEstIdentificador.estIdentificador =:identificacion) AND (p.pubNombreAutor LIKE :variableFiltro OR p.pubTipoPublicacion LIKE :variableFiltro OR p.capituloLibro.caplibTituloCapitulo LIKE :variableFiltro )")
+
+    , @NamedQuery(name = "Publicacion.findAllFiltPubEst", query = "SELECT p FROM Publicacion p WHERE  (p.pubEstIdentificador.estIdentificador =:identificacion) AND (p.pubNombreAutor LIKE :variableFiltro OR p.pubTipoPublicacion LIKE :variableFiltro OR p.revista.revTituloArticulo LIKE :variableFiltro OR p.capituloLibro.caplibTituloCapitulo LIKE :variableFiltro)")
     ,@NamedQuery(
             name = "findAllPub_Est",
             query = "SELECT p FROM Publicacion p WHERE p.pubEstIdentificador.estIdentificador= :identificacion"
@@ -160,6 +156,11 @@ public class Publicacion implements Serializable {
     @Column(name = "pub_fecha_publicacion")
     @Temporal(TemporalType.DATE)
     private Date pubFechaPublicacion;
+
+    @Size(max = 20)
+    @Column(name = "pub_num_acta")
+    private String pubNumActa;
+
     @Size(max = 30)
     @Column(name = "pub_doi")
     private String pubDoi;
@@ -169,11 +170,11 @@ public class Publicacion implements Serializable {
     @Size(max = 30)
     @Column(name = "pub_issn")
     private String pubIssn;
-    
+
     @Size(max = 20)
     @Column(name = "pub_visado")
     private String pubVisado;
-        
+
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "publicacion")
     private Libro libro;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "arcPubIdentificador")
@@ -254,22 +255,20 @@ public class Publicacion implements Serializable {
             para almacenarlo en formato PDFA */
         ArrayList<tipoPDF_cargar> subidaArchivos = new ArrayList<>();
 
-       /* tipoPDF_cargar cartaAprobacion = new tipoPDF_cargar();
+        /* tipoPDF_cargar cartaAprobacion = new tipoPDF_cargar();
         cartaAprobacion.setNombreArchivo(nombreCartaAprob);
         cartaAprobacion.setRutaArchivo(destCartaAprob);
         cartaAprobacion.setTipoPDF("cartaAprobacion");
         cartaAprobacion.setArchivoIS(cartaAprobacionPDF.getInputstream());
         subidaArchivos.add(cartaAprobacion); */
-       
-      if (!cartaAprobacionPDF.getFileName().equalsIgnoreCase("")) {
-        tipoPDF_cargar cartaAprobacion = new tipoPDF_cargar();
-        cartaAprobacion.setNombreArchivo(nombreCartaAprob);
-        cartaAprobacion.setRutaArchivo(destCartaAprob);
-        cartaAprobacion.setTipoPDF("cartaAprobacion");
-        cartaAprobacion.setArchivoIS(cartaAprobacionPDF.getInputstream());
-        subidaArchivos.add(cartaAprobacion);;
-       }
-               
+        if (!cartaAprobacionPDF.getFileName().equalsIgnoreCase("")) {
+            tipoPDF_cargar cartaAprobacion = new tipoPDF_cargar();
+            cartaAprobacion.setNombreArchivo(nombreCartaAprob);
+            cartaAprobacion.setRutaArchivo(destCartaAprob);
+            cartaAprobacion.setTipoPDF("cartaAprobacion");
+            cartaAprobacion.setArchivoIS(cartaAprobacionPDF.getInputstream());
+            subidaArchivos.add(cartaAprobacion);;
+        }
 
         if (!ArticuloPDF.getFileName().equalsIgnoreCase("")) {
             tipoPDF_cargar articulo = new tipoPDF_cargar();
@@ -312,8 +311,8 @@ public class Publicacion implements Serializable {
             /* codigoFirma - en este caso corresponde al nombre de la carpeta que contendra
                 el articulo y su tabla de contenido en formato PDFA
                 Ruta del folder a crear en el Gestor Openkm*/
-           // rutaFolderCrear = "/okm:root/Doctorado_Electronica/" + codigoFirma;
-            rutaFolderCrear = "/okm:root/Doctorado_Electronica/"+this.pubEstIdentificador.getEstUsuario();
+            // rutaFolderCrear = "/okm:root/Doctorado_Electronica/" + codigoFirma;
+            rutaFolderCrear = "/okm:root/Doctorado_Electronica/" + this.pubEstIdentificador.getEstUsuario();
             this.setPubDiropkm(codigoFirma);
             try {
                 /* Se valida si el forder a crear existe o no*/
@@ -328,8 +327,8 @@ public class Publicacion implements Serializable {
                 fld.setPath(rutaFolderCrear);
                 ws.createFolder(fld);
             }
-            
-            rutaFolderCrear = "/okm:root/Doctorado_Electronica/"+this.pubEstIdentificador.getEstUsuario()+ "/" + codigoFirma;
+
+            rutaFolderCrear = "/okm:root/Doctorado_Electronica/" + this.pubEstIdentificador.getEstUsuario() + "/" + codigoFirma;
             try {
                 /* Se valida si el forder a crear existe o no*/
                 ws.isValidFolder(rutaFolderCrear);
@@ -343,8 +342,7 @@ public class Publicacion implements Serializable {
                 fld.setPath(rutaFolderCrear);
                 ws.createFolder(fld);
             }
-            
-            
+
             for (int i = 0; i < subidaArchivos.size(); i++) {
 
                 Archivo arch = (Archivo) archivoCollection.toArray()[i];
@@ -1022,6 +1020,15 @@ public class Publicacion implements Serializable {
         this.pubFechaPublicacion = pubFechaPublicacion;
     }
 
+    public String getPubNumActa() {
+        return pubNumActa;
+    }
+
+    public void setPubNumActa(String pubNumActa) {
+        this.pubNumActa = pubNumActa;
+    }
+
+    
     public String getPubDoi() {
         return pubDoi;
     }
@@ -1054,7 +1061,6 @@ public class Publicacion implements Serializable {
         this.pubIssn = pubIssn;
     }
 
-    
     public Libro getLibro() {
         return libro;
     }

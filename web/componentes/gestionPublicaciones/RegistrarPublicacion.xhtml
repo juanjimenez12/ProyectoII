@@ -68,10 +68,25 @@
                             <h:outputLabel styleClass="addEspacio" />
                             <br/>
                             <h:outputLabel styleClass="addEspacio"/>
+                            
+                            
+                            <!-- ISSN de la publicacion -->
+                            <h:outputLabel styleClass="addEspacio"/><br/>
+                            <h:outputLabel value="ISSN " for="valISSN" styleClass="addEspacio"/>
+                            <h:inputText class="form-control" id="valISSN"  value="#{publicacionController.actual.pubIssn}" styleClass="addEspacio form-control">
+                                <f:validator validatorId="validadorISSN" />
+                                <p:ajax event="blur" update="msjValISSN" />
+                                <f:ajax />
+                            </h:inputText>
+                            <p:message for="valISSN" id="msjValISSN" /> 
+                            <h:outputLink style="color: blue" value="https://goo.gl/1hFMZ6">Conozca mas sobre el ISSN</h:outputLink>
+                            <h:outputLabel styleClass="addEspacio" />
+                            <br/>
+                            <h:outputLabel styleClass="addEspacio"/>
 
 
                             <!-- ISBN de la publicacion, solo para congreso, libro y capitulo de libro, es obligatorio -->
-                            <h:outputLabel value="ISBN *" for="valISBN" styleClass="addEspacio"/>
+                            <h:outputLabel value="ISBN " for="valISBN" styleClass="addEspacio"/>
                             <h:inputText class="form-control" id="valISBN"  value="#{publicacionController.actual.pubIsbn}" styleClass="addEspacio form-control">     
                                 <f:validator validatorId="validadorISBN" /> 
                                 <p:ajax event="blur" update="msjValISBN" />

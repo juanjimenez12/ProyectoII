@@ -219,7 +219,7 @@
                 </h:form>     
 
 
-                <p:dialog header="Confirmacion de Visado de Publicacion" minHeight="40" widgetVar="dialogVisar" resizable="false" draggable="false">
+                <p:dialog header="Confirmacion de Visado de Publicacion" width="500" height="300" widgetVar="dialogVisar" resizable="false" draggable="false">
                     <h:form>
                         <h:outputText value="Numero Actual de Creditos: " />
                         <h:outputText value="#{publicacionController.creditos}" />   
@@ -231,6 +231,25 @@
                         </h:inputText>
                         <p:message for="txtCreditos" id="msjValCredito" styleClass="addEspacio"/> 
 
+					   <br/>
+                        
+                        <h:outputLabel for="event" value="Fecha del acta: * " />
+                        <p:calendar id="event" value="#{publicacionController.actual.pubFechaVisado}">
+                            <p:ajax event="dateSelect" listener="#{publicacionController.onDateSelect}"  />
+                            <f:validator validatorId="validadorFechaVisado" />
+                            <p:ajax event="keyup" update="msjValFechaVisado btnAceptar" />
+                        </p:calendar>
+                        <p:message for="event" id="msjValFechaVisado" styleClass="addEspacio"/>
+                        <br/>
+                        
+                        <h:outputText value="Número de acta: * "></h:outputText>
+                        <h:inputText id="txtActa" value = "#{publicacionController.actual.pubNumActa}" >
+                            <f:validator validatorId="validadorNumeroActa"/>
+                            <p:ajax event="keyup" update="msjValNumeroActa btnAceptar" /> 
+                        </h:inputText>
+                        <p:message for="txtActa" id="msjValNumeroActa" styleClass="addEspacio"/>
+                        
+                        <br/>
 
 
                         <h:commandButton id="btnAceptar"  value="Aceptar"  action="#{publicacionController.visarPublicacion()}" class="btn btn-success"  style="float:center;"  disabled="#{not facesContext.postback or facesContext.validationFailed}"/>                             

@@ -29,9 +29,10 @@ public class ValidadorISSN implements Validator {
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "Se debe registrar el ISSN de la revista");
             throw new ValidatorException(msg);
         }
+ 
 
         if(!validarFormato(issn)) {
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "El formato del ISSN es incorrecto");
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "El formato del ISSN es incorrecto, ejemplos de entradas validas: 03178471 o 1050124X");
             throw new ValidatorException(msg);
         }
         
@@ -39,7 +40,8 @@ public class ValidadorISSN implements Validator {
     
     //valida el formato del DOI
     public boolean validarFormato(String doi) {
-        Pattern p = Pattern.compile("(^([0-9]{4})+[-]{1}+([0-9]{3})+([0-9X]{1}))$");
+      //  Pattern p = Pattern.compile("(^([0-9]{4})+([0-9]{3})+([0-9X]{1}))$");
+          Pattern p = Pattern.compile("(^([0-9]{4})+([0-9]{3})+([0-9X]{1}))$");
         //http://www.issn.org/es/comprender-el-issn/que-es-el-numero-issn/
         //https://goo.gl/jQFjlJ
         //Pattern p = Pattern.compile("^([0-9])");
