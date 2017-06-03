@@ -156,11 +156,8 @@ public class Publicacion implements Serializable {
     @Column(name = "pub_fecha_publicacion")
     @Temporal(TemporalType.DATE)
     private Date pubFechaPublicacion;
-
-    @Size(max = 20)
     @Column(name = "pub_num_acta")
     private Integer pubNumActa;
-
     @Size(max = 30)
     @Column(name = "pub_doi")
     private String pubDoi;
@@ -1020,13 +1017,15 @@ public class Publicacion implements Serializable {
         this.pubFechaPublicacion = pubFechaPublicacion;
     }
 
-    public int getPubNumActa() {
+    public Integer getPubNumActa() {
         return pubNumActa;
     }
 
-    public void setPubNumActa(int pubNumActa) {
+    public void setPubNumActa(Integer pubNumActa) {
         this.pubNumActa = pubNumActa;
     }
+
+  
  
 
     

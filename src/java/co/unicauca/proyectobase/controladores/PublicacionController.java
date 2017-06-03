@@ -562,7 +562,7 @@ public class PublicacionController implements Serializable {
                     Date date = new Date();
                     DateFormat datehourFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
                     String estampaTiempo = "" + datehourFormat.format(date);
-                    Utilidades.enviarCorreo("posgradoselectunic@gmail.com", "Mensaje Sistema Doctorados - Registro Publicacion", "El estudiante " + nombreAut + " ha regitrado una publicacion del tipo " + actual.getPubTipoPublicacion() + " en la siguiente fecha y hora: " + estampaTiempo);
+                    Utilidades.enviarCorreo("posgradoselectunic@gmail.com", "Mensaje Sistema Doctorados - Registro Publicacion", "Estudiante " + nombreAut + " ha regitrado una publicacion del tipo " + actual.getPubTipoPublicacion() + " en la siguiente fecha y hora: " + estampaTiempo);
                      limpiarCampos();
                     redirigirAlistar(est.getEstUsuario());
                     // redirigirAlistar(est.getEstUsuario());

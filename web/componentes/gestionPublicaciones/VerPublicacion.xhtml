@@ -219,7 +219,7 @@
                 </h:form>     
 
 
-           <p:dialog header="Confirmacion de Visado de Publicacion" width="500" height="300" widgetVar="dialogVisar" resizable="false" draggable="false">
+             <p:dialog header="Confirmacion de Visado de Publicacion" width="500" height="300" widgetVar="dialogVisar" resizable="false" draggable="false">
                     <h:form>
                         <h:outputText value="Numero Actual de Creditos: " />
                         <h:outputText value="#{publicacionController.creditos}" />   
@@ -257,6 +257,7 @@
                         <p:commandButton  value="Cancelar" onclick="PF('dialogVisar').hide();"  class="btn btn-danger"  style="float:center;" />                       
                     </h:form>
                 </p:dialog>
+
 
 
 
