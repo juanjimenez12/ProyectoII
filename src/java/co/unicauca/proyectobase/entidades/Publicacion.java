@@ -159,7 +159,7 @@ public class Publicacion implements Serializable {
 
     @Size(max = 20)
     @Column(name = "pub_num_acta")
-    private String pubNumActa;
+    private Integer pubNumActa;
 
     @Size(max = 30)
     @Column(name = "pub_doi")
@@ -1020,13 +1020,14 @@ public class Publicacion implements Serializable {
         this.pubFechaPublicacion = pubFechaPublicacion;
     }
 
-    public String getPubNumActa() {
+    public int getPubNumActa() {
         return pubNumActa;
     }
 
-    public void setPubNumActa(String pubNumActa) {
+    public void setPubNumActa(int pubNumActa) {
         this.pubNumActa = pubNumActa;
     }
+ 
 
     
     public String getPubDoi() {

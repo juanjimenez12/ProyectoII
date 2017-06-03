@@ -219,7 +219,7 @@
                 </h:form>     
 
 
-                <p:dialog header="Confirmacion de Visado de Publicacion" width="500" height="300" widgetVar="dialogVisar" resizable="false" draggable="false">
+           <p:dialog header="Confirmacion de Visado de Publicacion" width="500" height="300" widgetVar="dialogVisar" resizable="false" draggable="false">
                     <h:form>
                         <h:outputText value="Numero Actual de Creditos: " />
                         <h:outputText value="#{publicacionController.creditos}" />   
@@ -227,37 +227,38 @@
                         <h:outputText value="Asignacion de Creditos: "></h:outputText>
                         <h:inputText id="txtCreditos" value = "#{publicacionController.creditos}" maxlength="2" size="2">
                             <f:validator validatorId="validadorCredito"/>
-                            <p:ajax event="keyup" update="msjValCredito btnAceptar" />  
+                            <p:ajax event="keyup" update="msjValCredito" />  
+                            <p:ajax event="keyup" update="btnAceptar" /> 
                         </h:inputText>
                         <p:message for="txtCreditos" id="msjValCredito" styleClass="addEspacio"/> 
-
-					   <br/>
+                        <br/>
                         
-                        <h:outputLabel for="event" value="Fecha del acta: * " />
+                        <h:outputLabel for="event" value="Fecha del Acta: * " />
                         <p:calendar id="event" value="#{publicacionController.actual.pubFechaVisado}">
                             <p:ajax event="dateSelect" listener="#{publicacionController.onDateSelect}"  />
                             <f:validator validatorId="validadorFechaVisado" />
-                            <p:ajax event="keyup" update="msjValFechaVisado btnAceptar" />
+                            <p:ajax event="keyup" update="msjValFechaVisado" />
+                            <p:ajax event="keyup" update="btnAceptar" /> 
                         </p:calendar>
                         <p:message for="event" id="msjValFechaVisado" styleClass="addEspacio"/>
                         <br/>
                         
-                        <h:outputText value="Número de acta: * "></h:outputText>
+                        <h:outputText value="Número de Acta: * "></h:outputText>
                         <h:inputText id="txtActa" value = "#{publicacionController.actual.pubNumActa}" >
                             <f:validator validatorId="validadorNumeroActa"/>
-                            <p:ajax event="keyup" update="msjValNumeroActa btnAceptar" /> 
+                            <p:ajax event="keyup" update="msjValNumeroActa" /> 
+                            <p:ajax event="keyup" update="btnAceptar" /> 
                         </h:inputText>
                         <p:message for="txtActa" id="msjValNumeroActa" styleClass="addEspacio"/>
                         
                         <br/>
-
-
-                        <h:commandButton id="btnAceptar"  value="Aceptar"  action="#{publicacionController.visarPublicacion()}" class="btn btn-success"  style="float:center;"  disabled="#{not facesContext.postback or facesContext.validationFailed}"/>                             
-                    </h:form>
-                    <h:form>
+                        <p:commandButton id="btnAceptar"  value="Aceptar"  action="#{publicacionController.visarPublicacion()}" class="btn btn-success"  style="float:center;"  disabled="#{not facesContext.postback or facesContext.validationFailed}"/>                             
+                        <h:outputLabel value="&nbsp;&nbsp;"/>
                         <p:commandButton  value="Cancelar" onclick="PF('dialogVisar').hide();"  class="btn btn-danger"  style="float:center;" />                       
                     </h:form>
                 </p:dialog>
+
+
 
 
                 <h:outputLabel styleClass="addEspacio"/>
