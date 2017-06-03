@@ -557,7 +557,13 @@ public class PublicacionController implements Serializable {
                     dao.create(actual);
                     dao.flush();
                     mensajeconfirmarRegistro();
-                    limpiarCampos();
+                   
+
+                    Date date = new Date();
+                    DateFormat datehourFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+                    String estampaTiempo = "" + datehourFormat.format(date);
+                    Utilidades.enviarCorreo("posgradoselectunic@gmail.com", "Mensaje Sistema Doctorados - Registro Publicacion", "El estudiante " + nombreAut + " ha registrado una publicacion del tipo " + actual.getPubTipoPublicacion() + " en la siguiente fecha y hora: " + estampaTiempo);
+                     limpiarCampos();
                     redirigirAlistar(est.getEstUsuario());
                     // redirigirAlistar(est.getEstUsuario());
                 } catch (IOException | GeneralSecurityException | DocumentException | PathNotFoundException | AccessDeniedException | EJBException ex) {
