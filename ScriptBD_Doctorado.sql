@@ -28,6 +28,7 @@ CREATE TABLE IF NOT EXISTS `doctorado`.`estudiante` (
   `est_estado` VARCHAR(12) NULL,
   `est_usuario` VARCHAR(20) NULL,
   `est_contrasena` VARCHAR(40) NULL,
+  `est_creditos` INT NULL,
   PRIMARY KEY (`est_identificador`))
 ENGINE = InnoDB;
  
@@ -48,9 +49,11 @@ CREATE TABLE IF NOT EXISTS `doctorado`.`publicacion` (
   `pub_autores_secundarios` VARCHAR(300) NULL,
   `pub_tipo_publicacion` VARCHAR(22) NOT NULL,
   `pub_fecha_publicacion` DATE NOT NULL,
+  `pub_num_acta` INT(20) NULL,
   `pub_doi`  VARCHAR(30) NULL,
   `pub_isbn` VARCHAR(30) NULL,
   `pub_issn` VARCHAR(30) NULL,
+  `pub_visado` VARCHAR(20) NULL,
   PRIMARY KEY (`pub_identificador`),
   INDEX `fk_publicacion_estudiante_idx` (`pub_est_identificador` ASC),
   CONSTRAINT `fk_publicacion_estudiante`

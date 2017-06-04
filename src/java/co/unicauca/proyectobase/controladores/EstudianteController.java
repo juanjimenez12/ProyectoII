@@ -31,7 +31,22 @@ public class EstudianteController implements Serializable {
     private String variableFiltrado;
     private List<Estudiante> listadoEncontrado;
     private List<String> Estado;
+    private String credi;
 
+    public String getCredi(){
+         credi = "" + actual.getEstCreditos();
+    
+        if (credi.equalsIgnoreCase("null")) {
+            credi = "0";
+        }
+        return credi;
+    }
+    public void setCredi(String credi) {
+        this.credi = credi;
+    }
+
+
+ 
     public String getCohorte() {
         if((cohorte == null) || (cohorte.equals("null")) || (cohorte.equals("")))
         {
@@ -124,6 +139,7 @@ public class EstudianteController implements Serializable {
             dao.create(actual);
             dao.flush();
             mensajeconfirmarRegistro();
+            Utilidades.enviarCorreo(""+actual.getEstCorreo(), "Mensaje Sistema Doctorados Electronica Unicauca - Registro de cuenta de estudiante ", "Cordial Saludo "+ "\n" + "El registro en el sistema de Doctorados de Electronica se ha completado correctamente,los detalles de su cuenta son los siguientes: " + "\n" + "Nombre de Usuario: "+actual.getEstUsuario()+ "\n" +"Clave Ingreso: "+actual.getEstCodigo());
             limpiarCampos();
             redirigirAlistar();
         }
@@ -146,7 +162,16 @@ public class EstudianteController implements Serializable {
             actual.setEstCohorte(Integer.parseInt(cohorte));
             dao.edit(actual);
             dao.flush();
-            Utilidades.enviarCorreo("davidstl4@gmail.com", "Mensaje sistema soctorados", "Se ha editado su perfil de manera exitosa");
+            
+            if(actual.getEstEstado().equalsIgnoreCase("Inactivo"))
+            {
+                Utilidades.enviarCorreo(""+actual.getEstCorreo(), "Mensaje Sistema Doctorados Electronica Unicauca - Eliminacion de cuenta de estudiante ", "Cordial Saludo "+ "\n" + "La eliminacion de sus Datos en el sistema de Doctorados de Electronica se ha completado correctamente");
+            }
+            else
+            {
+                Utilidades.enviarCorreo(""+actual.getEstCorreo(), "Mensaje Sistema Doctorados Electronica Unicauca - Edicion de Datos en cuenta de estudiante ", "Cordial Saludo "+ "\n" + "La edicion de Datos en el sistema de Doctorados de Electronica se ha completado correctamente,los detalles de su cuenta son los siguientes: " + "\n" + "Codigo: "+actual.getEstCodigo()+ "\n" +"Nombres: "+actual.getEstNombre() + "\n" + "Apellidos: "+actual.getEstApellido()+ "\n" +"Correo Institucional: "+actual.getEstCorreo()+ "\n" +"Cohorte: "+actual.getEstCohorte()  + "\n" + "Nombre del Tutor: "+actual.getEstTutor() +   "\n" + "Semestre: "+actual.getEstSemestre()  + "\n" +"Estado: "+actual.getEstEstado());
+            }
+            
             mensajeEditar();
             redirigirAlistar();          
         }

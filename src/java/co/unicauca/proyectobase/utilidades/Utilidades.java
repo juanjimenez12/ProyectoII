@@ -24,21 +24,21 @@ public class Utilidades {
         } catch (IOException ex) {
             Logger.getLogger("Error al redireccionar a " + pagina);
         }
-
     }
-    
-    public static boolean enviarCorreo(String destinatario, String asunto, String mensaje)
+
+    public static boolean enviarCorreo(String destinatario, String asunto, String mensaje) 
     {
-        String de = "elcorreodelprofe@gmail.com";
-        String clave = "lacontraseñadelcorreodelprofe";        
+        // String de = "elcorreodelprofe@gmail.com";
+        // String clave = "lacontraseñadelcorreodelprofe";
+        String de = "posgradoselectunic@gmail.com";
+        String clave = "posgrados22";
         String para = destinatario;
+
         
         boolean resultado = false;
-        
-        try
-        {
+
+        try {
             Properties prop = new Properties();
-            
             prop.put("mail.smtp.auth", "true");
             prop.put("mail.smtp.starttls.enable", "true");
             prop.put("mail.smtp.ssl.trust", "smtp.gmail.com");
@@ -51,8 +51,7 @@ public class Utilidades {
                         return new PasswordAuthentication(de, clave);
                     }
                 });
-            
-            
+
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(de));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(para));

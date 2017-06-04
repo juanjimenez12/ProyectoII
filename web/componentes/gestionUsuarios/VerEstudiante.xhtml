@@ -40,6 +40,11 @@
                         <h:outputLabel value="Estado" for="valEstado" styleClass="addEspacio"/>
                         <h:outputText class="form-control"  id="valEstado" value="#{estudianteController.actual.estEstado}" styleClass="addEspacio form-control"/>
                         
+                        
+                        <h:outputLabel value="Numero de Creditos&nbsp;&nbsp;&nbsp;" for="valCreditos" styleClass="addEspacio"/>
+                        <h:outputText class="form-control"  id="valCreditos" value="#{estudianteController.credi}" styleClass="addEspacio form-control"/>
+                        
+                        
                         <h:outputLabel styleClass="addEspacio"/>
                         <h:commandButton value="Volver" actionListener="#{estudianteController.redirigirAlistar()}" class="btn btn-primary" />                       
 

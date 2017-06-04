@@ -6,7 +6,7 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets" >
-    
+
 
     <h:head>
         <title>Registrar Publicacion</title>
@@ -52,43 +52,11 @@
                                 <p:ajax event="blur" update="msjValFechaPublicacion" />
                             </p:calendar>
                             <p:message for="event" id="msjValFechaPublicacion" />
-
-
-                            <!-- DOI de la publicacion, solo para revista y congreso, es opcional -->
-                            <h:outputLabel styleClass="addEspacio"/><br/>
-                            <h:outputLabel value="DOI " for="valDOI" styleClass="addEspacio"/>
-                            <h:inputText class="form-control" id="valDOI"  value="#{publicacionController.actual.pubDoi}" styleClass="addEspacio form-control">
-                                <f:validator validatorId="validadorDOI" />
-                                <p:ajax event="blur" update="msjValDOI" />
-                                <f:ajax />
-                            </h:inputText>
-                            <p:message for="valDOI" id="msjValDOI" /> 
-                            <h:outputLink style="color: blue" value="https://goo.gl/AKGq9b">Conozca mas sobre el DOI</h:outputLink>
-                            <h:outputLink style="color: blue; margin-left: 40px" value="https://goo.gl/jPGYcc">Verifique su DOI</h:outputLink>
-                            <h:outputLabel styleClass="addEspacio" />
-                            <br/>
-                            <h:outputLabel styleClass="addEspacio"/>
-
-
-                            <!-- ISBN de la publicacion, solo para congreso, libro y capitulo de libro, es obligatorio -->
-                            <h:outputLabel value="ISBN *" for="valISBN" styleClass="addEspacio"/>
-                            <h:inputText class="form-control" id="valISBN"  value="#{publicacionController.actual.pubIsbn}" styleClass="addEspacio form-control">     
-                                <f:validator validatorId="validadorISBN" /> 
-                                <p:ajax event="blur" update="msjValISBN" />
-                                <f:ajax />
-                            </h:inputText>
-                            <p:message for="valISBN" id="msjValISBN" /> 
-
-                            <h:outputLink style="color: blue" value="https://goo.gl/jQFjlJ">Conozca mas sobre el ISBN</h:outputLink>
-                            <h:outputLink style="color: blue; margin-left: 40px" value="https://goo.gl/DQUANK">Verifique su ISBN</h:outputLink>
-                            <h:outputLabel styleClass="addEspacio" />
-                            <h:outputLabel styleClass="addEspacio" />
-                            <br/>
-                            <h:outputLabel styleClass="addEspacio"/>
-                            <h:outputLabel styleClass="addEspacio"/>
-
-
+                              
+                           
+                            <h:outputLabel styleClass="addEspacio"/>    
                             <!-- Tipo de publicacion -->
+                            <h:outputLabel styleClass="addEspacio"/>
                             <h:outputLabel value="Tipo publicación* " for="valTipopublicacion" styleClass="addEspacio"/>
 
                             <h:selectOneMenu class="form-control"  id="valTipopublicacion" value="#{publicacionController.actual.pubTipoPublicacion}" styleClass="tipopublicacion  addEspacio form-control">                                    
@@ -100,10 +68,24 @@
                                 <f:ajax render="@form" />
                             </h:selectOneMenu>
 
-                            <h:outputLabel styleClass="addEspacio"/>
+                             
                             <h:panelGroup id="tipoPub">
                                 <h:panelGroup rendered="#{publicacionController.actual.pubTipoPublicacion == 'revista'}">
                                     <div id="revista_info">
+
+                                        <!-- DOI de la publicacion - revista -->
+                                        <h:outputLabel styleClass="addEspacio"/><br/>
+                                        <h:outputLabel value="DOI" for="valDOIRev" styleClass="addEspacio"/>
+                                        <h:inputText class="form-control" id="valDOIRev"  value="#{publicacionController.actual.pubDoi}" styleClass="addEspacio form-control">
+                                            <f:validator validatorId="validadorDOI" />
+                                            <p:ajax event="blur" update="msjValDOIRev" />
+                                        </h:inputText>
+                                        <p:message for="valDOIRev" id="msjValDOIRev" /> 
+                                        <h:outputLink style="color: blue" value="https://goo.gl/AKGq9b">Conozca mas sobre el DOI</h:outputLink>
+                                        <h:outputLink style="color: blue; margin-left: 40px" value="https://goo.gl/jPGYcc">Verifique su DOI</h:outputLink>
+                                        <h:outputLabel styleClass="addEspacio" />
+                                        <br/>
+                                        <h:outputLabel styleClass="addEspacio"/>
 
                                         <!-- Titulo de la revista donde se va a publicar, es obligatorio -->
                                         <h:outputLabel value="Titulo Articulo *" for="valNArticulo" styleClass="addEspacio"/>
@@ -142,12 +124,46 @@
                                         <p:fileUpload id="revistaPDF" value="#{publicacionController.publicacionPDF}"    required="true" mode="simple" allowTypes="/(\.|\/)(pdf)$/"></p:fileUpload>
                                         <h:outputLabel styleClass="addEspacio"/>
 
+
+
+
+
                                     </div>
                                 </h:panelGroup>
 
 
                                 <h:panelGroup  rendered="#{publicacionController.actual.pubTipoPublicacion == 'congreso'}">
                                     <div id="congreso_info">
+
+                                        <!-- ISSN de la publicacion -->
+                                        <h:outputLabel styleClass="addEspacio"/><br/>
+                                        <h:outputLabel value="ISSN " for="valISSN" styleClass="addEspacio"/>
+                                        <h:inputText class="form-control" id="valISSN"  value="#{publicacionController.actual.pubIssn}" styleClass="addEspacio form-control">
+                                            <f:validator validatorId="validadorISSN" />
+                                            <p:ajax event="blur" update="msjValISSN" />
+                                        </h:inputText>
+                                        <p:message for="valISSN" id="msjValISSN" /> 
+                                        <h:outputLink style="color: blue" value="https://goo.gl/1hFMZ6">Conozca mas sobre el ISSN</h:outputLink>
+                                        <h:outputLabel styleClass="addEspacio" />
+                                        <br/>
+                                        <h:outputLabel styleClass="addEspacio"/>
+
+
+
+                                        <!-- DOI de la publicacion - revista -->
+                                        <h:outputLabel styleClass="addEspacio"/><br/>
+                                        <h:outputLabel value="DOI" for="valDOICong" styleClass="addEspacio"/>
+                                        <h:inputText class="form-control" id="valDOICong"  value="#{publicacionController.actual.pubDoi}" styleClass="addEspacio form-control">
+                                            <f:validator validatorId="validadorDOI" />
+                                            <p:ajax event="blur" update="msjValDOICong" />
+                                        </h:inputText>
+                                        <p:message for="valDOICong" id="msjValDOICong" /> 
+                                        <h:outputLink style="color: blue" value="https://goo.gl/AKGq9b">Conozca mas sobre el DOI</h:outputLink>
+                                        <h:outputLink style="color: blue; margin-left: 40px" value="https://goo.gl/jPGYcc">Verifique su DOI</h:outputLink>
+                                        <h:outputLabel styleClass="addEspacio" />
+                                        <br/>
+                                        <h:outputLabel styleClass="addEspacio"/>
+
                                         <h:outputLabel value="Titulo Ponencia *" for="valNPonencia" styleClass="addEspacio"/>
                                         <h:inputText class="form-control" id="valNPonencia"  value="#{publicacionController.actual.congreso.congTituloPonencia}" styleClass="addEspacio form-control">
                                             <f:validator validatorId="validadorNombrePonencia" />
@@ -188,6 +204,25 @@
 
                                 <h:panelGroup  rendered="#{publicacionController.actual.pubTipoPublicacion == 'libro'}">
                                     <div id="libro_info">
+
+
+                                        <!-- ISBN de la publicacion, solo para congreso, libro y capitulo de libro, es obligatorio -->
+                                        <h:outputLabel value="ISBN " for="valISBNLibro" styleClass="addEspacio"/>
+                                        <h:inputText class="form-control" id="valISBNLibro"  value="#{publicacionController.actual.pubIsbn}" styleClass="addEspacio form-control">     
+                                            <f:validator validatorId="validadorISBN" /> 
+                                            <p:ajax event="blur" update="msjValISBNLibro" />
+                                        </h:inputText>
+                                        <p:message for="valISBNLibro" id="msjValISBNLibro" /> 
+
+                                        <h:outputLink style="color: blue" value="https://goo.gl/jQFjlJ">Conozca mas sobre el ISBN</h:outputLink>
+                                        <h:outputLink style="color: blue; margin-left: 40px" value="https://goo.gl/DQUANK">Verifique su ISBN</h:outputLink>
+                                        <h:outputLabel styleClass="addEspacio" />
+                                        <h:outputLabel styleClass="addEspacio" />
+                                        <br/>
+                                        <h:outputLabel styleClass="addEspacio"/>
+                                        <h:outputLabel styleClass="addEspacio"/>
+
+
                                         <h:outputLabel value="Titulo Libro *" for="valTLibro" styleClass="addEspacio"/>
                                         <h:inputText class="form-control" id="valTLibro"  value="#{publicacionController.actual.libro.libTituloLibro}" styleClass="addEspacio form-control">
                                             <f:validator validatorId="validadorTituloLibro" />
@@ -209,6 +244,25 @@
 
                                 <h:panelGroup  rendered="#{publicacionController.actual.pubTipoPublicacion == 'capitulo_libro'}">
                                     <div id="capLibro_info">
+
+
+                                        <!-- ISBN de la publicacion, solo para congreso, libro y capitulo de libro, es obligatorio -->
+                                        <h:outputLabel value="ISBN " for="valISBNCapLibro" styleClass="addEspacio"/>
+                                        <h:inputText class="form-control" id="valISBNCapLibro"  value="#{publicacionController.actual.pubIsbn}" styleClass="addEspacio form-control">     
+                                            <f:validator validatorId="validadorISBN" /> 
+                                            <p:ajax event="blur" update="msjValISBNCapLibro" />
+                                        </h:inputText>
+                                        <p:message for="valISBNCapLibro" id="msjValISBNCapLibro" /> 
+
+                                        <h:outputLink style="color: blue" value="https://goo.gl/jQFjlJ">Conozca mas sobre el ISBN</h:outputLink>
+                                        <h:outputLink style="color: blue; margin-left: 40px" value="https://goo.gl/DQUANK">Verifique su ISBN</h:outputLink>
+                                        <h:outputLabel styleClass="addEspacio" />
+                                        <h:outputLabel styleClass="addEspacio" />
+                                        <br/>
+                                        <h:outputLabel styleClass="addEspacio"/>
+                                        <h:outputLabel styleClass="addEspacio"/>
+
+
                                         <h:outputLabel value="Titulo Libro *" for="valTCLibro" styleClass="addEspacio"/>
                                         <h:inputText class="form-control" id="valTCLibro"  value="#{publicacionController.actual.capituloLibro.caplibTituloLibro}" styleClass="addEspacio form-control">
                                             <f:validator validatorId="validadorTituloLibro" />
@@ -231,20 +285,20 @@
                                         <h:outputLabel for="capLibroPDF" value="Capitulo Libro PDF" styleClass="addEspacio"/>
                                         <p:fileUpload id="capLibroPDF" value="#{publicacionController.publicacionPDF}"    required="true" mode="simple" allowTypes="/(\.|\/)(pdf)$/"></p:fileUpload>
                                         <h:outputLabel styleClass="addEspacio"/>
-                                     
+
                                     </div>
                                 </h:panelGroup>
 
                             </h:panelGroup>
-                            
-                            
-                                <p:messages for="valPublicacion"  id="msjPublicacionF"/>
 
-                           <!--  <p:fileUpload mode="advanced" allowTypes="/(\.|\/)(gif|jpe?g|png|pdf|doc|docx|xls|xlsx|xlsm)$/i" label="Seleccionar Archivo" invalidFileMessage="Solo se permiten archivo PDF"
-                                          dragDropSupport="true" update="filemessage" uploadLabel="Aceptar" cancelLabel="Cancelar"
-                                          fileUploadListener="{publicacionController.seleccionarArchivo}"
-                                          ></p:fileUpload>
-                            <p:growl id="filemessage" showDetail="true" />  -->
+
+                            <p:messages for="valPublicacion"  id="msjPublicacionF"/>
+
+                            <!--  <p:fileUpload mode="advanced" allowTypes="/(\.|\/)(gif|jpe?g|png|pdf|doc|docx|xls|xlsx|xlsm)$/i" label="Seleccionar Archivo" invalidFileMessage="Solo se permiten archivo PDF"
+                                           dragDropSupport="true" update="filemessage" uploadLabel="Aceptar" cancelLabel="Cancelar"
+                                           fileUploadListener="{publicacionController.seleccionarArchivo}"
+                                           ></p:fileUpload>
+                             <p:growl id="filemessage" showDetail="true" />  -->
 
 
                             <!--  <p:fileUpload mode="advanced" 
@@ -253,20 +307,20 @@
                                             allowTypes="/(\.|\/)(pdf)$/" fileUploadListener="{publicacionController.seleccionarArchivo}"
                                             styleClass="addEspacio"></p:fileUpload>
                               <p:messages id="filemessage" autoUpdate="false" closable="false" /> -->
-                                
-                             <!--    <p:fileUpload allowTypes="/(\.|\/)(pdf)$/" fileUploadListener="{publicacionController.handleFileUpload}" mode="advanced"  
-     update="panelRegistrar:fileName" auto="true"  />
-                                <p:inputText id="fileName" value="{publicacionController.uploadedFileName}" />  -->
 
-   
+                            <!--    <p:fileUpload allowTypes="/(\.|\/)(pdf)$/" fileUploadListener="{publicacionController.handleFileUpload}" mode="advanced"  
+    update="panelRegistrar:fileName" auto="true"  />
+                               <p:inputText id="fileName" value="{publicacionController.uploadedFileName}" />  -->
+
+
                             <h:outputLabel for="valTContenido" value="Tabla de Contenido PDF" styleClass="addEspacio"/>
                             <p:fileUpload id="tablaContenidoPDF"   value="#{publicacionController.tablaContenidoPDF}"       required="true" mode="simple" allowTypes="/(\.|\/)(pdf)$/" styleClass="addEspacio"></p:fileUpload>
                             <h:outputLabel styleClass="addEspacio"/>
-                          
+
                             <p:messages for="valTContenido"  id="msjvalTContenido" />
-            
-                          
-                            
+
+
+
                             <h:outputLabel for="cartaAprobacionPDF" value="Evidencia de Publicacion * &nbsp;&nbsp;" />
 
                             <p:commandButton id="ayuda" ajax="false" onclick="return false;"  icon="ui-icon-help"/>
