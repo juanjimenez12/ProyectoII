@@ -62,11 +62,18 @@
 
                             <h:form style="font-size: 10px;">
                                 <h:commandButton actionListener="#{publicacionController.verPublicacionEst(pub)}" value="Ver" class="btn btn-success btn_listaEstudiantes"/>
-                            </h:form>
+                                <h:commandButton rendered="#{pub.pubEstado eq 'Activo'}" onclick="if (!confirm('¿Desea deshabilitar la publicacion?')) { return false;}; return true;" actionListener="#{publicacionController.cambiarEstado(pub.pubIdentificador)}" value="Deshabilitar" class="btn btn-danger btn_listaEstudiantes"/>
+                                <h:commandButton rendered="#{pub.pubEstado eq 'Inactivo'}" onclick="if (!confirm('¿Desea habilitar la publicacion?')) { return false;}; return true;" actionListener="#{publicacionController.habilitarPublicacion(pub.pubIdentificador)}" value="Habilitar" class="btn btn-info btn_listaEstudiantes"/>
+                           </h:form>
                         </p:column>
+                        
+                                       
+                        
                     </p:dataTable>
                 </div>
             </div>
+            
+           
 
         </ui:define>
     </ui:composition>

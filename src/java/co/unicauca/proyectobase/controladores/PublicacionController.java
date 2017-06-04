@@ -229,7 +229,7 @@ public class PublicacionController implements Serializable {
     public List<Publicacion> listaPublicacionVisadoEspera(List<Publicacion> lista) {
         List<Publicacion> listado = new ArrayList<>();
         for (int i = 0; i < lista.size(); i++) {
-            if (lista.get(i).getPubVisado().equals("espera")) {
+            if (lista.get(i).getPubVisado().equals("espera") && lista.get(i).getPubEstado().equals("Activo") ) {
                 listado.add(lista.get(i));
             }
         }
@@ -557,13 +557,12 @@ public class PublicacionController implements Serializable {
                     dao.create(actual);
                     dao.flush();
                     mensajeconfirmarRegistro();
-                   
 
                     Date date = new Date();
                     DateFormat datehourFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
                     String estampaTiempo = "" + datehourFormat.format(date);
                     Utilidades.enviarCorreo("posgradoselectunic@gmail.com", "Mensaje Sistema Doctorados - Registro Publicacion", "Estudiante " + nombreAut + " ha regitrado una publicacion del tipo " + actual.getPubTipoPublicacion() + " en la siguiente fecha y hora: " + estampaTiempo);
-                     limpiarCampos();
+                    limpiarCampos();
                     redirigirAlistar(est.getEstUsuario());
                     // redirigirAlistar(est.getEstUsuario());
                 } catch (IOException | GeneralSecurityException | DocumentException | PathNotFoundException | AccessDeniedException | EJBException ex) {
@@ -853,7 +852,7 @@ public class PublicacionController implements Serializable {
             actual.getPubEstIdentificador().setEstCreditos(creditos_nuevos);
             actual.setPubCreditos(auxCreditos);
             daoEst.edit(actual.getPubEstIdentificador());
-            Utilidades.enviarCorreo(""+actual.getPubEstIdentificador().getEstCorreo(), "Mensaje Sistema Doctorados Electronica Unicauca - Edicion de Creditos de publicacion", "Cordial Saludo "+ "\n" + "A la publicacion de nombre "+actual.obtenerNombrePub()+" se le han editado los creditos obtenidos, el nuevo numero de creditos asignados es: "+auxCreditos );
+            Utilidades.enviarCorreo("" + actual.getPubEstIdentificador().getEstCorreo(), "Mensaje Sistema Doctorados Electronica Unicauca - Edicion de Creditos de publicacion", "Cordial Saludo " + "\n" + "A la publicacion de nombre " + actual.obtenerNombrePub() + " se le han editado los creditos obtenidos, el nuevo numero de creditos asignados es: " + auxCreditos);
             dao.edit(actual);
             dao.flush();
             redirigirAlistarRevisadas();
@@ -864,7 +863,7 @@ public class PublicacionController implements Serializable {
                 actual.setPubCreditos(auxCreditos);
                 daoEst.edit(actual.getPubEstIdentificador());
                 actual.setPubVisado("aceptada");
-                Utilidades.enviarCorreo(""+actual.getPubEstIdentificador().getEstCorreo(), "Mensaje Sistema Doctorados Electronica Unicauca - Asignacion de Creditos de publicacion", "Cordial Saludo "+ "\n" + "La publicacion de nombre "+actual.obtenerNombrePub()+" ha sido revisada, y se la ha asignado el siguiente numero de creditos: "+auxCreditos );
+                Utilidades.enviarCorreo("" + actual.getPubEstIdentificador().getEstCorreo(), "Mensaje Sistema Doctorados Electronica Unicauca - Asignacion de Creditos de publicacion", "Cordial Saludo " + "\n" + "La publicacion de nombre " + actual.obtenerNombrePub() + " ha sido revisada, y se la ha asignado el siguiente numero de creditos: " + auxCreditos);
                 dao.edit(actual);
                 dao.flush();
                 redirigirAlistarRevisadas();
@@ -875,7 +874,7 @@ public class PublicacionController implements Serializable {
                 actual.getPubEstIdentificador().setEstCreditos(creditos_nuevos);
                 actual.setPubCreditos(auxCreditos);
                 actual.setPubVisado("aceptada");
-                Utilidades.enviarCorreo(""+actual.getPubEstIdentificador().getEstCorreo(), "Mensaje Sistema Doctorados Electronica Unicauca - Asignacion de Creditos de publicacion", "Cordial Saludo "+ "\n" + "La publicacion de nombre "+actual.obtenerNombrePub()+" ha sido revisada, y se la ha asignado el siguiente numero de creditos: "+auxCreditos );
+                Utilidades.enviarCorreo("" + actual.getPubEstIdentificador().getEstCorreo(), "Mensaje Sistema Doctorados Electronica Unicauca - Asignacion de Creditos de publicacion", "Cordial Saludo " + "\n" + "La publicacion de nombre " + actual.obtenerNombrePub() + " ha sido revisada, y se la ha asignado el siguiente numero de creditos: " + auxCreditos);
                 daoEst.edit(actual.getPubEstIdentificador());
                 dao.edit(actual);
                 dao.flush();
@@ -889,7 +888,7 @@ public class PublicacionController implements Serializable {
 
     public void RechazarPublicacion() {
         actual.setPubVisado("rechazada");
-        Utilidades.enviarCorreo(""+actual.getPubEstIdentificador().getEstCorreo(), "Mensaje Sistema Doctorados Electronica Unicauca - Revision de publicacion", "Cordial Saludo "+ "\n" + "La publicacion de nombre "+actual.obtenerNombrePub()+" ha sido revisada y se determino que no se aprueba");
+        Utilidades.enviarCorreo("" + actual.getPubEstIdentificador().getEstCorreo(), "Mensaje Sistema Doctorados Electronica Unicauca - Revision de publicacion", "Cordial Saludo " + "\n" + "La publicacion de nombre " + actual.obtenerNombrePub() + " ha sido revisada y se determino que no se aprueba");
         dao.edit(actual);
         dao.flush();
         redirigirAlistarRevisadas();
@@ -924,6 +923,39 @@ public class PublicacionController implements Serializable {
             FacesContext.getCurrentInstance().addMessage("valTContenido", new FacesMessage(FacesMessage.SEVERITY_ERROR, " not a text file", ""));
         }
 
+    }
+
+    public void cambiarEstado(int id) {
+        try {
+            actual = dao.find(id);
+            actual.setPubEstado("Inactivo");
+            dao.edit(actual);
+            dao.flush();
+            mensajeDeshabilitar();
+        } catch (EJBException e) {
+
+        }
+    }
+
+    public void mensajeDeshabilitar() {
+
+        addMessage("Ha deshabilitado satisfactoriamente la publicacion indicada.", "");
+    }
+
+    public void habilitarPublicacion(int id) {
+        try {
+            actual = dao.find(id);
+            actual.setPubEstado("Activo");
+            dao.edit(actual);
+            dao.flush();
+            mensajeConfirmacionHabilitacion();
+        } catch (EJBException e) {
+
+        }
+    }
+
+    public void mensajeConfirmacionHabilitacion() {
+        addMessage("Ha habilitado satisfactoriamente la publicacion indicada.", "");
     }
 
 }
