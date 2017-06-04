@@ -55,7 +55,8 @@ import javax.faces.validator.ValidatorException;
 
 @FacesValidator(value="validadorCorreoEditar")
 public class ValidadorCorreoEditar implements Validator {
-    @EJB
+    
+@EJB
     private EstudianteFacade dao;
 
     @Override
@@ -78,12 +79,12 @@ public class ValidadorCorreoEditar implements Validator {
                 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "El correo no tiene @");
                 throw new ValidatorException(msg);
             }
-            else {
-                if(!validarDominio(correo.split("@")[1])) {
-                    FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "El correo debe ser: gmail.com, unicuauca.edu.co o hotmail.com");
-                    throw new ValidatorException(msg);
-                }
-            }
+//            else {
+//                if(!validarDominio(correo.split("@")[1])) {
+//                    FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "El correo debe ser: gmail.com, unicuauca.edu.co o hotmail.com");
+//                    throw new ValidatorException(msg);
+//                }
+//            }
         }
         else {
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "El formato del correo es incorrecto");
@@ -100,7 +101,7 @@ public class ValidadorCorreoEditar implements Validator {
             throw new ValidatorException(msg);
         }
         
-        if(validarCaracteresEspeciales(correo)) {
+        if(!validarCaracteresEspeciales(correo)) {
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "El correo tiene caracteres errados");
             throw new ValidatorException(msg);
         }
@@ -130,18 +131,10 @@ public class ValidadorCorreoEditar implements Validator {
     
     //valida que no contenga caracteres prohibidos
     public boolean validarCaracteresEspeciales(String correo) {
-        Pattern p = Pattern.compile("[^A-Za-z0-9.@_-~#]+");
+        Pattern p = Pattern.compile("^[A-Za-z0-9.@_-~#]+$");
         Matcher m = p.matcher(correo);
-        StringBuffer sb = new StringBuffer();
-        boolean resultado = m.find();
-        boolean caracteresIlegales = false;
-
-        while(resultado) {
-            caracteresIlegales = true;
-            m.appendReplacement(sb, "");
-            resultado = m.find();
-        }
-        return caracteresIlegales;
+        
+        return m.matches();
     }
     
     //valida si el correo ingresado tiene el caracter @
@@ -155,5 +148,4 @@ public class ValidadorCorreoEditar implements Validator {
     public boolean validarFormato(String texto) {
         return texto.split("@").length == 2;
     }
-    
 }

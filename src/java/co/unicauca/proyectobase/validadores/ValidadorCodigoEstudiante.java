@@ -75,23 +75,20 @@ public class ValidadorCodigoEstudiante implements Validator {
             throw new ValidatorException(msg);  
         }
         
-       /* if(!validarFormato(codigo)) {
+        if(!validarFormato(codigo)) {
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "El código no cumple con el formato xx_xxxxxxxxxx");
             throw new ValidatorException(msg); 
-        }*/
+        }
         
-       /* if(!validarInicioCodigo(codigo)) {
+        if(!validarInicioCodigo(codigo)) {
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "El código debe iniciar por 70_");
             throw new ValidatorException(msg); 
-        }*/
+        }
         
         if(!validarCedula(codigo)) {
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "El código debe ser numérico.");
             throw new ValidatorException(msg); 
         }
-  
-        
-
     }
     
     //validar que el codigo tenga el formato xx_xxxxxx
@@ -101,16 +98,17 @@ public class ValidadorCodigoEstudiante implements Validator {
     
     //valida que el codigo empiece por 70
     public boolean validarInicioCodigo(String codigo) {
-        return codigo.split(codigo.split("_")[0]).equals("70");
+        return codigo.split("_")[0].equals("70");
     }
     
     //valida que la cedula, la segunda parte del codigo, sea numerica
     public boolean validarCedula(String codigo) {
+        String aux = codigo.split("_")[1];
         Pattern p = Pattern.compile("^[0-9]*$");
      //   Matcher m = p.matcher(codigo.split("_")[1]);
       //  return m.find();
         
-        Matcher m = p.matcher(codigo);
-        return m.find();
+        Matcher m = p.matcher(aux);
+        return m.matches();
     }
 }
