@@ -298,7 +298,8 @@ public class Publicacion implements Serializable {
 
         /* Inicia una instancia del Gestor Documental Openkm*/
         this.setPubHash(hash);
-        String host = "http://localhost:8083/OpenKM";
+        //String host = "http://localhost:8083/OpenKM";
+         String host = "http://wmyserver.sytes.net:8083/OpenKM";
         String username = "okmAdmin";
         String password = "admin";
         OKMWebservices ws = OKMWebservicesFactory.newInstance(host, username, password);
@@ -743,7 +744,8 @@ public class Publicacion implements Serializable {
         archivoPDF archivo = new archivoPDF();
         String tipoPDF = "cartaAprobacion";
 
-        String host = "http://localhost:8083/OpenKM";
+        //String host = "http://localhost:8083/OpenKM";
+        String host = "http://wmyserver.sytes.net:8083/OpenKM";
         String username = "okmAdmin";
         String password = "admin";
         OKMWebservices ws = OKMWebservicesFactory.newInstance(host, username, password);
@@ -799,7 +801,8 @@ public class Publicacion implements Serializable {
         archivoPDF archivo = new archivoPDF();
         String tipoPDF = "tipoPublicacion";
 
-        String host = "http://localhost:8083/OpenKM";
+        //String host = "http://localhost:8083/OpenKM";
+         String host = "http://wmyserver.sytes.net:8083/OpenKM";
         String username = "okmAdmin";
         String password = "admin";
         OKMWebservices ws = OKMWebservicesFactory.newInstance(host, username, password);
@@ -855,7 +858,8 @@ public class Publicacion implements Serializable {
         archivoPDF archivo = new archivoPDF();
         String tipoPDF = "tablaContenido";
 
-        String host = "http://localhost:8083/OpenKM";
+        //String host = "http://localhost:8083/OpenKM";
+         String host = "http://wmyserver.sytes.net:8083/OpenKM";
         String username = "okmAdmin";
         String password = "admin";
         OKMWebservices ws = OKMWebservicesFactory.newInstance(host, username, password);

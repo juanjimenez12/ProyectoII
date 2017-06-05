@@ -21,17 +21,17 @@ import javax.faces.validator.ValidatorException;
 @FacesValidator(value="validadorNumeroActa")
 public class ValidadorNumeroActa implements Validator{
     
-@Override
+ @Override
     public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException {
         String acta = String.valueOf(value);
 
-        if(acta == null) {
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "Se debe registrar el número del acta");
+        if(acta.length() == 0) {
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "El número del acta es obligatorio");
             throw new ValidatorException(msg);
         }    
         
         if(!validarActa(acta)) {
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "El valor del número de acta debe ser numérico");
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "El número de acta debe ser una cadena numérica de mínimo 1 caracter y máximo 20 caracteres");
             throw new ValidatorException(msg); 
         }            
         
@@ -41,7 +41,7 @@ public class ValidadorNumeroActa implements Validator{
         }
         
         if(acta.length() > 20){
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "El numero de acta debe no debe contener mas de 20 caracteres");
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "El número de acta debe ser una cadena numérica de mínimo 1 caracter y máximo 20 caracteres");
             throw new ValidatorException(msg);  
         }
         
