@@ -96,9 +96,15 @@ public class ValidadorCorreo implements Validator {
             throw new ValidatorException(msg);
         }
         
-        if(validarCaracteresEspeciales(correo)) {
+        if(!validarCaracteresEspeciales(correo)) {
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "El correo tiene caracteres errados");
             throw new ValidatorException(msg);
+        }
+        
+        if(validarExistencia(correo))
+        {
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "Ya existe un estudiante con este correo.");
+            throw new ValidatorException(msg); 
         }
     }
     
@@ -126,18 +132,10 @@ public class ValidadorCorreo implements Validator {
     
     //valida que no contenga caracteres prohibidos
     public boolean validarCaracteresEspeciales(String correo) {
-        Pattern p = Pattern.compile("[^A-Za-z0-9.@_-~#]+");
+        Pattern p = Pattern.compile("^[A-Za-z0-9.@_-~#]+$");
         Matcher m = p.matcher(correo);
-        StringBuffer sb = new StringBuffer();
-        boolean resultado = m.find();
-        boolean caracteresIlegales = false;
-
-        while(resultado) {
-            caracteresIlegales = true;
-            m.appendReplacement(sb, "");
-            resultado = m.find();
-        }
-        return caracteresIlegales;
+        
+        return m.matches();
     }
     
     //valida si el correo ingresado tiene el caracter @
@@ -150,6 +148,11 @@ public class ValidadorCorreo implements Validator {
     //valida si el correo cumple con el formato xxx@xxx
     public boolean validarFormato(String texto) {
         return texto.split("@").length == 2;
+    }
+    
+    public boolean validarExistencia(String correo)
+    {
+        return dao.findByEstCorreo(correo);
     }
     
 }

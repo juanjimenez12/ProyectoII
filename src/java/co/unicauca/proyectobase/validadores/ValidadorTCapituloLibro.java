@@ -25,10 +25,15 @@ public class ValidadorTCapituloLibro implements Validator {
     public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException {
         String nombre = String.valueOf(value);
         
-        if(nombre.length() == 0) {
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "Se requiere registrar un nombre de artículo");
+       if(nombre.length() == 0) {
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "El título del capítulo del libro es obligatorio");
             throw new ValidatorException(msg);
         }        
+        if(nombre.length() < 3 || nombre.length() > 80) {
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "El título del capiulo del libro debe contener entre 3 y 80 caracteres");
+            throw new ValidatorException(msg);
+        } 
+        
 
     }
     

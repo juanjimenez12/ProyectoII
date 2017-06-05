@@ -24,14 +24,14 @@ public class Utilidades {
         } catch (IOException ex) {
             Logger.getLogger("Error al redireccionar a " + pagina);
         }
-
     }
 
-    public static boolean enviarCorreo(String destinatario, String asunto, String mensaje) {
-       // String de = "elcorreodelprofe@gmail.com";
-       // String clave = "lacontraseñadelcorreodelprofe";
-     String de = "posgradoselectunic@gmail.com";
-    String clave = "posgrados22";
+    public static boolean enviarCorreo(String destinatario, String asunto, String mensaje) 
+    {
+        // String de = "elcorreodelprofe@gmail.com";
+        // String clave = "lacontraseñadelcorreodelprofe";
+        String de = "posgradoselectunic@gmail.com";
+        String clave = "posgrados22";
         String para = destinatario;
 
         
@@ -39,19 +39,18 @@ public class Utilidades {
 
         try {
             Properties prop = new Properties();
-
             prop.put("mail.smtp.auth", "true");
             prop.put("mail.smtp.starttls.enable", "true");
             prop.put("mail.smtp.ssl.trust", "smtp.gmail.com");
             prop.put("mail.smtp.host", "smtp.gmail.com");
             prop.put("mail.smtp.port", 587);
-
+            
             Session session = Session.getInstance(prop,
-                    new javax.mail.Authenticator() {
-                protected PasswordAuthentication getPasswordAuthentication() {
-                    return new PasswordAuthentication(de, clave);
-                }
-            });
+                new javax.mail.Authenticator() {
+                    protected PasswordAuthentication getPasswordAuthentication() {
+                        return new PasswordAuthentication(de, clave);
+                    }
+                });
 
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(de));
@@ -61,10 +60,12 @@ public class Utilidades {
             Transport.send(message);
             resultado = true;
             System.out.println("========== CORREO ENVIADO CON ÉXITO ============");
-        } catch (Exception e) {
+        }
+        catch(Exception e)
+        {
             System.out.println("========== ERROR AL ENVIAR CORREO ============ " + e.getMessage());
         }
-
+        
         return resultado;
     }
 }

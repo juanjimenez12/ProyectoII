@@ -21,7 +21,7 @@ public class ValidadorISBN implements Validator{
         String isbn = value.toString();
         
         if(isbn.length() == 0) {
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "Se debe registrar el ISBN de la publicación.");
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "El ISBN de la publicación es obligatorio");
             throw new ValidatorException(msg);
         }
         
