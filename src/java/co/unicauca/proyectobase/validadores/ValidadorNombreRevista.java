@@ -26,12 +26,12 @@ public class ValidadorNombreRevista implements Validator {
         String nombre = String.valueOf(value);
         
         if(nombre.length() == 0) {
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "Se requiere registrar un nombre de la revista");
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "El nombre de la revista es obligatorio");
             throw new ValidatorException(msg);
         }        
         
-        if(nombre.length() > 80) {
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "El nombre es deasiado largo");
+        if(nombre.length() < 3 || nombre.length() > 80) {
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "El nombre de la revista debe contener entre 3 y 80 caracteres");
             throw new ValidatorException(msg);
         } 
         

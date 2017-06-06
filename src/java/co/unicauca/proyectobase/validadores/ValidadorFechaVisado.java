@@ -23,9 +23,10 @@ public class ValidadorFechaVisado implements Validator{
     public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException {
 
         if(value == null) {
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "Se debe ingresar la fecha de visado");
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "La fecha de visado es obligatoria");
             throw new ValidatorException(msg);
         }
         
-    }    
+    }
+    
 }

@@ -26,12 +26,12 @@ public class ValidadorNombrePonencias implements Validator {
         String nombre = String.valueOf(value);
         
         if(nombre.length() == 0) {
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "Se requiere registrar un nombre de la ponencia");
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "El título de ponencia es obligatorio");
             throw new ValidatorException(msg);
         }        
         
-        if(nombre.length() > 80) {
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "El nombre de la ponencia es deasiado largo");
+        if(nombre.length() < 5 || nombre.length() > 200) {
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "El título de la ponencia debe contener entre 5 y 200 caracteres");
             throw new ValidatorException(msg);
         } 
         

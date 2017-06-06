@@ -26,12 +26,12 @@ public class ValidadorNombreEvento implements Validator {
         String nombre = String.valueOf(value);
         
         if(nombre.length() == 0) {
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "Se requiere registrar un nombre del evento");
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "El nombre del evento es obligatorio");
             throw new ValidatorException(msg);
         }        
         
-        if(nombre.length() > 80) {
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "El nombre del evento es deasiado largo");
+        if(nombre.length() < 3 || nombre.length() > 100) {
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "El nombre del evento debe contener entre 3 y 100 caracteres");
             throw new ValidatorException(msg);
         } 
         

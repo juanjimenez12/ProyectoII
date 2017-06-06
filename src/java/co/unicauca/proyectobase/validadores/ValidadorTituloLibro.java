@@ -26,9 +26,15 @@ public class ValidadorTituloLibro implements Validator {
         String nombre = String.valueOf(value);
         
         if(nombre.length() == 0) {
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "Se requiere registrar un nombre de artículo");
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "El título del libro es obligatorio");
             throw new ValidatorException(msg);
         }        
+        if(nombre.length() < 3 || nombre.length() > 200) {
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "El título del libro debe contener entre 3 y 200 caracteres");
+            throw new ValidatorException(msg);
+        } 
+        
+      
 
     }
     

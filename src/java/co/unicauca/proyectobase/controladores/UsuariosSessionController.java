@@ -10,6 +10,8 @@ import co.unicauca.proyectobase.entidades.GrupoTipoUsuario;
 import co.unicauca.proyectobase.entidades.Usuario;
 import co.unicauca.proyectobase.utilidades.Utilidades;
 import java.io.Serializable;
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -89,7 +91,8 @@ public class UsuariosSessionController implements Serializable{
             GrupoTipoUsuario grupo = lista.get(0);
             usuario_actual = grupo.getUsuario();
             String tipo = grupo.getTipoUsuario().getNombre();
-            if (usuario_actual.getContrasena().equals(contrasena)&&usuario_actual.getEstado().equals("activo")) {
+            String contrasenia=cifrarBase64(contrasena);
+            if (usuario_actual.getContrasena().equals(contrasenia)&&usuario_actual.getEstado().equals("activo")) {
                 errorSesion =false;
                 haySesion = true;
                 switch (tipo) {
@@ -125,4 +128,10 @@ public class UsuariosSessionController implements Serializable{
         Utilidades.redireccionar("/ProyectoII/faces/index.xhtml");
         
     }
+    public String cifrarBase64(String a) {
+        Base64.Encoder encoder = Base64.getEncoder();
+        String b = encoder.encodeToString(a.getBytes(StandardCharsets.UTF_8));
+        return b;
+    }
+    
 }
