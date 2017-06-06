@@ -32,6 +32,12 @@ public class GrupoTipoUsuarioController implements Serializable {
     public GrupoTipoUsuarioController() {
     }
 
+    public void setCurrent(GrupoTipoUsuario current) {
+        this.current = current;
+    }
+    
+    
+
     public GrupoTipoUsuario getSelected() {
         if (current == null) {
             current = new GrupoTipoUsuario();
@@ -86,10 +92,10 @@ public class GrupoTipoUsuarioController implements Serializable {
             current.getGrupoTipoUsuarioPK().setIdTipo(current.getTipoUsuario().getId());
             current.getGrupoTipoUsuarioPK().setIdUsuario(current.getUsuario().getId());
             getFacade().create(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/BundleUsuarios").getString("GrupoTipoUsuarioCreated"));
+            //JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/BundleUsuarios").getString("GrupoTipoUsuarioCreated"));
             return prepareCreate();
         } catch (Exception e) {
-            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/BundleUsuarios").getString("PersistenceErrorOccured"));
+            //JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/BundleUsuarios").getString("PersistenceErrorOccured"));
             return null;
         }
     }

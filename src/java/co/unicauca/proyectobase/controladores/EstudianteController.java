@@ -2,6 +2,9 @@ package co.unicauca.proyectobase.controladores;
 
 import co.unicauca.proyectobase.dao.EstudianteFacade;
 import co.unicauca.proyectobase.entidades.Estudiante;
+import co.unicauca.proyectobase.entidades.GrupoTipoUsuario;
+import co.unicauca.proyectobase.entidades.GrupoTipoUsuarioPK;
+import co.unicauca.proyectobase.entidades.TipoUsuario;
 import co.unicauca.proyectobase.entidades.Usuario;
 import co.unicauca.proyectobase.utilidades.Utilidades;
 import javax.inject.Named;
@@ -135,6 +138,22 @@ public class EstudianteController implements Serializable {
             UsuarioController uc = getUsuarioController();
             uc.setCurrent(user);
             uc.create();
+            
+            TipoUsuario tu = new TipoUsuario(1, "ESTUDIANTE");
+            
+            GrupoTipoUsuario gtu = new GrupoTipoUsuario();
+            gtu.setNombreUsuario(user.getNombreUsuario());
+            gtu.setTipoUsuario(tu);
+            gtu.setUsuario(user);
+            
+            GrupoTipoUsuarioPK grpPK = new GrupoTipoUsuarioPK();
+            grpPK.setIdTipo(tu.getId());
+            grpPK.setIdUsuario(user.getId());
+            gtu.setGrupoTipoUsuarioPK(grpPK);
+            
+            GrupoTipoUsuarioController gtuc = getGrupoTipoUsuarioController();
+            gtuc.setCurrent(gtu);
+            gtuc.create();
 
             dao.create(actual);
             dao.flush();
@@ -304,5 +323,14 @@ public class EstudianteController implements Serializable {
         Application appli = context.getApplication( );
         UsuarioController usuarioController = (UsuarioController) appli.evaluateExpressionGet(context, "#{usuarioController}",UsuarioController.class);
         return usuarioController;
+    }
+    
+    public GrupoTipoUsuarioController getGrupoTipoUsuarioController()
+    {
+        FacesContext context = FacesContext.getCurrentInstance();
+        ELContext contextoEL = context.getELContext( );
+        Application appli = context.getApplication( );
+        GrupoTipoUsuarioController grupoTipoUsuarioController = (GrupoTipoUsuarioController) appli.evaluateExpressionGet(context, "#{grupoTipoUsuarioController}",GrupoTipoUsuarioController.class);
+        return grupoTipoUsuarioController;
     }
 }
