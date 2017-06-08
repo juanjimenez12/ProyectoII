@@ -49,4 +49,21 @@ public class EstudianteFacade extends AbstractFacade<Estudiante> {
         List<Estudiante> findEst = query.getResultList();
         return findEst;
     }
+    
+    public List<Estudiante> findAllByStringYEstado(String texto, boolean estado)
+    {
+        Query query = em.createNamedQuery("Estudiante.findAllByStringYEstado");
+        query.setParameter("texto", "%" + texto + "%");
+        query.setParameter("estado", estado);
+        List<Estudiante> findEst = query.getResultList();
+        return findEst;
+    }
+    
+    public List<Estudiante> findByEstado(boolean estado)
+    {
+        Query query = em.createNamedQuery("Estudiante.findByEstEstado");
+        query.setParameter("estEstado", estado);
+        List<Estudiante> findEstado = query.getResultList();
+        return findEstado;                
+    }
 }

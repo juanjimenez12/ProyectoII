@@ -47,7 +47,7 @@ public class EstudianteController implements Serializable {
     public void setCredi(String credi) {
         this.credi = credi;
     }
-
+    
 
  
     public String getCohorte() {
@@ -107,12 +107,12 @@ public class EstudianteController implements Serializable {
         
         if((variableFiltrado == null) || (variableFiltrado.equals("")))
         {
-            listadoEncontrado = dao.findAll();
+            listadoEncontrado = dao.findByEstado(true);
             return listadoEncontrado;
         }
         else
         {
-            listadoEncontrado = dao.findAllByString(variableFiltrado);
+            listadoEncontrado = dao.findAllByStringYEstado(variableFiltrado, true);
             return listadoEncontrado;
         }
     }
