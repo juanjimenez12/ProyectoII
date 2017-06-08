@@ -50,7 +50,7 @@ public class EstudianteFacade extends AbstractFacade<Estudiante> {
         return findEst;
     }
     
-    public List<Estudiante> findAllByStringYEstado(String texto, boolean estado)
+    public List<Estudiante> findAllByStringYEstado(String texto, String estado)
     {
         Query query = em.createNamedQuery("Estudiante.findAllByStringYEstado");
         query.setParameter("texto", "%" + texto + "%");
@@ -59,7 +59,7 @@ public class EstudianteFacade extends AbstractFacade<Estudiante> {
         return findEst;
     }
     
-    public List<Estudiante> findByEstado(boolean estado)
+    public List<Estudiante> findByEstado(String estado)
     {
         Query query = em.createNamedQuery("Estudiante.findByEstEstado");
         query.setParameter("estEstado", estado);

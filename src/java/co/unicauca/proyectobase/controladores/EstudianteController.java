@@ -107,12 +107,12 @@ public class EstudianteController implements Serializable {
         
         if((variableFiltrado == null) || (variableFiltrado.equals("")))
         {
-            listadoEncontrado = dao.findByEstado(true);
+            listadoEncontrado = dao.findByEstado("Activo");
             return listadoEncontrado;
         }
         else
         {
-            listadoEncontrado = dao.findAllByStringYEstado(variableFiltrado, true);
+            listadoEncontrado = dao.findAllByStringYEstado(variableFiltrado, "Activo");
             return listadoEncontrado;
         }
     }
